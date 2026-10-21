@@ -243,12 +243,12 @@ def prepare_optical_source(
     }
 
 
-def _validate_transport(payload, profile):
+def _validate_transport(payload, profile, *, allow_geometric=False):
     optical, pixel, arrays = payload["optical"], payload["pixel"], payload["arrays"]
     spec = optical.get("specification", {})
     if (
         optical.get("schema") != "camera_reference_workshop_optics_v1"
-        or spec.get("optical_profile") != "exit_pupil_diffraction"
+        or spec.get("optical_profile") not in ({"exit_pupil_diffraction", "geometric_retrace"} if allow_geometric else {"exit_pupil_diffraction"})
     ):
         raise ValueError("Only the explicit legacy exit-pupil diffraction response is supported")
     if spec.get("wavelength_nm") != WAVE.tolist() or pixel.get("wavelength_nm") != WAVE.tolist():
@@ -471,10 +471,10 @@ def _mapping(field_mapping, available, optical_fields, field_mapping_mode):
     return result, "explicit_user_source_to_target_mapping", "sensor_normalized"
 
 
-def project_optical_profile(payload, profile, *, field_mapping=None, field_mapping_mode=None):
+def project_optical_profile(payload, profile, *, field_mapping=None, field_mapping_mode=None, allow_geometric=False):
     """Retain exact sampled source transport with explicit local applicability."""
     profile = lab.validate_profile(profile)
-    psf = _validate_transport(payload, profile)
+    psf = _validate_transport(payload, profile, allow_geometric=allow_geometric)
     spectral, spectral_evidence, derived = _spectral_evidence(payload)
     optical, pixel, arrays = payload["optical"], payload["pixel"], payload["arrays"]
     mapping, mapping_kind, field_domain = _mapping(
@@ -671,6 +671,7 @@ def project_optical_profile(payload, profile, *, field_mapping=None, field_mappi
     }
     report = {
         "schema": SCHEMA,
+        "source_optical_profile": optical["specification"]["optical_profile"],
         "status": "rejected" if rejected else "qualified",
         "can_apply": not rejected,
         "qualification": "sampled_kernel_exact_transfer",
@@ -701,7 +702,7 @@ def project_optical_profile(payload, profile, *, field_mapping=None, field_mappi
             else "Declared sensor-normalized positions; physical correspondence not validated"
         ),
         "fields": fields,
-        "limitations": LIMITATIONS,
+        "limitations": LIMITATIONS + (["Geometric-retrace source: diffraction is absent; no diffraction or subpixel physics is invented by this replay."] if optical["specification"]["optical_profile"] == "geometric_retrace" else []),
         "rejection_reasons": rejected,
         "frequency_unit": "cycles/native_pixel",
         "orientation_convention": (

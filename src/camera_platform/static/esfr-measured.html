@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>실측 112 Edge Calibration · CameraE2E</title>
   <link rel="stylesheet" href="/esfr-measured.css">
-  <script defer src="/esfr-measured.js"></script>
+  <script defer src="/esfr-measured.js?v=camera-model-v2"></script>
 </head>
 <body>
 <header class="topbar"><a class="brand" href="/">◎ CameraE2E <span>MEASURED CALIBRATION</span></a><nav><a id="measured-db-link" href="/db-design.html">DB Design Lab ↗</a><a id="measured-editor-link" href="/camera-validation-esfr.html">기존 E-SFR · ROI 편집기 ↗</a><a href="/examples/">가상 실측 예제 ↗</a></nav></header>
@@ -15,10 +15,24 @@
 
   <section class="card"><div class="section-heading"><div><p class="eyebrow">DB SOURCE · RECOVERY</p><h2>조건과 작업 연결</h2></div><button id="measured-refresh" class="quiet" type="button">상태 새로고침</button></div>
     <div class="three-fields"><label>원본 DB 실행 ID<input id="measured-source-run" autocomplete="off" placeholder="run-…"></label><label>후보 ID<input id="measured-source-candidate" autocomplete="off" placeholder="candidate-…"></label><label>조건 ID<input id="measured-source-condition" autocomplete="off" placeholder="condition-…"></label></div>
-    <p class="hint">연결 ID는 DB 조건의 출처입니다. 실카메라와 DB 모델이 같은 장비·모드인지 촬영 설정으로 확인하세요. 원본 DB 렌즈 처방은 보존하며 차트 조건부 응답 프로파일을 연결합니다.</p>
+    <p class="hint">아래에서 실측 카메라와 대응 DB 수치 모델을 선택·고정하세요. ID만 입력한 기존 작업은 설계 출처 연결이며, 선택 모델의 예측 계산으로 표시하지 않습니다.</p>
     <label>저장된 실측 workflow ID<input id="measured-workflow-id" autocomplete="off" placeholder="저장된 작업 ID를 붙여 넣으면 이어서 진행할 수 있습니다"></label><div class="actions"><button id="measured-load" class="secondary" type="button">작업 불러오기</button><button id="measured-resume" class="secondary" type="button" hidden>중단된 단계 재개</button><a class="button" href="/esfr-measured.html">새 작업</a></div>
     <div id="measured-progress" class="status-line" aria-live="polite">촬영과 설정을 등록하면 시작할 수 있습니다.</div>
     <div id="measured-contract" hidden></div>
+  </section>
+
+  <section class="card" id="camera-model-panel"><div class="section-heading"><div><p class="eyebrow">PHYSICAL CAMERA → PINNED DB NUMERICAL MODEL</p><h2>실측 카메라 · 시뮬레이션 모델 선택</h2></div><button id="camera-model-refresh" class="quiet" type="button">모델 목록 갱신</button></div>
+    <label>저장한 카메라–DB 대응 모델<select id="camera-model-select"><option value="">새 모델 등록 / 선택 필요</option></select></label>
+    <p id="camera-model-status" class="status-line" role="status">개발 촬영을 등록한 뒤 실물 카메라와 대응 DB 모델을 고정합니다.</p>
+    <fieldset id="camera-model-fields"><div class="two-fields"><label>완료된 DB 렌즈·센서 후보<select id="camera-model-source"><option value="">완료된 DB 실행을 선택하세요</option></select></label><button id="camera-model-source-load" class="secondary" type="button">위 연결 ID의 모델 확인</button></div>
+      <p id="camera-model-source-info" class="hint">DB 모델의 pixel pitch·CFA·ADC·D65·조리개·gain·온도가 촬영 선언과 맞아야 합니다.</p>
+      <div class="three-fields"><label>제조사<input id="camera-model-manufacturer" placeholder="실물 제조사 / 합성은 synthetic"></label><label>카메라 모델<input id="camera-model-model" placeholder="실제 모델명"></label><label>개체 일련번호<input id="camera-model-serial" placeholder="개체 식별자"></label><label>촬영 렌즈<input id="camera-model-lens" placeholder="모델·초점·마운트 기록"></label><label>센서 모델<input id="camera-model-sensor" placeholder="실제 센서 식별자"></label><label>camera_id / mode_id<p id="camera-model-capture-context">선택한 개발 촬영에서 고정</p></label></div>
+      <div class="two-fields"><label>DB PSF의 시야 배치<select id="camera-model-spatial"><option value="uniform_selected_db_field">선택한 DB 시야 PSF를 전영역에 동일 적용 · 가정</option><option value="explicit_roi_assignment">112 ROI별 DB 시야를 명시적으로 지정</option></select></label><label>사용할 DB PSF 시야<select id="camera-model-field"><option value="center">center</option></select></label></div>
+      <label id="camera-model-mapping-wrap" hidden>ROI ID → DB source field ID (112개 모두)<textarea id="camera-model-mapping" rows="5" spellcheck="false" placeholder='{"edge-id":"center", …}'></textarea></label>
+      <label class="review"><input id="camera-model-ack" type="checkbox">실물 장비와 DB의 대응은 사용자 선언이며, 시야 배치 가정과 bilinear Reference ISP 범위를 확인했습니다.</label>
+      <p class="boundary-note">DB 4채널 native PSF·센서 ADC를 실제 MTF 예측에 사용합니다. DB 가상 탐침을 센서 모서리로 자동 환산하지 않습니다. 절대 색·Tone·조도·노이즈 및 제조사 ISP의 완전한 재현에는 추가 모델 입력이 필요합니다. 보정 후는 조건부 유효 응답 후보이며 자동 활성화하지 않습니다.</p>
+      <button id="camera-model-register" class="primary" type="button">선택한 개발 촬영 기준으로 카메라 모델 고정</button>
+    </fieldset>
   </section>
 
   <section class="card iq-options"><div class="section-heading"><div><p class="eyebrow">OPTIONAL IQ · NOMINAL REFERENCE</p><h2>색·계조·노이즈 평가 추가</h2></div><label class="review"><input id="measured-iq-enabled" type="checkbox" checked>IQ 옵션 사용</label></div>

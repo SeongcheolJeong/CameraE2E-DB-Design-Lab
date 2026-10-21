@@ -336,6 +336,21 @@ class SQLiteRegistry:
             # Append without renumbering the existing immutable owner ordering.
             priority = 10 + len(cls.ARTIFACT_RECORD_KINDS)
             entries = [("artifacts", i, a) for i, a in enumerate(artifacts)]
+        elif kind in {"camera_esfr_camera_models", "camera_esfr_model_comparisons"}:
+            expected = {"camera_esfr_camera_models": "camera_esfr_camera_model_v1",
+                        "camera_esfr_model_comparisons": "camera_esfr_selected_model_comparison_v1"}
+            artifacts, files = document.get("artifacts"), document.get("files")
+            if (document.get("schema") != expected[kind] or not isinstance(artifacts, list) or not artifacts
+                    or not isinstance(files, dict) or not files or len(files) > 4096
+                    or not all(isinstance(p, str) and 0 < len(p) <= 500 and not p.startswith("/") and "\\" not in p
+                               and all(part not in {"", ".", ".."} for part in p.split("/")) for p in files)
+                    or not all(isinstance(a, dict) for a in artifacts)):
+                raise IntegrityError("E-SFR camera model has an invalid typed bundle")
+            hashes = {v.get("sha256") if isinstance(v, dict) else v for v in files.values()}
+            if {a.get("sha256") for a in artifacts} != hashes:
+                raise IntegrityError("E-SFR camera model manifest differs from its owned bytes")
+            priority = 15 + len(cls.ARTIFACT_RECORD_KINDS) + list(expected).index(kind)
+            entries = [("artifacts", i, a) for i, a in enumerate(artifacts)]
         elif kind in {"camera_esfr_iq_frozen", "camera_esfr_iq_reports", "camera_esfr_iq_comparisons", "camera_esfr_iq_exports"}:
             schemas = {"camera_esfr_iq_frozen": "camera_esfr_iq_frozen_v1",
                        "camera_esfr_iq_reports": "camera_esfr_iq_report_v1",

@@ -14,9 +14,9 @@
       "source": "portable-example-integration-20261021"
     },
     "README.md": {
-      "sha256": "19a405813298555f4abdd6b3de8d92ae6f338f1784d133ca372d956da9e36cad",
-      "bytes": 5610,
-      "source": "portable-example-integration-20261021"
+      "sha256": "8883a741a6d1b2af689ab749c1f73fe2410492fe7fc6b6f5a51bbe56b70a0bd3",
+      "bytes": 7764,
+      "source": "explicit-camera-model-integration-20261021"
     },
     "docs/esfr-normal-hdr-ab.md": {
       "sha256": "2c3f46e86f7ae6de3ae7c37c651c3a84bcb94fe03eb3fb7cc340a6edb3d5892f",
@@ -34,9 +34,9 @@
       "source": "portable-example-integration-20261021"
     },
     "src/camera_platform/esfr_measured_workflow.py": {
-      "sha256": "6661b2b7a1ca59e560e31012f16a912e4e21b0168809af90524f6005efe1b8ba",
-      "bytes": 22312,
-      "source": "portable-example-integration-20261021"
+      "sha256": "ca855c6ffd0bebe3af7f0424f8977ca55a294369dfb4bd53007dfa005ae8e462",
+      "bytes": 26499,
+      "source": "explicit-camera-model-integration-20261021"
     },
     "src/camera_platform/example_gallery.py": {
       "sha256": "242a996c2651cc7a7ecae728193c1850b04c226475c4becd3339e97e19748b5e",
@@ -49,14 +49,14 @@
       "source": "portable-example-integration-20261021"
     },
     "src/camera_platform/static/db-design.html": {
-      "sha256": "d46a718b2ca68161c84191ad5aaf7b0c2e41a434fad626a4c00c5617f31df83f",
-      "bytes": 22065,
-      "source": "portable-example-integration-20261021"
+      "sha256": "8ef1e173eb6d146a997fbda9a1397e4f0311e1205bc5c38fe85f36a33ddafd18",
+      "bytes": 22083,
+      "source": "explicit-camera-model-integration-20261021"
     },
     "src/camera_platform/static/esfr-measured.html": {
-      "sha256": "747d21594dc2d8087012fd4957a1b24b9d570719b57e5f012938fb121861617d",
-      "bytes": 15017,
-      "source": "portable-example-integration-20261021"
+      "sha256": "91a22cb7f579e45de3814d7dd346590a6af69f0b5ce257165d0fba5aa7687fff",
+      "bytes": 18237,
+      "source": "explicit-camera-model-integration-20261021"
     },
     "tests/test_portable_esfr_examples.py": {
       "sha256": "5b4c3d716d69d4c828fa200a8fb0da659ad8ce04d1d132ce93e19fcf0b86a35e",
@@ -102,6 +102,61 @@
       "sha256": "e4d377d01e1e94075b46fc7a06a605ba7b394b7f74d2fa212d26b6d215040069",
       "bytes": 10520,
       "source": "portable-example-integration-20261021"
+    },
+    "src/camera_platform/calibration_db_optics_engine.py": {
+      "sha256": "88a85d7916280d44d453dfbfb913d0cb6342dd0f9b260cc6857342e780f24e8e",
+      "bytes": 36680,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "src/camera_platform/esfr_camera_model.py": {
+      "sha256": "a555d0ea93011116e14b552c5a5b0756cd5561b604a5386a43c67938c211af9a",
+      "bytes": 13551,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "src/camera_platform/esfr_model_prediction.py": {
+      "sha256": "c3ba977da6f7c9a7b12d033af653d057826f731e69a20d0ef85c6cd8452277cb",
+      "bytes": 24249,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "src/camera_platform/registry.py": {
+      "sha256": "dcdaf0ffc4bade8159cba599463532a5cedbdcf6d46f946c4bd5d633e814f27f",
+      "bytes": 83904,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "src/camera_platform/static/esfr-entry.js": {
+      "sha256": "9b36da1fe6c9a083642e531e19195358b241c2a5cf74514469e41e85d064c415",
+      "bytes": 8628,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "src/camera_platform/static/esfr-measured.js": {
+      "sha256": "8bfc074e065f9be725de712ba8e72e0702d712877b2677309824e79f27dc68fd",
+      "bytes": 58013,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "tests/test_esfr_camera_model.py": {
+      "sha256": "6320349f526b838bd44a4ea7ba8007b5e4ade55cb14822ed01552d88b03041b3",
+      "bytes": 8519,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "tools/run_esfr_camera_model_live.py": {
+      "sha256": "d6d6b5096da41d7844bfaddf1974c697d7eecd9c77232b06623081b544c2193f",
+      "bytes": 10059,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "verification/report-adapter-predecessor.py": {
+      "sha256": "a223f9bfaffd7843ee74f4d94ad1d3e7ce956a888e8834eaacc4d88496f0c354",
+      "bytes": 18887,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "verification/workflow-adapter-predecessor.py": {
+      "sha256": "deef89e7e4646daf6c01da6e78edfd5f4dc346857d52edc02b39d973fccd0006",
+      "bytes": 24252,
+      "source": "explicit-camera-model-integration-20261021"
+    },
+    "verification/camera-model-selection.json": {
+      "sha256": "96f40af231b45100ef2b771aa413c369596b28f14c5c724e5c04fda9052f97cd",
+      "bytes": 3666,
+      "source": "explicit-camera-model-integration-20261021"
     }
   },
   "scope": "Historical read-only example pack, portable DB bootstrap and HTTP-only fresh E-SFR clients; numerical engines and thresholds unchanged"

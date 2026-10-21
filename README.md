@@ -56,6 +56,22 @@ python tools/serve_db_design_lab.py --port 8780
 
 일부 광학/색 계산은 고정 ISETCam 자산을 추가로 사용합니다. `pyisetcam.assets.ensure_upstream_snapshot()`로 고정 revision/hash를 검사하여 이 checkout의 기본 캐시에 준비합니다. 오프라인 DB 계산은 `PYISETCAM_UPSTREAM_ROOT` 환경변수만으로 준비되지 않으므로 [독립 예제 안내](docs/esfr-portable-examples.md)의 자산 설치 절차를 따르세요. Meep·Mitsuba·별도 장치 Solver는 필요한 작업에 맞게 별도 설치해야 합니다. 이 스냅샷은 가상 환경이나 모든 운영체제의 설치 검증을 포함하지 않습니다.
 
+## 실측 카메라와 시뮬레이션 모델 선택
+
+E-SFR 실측 화면(`/esfr-measured.html`)의 **실측 카메라 · 시뮬레이션 모델 선택**에서 제조사·모델·개체·렌즈·센서를 기록하고 완료된 DB 후보를 연결합니다. 개발 RAW/ISP를 먼저 등록·선택한 뒤 모델을 고정합니다. 새 UI 작업은 이 선택이 필수이며 기존 작업의 출처 연결은 그대로 읽힙니다.
+
+- 카메라 ID, 모드, RAW 형식, native geometry, CFA, pitch, 노출·gain·온도·조명·조리개·ISP 계약을 고정하고 개발/검증 입력 불일치를 거부합니다.
+- 선택 DB의 보존된 4-site native PSF를 실제 RAW/Reference ISP 예측에 사용합니다. 기하 모델과 회절 포함 모델을 구분하며, 별도 Gaussian 근사나 pixel aperture 중복 적용을 하지 않습니다.
+- 현재 전송은 2.9 µm RGGB와 저장된 ADC에 한정됩니다. 한 DB 시야를 전영역에 동일 적용하는 가정 또는 112 ROI별 명시적 DB 시야 지정을 선택합니다. 실제 센서 시야 대응을 자동 추정하지 않습니다.
+- 독립 검증 3쌍에서 **선택 DB 모델 / 관측 / 개발에서 고정한 보정 후 응답**의 112 edge RAW Gr·ISP Y MTF, 오차, HTML·JSON·CSV·ZIP을 자동 생성합니다. DB Design Lab에서도 해당 보고서로 연결됩니다.
+- 개발 영상의 geometry/밝기를 고정한 상대 MTF 비교입니다. 광학 처방 자체의 재최적화, 절대 색·Tone·노이즈·조도 예측, 제조사 ISP 및 실물 장비 대응의 검증은 포함하지 않습니다. 기존 IQ 보고서의 Color·Noise·Tone·CCM 평가를 별도로 연결합니다. 후보는 자동 활성화하지 않습니다.
+
+완료된 DB 실행의 `run_id`, `candidate_id`, 조건부 실행이면 `condition_id`를 JSON 파일로 저장하고 새 합성 통합 시험을 실행할 수 있습니다. RAW/ISP 6쌍을 새로 만들고, 검증 3쌍은 후보 고정 이후 생성합니다.
+
+```sh
+PYTHONPATH=src python tools/run_esfr_camera_model_live.py --base-url http://127.0.0.1:8781 --source-json source.json --output outputs/selected-camera-example
+```
+
 ## 문서와 시험
 
 - [DB Design Lab](docs/camera-platform-db-design-lab.md)

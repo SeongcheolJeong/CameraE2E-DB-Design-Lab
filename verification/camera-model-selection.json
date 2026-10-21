@@ -1,0 +1,100 @@
+{
+  "status": "verified",
+  "source_kind": "synthetic",
+  "physical_validation": "not_established",
+  "model_id": "esfr-camera-bc42b4fdcd5e31b77c6afe08e612452d",
+  "workflow_id": "measured-esfr-5f48487ae7554f639dd4cd7de79d5b73",
+  "comparison_id": "esfr-model-comparison-16a814b974f4c422feff28c0e0c82132",
+  "summary": {
+    "isp": {
+      "after": {
+        "available": 336,
+        "max": 0.024781136786217593,
+        "mean": 0.008044836645207238,
+        "unavailable": 0
+      },
+      "db": {
+        "available": 336,
+        "max": 0.12084667169911761,
+        "mean": 0.11516688263878351,
+        "unavailable": 0
+      }
+    },
+    "isp_diagnostic_count": 0,
+    "isp_failure_count": 0,
+    "raw": {
+      "after": {
+        "available": 336,
+        "max": 0.04232606929746525,
+        "mean": 0.011432561193608446,
+        "unavailable": 0
+      },
+      "db": {
+        "available": 336,
+        "max": 0.19209407314379448,
+        "mean": 0.1770839860684827,
+        "unavailable": 0
+      }
+    },
+    "raw_failure_count": 3,
+    "raw_unavailable_count": 0
+  },
+  "report_url": "http://127.0.0.1:8786/api/v1/camera-validation/esfr/camera-models/comparisons/esfr-model-comparison-16a814b974f4c422feff28c0e0c82132/files/report.html",
+  "bundle_url": "http://127.0.0.1:8786/api/v1/camera-validation/esfr/camera-models/comparisons/esfr-model-comparison-16a814b974f4c422feff28c0e0c82132/files/bundle.zip",
+  "db_url": "http://127.0.0.1:8786/db-design.html?run=run-1fcd1bc4aa92462f9c81dcb5df280da8&candidate-b=candidate-00",
+  "zip_sha256": "1578355a79fef1be49461e8d905f2b40e690d08476425ce7583c268af8cc2836",
+  "integrity": {
+    "source_code_current": true,
+    "raw_failure_ROIs": [
+      "star-corner-bottom-right-edge-2",
+      "star-corner-top-left-edge-2",
+      "star-middle-right-edge-6"
+    ],
+    "zip_entries": 1349,
+    "all_native_curves_retained": true,
+    "model_source_sha256": "a5da236cded9f02886cc7816a0f5cee88817ad0ef0e1b6c372aaa314a6372b70",
+    "report_only_compatibility": {
+      "all_other_sources_and_dependencies_identical": true,
+      "permitted_changed_modules": [
+        "camera_platform/esfr_measured_workflow.py",
+        "camera_platform/esfr_model_prediction.py"
+      ],
+      "previous_prediction_source_sha256": "a223f9bfaffd7843ee74f4d94ad1d3e7ce956a888e8834eaacc4d88496f0c354",
+      "sampled_psf_operator_sha256": "dae670d16dc14e8941d02e63b68ed9c8e04d31f9d506bb72649cfba83c0e1611",
+      "schema": "camera_esfr_report_only_compatibility_v1",
+      "validation_refit_performed": false
+    },
+    "numerical_stages_reexecuted": false,
+    "capture_pixel_hashes_unique": true
+  },
+  "browser": {
+    "db_link_verified": true,
+    "model_selection_verified": true,
+    "native_raw_isp_images_loaded": 6,
+    "zip_download_sha256_verified": true
+  },
+  "tests": [
+    {
+      "scope": "ESFR workflow, API, IQ, compatibility",
+      "passed": 90
+    },
+    {
+      "scope": "model, optical and registry integrity",
+      "passed": 82
+    },
+    {
+      "scope": "report-only recovery and numerical guards",
+      "passed": 80
+    },
+    {
+      "scope": "browser contract tests",
+      "passed": 17
+    }
+  ],
+  "interpretation": "Independent synthetic software integration; 3/336 RAW observations remain over unchanged threshold. DB baseline uses a declared uniform center geometric PSF; diffraction and actual-camera matching are not established.",
+  "numerical_fit_and_validation_preserved_after_report_performance_fix": true,
+  "report_generation_sources": {
+    "predecessor_prediction": "verification/report-adapter-predecessor.py",
+    "predecessor_workflow": "verification/workflow-adapter-predecessor.py"
+  }
+}

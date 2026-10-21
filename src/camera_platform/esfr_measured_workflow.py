@@ -78,7 +78,7 @@ def create(service, payload, *, launch=True, source_kind="measured"):
     from . import esfr_iq_service as iq
     if source_kind not in {"measured", "synthetic"}:
         raise ValueError("Unsupported workflow source kind")
-    allowed = {"source", "development_ids", "rois", "chart_profile", "measured_review", "roi_reviewed_capture_ids", "iq"}
+    allowed = {"source", "development_ids", "rois", "chart_profile", "measured_review", "roi_reviewed_capture_ids", "iq", "camera_model_id"}
     if not isinstance(payload, dict) or set(payload) - allowed:
         raise ValueError("Unexpected measured workflow field")
     ids = payload.get("development_ids", [])
@@ -105,6 +105,10 @@ def create(service, payload, *, launch=True, source_kind="measured"):
         raise ValueError("Select the exact DB run/candidate/condition to link")
     from .calibration_db import source_selection
     _, context = source_selection(service, source)
+    model = None
+    if payload.get("camera_model_id"):
+        from . import esfr_camera_model as camera
+        model = camera.check_captures(service, payload["camera_model_id"], captures, source)
     code = lab._source_code()
     if service.loaded_environment != code:
         raise ConflictError("Restart the current source before creating measured workflows")
@@ -116,7 +120,9 @@ def create(service, payload, *, launch=True, source_kind="measured"):
         "rois": rois, "chart_profile": chart, "measured_review": review,
         "thresholds": THRESHOLDS, "physical_validation": "not_established",
         "source_kind": source_kind, "iq": iq_config,
-    }, [(esfr_lab.CAPTURES, c) for c in captures], identity=identity)
+        **({"camera_model_id": model["id"], "camera_model_sha256": model["content_hash"],
+            "camera_model_snapshot": model} if model else {}),
+    }, [(esfr_lab.CAPTURES, c) for c in captures] + ([(camera.KIND, model)] if model else []), identity=identity)
     _write(service, identity, {"id": identity, "input_sha256": record["content_hash"],
         "status": "running", "stage": "development_measurement", "receipts": {}, "current_job": None})
     if launch:
@@ -137,6 +143,9 @@ def get(service, identity):
         "rois": record["rois"], "chart_profile": record["chart_profile"],
         "measured_review": record["measured_review"], "thresholds": record["thresholds"],
         "source_kind": record.get("source_kind", "measured"), "iq": record.get("iq"),
+        "camera_model_id": record.get("camera_model_id"),
+        "camera_model_sha256": record.get("camera_model_sha256"),
+        "camera_model_scope": record.get("camera_model_snapshot", {}).get("scope"),
         "current_job": current, "resume_required": status == "running" and not alive,
         "physical_validation": "not_established"}
     from .esfr_iq_exports import overlay_workflow
@@ -156,6 +165,11 @@ def start_validation(service, identity, payload, *, launch=True):
         if len(ids) != 3 or len(set(ids)) != 3:
             raise ValueError("Select exactly three newly acquired validation pairs")
         captures = [esfr_lab.capture(service, i) for i in record["development_ids"] + ids]
+        if record.get("camera_model_id"):
+            from . import esfr_camera_model as camera
+            model = camera.check_captures(service, record["camera_model_id"], captures, record["source"])
+            if model != record["camera_model_snapshot"]:
+                raise IntegrityError("Frozen selected camera model changed")
         source_kind = record.get("source_kind", "measured")
         if any(c["metadata"].get("role") != "validation" or c["metadata"].get("source_kind") != source_kind for c in captures[3:]):
             raise ValueError("Validation requires immutable " + source_kind + " validation roles")
@@ -227,11 +241,47 @@ def _launch(service, identity):
 def resume(service, identity):
     with _lock:
         record, state = _read(service, identity)
-        _current(service, record)
         if state["status"] != "running":
             raise ConflictError("Only interrupted running workflows can resume; failures stay preserved")
+        # A report retry is idempotent and cannot resubmit any numerical job.
+        required = {"development_measurement", "development_export", "calibration_fit", "contract",
+            "validation_measurement", "validation_export", "frozen_validation", "profile", "report"}
+        if (record.get("camera_model_id") and state.get("stage") == "selected_model_comparison"
+                and state.get("pending_operation") == "selected_model_comparison"
+                and required <= set(state.get("receipts", {}))
+                and (not record.get("iq", {}).get("enabled") or "iq_report" in state.get("receipts", {}))):
+            from . import esfr_model_prediction as prediction
+            prediction.report_compatibility(service, record)
+            if identity not in _threads or not _threads[identity].is_alive():
+                thread = threading.Thread(target=_finish_model_report, args=(service, identity), daemon=True,
+                    name="esfr-model-report-"+identity[-8:])
+                _threads[identity] = thread
+                thread.start()
+            return get(service, identity)
+        _current(service, record)
         _launch(service, identity)
     return get(service, identity)
+
+
+def _finish_model_report(service, identity):
+    """Finish interrupted reporting from exact completed numerical owners."""
+    from . import esfr_model_prediction as prediction
+    try:
+        record, state = _read(service, identity)
+        proof = prediction.report_compatibility(service, record)
+        result = prediction.create(service, record, state, report_only=True)
+        state["model_comparison"] = result
+        state["receipts"]["selected_model_comparison"] = result
+        state["links"].update(model_report=result["report_url"], model_bundle=result["bundle_url"])
+        state["report_finalization"] = {"compatibility":proof,"source_code":lab._source_code(),
+            "numerical_source_code":record["source_code"],"numerical_stages_reexecuted":False}
+        state.pop("pending_operation", None)
+        state.update(status="completed", stage="report_ready", current_job=None)
+        _write(service, identity, state)
+    except Exception as exc:
+        _, state = _read(service, identity)
+        state.update(status="failed", error=str(exc), current_job=None)
+        _write(service, identity, state)
 
 
 def _run(service, identity):
@@ -301,13 +351,13 @@ def _run(service, identity):
         image = validated["result"]["summary"]["esfr_image_validation"]
         passed = image["validation"]["status"] == "pass"
         applied = once("profile", lambda: lab.apply(service, fitted["id"],
-            {"campaign_id": exported["campaign_id"], "activate": passed}))
+            {"campaign_id": exported["campaign_id"], "activate": passed and not record.get("camera_model_id")}))
         from .calibration_completion import create as completion
         report = once("report", lambda: completion(service, {"study_id": fitted["id"],
             "validation_id": validated["id"], "profile_id": applied["profile"]["id"]}))
         state.update(status="running", stage="report_finalization", current_job=None,
             validation={"id": validated["id"], "image_validation": image["validation"], "metrics": image["metrics"]},
-            report=report, profile_id=applied["profile"]["id"], profile_activated=passed,
+            report=report, profile_id=applied["profile"]["id"], profile_activated=passed and not record.get("camera_model_id"),
             links={"report": report["report_url"], "bundle": report["bundle_url"],
                 "lab": exported["calibration_lab_url"] + "&study=" + fitted["id"] + "&validation=" + validated["id"],
                 "image_report": image["report_url"]})
@@ -316,6 +366,12 @@ def _run(service, identity):
             state["iq_result"] = once("iq_report", lambda: iq.validate(service, record, state))
             state["links"].update(iq_report=state["iq_result"]["report_url"],
                                   iq_bundle=state["iq_result"]["bundle_url"])
+        if record.get("camera_model_id"):
+            from . import esfr_model_prediction as prediction
+            state["stage"] = "selected_model_comparison"
+            state["model_comparison"] = once("selected_model_comparison", lambda: prediction.create(service, record, state))
+            state["links"].update(model_report=state["model_comparison"]["report_url"],
+                                  model_bundle=state["model_comparison"]["bundle_url"])
         # Publish completion once, after every requested report and link exists.
         # once() persists both before execution and after receipt storage.
         state.update(status="completed", stage="report_ready")
@@ -330,6 +386,16 @@ def _run(service, identity):
 
 
 def install_routes(app, service):
+    from . import esfr_camera_model, esfr_model_prediction
+    esfr_camera_model.install_routes(app, service)
+    esfr_model_prediction.install_routes(app, service)
+
+    @app.post(ROOT + "/model-workflows", status_code=202)
+    def model_start(payload: dict):
+        if not payload.get("camera_model_id"):
+            raise ValueError("Select and freeze a physical-camera / DB numerical model first")
+        return create(service, payload)
+
     @app.get(ROOT + "/template")
     def template():
         from .esfr_measured import measured_template

@@ -181,7 +181,7 @@
   function resultLinks(workflow) {
     const value = workflow?.links || {}, rows = [];
     const add = (label, url) => { const valid = safeURL(url); if (valid && !rows.some(row => row.url === valid)) rows.push({label,url:valid}); };
-    for (const [key,label] of [['iq_report','색·계조·노이즈 IQ 보고서'],['iq_bundle','IQ 후보·근거 ZIP'],['report','통합 보정·검증 보고서'],['bundle','원본·근거 ZIP'],['lab','Calibration Lab'],['image_report','새 검증 RAW·ISP 보고서'],['report_url','통합 보정·검증 보고서'],['completion_report_url','통합 보정·검증 보고서'],['report_html','통합 보고서'],['zip_url','원본·근거 ZIP'],['bundle_url','원본·근거 ZIP'],['calibration_lab_url','Calibration Lab'],['lab_url','Calibration Lab'],['db_url','DB Design Lab'],['development_report_url','개발 측정 보고서'],['validation_report_url','새 검증 RAW·ISP 보고서']]) add(label,value[key]);
+    for (const [key,label] of [['model_report','선택 카메라 모델·실측 통합 비교'],['model_bundle','카메라 모델 비교 ZIP'],['iq_report','색·계조·노이즈 IQ 보고서'],['iq_bundle','IQ 후보·근거 ZIP'],['report','통합 보정·검증 보고서'],['bundle','원본·근거 ZIP'],['lab','Calibration Lab'],['image_report','새 검증 RAW·ISP 보고서'],['report_url','통합 보정·검증 보고서'],['completion_report_url','통합 보정·검증 보고서'],['report_html','통합 보고서'],['zip_url','원본·근거 ZIP'],['bundle_url','원본·근거 ZIP'],['calibration_lab_url','Calibration Lab'],['lab_url','Calibration Lab'],['db_url','DB Design Lab'],['development_report_url','개발 측정 보고서'],['validation_report_url','새 검증 RAW·ISP 보고서']]) add(label,value[key]);
     add('통합 보정·검증 보고서',workflow?.report?.report_url || workflow?.report?.url || workflow?.report_url);
     add('원본·근거 ZIP',workflow?.report?.bundle_url || workflow?.report?.zip_url || workflow?.zip_url);
     return rows;
@@ -267,7 +267,7 @@
     if (!workflow) return;
     const links = resultLinks(workflow), validation = workflow.validation_summary || workflow.validation?.summary || workflow.validation || {}, image = workflow.image_validation || validation.esfr_image_validation || {}, metrics = image.metrics || validation.metrics || workflow.metrics || {};
     const judgment=image.validation||validation.image_validation||validation,rawOnly=judgment.scope==='raw_native_sfr_only',verdict = judgment.status, verdictLabels = {pass:'선언한 수치 기준 충족',fail:'선언한 수치 기준 미충족',inconclusive:'판정 보류',not_evaluated:'미평가'};
-    container.innerHTML = '<p class="identity">workflow '+esc(workflow.id)+'</p><p>'+esc(stageLabel(workflow))+'</p>'+(workflow.error?'<p class="measured-error">'+esc(typeof workflow.error==='string'?workflow.error:JSON.stringify(workflow.error))+'</p>':'')+(verdict?'<p><b>'+(rawOnly?'RAW 독립 검증 · ISP는 진단: ':'선언된 비교 범위의 검증: ')+esc(verdictLabels[verdict]||verdict)+'</b></p>':'')+(workflow.profile_id?'<p class="identity">프로파일 '+esc(workflow.profile_id)+' · '+(workflow.profile_activated===true?'이번 작업의 조건부 프로파일 활성화':'이번 작업의 후보를 비활성 상태로 저장')+'</p>':'')+(Object.keys(metrics).length?'<table class="result-table"><thead><tr><th>오차 RMSE</th><th>보정 전 기준</th><th>고정 후보</th><th>최대 오차</th></tr></thead><tbody>'+[['raw_sfr_rmse','RAW Gr'],['isp_sfr_rmse',rawOnly?'ISP · 진단 전용':'ISP · 비교 범위 확인']].map(([key,label])=>'<tr><td>'+label+'</td><td>'+number(metrics[key]?.before)+'</td><td>'+number(metrics[key]?.after)+'</td><td>'+number(metrics[key]?.worst_after)+'</td></tr>').join('')+'</tbody></table>':'')+'<div class="result-links">'+links.map(link=>'<a class="button" href="'+esc(link.url)+'" target="_blank" rel="noopener">'+esc(link.label)+' ↗</a>').join('')+'</div><p class="measured-result-scope">RAW는 lens·sensor·차트·촬영 조건이 합쳐진 유효 응답입니다. ISP 처리 미일치 시 ISP는 진단으로 남습니다. 측정 파일을 등록했다는 사실만으로 물리 검증이나 ISO 인증을 선언하지 않습니다.</p><details><summary>단계·원본 연결·적용 근거</summary><pre class="workflow-details">'+esc(JSON.stringify(workflow,null,2))+'</pre></details>';
+    container.innerHTML = '<p class="identity">workflow '+esc(workflow.id)+'</p><p>'+esc(stageLabel(workflow))+'</p>'+(workflow.error?'<p class="measured-error">'+esc(typeof workflow.error==='string'?workflow.error:JSON.stringify(workflow.error))+'</p>':'')+(verdict?'<p><b>'+(rawOnly?'RAW 독립 검증 · ISP는 진단: ':'선언된 비교 범위의 검증: ')+esc(verdictLabels[verdict]||verdict)+'</b></p>':'')+(workflow.profile_id?'<p class="identity">프로파일 '+esc(workflow.profile_id)+' · '+(workflow.profile_activated===true?'이번 작업의 조건부 프로파일 활성화':'이번 작업의 후보를 비활성 상태로 저장')+'</p>':'')+(Object.keys(metrics).length?'<table class="result-table"><thead><tr><th>오차 RMSE</th><th>보정 전 기준</th><th>고정 후보</th><th>최대 오차</th></tr></thead><tbody>'+[['raw_sfr_rmse','RAW Gr'],['isp_sfr_rmse',rawOnly?'ISP · 진단 전용':'ISP · 비교 범위 확인']].map(([key,label])=>'<tr><td>'+label+'</td><td>'+number(metrics[key]?.before)+'</td><td>'+number(metrics[key]?.after)+'</td><td>'+number(metrics[key]?.worst_after)+'</td></tr>').join('')+'</tbody></table>':'')+'<div class="result-links">'+links.map(link=>'<a class="button" href="'+esc(link.url)+'" target="_blank" rel="noopener">'+esc(link.label)+' ↗</a>').join('')+'</div><p class="measured-result-scope">RAW는 lens·sensor·차트·촬영 조건이 합쳐진 유효 응답입니다. ISP 처리 미일치 시 ISP는 진단으로 남습니다. 측정 파일을 등록했다는 사실만으로 물리 검증이나 ISO 인증을 선언하지 않습니다.</p><details><summary>단계·원본 연결·적용 근거</summary><pre class="workflow-details">'+esc(JSON.stringify({id:workflow.id,status:workflow.status,stage:workflow.stage,source:workflow.source,source_kind:workflow.source_kind,camera_model_id:workflow.camera_model_id,camera_model_sha256:workflow.camera_model_sha256,camera_model_scope:workflow.camera_model_scope,fit:workflow.fit,contract:workflow.contract?{id:workflow.contract.id,content_hash:workflow.contract.content_hash,created_at:workflow.contract.created_at,candidate_sha256:workflow.contract.candidate_sha256}:null,validation:workflow.validation?{id:workflow.validation.id,metrics:workflow.validation.metrics}:null,model_comparison:workflow.model_comparison?{id:workflow.model_comparison.id,summary:workflow.model_comparison.summary,report_url:workflow.model_comparison.report_url}:null,links:workflow.links,physical_validation:workflow.physical_validation},null,2))+'</pre></details>';
     const kind=workflow.source_kind||workflow.iq_result?.source_kind;container.insertAdjacentHTML('afterbegin','<p class="source-status"><strong>입력 출처: '+esc(kind==='synthetic'?'합성 동작 검증 · 실제 촬영 아님':kind==='measured'?'실측으로 등록된 사용자 원본 · 장비/시각은 사용자 선언':'저장된 원본 출처 확인 필요')+'</strong></p>');
     if(workflow.iq_result||workflow.iq_frozen)container.insertAdjacentHTML('afterbegin','<div class="iq-summary"><h3>IQ 후보 · 판정 기준 미선언</h3><p>명목 기준의 색·계조·반복 노이즈를 진단합니다. CCM 후보는 같은 RAW의 reference ISP에만 적용하며 자동 활성화하지 않습니다. 실제 ISP의 색 공간: '+esc(state.iq.actual_isp_color_space==='srgb'?'sRGB · 사용자 기록으로 확인':'미확인 · 실제 ISP 색차 미평가')+'</p><p class="identity">Reference '+esc(state.iq.reference_id)+'</p></div>');
   }
@@ -278,7 +278,8 @@
     $('upload').textContent = role === 'development' ? '개발 촬영 쌍 등록' : '새 검증 촬영 쌍 등록';
     $('upload-instruction').textContent = role === 'development' ? '개발 촬영 3쌍을 등록합니다. 검증 촬영은 후보 고정 뒤 새 세션에서 취득합니다.' : '계약의 후보 고정 시각 이후 취득한 새 검증 3쌍을 등록하세요. 동일 개발 촬영을 재사용하지 않습니다.';
     const devErrors=readiness(state,'development'),valErrors=readiness(state,'validation'), errors=role==='development'?devErrors:valErrors;
-    $('create').disabled = locked || devErrors.length > 0;
+    if (!state.workflow && !doc.getElementById('camera-model-select')?.value) errors.push('실측 카메라와 대응 DB 수치 모델을 선택·고정하세요.');
+    $('create').disabled = locked || devErrors.length > 0 || !doc.getElementById('camera-model-select')?.value;
     $('validate').disabled = locked || valErrors.length > 0;
     $('readiness').innerHTML = errors.length ? '<ul class="readiness-list">'+errors.map(error=>'<li>'+esc(error)+'</li>').join('')+'</ul>' : '<b>촬영 선택과 ROI 검토가 준비되었습니다.</b><p>서버가 원본 hash·조건·역할·시간 순서와 112개 전체 범위를 다시 확인합니다.</p>';
     for (const id of ['source-run','source-candidate','source-condition','rois','roi-file','rois-apply','chart-profile']) $(id).disabled = locked || !!state.workflow;
@@ -312,6 +313,7 @@
     const iq=workflow.iq||specification.iq||workflow.iq_frozen?.settings;
     if(iq?.enabled){state.iq={...iq,nominal_confirmed:true,srgb_confirmed:iq.actual_isp_color_space==='srgb'};$('iq-enabled').checked=true;$('iq-reference').value=iq.reference_id;$('iq-color-space').value=iq.actual_isp_color_space;$('iq-nominal-confirmed').checked=true;$('iq-srgb-confirmed').checked=state.iq.srgb_confirmed;for(const id of list(iq.patch_roi_reviewed_capture_ids))state.iqReviewed.add(id);}else{state.iq.enabled=false;$('iq-enabled').checked=false;}
     $('workflow-id').value=workflow.id;
+    if (typeof global.CustomEvent === 'function') global.dispatchEvent(new CustomEvent('esfr-camera-workflow', {detail:workflow}));
     global.history.replaceState({},'',sourceURL(state.source,'/esfr-measured.html',workflow.id));
     $('progress').textContent=stageLabel(workflow)+' · '+workflow.id+(workflow.current_job?.id?' · 계산 '+workflow.current_job.id:'');
     if(!wasFrozen&&candidateFrozen(workflow)){fillMetadata();state.noiseText='';$('iq-noise-ids').value='';}
@@ -365,7 +367,8 @@
     if(chart.physical_chart_id&&chart.physical_chart_id!==state.physicalChart)throw Error('차트 프로파일과 검토한 실물 차트 개체 ID가 다릅니다.');
     chart.physical_chart_id=state.physicalChart;$('chart-profile').value=JSON.stringify(chart,null,2);
     const body={source:sourceValue(state.source),development_ids:[...state.development],rois:copy(state.rois),chart_profile:chart,roi_reviewed_capture_ids:[...state.development],measured_review:review,...iqRequest(state,'development')};
-    const value=await api('/measured/workflows',body);adoptWorkflow(value);epoch++;await pollWorkflow(state.workflow.id,epoch);notice('개발 영상으로 측정·보정을 시작했습니다. 후보 고정 완료 뒤 새 검증 촬영 단계가 열립니다.');
+    body.camera_model_id=doc.getElementById('camera-model-select')?.value;if(!body.camera_model_id)throw Error('실측 카메라와 대응 DB 모델을 먼저 선택·고정하세요.');
+    const value=await api('/measured/model-workflows',body);adoptWorkflow(value);epoch++;await pollWorkflow(state.workflow.id,epoch);notice('개발 영상으로 측정·보정을 시작했습니다. 후보 고정 완료 뒤 새 검증 촬영 단계가 열립니다.');
   }));
   $('validate').addEventListener('click',()=>busy(async()=>{
     syncInputs();const review=await getReview('validation'),id=state.workflow.id;
@@ -376,6 +379,7 @@
   $('refresh').addEventListener('click',()=>busy(async()=>{await refreshCaptures();if(state.workflow){epoch++;await pollWorkflow(state.workflow.id,epoch);}}));
   $('resume').addEventListener('click',()=>busy(async()=>{if(!state.workflow?.resume_required)throw Error('재개가 필요한 작업이 아닙니다.');const result=await api('/measured/workflows/'+encodeURIComponent(state.workflow.id)+'/resume',{});adoptWorkflow(result);epoch++;await pollWorkflow(state.workflow.id,epoch);}));
   $('iq-compare').addEventListener('click',()=>busy(async()=>{const body=comparisonRequest($('iq-mode-a').value.trim(),$('iq-mode-b').value.trim()),result=await api('/measured/iq-comparisons',body),url=safeURL(result.report_url||result.links?.report||result.links?.report_url);if(!url)throw Error('두 모드 비교 보고서 주소를 확인할 수 없습니다.');$('iq-comparison-result').innerHTML='<p>각 모드의 고정 조건을 유지한 보고서 비교입니다.</p><a class="button" href="'+esc(url)+'" target="_blank" rel="noopener">모드 A/B 비교 보고서 ↗</a>';}));
+  global.addEventListener('esfr-camera-selection',renderControls);
   global.addEventListener('beforeunload',()=>{epoch++;previewEpoch++;clearTimeout(timer);});
   async function init(){
     for(const[key,id]of[['run_id','source-run'],['candidate_id','source-candidate'],['condition_id','source-condition']])$(id).value=state.source[key]||'';
@@ -388,3 +392,44 @@
   }
   init();
 })(typeof window === 'undefined' ? globalThis : window);
+
+/* Explicit device/model selection; no capture metadata or old records mutated. */
+(() => {
+  'use strict';
+  if (typeof document === 'undefined' || !document.getElementById('camera-model-panel')) return;
+  const $ = id => document.getElementById('camera-model-'+id);
+  const measured = id => document.getElementById('measured-'+id);
+  const api = window.CameraESFRMeasured.createAPI(window.fetch.bind(window));
+  const root = '/camera-models';
+  let models = [], sources = [], frozen = false, currentWorkflow = null;
+  const status = text => {$('status').textContent=text;};
+  const signal = () => window.dispatchEvent(new CustomEvent('esfr-camera-selection'));
+  function source() {const s={run_id:measured('source-run').value.trim(),candidate_id:measured('source-candidate').value.trim()};const c=measured('source-condition').value.trim();if(c)s.condition_id=c;return s;}
+  function same(a,b){return ['run_id','candidate_id','condition_id'].every(k=>(a?.[k]||'')===(b?.[k]||''));}
+  function setSource(s){for(const[k,id]of[['run_id','source-run'],['candidate_id','source-candidate'],['condition_id','source-condition']]){measured(id).value=s[k]||'';measured(id).dispatchEvent(new Event('input',{bubbles:true}));}}
+  function add(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o);}
+  function chooseModel(){const row=models.find(r=>r.id===$('select').value);if(!row){status('카메라 모델을 선택·고정해야 새 실측 보정을 시작할 수 있습니다.');signal();return;}setSource(row.source);$('select').value=row.id;for(const k of ['manufacturer','model','serial','lens','sensor'])$(k).value=row.camera[k];$('capture-context').textContent=row.camera.camera_id+' / '+row.camera.mode;$('spatial').value=row.spatial.mode;$('mapping-wrap').hidden=row.spatial.mode!=='explicit_roi_assignment';$('mapping').value=row.spatial.roi_fields?JSON.stringify(row.spatial.roi_fields,null,2):'';if(row.spatial.source_field_id){if(!Array.from($('field').options).some(o=>o.value===row.spatial.source_field_id))add($('field'),row.spatial.source_field_id,row.spatial.source_field_id);$('field').value=row.spatial.source_field_id;}$('ack').checked=true;status(row.camera.manufacturer+' / '+row.camera.model+' · '+row.camera.serial+' · '+row.camera.mode+' · '+row.id+' · SHA256 '+row.content_hash+' · 시야 배치 '+row.spatial.mode);signal();}
+  async function loadFields(){const s=source();if(!s.run_id||!s.candidate_id)throw Error('완료된 DB 실행과 후보를 먼저 선택하세요.');const q=new URLSearchParams(s);const d=await api(root+'/source-fields?'+q);$('field').replaceChildren();for(const f of d.fields)add($('field'),f.id,f.id+' · '+JSON.stringify(f.image_xy_mm||f.field_xy||'sensor 위치 미확인'));$('source-info').textContent='선택 DB: '+d.lens.label+' × '+d.sensor.label+' · 광학 '+d.optical_profile+(d.optical_profile==='geometric_retrace'?' (회절 미포함)':'')+' · 필수 조건 '+JSON.stringify(d.requirements)+' · 정확한 physical sensor field 대응은 자동 추정하지 않습니다.';}
+  async function refresh(){const old=$('select').value;const [m,s]=await Promise.all([api(root),api(root+'/sources')]);models=m.models;sources=s.sources;$('select').replaceChildren();add($('select'),'','새 모델 등록 / 선택 필요');for(const row of models)add($('select'),row.id,row.camera.model+' / '+row.camera.serial+' / '+row.camera.mode+' · '+row.id.slice(-8));$('select').value=old;$('source').replaceChildren();add($('source'),'','완료된 DB 렌즈·센서 후보 선택');sources.forEach((row,i)=>add($('source'),String(i),row.label));const index=sources.findIndex(r=>same(r.source,source()));$('source').value=index<0?'':String(index);if(currentWorkflow)adopt(currentWorkflow);signal();}
+  async function guarded(fn){try{await fn();}catch(e){status('모델 연결 확인: '+e.message);}}
+  function adopt(flow){currentWorkflow=flow;frozen=true;$('fields').disabled=true;$('select').disabled=true;$('refresh').disabled=true;if(flow.camera_model_id){if(!Array.from($('select').options).some(o=>o.value===flow.camera_model_id))add($('select'),flow.camera_model_id,flow.camera_model_id);$('select').value=flow.camera_model_id;status('이 작업의 고정 모델: '+flow.camera_model_id+' · SHA256 '+flow.camera_model_sha256+' · '+JSON.stringify(flow.camera_model_scope));}else{$('select').value='';status('이전 작업: DB 설계 출처만 연결됨. 선택 카메라 모델의 직접 예측 비교는 새 작업에서 시작하세요.');}signal();}
+  $('select').addEventListener('change',()=>{if(!frozen)chooseModel();});
+  $('source').addEventListener('change',()=>guarded(async()=>{if(frozen)return;const row=sources[Number($('source').value)];if(!row||$('source').value==='')return;setSource(row.source);$('select').value='';$('ack').checked=false;signal();await loadFields();}));
+  $('source-load').addEventListener('click',()=>guarded(loadFields));
+  $('refresh').addEventListener('click',()=>guarded(refresh));
+  $('spatial').addEventListener('change',()=>{$('mapping-wrap').hidden=$('spatial').value!=='explicit_roi_assignment';$('ack').checked=false;});
+  $('register').addEventListener('click',()=>guarded(async()=>{
+    if(frozen)return;const ids=Array.from(document.querySelectorAll('[data-capture-select]:checked')).map(n=>n.dataset.captureSelect);if(!ids.length)throw Error('아래에서 개발 RAW·ISP 촬영을 먼저 등록하고 선택하세요.');
+    const data=await api('/captures');const captures=Array.isArray(data)?data:data.captures;const capture=captures.find(c=>ids.includes(c.id)&&c.metadata.role==='development');if(!capture)throw Error('선택한 개발 촬영을 찾을 수 없습니다.');
+    const meta=capture.metadata;const camera={camera_id:meta.camera_id,mode:meta.conditions.mode_id};for(const k of ['manufacturer','model','serial','lens','sensor'])camera[k]=$(k).value.trim();
+    $('capture-context').textContent=meta.camera_id+' / '+meta.conditions.mode_id;
+    const spatial={mode:$('spatial').value,acknowledged:$('ack').checked};if(spatial.mode==='explicit_roi_assignment')spatial.roi_fields=JSON.parse($('mapping').value);else spatial.source_field_id=$('field').value;
+    const row=await api(root,{source:source(),development_capture_id:capture.id,camera,spatial});await refresh();$('select').value=row.id;chooseModel();
+  }));
+  for(const id of ['source-run','source-candidate','source-condition'])measured(id).addEventListener('input',()=>{if(frozen)return;const row=models.find(r=>r.id===$('select').value);if(row&&!same(row.source,source())){$('select').value='';status('DB 선택이 달라졌습니다. 대응 카메라 모델을 다시 선택하세요.');signal();}});
+  function invalidate(){if(frozen||!$('select').value)return;$('select').value='';status('장비 정보 또는 PSF 배치가 변경됐습니다. 새 카메라 모델을 고정한 뒤 진행하세요.');signal();}
+  for(const id of ['manufacturer','model','serial','lens','sensor','mapping'])$(id).addEventListener('input',invalidate);
+  for(const id of ['spatial','field','ack'])$(id).addEventListener('change',invalidate);
+  window.addEventListener('esfr-camera-workflow',e=>adopt(e.detail));
+  guarded(refresh);
+})();
