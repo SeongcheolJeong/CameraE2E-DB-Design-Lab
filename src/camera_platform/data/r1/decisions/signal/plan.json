@@ -1,0 +1,410 @@
+{
+  "created_at_utc": "2026-09-26T13:41:12.397806+00:00",
+  "limits": {
+    "minimum_green_dn": 120.0,
+    "minimum_green_snr_p10": 10.0,
+    "maximum_well_fraction": 0.01,
+    "maximum_white_fraction": 0.01,
+    "maximum_exposure_ms": 4.0
+  },
+  "candidates": [
+    {
+      "candidate_id": "clear-e1-g1",
+      "stop": "clear",
+      "exposure_ms": 1.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "clear-e1-g2",
+      "stop": "clear",
+      "exposure_ms": 1.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "clear-e1-g4",
+      "stop": "clear",
+      "exposure_ms": 1.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "stop": "clear",
+      "exposure_ms": 2.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "clear-e2-g2",
+      "stop": "clear",
+      "exposure_ms": 2.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "clear-e2-g4",
+      "stop": "clear",
+      "exposure_ms": 2.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "clear-e4-g1",
+      "stop": "clear",
+      "exposure_ms": 4.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "clear-e4-g2",
+      "stop": "clear",
+      "exposure_ms": 4.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "clear-e4-g4",
+      "stop": "clear",
+      "exposure_ms": 4.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "clear-e8-g1",
+      "stop": "clear",
+      "exposure_ms": 8.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "clear-e8-g2",
+      "stop": "clear",
+      "exposure_ms": 8.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "clear-e8-g4",
+      "stop": "clear",
+      "exposure_ms": 8.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "quarter-e1-g1",
+      "stop": "quarter",
+      "exposure_ms": 1.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "quarter-e1-g2",
+      "stop": "quarter",
+      "exposure_ms": 1.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "quarter-e1-g4",
+      "stop": "quarter",
+      "exposure_ms": 1.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "quarter-e2-g1",
+      "stop": "quarter",
+      "exposure_ms": 2.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "quarter-e2-g2",
+      "stop": "quarter",
+      "exposure_ms": 2.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "quarter-e2-g4",
+      "stop": "quarter",
+      "exposure_ms": 2.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "quarter-e4-g1",
+      "stop": "quarter",
+      "exposure_ms": 4.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "quarter-e4-g2",
+      "stop": "quarter",
+      "exposure_ms": 4.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "quarter-e4-g4",
+      "stop": "quarter",
+      "exposure_ms": 4.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "quarter-e8-g1",
+      "stop": "quarter",
+      "exposure_ms": 8.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "quarter-e8-g2",
+      "stop": "quarter",
+      "exposure_ms": 8.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "quarter-e8-g4",
+      "stop": "quarter",
+      "exposure_ms": 8.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "radial-e1-g1",
+      "stop": "radial",
+      "exposure_ms": 1.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "radial-e1-g2",
+      "stop": "radial",
+      "exposure_ms": 1.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "radial-e1-g4",
+      "stop": "radial",
+      "exposure_ms": 1.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "radial-e2-g1",
+      "stop": "radial",
+      "exposure_ms": 2.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "radial-e2-g2",
+      "stop": "radial",
+      "exposure_ms": 2.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "radial-e2-g4",
+      "stop": "radial",
+      "exposure_ms": 2.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "stop": "radial",
+      "exposure_ms": 4.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "radial-e4-g2",
+      "stop": "radial",
+      "exposure_ms": 4.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "radial-e4-g4",
+      "stop": "radial",
+      "exposure_ms": 4.0,
+      "gain": 4.0
+    },
+    {
+      "candidate_id": "radial-e8-g1",
+      "stop": "radial",
+      "exposure_ms": 8.0,
+      "gain": 1.0
+    },
+    {
+      "candidate_id": "radial-e8-g2",
+      "stop": "radial",
+      "exposure_ms": 8.0,
+      "gain": 2.0
+    },
+    {
+      "candidate_id": "radial-e8-g4",
+      "stop": "radial",
+      "exposure_ms": 8.0,
+      "gain": 4.0
+    }
+  ],
+  "training": [
+    {
+      "scenario_id": "train-L0.5",
+      "split": "train",
+      "kind": "original",
+      "scale": 0.5,
+      "domain": "selection"
+    },
+    {
+      "scenario_id": "train-L2",
+      "split": "train",
+      "kind": "original",
+      "scale": 2.0,
+      "domain": "selection"
+    },
+    {
+      "scenario_id": "train-L6",
+      "split": "train",
+      "kind": "original",
+      "scale": 6.0,
+      "domain": "selection"
+    }
+  ],
+  "holdout_recipes": [
+    {
+      "scenario_id": "holdout-mirror-L0.75",
+      "split": "holdout",
+      "kind": "mirror",
+      "scale": 0.75,
+      "domain": "within_training_per_band_peak_envelope"
+    },
+    {
+      "scenario_id": "holdout-rotate-L3",
+      "split": "holdout",
+      "kind": "rotate",
+      "scale": 3.0,
+      "domain": "within_training_per_band_peak_envelope"
+    },
+    {
+      "scenario_id": "holdout-spectrum-L2",
+      "split": "holdout",
+      "kind": "spectrum",
+      "scale": 2.0,
+      "band_factors": [
+        0.6,
+        1.4
+      ],
+      "domain": "within_training_per_band_peak_envelope"
+    },
+    {
+      "scenario_id": "stress-local-highlight-L20",
+      "split": "holdout",
+      "kind": "highlight",
+      "scale": 1.0,
+      "highlight_peak_factor": 20.0,
+      "domain": "outside_training_per_band_peak_envelope"
+    }
+  ],
+  "noise_seeds": [
+    1901,
+    1902,
+    1903,
+    1904
+  ],
+  "training_noise_enabled": false,
+  "source_identity": {
+    "clear": {
+      "run_id": "run-a2f9b36ad92c4cfaad3f3a545af0b131",
+      "archive_sha256": "80f00e71c835a1f92073d9c2b040319269137ab790223548a229f5625d2af351",
+      "lens_model_id": "model-e3b6428f60334958a9d1694cdc8129e5",
+      "lens_response_sha256": "d7af5860bcd662bfb04e8f0e4076e17165e561b600290de5491f150ae82bedad",
+      "psf_factory_job_id": "run-e2725342c91e4bdc94489f13e3c9cd20",
+      "sensor_model_id": "model-053d49e660ff4545abf2467d25237bf5",
+      "sensor_payload_sha256": "86623c761bdb80340924b2075f2686bc9865c41da77c923208d402474c869179",
+      "scene_render_id": "run-7340d77f8e8a4f9d861f9a412f724983",
+      "scene_render_content_hash": "5c2cde0f03d9d69b90b8b15efb74f81b361cede609249288aa7a7ffcd664e666",
+      "projection_lens_model_id": "model-e3b6428f60334958a9d1694cdc8129e5",
+      "sampling": {
+        "crop_origin": [
+          56,
+          56
+        ],
+        "full_sensor_shape": [
+          128,
+          128
+        ],
+        "kind": "native_sensor",
+        "pixel_pitch_um": 3.0
+      },
+      "spectral_axis_nm": [
+        500,
+        600
+      ],
+      "physical_instance": null,
+      "design_asset_id": "asset-14f2716f4b334920b0c66b8c77cb703a",
+      "prescription_sha256": "1eaeebfdedffcbf67f5d3df19dd9826b3f07fc75c0ecb7dcda8e4e22ba5cab5d",
+      "source_uri": "factory://run-e2725342c91e4bdc94489f13e3c9cd20",
+      "physical_validation": "not_established"
+    },
+    "quarter": {
+      "run_id": "run-c117aaee2d2e4f65a849f498cea1735d",
+      "archive_sha256": "64543574a086b01c149ccfdbfccd30f69695c936e7b4ae488a275c0624bd84b2",
+      "lens_model_id": "model-15c32cd025fe4959a2a09a038aa0b758",
+      "lens_response_sha256": "f01f81531c40fb625ff6e37fdd5cfbe86ac677d452c8fca3310e7aa7aa539d78",
+      "psf_factory_job_id": "run-8d10877371b44ea989929312c2415b13",
+      "sensor_model_id": "model-053d49e660ff4545abf2467d25237bf5",
+      "sensor_payload_sha256": "86623c761bdb80340924b2075f2686bc9865c41da77c923208d402474c869179",
+      "scene_render_id": "run-7340d77f8e8a4f9d861f9a412f724983",
+      "scene_render_content_hash": "5c2cde0f03d9d69b90b8b15efb74f81b361cede609249288aa7a7ffcd664e666",
+      "projection_lens_model_id": "model-15c32cd025fe4959a2a09a038aa0b758",
+      "sampling": {
+        "crop_origin": [
+          56,
+          56
+        ],
+        "full_sensor_shape": [
+          128,
+          128
+        ],
+        "kind": "native_sensor",
+        "pixel_pitch_um": 3.0
+      },
+      "spectral_axis_nm": [
+        500,
+        600
+      ],
+      "physical_instance": null,
+      "design_asset_id": "asset-14f2716f4b334920b0c66b8c77cb703a",
+      "prescription_sha256": "4dbd616d121fcb559a2c2333dcc68813edc302147f93cb0a0874f3b6857eaea9",
+      "source_uri": "factory://run-8d10877371b44ea989929312c2415b13",
+      "physical_validation": "not_established"
+    },
+    "radial": {
+      "run_id": "run-c2a3134e19c94708ab03e1b2487429e5",
+      "archive_sha256": "0db9d4460f1732cf1ba2e3926260cd29ea5cba2bdc287a9d8cf6618dfadcc98c",
+      "lens_model_id": "model-609a4fe02ab940ea8eee7fd04bc1844c",
+      "lens_response_sha256": "16491cfb62a55ca9bdd7c7095c6985026d15ce2318677889bf389c8f062fbb52",
+      "psf_factory_job_id": "run-1b8455898e6a4cf18baf706faff3bdb3",
+      "sensor_model_id": "model-053d49e660ff4545abf2467d25237bf5",
+      "sensor_payload_sha256": "86623c761bdb80340924b2075f2686bc9865c41da77c923208d402474c869179",
+      "scene_render_id": "run-7340d77f8e8a4f9d861f9a412f724983",
+      "scene_render_content_hash": "5c2cde0f03d9d69b90b8b15efb74f81b361cede609249288aa7a7ffcd664e666",
+      "projection_lens_model_id": "model-609a4fe02ab940ea8eee7fd04bc1844c",
+      "sampling": {
+        "crop_origin": [
+          56,
+          56
+        ],
+        "full_sensor_shape": [
+          128,
+          128
+        ],
+        "kind": "native_sensor",
+        "pixel_pitch_um": 3.0
+      },
+      "spectral_axis_nm": [
+        500,
+        600
+      ],
+      "physical_instance": null,
+      "design_asset_id": "asset-14f2716f4b334920b0c66b8c77cb703a",
+      "prescription_sha256": "f3fec19dceedd88ec1f755a50fe8ecc630ff20ae80198ee95bf6c015b85b3dc2",
+      "source_uri": "factory://run-1b8455898e6a4cf18baf706faff3bdb3",
+      "physical_validation": "not_established"
+    }
+  },
+  "implementation_sha256": {
+    "src/camera_platform/constrained_selection.py": "76db4ea6d20f1449597eac06c9bee52673f0fe874be0ea9eac8cc678b7ff1ca8",
+    "tools/run_camera_constrained_selection.py": "03bd176c5e91f2fcff251ebcc55c0da2e97f0436f24d061ff757495a4e526727",
+    "src/camera_platform/response_chain.py": "71f3a93ae9a9c7055355ec7ab7c206157d333f6a4948ffb85e6791a49e32da96",
+    "src/camera_platform/prescription_response.py": "1946ba8e227b53a484a77b75c3a1e25d2b3b23df0562a2671076d58ff1ea3276",
+    "tools/run_camera_prescription_comparison.py": "338c1478c6de7db0283651ae9b5ea2ba981dd8ebd4082eea5b46e9ca56beb23a"
+  },
+  "selection_objective": "maximize_worst_green_SNR_p10_then_shorter_exposure_lower_gain_id",
+  "independent_reference_limits": {
+    "photo_relative_error": 2e-10,
+    "raw_difference_dn": 0
+  },
+  "brief_source": "explicit_research_requirements_not_customer_or_sensor_hardware_specification",
+  "gain_and_exposure_domain": "direct_runtime_hypotheses_no_registry_validity_expansion",
+  "holdout_policy": "freeze_selection_before_constructing_holdout_inputs_no_reselection",
+  "scope": "reused_prescription_field_PSF_and_radiometry_static_independent_reset"
+}

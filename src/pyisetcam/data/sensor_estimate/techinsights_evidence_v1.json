@@ -1,0 +1,1010 @@
+{
+  "schema": "camerae2e_reviewed_techinsights_v1",
+  "source_priority": "reviewed_locally_collected_original_reports",
+  "reviewed_on": "2026-09-05",
+  "profiles": {
+    "DEF-1807-801": {
+      "device_name": "IMX307",
+      "sources": {
+        "DEF-1807-801": {
+          "relative_path": "techinsights_html_download/html/pdfs/134_DEF-1807-801/Sony_IMX307_STARVIS_CIS_DEF-1807-801.pdf",
+          "sha256": "f50b33847064cfccfe5ed3b61646fa1f5058c49ad6455105ee92a9e1feae9012",
+          "page_count": 9
+        }
+      },
+      "selected_facts": {
+        "pixel_pitch_um": {
+          "value": 2.9,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 6,
+          "notes": "Report table gives the native pixel pitch; not inferred from marketing resolution."
+        },
+        "active_si_thickness_um": {
+          "value": 2.8,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 6,
+          "notes": ""
+        },
+        "optical_stack_height_um": {
+          "value": 2.4,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 6,
+          "notes": "Total microlens/coating-to-Si height only; does not resolve microlens, buffer and AR constituent thicknesses."
+        },
+        "cfa_pattern": {
+          "value": "rgb_bayer",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 7,
+          "notes": ""
+        },
+        "microlens_footprint": {
+          "value": "gapless_array",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 7,
+          "notes": "Qualitative topology; no numerical sag, curvature, asphere profile or residual gap is supplied."
+        },
+        "microlens_coating_present": {
+          "value": true,
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 7,
+          "notes": "Presence is observed; composition, n,k and thickness are absent. Coating presence does not identify an AR material stack."
+        },
+        "edge_optical_shift": {
+          "value": "not_observed",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 7,
+          "notes": "Observation at sampled locations, not a quantified zero-displacement measurement or angular-response curve."
+        },
+        "back_aperture_grid_material": {
+          "value": "W",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 6,
+          "notes": ""
+        },
+        "peripheral_dti_type": {
+          "value": "full_front_dti",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "bond_pad_and_die_seal",
+          "source_id": "DEF-1807-801",
+          "pdf_page_1_based": 7,
+          "notes": ""
+        }
+      },
+      "supplemental_observations": {},
+      "active_pixel_dti": "unconfirmed",
+      "corrected_legacy_classifications": [
+        {
+          "field": "derived_specs.dti_type",
+          "catalog_value": "full_depth_front_dti",
+          "status": "region_scope_not_supported",
+          "recommended_active_pixel_value": null,
+          "notes": "Full F-DTI statement is explicitly about bond pad isolation and die seal, not pixel-to-pixel isolation. Do not infer active-array DTI presence or absence."
+        }
+      ],
+      "rejected_legacy_optical_fields": [],
+      "unmodeled_structure": [
+        "AR/coating optical dispersion and coherent thin-film response",
+        "full microlens surface and spatial/angular calibration",
+        "DTI and surface-texture light redistribution and carrier collection"
+      ],
+      "missing_calibration": [
+        "product RGB CFA n,k or transmission spectra",
+        "product spectral EQE and angular response",
+        "charge-collection efficiency and spatial crosstalk"
+      ],
+      "limitations": [
+        "Numerical lens height, circular/ellipsoid shape and0.08um edgegap are generated assumptions; gapless observation does not validate them.",
+        "A coating-presence statement does not identify SiO2, SiN, HfO2 or a specific AR multilayer.",
+        "Total optical stack height constrains a sum; it does not independently determine lens, CFA and buffer thicknesses.",
+        "Structural observed Si thickness and CFA range do not validate optical constants, quantum efficiency or electron-domain readout."
+      ]
+    },
+    "DEF-2011-804": {
+      "device_name": "IMX462",
+      "sources": {
+        "DEF-2011-804": {
+          "relative_path": "techinsights_html_download/html/pdfs/100_DEF-2011-804/Sony_IMX462_DEF-2011-804.pdf",
+          "sha256": "0ccbcf14097f990e9224bc530ca452cab6412878016adb9b1f995583db06a5e6",
+          "page_count": 12
+        }
+      },
+      "selected_facts": {
+        "pixel_pitch_um": {
+          "value": 2.9,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 7,
+          "notes": "Report table gives the native pixel pitch; not inferred from marketing resolution."
+        },
+        "active_si_thickness_um": {
+          "value": 6.2,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 7,
+          "notes": ""
+        },
+        "optical_stack_height_um": {
+          "value": 2.5,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 7,
+          "notes": "Total microlens/coating-to-Si height only; does not resolve microlens, buffer and AR constituent thicknesses."
+        },
+        "cfa_pattern": {
+          "value": "rgb_bayer",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 8,
+          "notes": ""
+        },
+        "microlens_footprint": {
+          "value": "gapless_array",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 8,
+          "notes": "Qualitative topology; no numerical sag, curvature, asphere profile or residual gap is supplied."
+        },
+        "microlens_coating_present": {
+          "value": true,
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": "Presence is observed; composition, n,k and thickness are absent. Coating presence does not identify an AR material stack."
+        },
+        "edge_optical_shift": {
+          "value": "not_observed",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": "Observation at sampled locations, not a quantified zero-displacement measurement or angular-response curve."
+        },
+        "back_aperture_grid_material": {
+          "value": "W",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 7,
+          "notes": ""
+        },
+        "cfa_thickness_observed_range_um": {
+          "value": [
+            0.45,
+            0.55
+          ],
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": "Source explicitly states dependence on color and measured location. No R/G/B association or statistical distribution is provided."
+        },
+        "grid_aperture_area_fraction": {
+          "value": 0.88,
+          "unit": "fraction",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 8,
+          "notes": "Geometric aperture area fraction, not linear width, photodiode fill factor, collection efficiency or net sensor QE."
+        },
+        "inverted_pyramid_pitch_um": {
+          "value": 0.4,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "inverted_pyramid_depth_um": {
+          "value": 0.22,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "inverted_pyramids_per_pixel": {
+          "value": 25,
+          "unit": "count",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": "Back-surface texture is structurally observed. No measured reflectance/path-enhancement factor is supplied."
+        },
+        "active_pixel_dti_type": {
+          "value": "partial_depth_back_dti",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "active_pixel_dti_depth_um": {
+          "value": 2.0,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "active_pixel_dti_intersection_max_depth_um": {
+          "value": 2.4,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": "Source wording says maximum thickness at intersections. Do not substitute 2.4um for all trench depths."
+        },
+        "peripheral_dti_type": {
+          "value": "full_depth_back_dti",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "bond_pad_and_die_seal",
+          "source_id": "DEF-2011-804",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        }
+      },
+      "supplemental_observations": {},
+      "active_pixel_dti": "partial_depth_back_dti",
+      "corrected_legacy_classifications": [
+        {
+          "field": "derived_specs.dti_type",
+          "catalog_value": "full_depth_front_dti",
+          "status": "contradicted_by_original_pdf",
+          "recommended_active_pixel_value": "partial_depth_back_dti",
+          "notes": "Catalog front/full-depth classification conflicts with p9. Active depth2.0um is consistent; peripheral full-depth B-DTI must remain region-specific."
+        }
+      ],
+      "rejected_legacy_optical_fields": [
+        {
+          "field": "qe.spectral_ranges",
+          "reason": "CFA thickness is not a wavelength band",
+          "value_nm": [
+            450.0,
+            550.0
+          ]
+        }
+      ],
+      "unmodeled_structure": [
+        "AR/coating optical dispersion and coherent thin-film response",
+        "full microlens surface and spatial/angular calibration",
+        "DTI and surface-texture light redistribution and carrier collection"
+      ],
+      "missing_calibration": [
+        "product RGB CFA n,k or transmission spectra",
+        "product spectral EQE and angular response",
+        "charge-collection efficiency and spatial crosstalk"
+      ],
+      "limitations": [
+        "Numerical lens height, circular/ellipsoid shape and0.08um edgegap are generated assumptions; gapless observation does not validate them.",
+        "A coating-presence statement does not identify SiO2, SiN, HfO2 or a specific AR multilayer.",
+        "Total optical stack height constrains a sum; it does not independently determine lens, CFA and buffer thicknesses.",
+        "Structural observed Si thickness and CFA range do not validate optical constants, quantum efficiency or electron-domain readout."
+      ]
+    },
+    "DEF-2206-805": {
+      "device_name": "IMX662",
+      "sources": {
+        "DEF-2206-805": {
+          "relative_path": "techinsights_html_download/html/pdfs/075_DEF-2206-805/Sony_IMX662_DEF-2206-805.pdf",
+          "sha256": "f3beef45729ff9306ced07c5db4a0086c331321afecf4aefa8f99d3933d3cb07",
+          "page_count": 13
+        },
+        "DEP-2206-801": {
+          "relative_path": "techinsights_html_download_dep_a6pf30000009PYHAA2/html/pdfs/026_DEP-2206-801/Sony_IMX662_DEP-2206-801.pdf",
+          "sha256": "6788c0879e21ee6a6d93efc4a9823de3b77b5f24e863ea56435115e1e66f7ade",
+          "page_count": 162
+        }
+      },
+      "selected_facts": {
+        "pixel_pitch_um": {
+          "value": 2.9,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 8,
+          "notes": "Report table gives the native pixel pitch; not inferred from marketing resolution."
+        },
+        "active_si_thickness_um": {
+          "value": 6.6,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 8,
+          "notes": ""
+        },
+        "optical_stack_height_um": {
+          "value": 2.6,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 8,
+          "notes": "Total microlens/coating-to-Si height only; does not resolve microlens, buffer and AR constituent thicknesses."
+        },
+        "cfa_pattern": {
+          "value": "rgb_bayer",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "microlens_footprint": {
+          "value": "gapless_array",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 9,
+          "notes": "Qualitative topology; no numerical sag, curvature, asphere profile or residual gap is supplied."
+        },
+        "microlens_coating_present": {
+          "value": true,
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 10,
+          "notes": "Presence is observed; composition, n,k and thickness are absent. Coating presence does not identify an AR material stack."
+        },
+        "edge_optical_shift": {
+          "value": "not_observed",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 10,
+          "notes": "Observation at sampled locations, not a quantified zero-displacement measurement or angular-response curve."
+        },
+        "back_aperture_grid_material": {
+          "value": "W",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 8,
+          "notes": ""
+        },
+        "cfa_thickness_observed_range_um": {
+          "value": [
+            0.42,
+            0.53
+          ],
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 10,
+          "notes": "Source explicitly states dependence on color and measured location. No R/G/B association or statistical distribution is provided."
+        },
+        "grid_aperture_area_fraction": {
+          "value": 0.854,
+          "unit": "fraction",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 9,
+          "notes": "Geometric aperture area fraction, not linear width, photodiode fill factor, collection efficiency or net sensor QE."
+        },
+        "inverted_pyramid_pitch_um": {
+          "value": 0.4,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 10,
+          "notes": ""
+        },
+        "inverted_pyramid_depth_um": {
+          "value": 0.2,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 10,
+          "notes": ""
+        },
+        "inverted_pyramids_per_pixel": {
+          "value": 25,
+          "unit": "count",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 10,
+          "notes": "Back-surface texture is structurally observed. No measured reflectance/path-enhancement factor is supplied."
+        },
+        "active_pixel_dti_type": {
+          "value": "full_depth_front_dti",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 10,
+          "notes": ""
+        },
+        "ocl_pitch_um": {
+          "value": 2.9,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "color_filter_pitch_um": {
+          "value": 2.9,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "grid_pitch_um": {
+          "value": 2.9,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEF-2206-805",
+          "pdf_page_1_based": 9,
+          "notes": ""
+        },
+        "microlens_height_um": {
+          "value": 1.3,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 97,
+          "notes": "Figure arrow measures organic OCL thickness between CFA/OCL interface and curved OCL surface near apex. This is not a complete aspheric sag/footprint specification; SiO coating is reported separately."
+        },
+        "microlens_vertex_radius_um": {
+          "value": 1.6,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 97,
+          "notes": "Source says radius of curvature, and figure overlays a fitted circle on the TEM lens profile. Mapping it to a model vertex-curvature parameter is a model interpretation, not a measured complete ellipsoid."
+        },
+        "green_cfa_thickness_um": {
+          "value": 0.5,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 100,
+          "notes": "Direct green-channel identification in TEM figure and text. No independent distinction between the two Bayer green sites."
+        }
+      },
+      "supplemental_observations": {
+        "microlens_height_um": {
+          "value": 1.3,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 97,
+          "notes": "Figure arrow measures organic OCL thickness between CFA/OCL interface and curved OCL surface near apex. This is not a complete aspheric sag/footprint specification; SiO coating is reported separately."
+        },
+        "microlens_vertex_radius_um": {
+          "value": 1.6,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 97,
+          "notes": "Source says radius of curvature, and figure overlays a fitted circle on the TEM lens profile. Mapping it to a model vertex-curvature parameter is a model interpretation, not a measured complete ellipsoid."
+        },
+        "green_cfa_thickness_um": {
+          "value": 0.5,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 100,
+          "notes": "Direct green-channel identification in TEM figure and text. No independent distinction between the two Bayer green sites."
+        },
+        "unidentified_red_or_blue_cfa_thickness_um": {
+          "value": 0.55,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 100,
+          "notes": "Figure caption explicitly says Blue or Red Color Filter; do not assign .55um independently to both R and B as measured."
+        },
+        "cfa_thickness_observed_dep_range_um": {
+          "value": [
+            0.5,
+            0.55
+          ],
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 12,
+          "notes": "More detailed DEP measurement differs from DEF pooled .42-.53um; preserve both reports and measurement contexts, not a single fabricated universal tolerance."
+        },
+        "optical_stack_height_um": {
+          "value": 2.6,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 97,
+          "notes": "SEM arrow spans active-Si backside/AR region to outer microlens coating; layer terms are rounded and location dependent."
+        },
+        "active_si_thickness_um": {
+          "value": 6.6,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 41,
+          "notes": ""
+        },
+        "microlens_elemental_composition": {
+          "value": [
+            "C",
+            "O",
+            "Si"
+          ],
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 96,
+          "notes": "TEM-EDS elemental composition; molecular polymer, stoichiometry and optical n,k are not measured."
+        },
+        "green_cfa_elemental_composition": {
+          "value": [
+            "C",
+            "Br",
+            "O",
+            "Ni",
+            "N",
+            "Si",
+            "Cl"
+          ],
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 96,
+          "notes": "Approximate elemental composition only, not pigment chemistry or optical constants."
+        },
+        "unidentified_cfa_elemental_composition": {
+          "value": [
+            "C",
+            "O",
+            "N",
+            "Si",
+            "Cl"
+          ],
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 96,
+          "notes": "Color remains blue or red; elemental composition is not an optical absorption spectrum."
+        },
+        "cfa_buffer_thickness_um": {
+          "value": 0.47,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 103,
+          "notes": "Figure also marks590nm at a different lateral position. Planarized CFA buffer lies between CFA and patterned BPMD;470nm is a local measurement, not an exact homogeneous thickness."
+        },
+        "cfa_buffer_alternate_local_thickness_um": {
+          "value": 0.59,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 103,
+          "notes": "TEM figure annotation near a different IPA/BPMD contour; context differs from nominal470nm."
+        },
+        "cfa_buffer_elemental_composition": {
+          "value": [
+            "C",
+            "O",
+            "Si"
+          ],
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 103,
+          "notes": "Polymer identity and spectral n,k not measured."
+        },
+        "back_hkd_ar1_thickness_um": {
+          "value": 0.013,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 101,
+          "notes": "Closest identified deposited HKD/AR layer to active Si, outside approximately1nm nativeoxide visible in figure."
+        },
+        "back_hkd_ar1_composition": {
+          "value": "AlO",
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 96,
+          "notes": "Elemental oxide abbreviation; exact Al2O3 stoichiometry, phase and n,k require separate evidence."
+        },
+        "back_hkd_ar2_thickness_um": {
+          "value": 0.044,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 101,
+          "notes": "Representative back-surface value; pyramid-tip TEM p99 reports35nm locally."
+        },
+        "back_hkd_ar2_composition": {
+          "value": "TaO",
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 96,
+          "notes": "Elemental oxide abbreviation; exact Ta2O5 stoichiometry, phase and n,k require separate evidence."
+        },
+        "bpmd_thickness_um": {
+          "value": 0.2,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 101,
+          "notes": "A patterned SiO layer. At an IPA-tip location p99 reports230nm."
+        },
+        "bpmd_composition": {
+          "value": "SiO",
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 96,
+          "notes": "Approximate elemental oxide identity, not measured dispersive n,k."
+        },
+        "pyramid_tip_ar2_thickness_um": {
+          "value": 0.035,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 99,
+          "notes": "Local pyramid-tip context; do not replace all AR2 with this value."
+        },
+        "pyramid_tip_bpmd_thickness_um": {
+          "value": 0.23,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 99,
+          "notes": "Local contour measurement; do not sum into a plane stack together with separate200nmBPMD."
+        },
+        "microlens_coating_thickness_range_um": {
+          "value": [
+            0.023,
+            0.09
+          ],
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 104,
+          "notes": "Lateral variation on curved lens; the TEM also annotates29,45,52nm near edges. Not a statistical confidence interval."
+        },
+        "microlens_coating_composition": {
+          "value": "SiO",
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 104,
+          "notes": "Optical constants and exact stoichiometry are not measured."
+        },
+        "grid_w_body_thickness_um": {
+          "value": 0.23,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 103,
+          "notes": ""
+        },
+        "grid_tin_liner_thickness_um": {
+          "value": 0.035,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 103,
+          "notes": ""
+        },
+        "grid_sio_seal_thickness_um": {
+          "value": 0.045,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 103,
+          "notes": ""
+        },
+        "grid_aperture_width_um": {
+          "value": 2.7,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 117,
+          "notes": "Approximate edge-to-edge width; rounded corners make opening area below2.7^2."
+        },
+        "grid_aperture_area_um2": {
+          "value": 7.18,
+          "unit": "um2",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 117,
+          "notes": "TEM/SEM annotation traces a rounded-square opening. Use area directly for aperture fill; not2.7^2."
+        },
+        "grid_aperture_area_fraction": {
+          "value": 0.854,
+          "unit": "fraction",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 117,
+          "notes": "Geometric grid opening fraction, not effective photodiode fill or net QE."
+        },
+        "inverted_pyramid_pitch_um": {
+          "value": 0.4,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 98,
+          "notes": ""
+        },
+        "inverted_pyramid_depth_um": {
+          "value": 0.2,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 98,
+          "notes": ""
+        },
+        "inverted_pyramids_per_pixel": {
+          "value": 25,
+          "unit": "count",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 98,
+          "notes": ""
+        },
+        "inverted_pyramid_tip_radius_um": {
+          "value": 0.098,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 99,
+          "notes": ""
+        },
+        "active_pixel_dti_type": {
+          "value": "full_depth_front_dti",
+          "unit": null,
+          "status": "reported_structural_observation",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 67,
+          "notes": ""
+        },
+        "active_pixel_dti_depth_um": {
+          "value": 6.6,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 67,
+          "notes": ""
+        },
+        "active_pixel_dti_average_width_um": {
+          "value": 0.23,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 67,
+          "notes": "Trench width varies with depth; midheight210nm,backtop270-280nm in p68."
+        },
+        "active_pixel_dti_fill": {
+          "value": "undoped_poly_si_and_oxide",
+          "unit": null,
+          "status": "reported_material_composition",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 67,
+          "notes": "Quoted75nm is bottom local polysilicon thickness; oxide65nm eachside there. Optical constants not measured."
+        },
+        "n_type_photocathode_depth_um": {
+          "value": 5.2,
+          "unit": "um",
+          "status": "reported_structural_measurement",
+          "scope": "active_pixel_array",
+          "source_id": "DEP-2206-801",
+          "pdf_page_1_based": 44,
+          "notes": "SCM-based dopant-region dimension. It does not define the full charge-collection depth or replace6.6umactiveSi without an electrical transport model."
+        }
+      },
+      "active_pixel_dti": "full_depth_front_dti",
+      "corrected_legacy_classifications": [
+        {
+          "field": "derived_specs.dti_type",
+          "catalog_value": "full_depth_front_dti",
+          "status": "supported_for_active_pixels",
+          "recommended_active_pixel_value": "full_depth_front_dti",
+          "notes": "p10 explicitly includes pixels. Quantitative trench width and material optical constants are absent."
+        }
+      ],
+      "rejected_legacy_optical_fields": [
+        {
+          "field": "qe.spectral_ranges",
+          "reason": "CFA thickness is not a wavelength band",
+          "value_nm": [
+            420.0,
+            530.0
+          ]
+        }
+      ],
+      "unmodeled_structure": [
+        "AR/coating optical dispersion and coherent thin-film response",
+        "full microlens surface and spatial/angular calibration",
+        "DTI and surface-texture light redistribution and carrier collection"
+      ],
+      "missing_calibration": [
+        "product RGB CFA n,k or transmission spectra",
+        "product spectral EQE and angular response",
+        "charge-collection efficiency and spatial crosstalk"
+      ],
+      "limitations": [
+        "Numerical lens height, circular/ellipsoid shape and0.08um edgegap are generated assumptions; gapless observation does not validate them.",
+        "A coating-presence statement does not identify SiO2, SiN, HfO2 or a specific AR multilayer.",
+        "Total optical stack height constrains a sum; it does not independently determine lens, CFA and buffer thicknesses.",
+        "Structural observed Si thickness and CFA range do not validate optical constants, quantum efficiency or electron-domain readout."
+      ],
+      "cross_report_links": [
+        {
+          "source_report": "DEP-2206-801",
+          "target_representative_report": "DEF-2206-805",
+          "scope": "same_named_sensor_and_shared_sample_image_identity",
+          "verified": true,
+          "evidence": [
+            {
+              "source_report": "DEP-2206-801",
+              "page": 4,
+              "quote": "extracted from the Play One astronomical camera (Mars-C II)"
+            },
+            {
+              "source_report": "DEF-2206-805",
+              "page": 8,
+              "quote": "Sony, IMX662, PlayOne Astronomical Camera (Mars-C II)"
+            },
+            {
+              "source_report": "DEP-2206-801",
+              "page": 14,
+              "quote": "Mars-C_II_Front-Cam_CIS_405562_Oriented.png"
+            },
+            {
+              "source_report": "DEF-2206-805",
+              "page": 4,
+              "quote": "Mars-C_II_Front-Cam_CIS_405562_Oriented.png"
+            }
+          ],
+          "matching_dimensions": {
+            "die_size_um": [
+              6820,
+              3880
+            ],
+            "pixel_pitch_um": 2.9,
+            "active_si_thickness_um": 6.6
+          },
+          "limitation": "No independent unique die serial/marking assertion; same part, downstream product, die dimensions and exact shared analysis-image ID support this cross-report link."
+        }
+      ],
+      "cfa_range_conflict": {
+        "DEF_observed_range_um": [
+          0.42,
+          0.53
+        ],
+        "DEP_observed_range_um": [
+          0.5,
+          0.55
+        ],
+        "pooled_sensitivity_range_um": [
+          0.42,
+          0.55
+        ],
+        "resolution": "Local observations, not statistical limits. Apply identified green only; unresolved red/blue retain DEF midpoint .475 um as a scenario assumption."
+      },
+      "optical_height_budget": {
+        "source_total_um": 2.6,
+        "local_sum_example_um": 2.617,
+        "terms_um": {
+          "organic_ocl": 1.3,
+          "green_cfa": 0.5,
+          "cfa_buffer": 0.47,
+          "bpmd": 0.2,
+          "ar2": 0.044,
+          "ar1": 0.013,
+          "central_ocl_coating": 0.09
+        },
+        "difference_um": 0.017,
+        "interpretation": "Rounded dimensions from different locations sum approximately to total. Preserve measured2.6um as a coarse constraint, not an exact layer-fit equation. Example remainder2.6-1.3-.5=.8um already contains buffer/BPMD/AR/coating; do not append them to that remainder."
+      }
+    }
+  }
+}

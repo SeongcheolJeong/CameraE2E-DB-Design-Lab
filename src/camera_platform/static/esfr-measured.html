@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>실측 112 Edge Calibration · CameraE2E</title>
+  <link rel="stylesheet" href="/esfr-measured.css">
+  <script defer src="/esfr-measured.js"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="/">◎ CameraE2E <span>MEASURED CALIBRATION</span></a><nav><a id="measured-db-link" href="/db-design.html">DB Design Lab ↗</a><a id="measured-editor-link" href="/camera-validation-esfr.html">기존 E-SFR · ROI 편집기 ↗</a></nav></header>
+<main id="measured-app">
+  <section class="hero"><div><p class="eyebrow">실물 차트 · 동일 노출 RAW / ISP</p><h1>해상도부터 색·계조까지,<br>새 촬영으로 비교합니다.</h1><p class="lede">Extended E-SFR ISO 2023 16:9 차트의 112개 edge를 보정합니다. IQ 옵션을 켜면 색 18개·계조 20개 패치와 반복 노이즈를 추가하고, 같은 RAW의 reference ISP·CCM 결과를 함께 보고합니다.</p></div><aside class="hero-note"><span class="tag">개발 3쌍 → 후보 고정 → 새 검증 3쌍</span><h2>실제 출력과 모델 출력을 구분합니다</h2><p>실제 ISP의 색 공간을 확인하고, 명목 차트 값은 진단 기준으로만 사용합니다. IQ는 합격 기준을 임의로 만들지 않으며 CCM 후보를 자동 활성화하지 않습니다.</p><a class="button" href="/esfr-measured-guide.html" target="_blank" rel="noopener">촬영 가이드 보기 ↗</a><a class="button" href="/esfr-measured-guide.html" download="CameraE2E-실측-촬영-가이드.html">가이드 저장</a></aside></section>
+  <div id="measured-notice" class="notice" role="status" aria-live="polite" hidden></div>
+  <ol class="measured-steps" aria-label="실측 보정 단계"><li id="measured-step-setup">1 조건·개발 3쌍</li><li id="measured-step-fit">2 112개 보정·고정</li><li id="measured-step-validation">3 새 검증 3쌍</li><li id="measured-step-report">4 DB 연결·보고서</li></ol>
+
+  <section class="card"><div class="section-heading"><div><p class="eyebrow">DB SOURCE · RECOVERY</p><h2>조건과 작업 연결</h2></div><button id="measured-refresh" class="quiet" type="button">상태 새로고침</button></div>
+    <div class="three-fields"><label>원본 DB 실행 ID<input id="measured-source-run" autocomplete="off" placeholder="run-…"></label><label>후보 ID<input id="measured-source-candidate" autocomplete="off" placeholder="candidate-…"></label><label>조건 ID<input id="measured-source-condition" autocomplete="off" placeholder="condition-…"></label></div>
+    <p class="hint">연결 ID는 DB 조건의 출처입니다. 실카메라와 DB 모델이 같은 장비·모드인지 촬영 설정으로 확인하세요. 원본 DB 렌즈 처방은 보존하며 차트 조건부 응답 프로파일을 연결합니다.</p>
+    <label>저장된 실측 workflow ID<input id="measured-workflow-id" autocomplete="off" placeholder="저장된 작업 ID를 붙여 넣으면 이어서 진행할 수 있습니다"></label><div class="actions"><button id="measured-load" class="secondary" type="button">작업 불러오기</button><button id="measured-resume" class="secondary" type="button" hidden>중단된 단계 재개</button><a class="button" href="/esfr-measured.html">새 작업</a></div>
+    <div id="measured-progress" class="status-line" aria-live="polite">촬영과 설정을 등록하면 시작할 수 있습니다.</div>
+    <div id="measured-contract" hidden></div>
+  </section>
+
+  <section class="card iq-options"><div class="section-heading"><div><p class="eyebrow">OPTIONAL IQ · NOMINAL REFERENCE</p><h2>색·계조·노이즈 평가 추가</h2></div><label class="review"><input id="measured-iq-enabled" type="checkbox" checked>IQ 옵션 사용</label></div>
+    <div id="measured-iq-settings" hidden><div class="two-fields"><label>버전이 고정된 명목 기준<select id="measured-iq-reference"><option value="imatest_esfr_2023_nominal_v1">E-SFR 2023 명목 기준 · v1</option></select></label><label>실제 ISP 파일의 확인된 색 공간<select id="measured-iq-color-space"><option value="unknown">미확인 · 색차 판정 불가</option><option value="srgb">sRGB · 출력 기록으로 확인</option></select></label></div>
+      <p id="measured-iq-reference-info" class="identity">명목 reference ID와 hash는 서버에서 고정합니다.</p>
+      <label class="review"><input id="measured-iq-nominal-confirmed" type="checkbox">명목 값은 보유 인쇄물의 분광 반사율·실측 인증값이 아님을 확인했습니다.</label><label class="review" id="measured-iq-srgb-wrap" hidden><input id="measured-iq-srgb-confirmed" type="checkbox">실제 ISP가 sRGB 색 공간임을 장비 설정/파일 생성 기록으로 확인했습니다.</label>
+      <p class="hint">sRGB transfer encoding과 sRGB 색 공간은 다릅니다. 미확인 상태에서는 실제 ISP의 절대 색차를 계산하지 않습니다. 명목 기준과 reference ISP의 색차도 절대 색 정확도 합격이 아닌 진단입니다. 18 color + 20 gray ROI를 매 촬영에서 확인해야 합니다.</p>
+      <label>추가 반복 노이즈 촬영 ID (선택)<textarea id="measured-iq-noise-ids" rows="3" spellcheck="false" placeholder="등록된 반복 촬영 ID를 줄바꿈 또는 쉼표로 구분"></textarea></label><p class="hint">기본 3쌍으로 반복 노이즈를 계산합니다. 추가 0–5쌍을 입력하면 총 3–8프레임이며 8프레임을 권장합니다. 추가 ID는 기본 3개와 겹치지 않아야 합니다. 새 검증도 개발과 같은 추가 수를 유지합니다. 역할과 고정 조건을 섞지 않으며 공간 분산을 센서 PTC·DR로 바꾸지 않습니다.</p>
+      <div class="boundary-note"><b>후보와 판정 범위</b><p>CCM은 reference ISP 후보입니다. 실제 제조사 ISP를 덮어쓰지 않습니다. IQ 판정은 기준 미선언으로 보류하며, 동일 RAW의 baseline/reference CCM 출력과 실제 ISP 관측을 나란히 보존합니다.</p></div>
+    </div>
+  </section>
+
+  <div class="workspace-grid"><section class="card"><div class="section-heading"><div><p class="eyebrow">01 / NATIVE FILES</p><h2>RAW·ISP 쌍 업로드</h2></div><span id="measured-upload-stage" class="tag">개발 촬영</span></div>
+    <p id="measured-upload-instruction" class="hint">먼저 개발 촬영 3쌍을 등록합니다. 검증 촬영은 후보가 고정된 뒤 새 세션에서 취득하세요.</p><p class="boundary-note">현재 DB 보정 연결: RGGB Bayer 원본과 같은 native raster의 ISP. DNG/CR2/CR3/NEF/ARW/YUV, binning·resize·회전·mirror, unknown ISP transfer는 이 경로에서 지원하지 않습니다. 다른 형식을 지원 형식으로 허위 선언하지 마세요.</p>
+    <form id="measured-upload-form"><fieldset id="measured-upload-fields">
+      <div class="two-fields"><label>RAW / BIN 원본<input id="measured-raw-file" type="file" accept=".raw,.bin" required></label><label>동일 노출 ISP 원본<input id="measured-isp-file" type="file" accept="image/png,image/jpeg,image/tiff,.tif,.tiff" required></label></div>
+      <div class="actions metadata-actions"><button id="measured-template-fill" class="quiet" type="button">현재 단계의 빈 양식 불러오기</button><button id="measured-template-download" class="quiet" type="button">metadata 양식 저장</button></div>
+      <label>촬영·디코딩 metadata (JSON)<textarea id="measured-metadata" rows="19" spellcheck="false" aria-describedby="measured-metadata-help"></textarea></label>
+      <p class="hint" id="measured-metadata-help">null은 직접 확인해 입력할 값입니다. conditions에는 고정 설정·기준 온도를, capture_observations에는 촬영별 실제 조도·온도를 기록합니다. session_id는 개발·검증을 구분하고 captured_at은 실제 노출 시각으로 입력합니다. 검증 양식에는 고정 계약에서 확인된 설정과 계약 ID/hash를 복사하며, 취득 확인 항목은 직접 작성합니다.</p>
+      <label class="review"><input id="measured-metadata-confirmed" type="checkbox">카메라 설정 기록과 파일 형식을 대조했고, 같은 노출의 RAW·ISP 쌍임을 확인했습니다.</label>
+      <button class="primary" id="measured-upload" type="submit">개발 촬영 쌍 등록</button>
+    </fieldset></form>
+  </section><section class="card"><div class="section-heading"><div><p class="eyebrow">CAPTURES · IMMUTABLE ROLES</p><h2>현재 작업의 촬영 선택</h2></div><button id="measured-captures-refresh" class="quiet" type="button">목록 갱신</button></div>
+    <p id="measured-counts" class="counts">개발 0 / 3 · 새 검증 0 / 3</p><div id="measured-captures" class="capture-list"><p class="empty">원본 촬영 목록을 불러오는 중입니다.</p></div>
+    <p class="hint">업로드 시의 개발/검증 역할과 원본 hash는 보존됩니다. 목록의 촬영을 선택한 후 각 촬영의 112개 ROI를 확인해야 합니다. 다른 작업의 촬영을 자동 선택하지 않습니다.</p>
+  </section></div>
+
+  <section class="card"><div class="section-heading"><div><p class="eyebrow">02 / ALL 112 EDGES · NATIVE COORDINATES</p><h2>ROI 위치와 촬영 상태 확인</h2></div><a id="measured-roi-editor" class="button" href="/camera-validation-esfr.html" target="_blank" rel="noopener">4개 기준점으로 ROI 편집 ↗</a></div>
+    <p class="hint">기존 편집기에서 실제 촬영의 원형 기준점 4개를 지정하고 제안된 ROI를 검토하세요. 아래에 ROI JSON과 차트 프로파일을 가져온 뒤 각 촬영에서 위치를 다시 확인합니다. 영상 정합은 좌표에만 사용하며 분석 원본을 warp하지 않습니다.</p>
+    <div class="two-fields"><label>검토자 ID<input id="measured-operator" autocomplete="off" placeholder="실제 검토 담당자 식별자"></label><label>실물 차트 개체 ID<input id="measured-chart-id" autocomplete="off" placeholder="보유 차트의 관리 ID"></label></div>
+    <div class="roi-layout"><div><label>확인할 촬영<select id="measured-preview-capture"><option value="">촬영 선택</option></select></label><div class="preview-wrap measured-preview"><svg id="measured-preview" role="img" aria-label="원본 촬영 미리보기와 112개 분석 ROI" viewBox="0 0 1600 900"><text x="800" y="450" text-anchor="middle">촬영과 ROI를 선택하세요.</text></svg></div><p id="measured-preview-caption" class="identity">미리보기는 시각적 위치 확인용이며 SFR 분석은 원본 RAW/ISP에서 수행합니다.</p>
+      <fieldset id="measured-review-fields"><label class="review"><input id="measured-review-edges" type="checkbox">112개 edge가 모두 올바른 위치에 있으며 ROI 정합이 적절합니다.</label><label class="review"><input id="measured-review-fixed" type="checkbox">개발·검증 사이 카메라/차트 위치와 고정 설정을 유지했습니다.</label><label class="review"><input id="measured-review-quality" type="checkbox">112개 ROI의 잘림·가림·glare·clipping이 없음을 확인했습니다.</label><label class="review" id="measured-iq-review-wrap" hidden><input id="measured-review-patches" type="checkbox">색 18개·계조 20개 패치 모두 위치·패치 내부 ROI·가림·clipping을 확인했습니다.</label><button id="measured-review-save" class="secondary" type="button">이 촬영의 ROI 확인 기록</button></fieldset>
+    </div><div><label>ROI JSON 파일 가져오기<input id="measured-roi-file" type="file" accept="application/json,.json"></label><label>ROI 목록 · 원본 픽셀<textarea id="measured-rois" rows="14" spellcheck="false">[]</textarea></label><p class="hint">box: [행, 열, 높이, 너비]. edge 112개가 필요합니다. 원형 기준점의 자동 제안을 검토 없이 승인하지 마세요.</p><button id="measured-rois-apply" class="quiet" type="button">ROI 적용·미리보기</button><details class="advanced"><summary>차트 프로파일 JSON</summary><textarea id="measured-chart-profile" rows="12" spellcheck="false">{}</textarea><p class="hint">실물 차트의 개체·재질·크기와 확인된 기준값을 기록합니다. 참고 그림의 RGB는 반사율 기준이 아닙니다.</p></details><p id="measured-roi-count" class="counts">edge 0 / 112</p></div></div>
+  </section>
+
+  <section class="card"><p class="eyebrow">03 / CANDIDATE THEN NEW ACQUISITION</p><h2>선택과 검토가 끝나면 단계별로 실행합니다.</h2><p class="hint">개발 RAW Gr SFR만으로 camera-effective 공간응답을 보정합니다. ISP는 별도 진단이며 처리 파이프라인이 일치한다고 입증된 경우에만 대응 기준으로 판단합니다. 순수 렌즈 PSF 복원이나 ISO 적합성 인증은 아닙니다.</p><div id="measured-readiness" class="boundary-note"></div><div class="actions measured-submit"><button id="measured-create" class="primary" type="button" disabled>개발 3쌍 → 112개 보정 → 후보 고정</button><button id="measured-validate" class="primary" type="button" disabled>새 검증 3쌍 → 고정 후보 검증·통합 보고서</button></div><p class="hint">검증 단계에서는 후보를 다시 피팅하지 않습니다. 실패한 검증도 원본과 보고서에 남으며 활성 모델 변경 여부는 결과에서 명확히 확인합니다.</p></section>
+  <section class="card" id="measured-results"><p class="eyebrow">04 / FULL COVERAGE · EVIDENCE</p><h2>DB 연결과 자동 보고서</h2><div id="measured-result-body"><p class="empty">112개 위치의 RAW·ISP·SFR, 보정 전후 오차와 기준 판정을 여기에 연결합니다.</p></div></section>
+  <section class="card"><p class="eyebrow">MODE A / B · REPORT COMPARISON</p><h2>일반·HDR 등 두 모드의 완료 보고서 비교</h2><p class="hint">각 모드는 자체 고정 촬영 조건으로 보정·독립 검증을 완료해야 합니다. 서로 다른 노출·gain·HDR 모드를 한 작업의 반복으로 섞지 않습니다. 모드 비교는 보고서 간 비교이며 센서 DR 인증이 아닙니다.</p><div class="two-fields"><label>모드 A workflow ID<input id="measured-iq-mode-a" placeholder="measured-esfr-…" autocomplete="off"></label><label>모드 B workflow ID<input id="measured-iq-mode-b" placeholder="measured-esfr-…" autocomplete="off"></label></div><div class="actions"><button id="measured-iq-compare" class="secondary" type="button" disabled>두 모드의 IQ 보고서 비교</button></div><div id="measured-iq-comparison-result" aria-live="polite"></div></section>
+  <footer>실측 원본과 설정은 사용자가 제공한 기록입니다. 소프트웨어 동작 확인과 실카메라 측정 결과를 구분합니다.<br>2023 차트 지원 · ISO 12233:2024 후속 표준 존재 · engineering SFR 분석</footer>
+</main>
+</body></html>

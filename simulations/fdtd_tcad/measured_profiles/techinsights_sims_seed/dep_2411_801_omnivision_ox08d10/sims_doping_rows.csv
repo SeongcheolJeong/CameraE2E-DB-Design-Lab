@@ -1,0 +1,15 @@
+source_index,feature,role,polarity,dopant,concentration_text,seed_concentration_cm3,seed_method,depth_text,depth_um,source_table_caption
+1,Active Si,active_si_background,acceptor,"P-type, 11B",–,,missing_concentration,3.0,3.0,Pixel Array SIMS Doping Concentration
+2,P-pinning/P^+^ V~SS~ contact,p_pinning,acceptor,"P-type, 11B/10B",5 × 10^21^/1.3 × 10^21^,5e+21,max_component_for_local_high_dose_feature,0.11,0.11,Pixel Array SIMS Doping Concentration
+3,P-well,p_well,acceptor,"P-type, 11B/10B",2 × 10^19^/2 × 10^18^,6.324555320336731e+18,geometric_mean_of_reported_components_or_range,0.50,0.5,Pixel Array SIMS Doping Concentration
+4,Isolation,pixel_isolation,acceptor,"P-type, 11B/10B",3 × 10^16^,3e+16,single_reported_value,0.50-0.95,0.5,Pixel Array SIMS Doping Concentration
+5,B-DTI passivation,dti_non_silicon_or_interface_metadata,acceptor,"P-type, 11B/10B",3 × 10^17^/5 × 10^15^,3.872983346207404e+16,geometric_mean_of_reported_components_or_range,–,,Pixel Array SIMS Doping Concentration
+6,N^+^ S/D,source_drain,donor,"N-type, 31P/75As",1.3 × 10^21^/2 × 10^18^,1.3e+21,max_component_for_local_high_dose_feature,0.25,0.25,Pixel Array SIMS Doping Concentration
+7,N^+^ FD,floating_diffusion,donor,"N-type, 31P/75As",1.3 × 10^21^/2 × 10^18^,1.3e+21,max_component_for_local_high_dose_feature,0.25,0.25,Pixel Array SIMS Doping Concentration
+8,Photocathode,photocathode,donor,"N-type, 31P/75As",<1 × 10^15^/5 × 10^15^,500000000000000.0,half_of_reported_upper_bound,2.7,2.7,Pixel Array SIMS Doping Concentration
+9,Active Si,active_si_background,acceptor,"P-type, 11B",<1× 10^15^,500000000000000.0,half_of_reported_upper_bound,3.0,3.0,Periphery SIMS Doping Concentration Profiles
+10,P^+^ contact,p_plus_contact,acceptor,"P-type, 11B/10B",1.2 × 10^22^/1.3 × 10^21^,1.2e+22,max_component_for_local_high_dose_feature,–,,Periphery SIMS Doping Concentration Profiles
+11,Shallow P-well,p_well,acceptor,"P-type, 11B/10B",1 × 10^18^/5 × 10^16^,2.2360679774997952e+17,geometric_mean_of_reported_components_or_range,0.89,0.89,Periphery SIMS Doping Concentration Profiles
+12,Deep P-well,p_well,acceptor,"P-type, 11B",1 × 10^15^-1 × 10^17^,1.0000000000000034e+16,geometric_mean_of_reported_components_or_range,–,,Periphery SIMS Doping Concentration Profiles
+13,N^+^ contact,generic_silicon_region,donor,"N-type, 31P/75As",3 × 10^20^/3 × 10^19^,3e+20,max_component_for_local_high_dose_feature,0.16,0.16,Periphery SIMS Doping Concentration Profiles
+14,N-well,n_well,donor,"N-type, –",–,,missing_concentration,2.7,2.7,Periphery SIMS Doping Concentration Profiles

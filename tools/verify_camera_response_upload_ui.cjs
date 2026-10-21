@@ -1,0 +1,71 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const {chromium}=require('playwright');
+const input=JSON.parse(fs.readFileSync(process.argv[2],'utf8')),out=path.resolve(process.argv[3]),base=input.base_url;
+fs.mkdirSync(out,{recursive:true});
+const report={schema:'camera_response_upload_ui_v1',base_url:base,state_dir:input.state_dir,checks:[],errors:[],posts:[],user_browser_profile_accessed:false};
+const check=(name,value)=>{assert(value,name);report.checks.push({name,status:'passed'});};
+(async()=>{
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CAMERA_UI_BROWSER||chromium.executablePath()}),page=await browser.newPage({viewport:{width:1440,height:1080}});
+ const get=async p=>{const r=await page.request.get(base+'/api/v1/'+p);assert(r.ok(),p);return r.json();};
+ page.on('pageerror',e=>report.errors.push(String(e)));
+ page.on('request',r=>{if(r.method()==='POST')report.posts.push(new URL(r.url()).pathname);});
+ try{
+  const before=await get('bootstrap');
+  check('Explicit isolated QA state',before.state_dir===input.state_dir&&!input.state_dir.endsWith('/camera-platform'));
+  await page.goto(base+'/#validation');const panel=page.locator('[data-response-import-panel]');await panel.waitFor();
+  check('Upload panel is available before a new response acquisition exists',await panel.isVisible());
+  await page.locator('#response-program').selectOption(input.records.program);
+  await panel.locator('[data-response-author] summary').click();
+  await page.locator('#response-observable').selectOption('green_mean_normalized');
+  await panel.locator('[data-response-action="test-template"]').click();
+  await page.waitForFunction(()=>document.querySelector('#response-testDraft')?.value.includes('observation_method'));
+  const draft=JSON.parse(await page.locator('#response-testDraft').inputValue());draft.name='Browser RAW upload QA · common Test';
+  await page.locator('#response-testDraft').fill(JSON.stringify(draft,null,2));
+  const testResponse=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/v1/tests'&&r.request().method()==='POST');
+  await panel.locator('[data-response-form="test"] button[type="submit"]').click();
+  const testReply=await testResponse;check('First common Test created through the upload panel',testReply.ok());const test=await testReply.json();
+  await page.waitForFunction(id=>document.querySelector('#response-test')?.value===id,test.id);
+  await panel.locator('[data-response-action="metadata-template"]').click();
+  await page.waitForFunction(()=>document.querySelector('#response-metadata')?.value.includes('alignment_absolute_bound_ns'));
+  const template=JSON.parse(await page.locator('#response-metadata').inputValue());
+  check('Template does not invent actual RAW mapping or applied settings',template.acquisition.frames.every(f=>f.raw_index===null&&f.applied===null&&f.frame_start_ns===null));
+  check('Template requires acquisition identity and uncertainty evidence',template.dataset_ids.length===0&&template.source_uri===''&&template.acquisition.alignment_absolute_bound_ns===null&&template.uncertainty.kind==='unknown');
+  // Prepare a genuinely computed, explicitly synthetic fixture through the separate Worker.
+  const session=await get('session'),headers={'X-Platform-Token':session.token};
+  const reply=await page.request.post(base+'/api/v1/runs',{headers,data:{assembly_id:input.records.assembly||template.assembly_id,test_id:test.id,plugin_id:'closed_loop_scene_v1',control_program_id:input.records.program,parameters:{seed:input.fixture_seed??876543}}});
+  check('Synthetic RAW preparation is accepted by the API',reply.ok());const queued=await reply.json();let run;
+  const deadline=Date.now()+60000;
+  while(Date.now()<deadline){run=await get('runs/'+queued.id);if(['succeeded','failed','cancelled'].includes(run.status))break;await new Promise(r=>setTimeout(r,100));}
+  check('Actual Worker computes the upload fixture',run.status==='succeeded'&&run.result.response_observation.coverage.raw_frames===32);
+  const rawArtifact=run.artifacts.find(a=>a.name==='raw_frames.npy'),rawResponse=await page.request.get(base+rawArtifact.url),raw=await rawResponse.body();
+  check('Computed RAW download preserves its digest',crypto.createHash('sha256').update(raw).digest('hex')===rawArtifact.sha256);
+  const metadata={...template,name:'브라우저 원문 보존 · 합성 RAW',source_kind:'simulated',source_uri:'run://'+run.id,license:'MIT',method_and_version:'browser_qa_export:1',dataset_ids:['synthetic-ui-'+run.id],acquisition:run.result.response_observation.acquisition};
+  const original=Buffer.from(JSON.stringify(metadata,null,3).replaceAll('\n','\r\n')+'\r\n','utf8');
+  fs.writeFileSync(path.join(out,'fixture-raw.npy'),raw);fs.writeFileSync(path.join(out,'fixture-metadata.json'),original);
+  await page.locator('#response-raw-file').setInputFiles(path.join(out,'fixture-raw.npy'));
+  await page.locator('#response-metadata-file').setInputFiles(path.join(out,'fixture-metadata.json'));
+  await page.waitForFunction(()=>document.querySelector('[data-response-import-summary]')?.textContent.includes('선택한 JSON 파일의 원본 바이트'));
+  check('File metadata selects its exact registered Test',await page.locator('#response-test').inputValue()===test.id);
+  check('Source kind and actual/unknown settings appear before submission',(await panel.locator('[data-response-import-summary]').innerText()).includes('simulated')&&(await panel.locator('[data-response-import-summary]').innerText()).includes('RAW 대응 선언 32개'));
+  const uploaded=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/v1/captures/control-response/import'&&r.request().method()==='POST');
+  await panel.locator('[data-response-form="import"] button[type="submit"]').click();
+  const uploadedReply=await uploaded;check('Original file import succeeds through the browser',uploadedReply.ok());const result=await uploadedReply.json();
+  await page.locator('[data-analysis-select="'+result.analysis.id+'"]').waitFor();
+  const preserved=result.capture.artifacts.find(a=>a.name==='acquisition-metadata.json');
+  check('Browser upload preserves exact UTF-8 CRLF metadata bytes',(await (await page.request.get(base+preserved.url)).body()).equals(original));
+  check('One atomic acquisition and linked analysis/measurement returned',result.measurement.raw_capture_id===result.capture.id&&result.measurement.capture_analysis_id===result.analysis.id&&result.capture.capture_schema==='camera_response_acquisition_v1');
+  check('Imported source remains synthetic',result.capture.source_kind==='simulated'&&result.measurement.source_kind==='simulated');
+  check('Imported measurement equals observation of actual Worker RAW',JSON.stringify(result.measurement.values)===JSON.stringify(run.result.prediction.values));
+  check('New capture is selected in the reanalysis panel',await page.locator('#analysis-capture').inputValue()===result.capture.id);
+  check('Comparison binds exact imported Test and Measurement',await page.locator('#validation-test').inputValue()===test.id&&await page.locator('#validation-measurement').inputValue()===result.measurement.id);
+  await page.locator('#toast').waitFor({state:'hidden',timeout:15000});await panel.screenshot({path:path.join(out,'upload-panel.png')});
+  await page.setViewportSize({width:390,height:844});await panel.evaluate(e=>e.scrollIntoView({block:'start'}));
+  check('Mobile upload page has no horizontal overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:path.join(out,'mobile.png')});
+  const after=await get('bootstrap');
+  check('Browser workflow adds exactly one acquisition and one analysis',after.counts.captures===before.counts.captures+1&&after.counts.capture_analyses===before.counts.capture_analyses+1&&after.counts.measurements===before.counts.measurements+1);
+  check('No JavaScript errors',report.errors.length===0);
+  report.records={program:input.records.program,test:test.id,run:run.id,capture:result.capture.id,analysis:result.analysis.id,measurement:result.measurement.id};report.status='passed';
+ }catch(error){report.status='failed';report.error=String(error);await page.screenshot({path:path.join(out,'debug.png')});throw error;}
+ finally{fs.writeFileSync(path.join(out,'verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

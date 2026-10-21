@@ -1,0 +1,368 @@
+{
+  "schema": "measured_tcad_profile_v1",
+  "profile_name": "DEP-2407-801_dep_2407_801_smartsens_sc100at_cs1af00_techinsights_sims_seed_profile",
+  "units": {
+    "length": "um",
+    "doping": "cm^-3",
+    "sheet_charge": "cm^-2"
+  },
+  "reference_mode": false,
+  "reference_notes": [
+    "SIMS/SPM table rows provide measured concentration/depth anchors where present.",
+    "Lateral placement, smoothing, and overlap handling are inferred for open-source TCAD setup.",
+    "This is not a calibrated product process deck and should not be used as accuracy evidence without target calibration.",
+    "DTI poly-Si fill and passivation rows are exported as metadata unless the current silicon mesh can resolve those regions/interfaces."
+  ],
+  "geometry": {
+    "width_um": 3.0,
+    "depth_um": 2.3,
+    "z_width_um": 3.0,
+    "split_gap_um": 0.12,
+    "pinning_depth_um": 0.0575,
+    "dti_width_um": 0.22,
+    "dti": {
+      "type": "back_dti",
+      "depth_um": null,
+      "width_um": 0.22,
+      "source": "TechInsights-derived geometry table where available"
+    },
+    "transfer_gate": {
+      "x_min_um": -0.25,
+      "x_max_um": 0.25,
+      "oxide_thickness_um": 0.006,
+      "type": null
+    },
+    "floating_diffusion": {
+      "x_min_um": 0.84,
+      "x_max_um": 1.09,
+      "depth_min_um": 0.0,
+      "depth_max_um": 0.115
+    }
+  },
+  "background": {
+    "acceptor_cm3": 500000000000000.0,
+    "donor_cm3": 0.0
+  },
+  "implants": [
+    {
+      "name": "sims_01_p_pinning_p_vss",
+      "type": "analytic_smooth_box",
+      "role": "p_pinning",
+      "x_min_um": -1.28,
+      "x_max_um": 1.28,
+      "depth_min_um": 0.0,
+      "depth_max_um": 0.12,
+      "x_rolloff_um": 0.04,
+      "depth_rolloff_um": 0.0345,
+      "donor_cm3": 0.0,
+      "acceptor_cm3": 8e+18,
+      "measured": true,
+      "mapping_inferred": true,
+      "source_feature": "P-pinning/P+ VSS",
+      "source_dopant": "11B/10B",
+      "source_concentration_text": "8 × 10^18^ / 2 × 10^17^",
+      "source_depth_text": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+      "seed_method": "max_component_for_local_high_dose_feature",
+      "note": "SIMS/SPM table concentration with inferred lateral placement; not a calibrated implant process model."
+    },
+    {
+      "name": "sims_02_p_well",
+      "type": "analytic_smooth_box",
+      "role": "p_well",
+      "x_min_um": -1.28,
+      "x_max_um": 1.28,
+      "depth_min_um": 0.0,
+      "depth_max_um": 0.6,
+      "x_rolloff_um": 0.04,
+      "depth_rolloff_um": 0.0345,
+      "donor_cm3": 0.0,
+      "acceptor_cm3": 3.4397906282503816e+16,
+      "measured": true,
+      "mapping_inferred": true,
+      "source_feature": "P-well",
+      "source_dopant": "11B/10B",
+      "source_concentration_text": "1 × 10^16^ – 2 × 10^18^ / 1 × 10^15^ – 7 × 10^16^",
+      "source_depth_text": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+      "seed_method": "geometric_mean_of_reported_components_or_range",
+      "note": "SIMS/SPM table concentration with inferred lateral placement; not a calibrated implant process model."
+    },
+    {
+      "name": "sims_03_pixel_isolation_1",
+      "type": "analytic_smooth_box",
+      "role": "pixel_isolation",
+      "x_min_um": -1.5,
+      "x_max_um": -1.28,
+      "depth_min_um": 0.0,
+      "depth_max_um": 2.3,
+      "x_rolloff_um": 0.04,
+      "depth_rolloff_um": 0.0345,
+      "donor_cm3": 0.0,
+      "acceptor_cm3": 1e+16,
+      "measured": true,
+      "mapping_inferred": true,
+      "source_feature": "Pixel Isolation",
+      "source_dopant": "11B",
+      "source_concentration_text": "1 × 10^16^",
+      "source_depth_text": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+      "seed_method": "single_reported_value",
+      "note": "SIMS/SPM table concentration with inferred lateral placement; not a calibrated implant process model."
+    },
+    {
+      "name": "sims_03_pixel_isolation_2",
+      "type": "analytic_smooth_box",
+      "role": "pixel_isolation",
+      "x_min_um": 1.28,
+      "x_max_um": 1.5,
+      "depth_min_um": 0.0,
+      "depth_max_um": 2.3,
+      "x_rolloff_um": 0.04,
+      "depth_rolloff_um": 0.0345,
+      "donor_cm3": 0.0,
+      "acceptor_cm3": 1e+16,
+      "measured": true,
+      "mapping_inferred": true,
+      "source_feature": "Pixel Isolation",
+      "source_dopant": "11B",
+      "source_concentration_text": "1 × 10^16^",
+      "source_depth_text": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+      "seed_method": "single_reported_value",
+      "note": "SIMS/SPM table concentration with inferred lateral placement; not a calibrated implant process model."
+    },
+    {
+      "name": "sims_05_n_s_d_and_fd",
+      "type": "analytic_smooth_box",
+      "role": "fd_and_source_drain",
+      "x_min_um": 0.84,
+      "x_max_um": 1.09,
+      "depth_min_um": 0.0,
+      "depth_max_um": 0.22,
+      "x_rolloff_um": 0.04,
+      "depth_rolloff_um": 0.0345,
+      "donor_cm3": 3e+19,
+      "acceptor_cm3": 0.0,
+      "measured": true,
+      "mapping_inferred": true,
+      "source_feature": "N+ S/D and FD",
+      "source_dopant": "31P/75As",
+      "source_concentration_text": "2 × 10^19^ / 3 × 10^19^",
+      "source_depth_text": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+      "seed_method": "max_component_for_local_high_dose_feature",
+      "note": "SIMS/SPM table concentration with inferred lateral placement; not a calibrated implant process model."
+    },
+    {
+      "name": "sims_06_photocathode_top_bottom",
+      "type": "analytic_smooth_box",
+      "role": "photocathode",
+      "x_min_um": -1.28,
+      "x_max_um": 1.28,
+      "depth_min_um": 0.0,
+      "depth_max_um": 2.3,
+      "x_rolloff_um": 0.04,
+      "depth_rolloff_um": 0.0345,
+      "donor_cm3": 7.745966692414822e+16,
+      "acceptor_cm3": 0.0,
+      "measured": true,
+      "mapping_inferred": true,
+      "source_feature": "Photocathode top/bottom",
+      "source_dopant": "31P",
+      "source_concentration_text": "2 × 10^18^ / 3 × 10^15^",
+      "source_depth_text": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+      "seed_method": "geometric_mean_of_reported_components_or_range",
+      "note": "SIMS/SPM table concentration with inferred lateral placement; not a calibrated implant process model."
+    },
+    {
+      "name": "sims_07_photocathode_top_bottom",
+      "type": "analytic_smooth_box",
+      "role": "photocathode",
+      "x_min_um": -1.28,
+      "x_max_um": 1.28,
+      "depth_min_um": 0.0,
+      "depth_max_um": 2.3,
+      "x_rolloff_um": 0.04,
+      "depth_rolloff_um": 0.0345,
+      "donor_cm3": 5.477225575051647e+16,
+      "acceptor_cm3": 0.0,
+      "measured": true,
+      "mapping_inferred": true,
+      "source_feature": "Photocathode top/bottom",
+      "source_dopant": "75As",
+      "source_concentration_text": "3 × 10^18^ / <1 × 10^15^",
+      "source_depth_text": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+      "seed_method": "geometric_mean_of_reported_components_or_range",
+      "note": "SIMS/SPM table concentration with inferred lateral placement; not a calibrated implant process model."
+    }
+  ],
+  "electrical_features": [
+    {
+      "name": "sims_row_04_backside_passivation",
+      "type": "metadata_only",
+      "role": "backside_passivation_metadata",
+      "measured": true,
+      "source_feature": "Backside passivation",
+      "dopant": "11B",
+      "concentration_text": "6 × 10^16^",
+      "seed_concentration_cm3": 6e+16,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "reason_not_executable": "non-silicon/interface feature or missing polarity/concentration; do not apply to silicon NetDoping without a resolved material/interface model"
+    },
+    {
+      "name": "sims_row_08_active_si",
+      "type": "metadata_only",
+      "role": "active_si_background",
+      "measured": true,
+      "source_feature": "Active Si",
+      "dopant": "11B",
+      "concentration_text": "<1 × 10^15^",
+      "seed_concentration_cm3": 500000000000000.0,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "reason_not_executable": "periphery/non-pixel-array table row retained as metadata; not applied to pixel-array NetDoping"
+    },
+    {
+      "name": "sims_row_09_pmos_s_d_contact",
+      "type": "metadata_only",
+      "role": "source_drain",
+      "measured": true,
+      "source_feature": "PMOS S/D, contact",
+      "dopant": "11B/10B",
+      "concentration_text": "3 × 10^19^ / 3 × 10^19^",
+      "seed_concentration_cm3": 3e+19,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "reason_not_executable": "periphery/non-pixel-array table row retained as metadata; not applied to pixel-array NetDoping"
+    },
+    {
+      "name": "sims_row_10_nmos_s_d_contact",
+      "type": "metadata_only",
+      "role": "source_drain",
+      "measured": true,
+      "source_feature": "NMOS S/D, contact",
+      "dopant": "31P/75As",
+      "concentration_text": "1.3 × 1019 / 5 × 1019",
+      "seed_concentration_cm3": 5e+19,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "reason_not_executable": "periphery/non-pixel-array table row retained as metadata; not applied to pixel-array NetDoping"
+    },
+    {
+      "name": "sims_row_11_p_well_logic",
+      "type": "metadata_only",
+      "role": "p_well",
+      "measured": true,
+      "source_feature": "P-well Logic",
+      "dopant": "11B/10B",
+      "concentration_text": "3 × 10^17^ / 2 × 10^16^",
+      "seed_concentration_cm3": 7.745966692414822e+16,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "reason_not_executable": "periphery/non-pixel-array table row retained as metadata; not applied to pixel-array NetDoping"
+    },
+    {
+      "name": "sims_row_12_p_well_transition",
+      "type": "metadata_only",
+      "role": "p_well",
+      "measured": false,
+      "source_feature": "P-well transition",
+      "dopant": "–",
+      "concentration_text": "–",
+      "seed_concentration_cm3": null,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "reason_not_executable": "periphery/non-pixel-array table row retained as metadata; not applied to pixel-array NetDoping"
+    },
+    {
+      "name": "sims_row_13_n_well_top_bottom",
+      "type": "metadata_only",
+      "role": "n_well",
+      "measured": true,
+      "source_feature": "N-well top/bottom",
+      "dopant": "31P",
+      "concentration_text": "4 × 10^17^ / 1 × 10^15^ – 4 × 10^17^",
+      "seed_concentration_cm3": 5.4288352331898024e+16,
+      "source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+      "reason_not_executable": "periphery/non-pixel-array table row retained as metadata; not applied to pixel-array NetDoping"
+    }
+  ],
+  "interfaces": [],
+  "mobility_recombination": {
+    "transport_model": "caughey_thomas_doping_and_field_dependent_reference_v1",
+    "transport_model_measured": false,
+    "transport_model_calibrated": false,
+    "mu_n_model": "caughey_thomas_doping_dependent_reference",
+    "mu_p_model": "caughey_thomas_doping_dependent_reference",
+    "mu_n_cm2_v_s": 400.0,
+    "mu_p_cm2_v_s": 200.0,
+    "tau_n_s": 1e-06,
+    "tau_p_s": 1e-06,
+    "note": "Transport/lifetime settings are still reference defaults; only selected doping anchors come from local extracted tables."
+  },
+  "calibration_status": {
+    "is_measured": false,
+    "geometry_measured": false,
+    "doping_table_measured": true,
+    "deck_calibrated": false,
+    "mode": "techinsights_sims_table_seed",
+    "source_report_code": "DEP-2407-801",
+    "note": "Measured table values are present, but this executable profile uses inferred 2D placement and is not a calibrated TCAD process deck."
+  },
+  "techinsights_source": {
+    "code": "DEP-2407-801",
+    "manufacturer": "SmartSens",
+    "device_name": "SC100AT-CS1AF00",
+    "title": "SmartSens SC100AT Device Essentials Plus",
+    "report_type": "DEP",
+    "release_date": "2024-12-23T00:00:00.000+00:00",
+    "source_html": [
+      "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html"
+    ],
+    "source_pdf": [],
+    "key_geometry": {
+      "pixel_pitch_um": 3.0,
+      "active_si_thickness_um": 2.3,
+      "dti_type": "back_dti",
+      "pixel_architecture": "standalone"
+    },
+    "doping_tables": [
+      {
+        "caption": "CIS P- and N-Type Regions – Doping Levels",
+        "source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html",
+        "row_count": 13
+      }
+    ]
+  },
+  "sims_seed_summary": {
+    "doping_row_count": 13,
+    "executable_implant_count": 7,
+    "metadata_only_row_count": 7,
+    "background_acceptor_source": {
+      "row": {
+        "raw": [
+          "Periphery",
+          "Active Si",
+          "P-type",
+          "11B",
+          "<1 × 10^15^"
+        ],
+        "feature": "Active Si",
+        "dopant": "11B",
+        "concentration_text": "<1 × 10^15^",
+        "concentration_cm3_values": [
+          1000000000000000.0
+        ],
+        "_source_table_caption": "CIS P- and N-Type Regions – Doping Levels",
+        "_source_table_source": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/012_DEP-2407-801.html"
+      },
+      "seed_method": "half_of_reported_upper_bound"
+    },
+    "normalized_rows_file": "sims_doping_rows.csv"
+  }
+}

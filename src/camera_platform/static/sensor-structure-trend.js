@@ -1,0 +1,15 @@
+(()=>{'use strict';const $=id=>document.getElementById(id);let result;
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const labels={magnitude_stable:'영향 크기 안정',direction_stable:'방향만 안정',indistinguishable:'차이 작음 / 구분 불가',unresolved:'미결정 / 수치 확인 필요'};
+const names={total_absorption:'전체 Si 흡수',central_absorption:'중심 픽셀 흡수',neighbor_fraction:'이웃 전달 비율',asymmetry:'좌우 비대칭',centroid_pitch:'흡수 중심'};
+const f=v=>Number.isFinite(v)?v.toPrecision(4):'—';
+function render(){if(!result)return;const a=result.trend_assessment;if(!a){$('trend-rows').innerHTML='';$('trend-status').textContent='아직 경향성 평가가 없습니다.';return;}const mode=$('trend-view').value;
+$('trend-head').innerHTML='<tr><th>구조 · 조건 · 지표</th><th>'+({absolute:'기준 / 변경',difference:'변화 D',sensitivity:'민감도 U / |D|'}[mode])+'</th><th>판정 · 남은 검사</th></tr>';
+$('trend-rows').innerHTML=a.rows.filter(r=>$('trend-pol').value==='all'||r.polarization==='unpolarized').map(r=>{const unit=r.delta_unit==='relative_fraction'?'상대 %':r.delta_unit==='pitch'?'pitch':'%p';const scale=unit==='pitch'?1:100;const val=mode==='absolute'?`${f(r.baseline)} / ${f(r.candidate)}`:mode==='difference'?`${f(r.delta*scale)} ${unit}`:`${f(r.sensitivity*scale)} ${unit} / ${r.delta?f(100*r.sensitivity/Math.abs(r.delta))+'%':'—'}`;return `<tr><td>${esc(r.variant)} · ${r.angle_deg}° · ${esc(r.polarization)}<small>${esc(names[r.metric])}${r.weak_baseline?' · 약한 기준 응답':''}</small></td><td>${val}</td><td>${esc(labels[r.status])}<small>${r.polarization_opposition?'⚠ s/p 변화 방향 반대 · ':''}${r.sign_reversal?'방향 반전 · ':''}${esc(r.missing_checks.map(x=>x.join(':')).join(', '))}${esc(r.invalid_checks.map(x=>x.reasons.join('/')).join(', '))}</small></td></tr>`}).join('');
+const b=result.budget;$('trend-status').textContent=`${a.rows.length}개 조건별 지표 · ${a.additional_requests.length}개 추가 비교 요청`+(b?` · 사용 ${f(b.used_s/3600)} / ${f(b.limit_s/3600)}시간`:'')+(result.stop_reason?` · ${result.stop_reason}`:'');}
+window.renderSensorTrend=job=>{result=job.result?.summary;if(result?.trend_assessment && $('trend-policy').value.trim()==='{}')$('trend-policy').value=JSON.stringify(result.trend_assessment.policy,null,2);render();};
+$('trend-view').onchange=render;$('trend-pol').onchange=render;
+async function submit(endpoint){const id=new URLSearchParams(location.search).get('run');if(!id)throw Error('실행을 먼저 선택하세요.');const p=JSON.parse($('trend-policy').value);const s=await(await fetch('/api/v1/session')).json();const r=await fetch(`/api/v1/sensor-structure-studies/${id}/${endpoint}`,{method:'POST',headers:{'Content-Type':'application/json','X-Platform-Token':s.token},body:JSON.stringify({policy:p})});const j=await r.json();if(!r.ok)throw Error(JSON.stringify(j));location.href='/sensor-structure.html?run='+encodeURIComponent(j.id);}
+$('trend-assess').onclick=()=>submit('trend-assessments').catch(e=>$('trend-status').textContent=e.message);
+$('trend-resume').onclick=()=>submit('trend-studies').catch(e=>$('trend-status').textContent=e.message);
+})();

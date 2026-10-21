@@ -1,0 +1,12 @@
+{
+  "selected_candidate_id": "clear-e2-g1",
+  "feasible_candidates": [
+    "clear-e2-g1"
+  ],
+  "selection_basis": "additional_development_motion_color_gates_then_prior_training_SNR_rank",
+  "original_selection_unchanged": true,
+  "calibration_sha256": "4d81e82b628ce03ba091993b4beff8eef340d518ef4abed36ef0cbc5b3c8617f",
+  "frozen_at_utc": "2026-09-26T14:19:30.840486+00:00",
+  "holdout_seen": false,
+  "automatic_approval": false
+}

@@ -1,0 +1,20 @@
+{
+  "gains_rgb": {
+    "radial-e4-g1": [
+      1.1005061922597823,
+      1.0,
+      0.9128004747443339
+    ],
+    "clear-e2-g1": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "calibration_acquisitions": {
+    "radial-e4-g1": "acquisition-000-radial-e4-g1.npz",
+    "clear-e2-g1": "acquisition-001-clear-e2-g1.npz"
+  },
+  "reference_candidate_id": "clear-e2-g1",
+  "retuned_on_evaluation": false
+}

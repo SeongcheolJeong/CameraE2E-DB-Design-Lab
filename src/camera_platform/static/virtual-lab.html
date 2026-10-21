@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123c42">
+  <title>Camera Virtual Lab · CameraE2E</title>
+  <link rel="stylesheet" href="/virtual-lab.css">
+  <script defer src="/virtual-lab.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="CameraE2E 작업실"><span class="brand-mark" aria-hidden="true"><i></i></span><strong>CameraE2E<span>VIRTUAL LAB</span></strong></a>
+    <nav aria-label="주요 탐색"><a href="/lens-psf-lut.html">Lens PSF Library ↗</a><a href="/reference-workshop.html">Reference Bench ↗</a><a href="/design-workshop.html">Design Workshop ↗</a><a href="/">Engineering Workbench ↗</a><span class="simulation-label"><i></i> Model-based simulation</span><button class="icon-button" id="history-toggle" aria-expanded="false" aria-controls="history-panel">실행 기록 <span id="run-count">0</span></button></nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">DESIGN. CAPTURE. UNDERSTAND.</p><h1>카메라 설계를, 하나의 Lab에서.</h1><p class="intro-copy">렌즈부터 ISP까지. 같은 조건으로 촬영하고, 영상과 측정 결과를 함께 비교하세요.</p></div>
+      <div class="intro-actions"><a class="button secondary disabled" id="report-link" aria-disabled="true" target="_blank" rel="noopener">비교 보고서 ↗</a><button class="button secondary" id="pin-baseline" disabled>현재 결과를 기준안으로</button></div>
+    </section>
+
+    <section class="pipeline" aria-label="카메라 계산 단계">
+      <button data-focus="scene-controls"><span class="step-number">01</span><span><strong>Scene</strong><small id="pipe-scene">시험 차트</small></span></button><span class="connector" aria-hidden="true">→</span>
+      <button data-focus="lens-controls"><span class="step-number">02</span><span><strong>Lens</strong><small id="pipe-lens">광학 모델</small></span></button><span class="connector" aria-hidden="true">→</span>
+      <button data-focus="sensor-controls"><span class="step-number">03</span><span><strong>Sensor</strong><small id="pipe-sensor">픽셀 · 전기 응답</small></span></button><span class="connector" aria-hidden="true">→</span>
+      <button data-focus="isp-controls"><span class="step-number">04</span><span><strong>ISP</strong><small id="pipe-isp">Balanced</small></span></button><span class="connector" aria-hidden="true">→</span>
+      <button data-focus="lab-results" class="pipeline-lab"><span class="step-number">05</span><span><strong>Virtual Lab</strong><small>MTF · Color · Noise</small></span></button>
+    </section>
+
+    <div class="lab-layout">
+      <aside class="configuration panel" aria-labelledby="config-title">
+        <div class="panel-heading"><div><p class="eyebrow">CONFIGURATION</p><h2 id="config-title">카메라 구성</h2></div><button class="text-button" id="reset-config">초기화</button></div>
+        <form id="capture-form">
+          <div class="config-name"><label for="run-name">설계안 이름</label><input id="run-name" maxlength="120" value="Camera design 01" required></div>
+          <details open id="scene-controls" class="control-section"><summary><span class="section-icon">◫</span> Scene &amp; light <span class="detail-chevron">⌄</span></summary><div class="section-content">
+            <label for="scene">입력 장면</label><select id="scene"><option value="resolution">해상력 차트</option><option value="color">24색 차트</option><option value="uniform">균일장</option><option value="tone">명암 계단</option><option value="natural">합성 도로 장면</option><option value="grid">각도 격자 · 투영 비교</option></select>
+            <div class="field-row"><div><label for="illuminant">광원</label><select id="illuminant"><option value="D65">D65 · 주광</option><option value="A">A · 텅스텐</option></select></div><div><label for="luminance">광량 <span>cd/m²</span></label><input id="luminance" type="number" min="0.01" max="10000" step="any" value="10" required></div></div>
+          </div></details>
+          <details open id="lens-controls" class="control-section"><summary><span class="section-icon">◎</span> Lens <span class="detail-chevron">⌄</span></summary><div class="section-content">
+            <label for="lens">광학 모델</label><select id="lens" aria-describedby="lens-description"><option>모델 읽는 중…</option></select><p class="field-note" id="lens-description"></p>
+            <div class="field-row"><div><label for="f-number">F-number</label><input id="f-number" type="number" min="1" max="16" step="any" value="4"></div><div><label for="defocus">Defocus <span>µm</span></label><input id="defocus" type="number" min="-100" max="100" step="0.1" value="0"></div></div><p class="field-note" id="optics-note">모델에서 지원하는 항목만 조절할 수 있습니다.</p>
+            <label class="spaced-label" for="field-mode">시야별 광학 계산</label><select id="field-mode"><option value="full_field">설정한 관측 시야 전체 · 위치별 PSF</option><option value="center_local">중심 국소 PSF</option></select>
+            <label class="spaced-label" for="horizontal-fov">수평 관측 FOV <span><span id="fov-range">° · 요청 범위 2…40</span></span></label><input id="horizontal-fov" type="number" min="2" max="40" step="any" placeholder="기본 관측창 · 약 5.11°"><p id="field-budget" class="field-note">모델 지원 범위와 400만 native 픽셀 소프트웨어 예산 내에서 실행합니다. 초과 시 실패하며 해상도를 자동으로 낮추지 않습니다.</p>
+            <div id="wide-controls" class="wide-controls hidden">
+              <div class="wide-model-label">PARAMETRIC WIDE ANGLE · 2 MP</div>
+              <label for="wide-projection">투영 모델</label><select id="wide-projection"><option value="rectilinear">Rectilinear · 직선 보존</option><option value="equidistant">Equidistant · 등거리 어안</option></select>
+              <p class="field-note">1920 × 1080 가상 센서 영역 · 선택 센서의 pitch 유지. 제품 렌즈 처방이나 제품 고유 mode가 아닙니다.</p>
+              <label for="wide-exit-pupil">출사동공 거리 <span>mm</span></label><input id="wide-exit-pupil" type="number" min="0.1" max="1000" step="any" value="6">
+              <div class="field-row"><div><label for="wide-radial-blur">방사 PSF σ <span>µm</span></label><input id="wide-radial-blur" type="number" min="0" max="30" step="any" value="0"></div><div><label for="wide-tangential-blur">접선 PSF σ <span>µm</span></label><input id="wide-tangential-blur" type="number" min="0" max="30" step="any" value="0"></div></div>
+              <details class="advanced"><summary>광량 · 샘플링 · 실행 예산</summary>
+                <div class="field-row"><div><label for="wide-transmission">투과율 <span>0.001…1</span></label><input id="wide-transmission" type="number" min="0.001" max="1" step="any" value="1"></div><div><label for="wide-ri-power">상대조도 cosⁿ</label><input id="wide-ri-power" type="number" min="0" max="8" step="any" value="0"></div></div>
+                <label for="wide-sampling">픽셀 내 표본 · 축별</label><select id="wide-sampling"><option value="auto">Auto · 정확도 refinement</option><option value="2">2 × 2</option><option value="4">4 × 4</option><option value="8">8 × 8</option></select>
+                <label for="wide-tile">타일 크기 <span>native pixels</span></label><select id="wide-tile"><option value="128">128</option><option value="256" selected>256</option><option value="512">512</option></select>
+                <div class="field-row"><div><label for="wide-memory">작업 메모리 <span>GiB</span></label><input id="wide-memory" type="number" min="0.0625" max="64" step="any" value="4"></div><div><label for="wide-disk">최소 여유 디스크 <span>GiB</span></label><input id="wide-disk" type="number" min="0" max="1024" step="any" value="10"></div></div>
+                <p class="field-note">소프트웨어 실행 예산입니다. 부족하면 명시적으로 중단하며 native 해상도를 자동으로 낮추지 않습니다.</p>
+              </details>
+            </div>
+          </div></details>
+          <details open id="sensor-controls" class="control-section"><summary><span class="section-icon">▦</span> Sensor &amp; readout <span class="detail-chevron">⌄</span></summary><div class="section-content">
+            <label for="sensor">센서 모델</label><select id="sensor" aria-describedby="sensor-description"><option>모델 읽는 중…</option></select><p class="field-note" id="sensor-description"></p>
+            <div class="field-row"><div><label for="exposure">노출 <span>ms</span></label><input id="exposure" type="number" min="0.1" max="100" step="any" value="4" required></div><div><label for="gain">Gain <span>×</span></label><input id="gain" type="number" min="1" max="16" step="0.1" value="1" required></div></div>
+            <label class="spaced-label" for="angular-mode">픽셀 입사각 응답</label><select id="angular-mode"><option value="physical_relative">층 모델 상대 응답 · Chief ray</option><option value="physical_pupil">층 모델 상대 응답 · 동공 방향 평균</option><option value="off">각도 응답 끄기</option><option value="cosine_power">선언한 cosⁿ 근사</option></select><p id="angular-note" class="field-note">저장된 정면 QE에 층 모델의 상대 각도 응답을 적용합니다. Chief ray 기준이며 실측 QE 정합 모델은 아닙니다.</p>
+            <div id="angular-exponents" class="hidden"><label>cosⁿ 지수 <span>R / Gr / Gb / B · 0…16</span></label><div class="quad-fields"><input id="angular-r" aria-label="R angular exponent" type="number" min="0" max="16" step="any" value="2"><input id="angular-gr" aria-label="Gr angular exponent" type="number" min="0" max="16" step="any" value="2"><input id="angular-gb" aria-label="Gb angular exponent" type="number" min="0" max="16" step="any" value="2"><input id="angular-b" aria-label="B angular exponent" type="number" min="0" max="16" step="any" value="2"></div></div>
+          </div></details>
+          <details open id="isp-controls" class="control-section"><summary><span class="section-icon">≋</span> ISP tuning <span class="detail-chevron">⌄</span></summary><div class="section-content">
+            <div class="profile-picker" role="group" aria-label="ISP 프로필"><button type="button" data-profile="low_noise">저잡음</button><button type="button" class="active" data-profile="balanced" aria-pressed="true">균형</button><button type="button" data-profile="detail">고선예도</button></div>
+            <label class="slider-label" for="denoise">Denoise <output id="denoise-value" for="denoise">0.00</output></label><input id="denoise" type="range" min="0" max="1" step="0.05" value="0">
+            <label class="slider-label" for="sharpen">Sharpen <output id="sharpen-value" for="sharpen">0.00</output></label><input id="sharpen" type="range" min="0" max="2" step="0.05" value="0">
+            <label class="slider-label" for="gamma">Tone gamma <output id="gamma-value" for="gamma">2.20</output></label><input id="gamma" type="range" min="0.5" max="3" step="0.05" value="2.2">
+            <label class="slider-label" for="lsc">수동 LSC gain <output id="lsc-value" for="lsc">0.00</output></label><input id="lsc" type="range" min="0" max="2" step="0.05" value="0"><p class="field-note">수동 방사형 gain 모델 · 자동 보정 아님</p>
+            <label for="black-offset">Black offset <span>DN · −32…32</span></label><input id="black-offset" type="number" min="-32" max="32" step="any" value="0"><p class="field-note">Demosaic · bilinear 고정</p>
+            <details class="advanced"><summary>WB · CCM 세부 조정</summary><label>White balance <span>R / G / B</span></label><div class="triple-fields"><input aria-label="WB red" id="wb-r" type="number" min="0.1" max="8" step="any" value="1"><input aria-label="WB green" id="wb-g" type="number" min="0.1" max="8" step="any" value="1"><input aria-label="WB blue" id="wb-b" type="number" min="0.1" max="8" step="any" value="1"></div><label for="ccm">색 보정 행렬 <span>3 × 3</span></label><textarea id="ccm" rows="3" spellcheck="false">1, 0, 0
+0, 1, 0
+0, 0, 1</textarea></details>
+            <button type="button" class="button replay-button" id="replay" disabled>↻ 같은 RAW로 ISP 재처리</button><p class="field-note">재처리는 취득된 RAW를 유지합니다.</p>
+          </div></details>
+          <div class="run-controls"><label for="test-suite">Lab 시험</label><select id="test-suite"><option value="all">전체 · Resolution / Color / Noise / Tone</option><option value="resolution">Resolution · 해상력</option><option value="color">Color · 색</option><option value="noise">Noise · 잡음</option><option value="tone">Tone &amp; Saturation · 명암 · 포화</option></select><button class="button primary" id="run-button" type="submit"><span>▶</span> 가상 촬영 &amp; Lab 실행</button><p class="field-note centered">고정 seed · 잡음 8회 반복 취득</p></div>
+        </form>
+      </aside>
+
+      <div class="workspace">
+        <div class="status-bar" id="status-bar" role="status" aria-live="polite"><span class="status-dot"></span><span id="status-message">카메라 모델과 실행 기록을 불러오는 중입니다.</span><button id="resume-run" class="text-button hidden">체크포인트에서 재개</button><button id="cancel-run" class="text-button hidden">실행 취소</button></div>
+        <section class="viewer panel" aria-labelledby="viewer-title">
+          <div id="configuration-notice" class="configuration-notice hidden" role="status"></div>
+          <div class="panel-heading viewer-heading"><div><p class="eyebrow">IMAGE COMPARISON</p><h2 id="viewer-title">같은 장면. 다른 설계.</h2></div><div class="view-controls"><button class="icon-button" id="zoom-out" aria-label="축소">−</button><output id="zoom-label">100%</output><button class="icon-button" id="zoom-in" aria-label="확대">＋</button><button class="text-button" id="zoom-reset">맞춤</button></div></div>
+          <div class="viewer-toolbar"><div class="stage-tabs" role="tablist" aria-label="계산 단계"><button role="tab" data-stage="scene" aria-selected="false">Scene</button><button role="tab" data-stage="optical" aria-selected="false">Optical</button><button role="tab" data-stage="raw" aria-selected="false">RAW</button><button role="tab" data-stage="linear" aria-selected="false">Linear RGB</button><button role="tab" data-stage="isp" aria-selected="true" class="active">ISP output</button><button role="tab" data-stage="cra" aria-selected="false">CRA</button><button role="tab" data-stage="angular_gain" aria-selected="false">Angular gain</button></div><label class="roi-toggle"><input id="show-roi" type="checkbox"> 측정 위치</label></div>
+          <div class="preview-row"><label for="preview-scene">저장된 시험 영상</label><select id="preview-scene"><option value="primary">주 장면 · 전체 단계</option><option value="resolution">해상력 차트</option><option value="color">24색 차트</option><option value="uniform">균일장 · 잡음</option><option value="tone">명암 계단</option><option value="grid">각도 격자</option></select><span id="preview-note">같은 실행에 보존된 결과를 바로 확인합니다.</span></div>
+          <div id="geometry-summary" class="geometry-summary hidden" aria-label="실행 결과의 광학 기하"></div>
+          <div class="image-comparison">
+            <article class="image-pane"><div class="image-label"><span class="tag baseline-tag">A</span><div><strong id="baseline-name">기준안</strong><small id="baseline-meta">결과를 기준안으로 고정하세요</small></div></div><div class="image-viewport" id="baseline-viewport"><div class="image-content"><img id="baseline-image" alt="기준안 계산 영상" hidden><div class="roi-overlay" aria-hidden="true"></div></div><div class="image-empty" id="baseline-empty"><span class="empty-lens">◎</span><strong>비교의 기준을 정하세요</strong><p>첫 촬영 결과를 기준안으로 고정하면<br>다음 설계안과 나란히 비교합니다.</p></div></div><div class="image-footer"><span id="baseline-caption">계산 결과가 없습니다.</span><a id="baseline-native" class="hidden" target="_blank" rel="noopener">Native ISP ↗</a><a id="baseline-raw" class="hidden" target="_blank" rel="noopener">RAW ↓</a></div></article>
+            <article class="image-pane"><div class="image-label"><span class="tag candidate-tag">B</span><div><strong id="candidate-name">현재 설계안</strong><small id="candidate-meta">렌즈 · 센서 · ISP 통합 결과</small></div><span id="candidate-status" class="tiny-badge">READY</span></div><div class="image-viewport" id="candidate-viewport"><div class="image-content"><img id="candidate-image" alt="현재 설계안 계산 영상" hidden><div class="roi-overlay" aria-hidden="true"></div></div><div class="image-empty" id="candidate-empty"><span class="empty-lens">◉</span><strong>설계가 영상이 되는 순간</strong><p>왼쪽에서 카메라를 구성하고<br>가상 촬영을 시작하세요.</p></div></div><div class="image-footer"><span id="candidate-caption">실제 계산 크기는 결과와 함께 표시됩니다.</span><a id="candidate-native" class="hidden" target="_blank" rel="noopener">Native ISP ↗</a><a id="candidate-raw" class="hidden" target="_blank" rel="noopener">RAW ↓</a></div></article>
+          </div>
+          <div class="viewer-note"><span>↔ 동기화된 확대 · 이동</span><span id="display-policy">공통 표시 범위 · 프레임별 밝기 정규화 없음</span></div>
+          <div id="field-map-legend" class="field-map-legend hidden"></div>
+        </section>
+
+        <section id="lab-results" class="results" aria-labelledby="results-title">
+          <div class="results-heading"><div><p class="eyebrow">VIRTUAL LAB RESULTS</p><h2 id="results-title">보이는 차이를, 수치로.</h2></div><div class="legend"><span><i class="baseline-swatch"></i>기준안 A</span><span><i class="candidate-swatch"></i>현재 B</span></div></div>
+          <div class="metric-grid">
+            <article class="metric-card panel"><div class="metric-heading"><h3>Resolution</h3><span>MTF / SFR</span></div><div class="metric-value"><strong id="mtf-value">—</strong><span id="mtf-unit">MTF50 · cycles/pixel</span><small id="mtf-delta"></small></div><div class="metric-selectors"><select id="resolution-site" aria-label="해상력 측정 위치"><option value="main">공통 차트 · 중심 국소 PSF</option></select><select id="resolution-orientation" aria-label="SFR 방향" class="hidden"><option value="radial">방사 방향</option><option value="tangential">접선 방향</option></select><select id="resolution-response" aria-label="광학 또는 시스템 응답"><option value="processed_system">ISP SFR</option><option value="linear_system">선형 SFR</option><option value="optical">광학 MTF</option></select></div><div id="resolution-chart" class="chart" aria-label="해상력 곡선"></div><div class="metric-detail" id="resolution-detail">해상력 시험을 실행하면 곡선이 표시됩니다.</div></article>
+            <article class="metric-card panel"><div class="metric-heading"><h3>Color</h3><span>24 PATCHES</span></div><div class="metric-value"><strong id="color-value">—</strong><span>평균 ΔE00</span><small id="color-delta"></small></div><div id="color-chart" class="color-patches" aria-label="색 패치 기준과 출력 비교"></div><div class="metric-detail" id="color-detail">각 패치의 기준색 · 출력색을 함께 비교합니다.</div></article>
+            <article class="metric-card panel"><div class="metric-heading"><h3>Noise</h3><span>TEMPORAL</span></div><div class="metric-value"><strong id="noise-value">—</strong><span id="noise-unit">SNR · dB</span><small id="noise-delta"></small></div><div id="noise-chart" class="chart" aria-label="광량별 신호 대 잡음 곡선"></div><div class="metric-detail" id="noise-detail">독립 반복 취득으로 시간 잡음을 측정합니다.</div></article>
+            <article class="metric-card panel"><div class="metric-heading"><h3>Tone &amp; Saturation</h3><span>RESPONSE</span></div><div class="metric-value"><strong id="tone-value">—</strong><span>밝기 계단 최대 포화율</span><small id="tone-delta"></small></div><div id="tone-chart" class="chart" aria-label="광량별 응답 곡선"></div><div class="metric-detail" id="tone-detail">광량별 응답과 well·ADC 포화를 확인합니다.</div></article>
+          </div>
+          <article class="field-response-card panel"><div class="metric-heading"><h3>Field response · CRA &amp; pixel coupling</h3><span id="field-response-model">CHIEF-RAY MODEL</span></div><div class="field-response-summary"><div class="metric-value"><strong id="cra-value">—</strong><span>최대 CRA · °</span></div><p id="field-response-scope">시야 계산을 실행하면 입사각과 채널별 상대 응답이 표시됩니다.</p></div><div class="field-profile-grid"><div><div id="cra-chart" class="chart" aria-label="관측창 반경별 chief ray angle"></div><p class="field-profile-caption">관측창 반경에 따른 CRA · Chief-ray 진단</p></div><div><div id="angular-chart" class="chart" aria-label="관측창 반경별 CFA 채널 상대 각도 응답"></div><p class="field-profile-caption"><i style="background:#bf6e63"></i>R <i style="background:#238778"></i>Gr <i style="background:#76a465"></i>Gb <i style="background:#587bc0"></i>B · 550 nm</p></div></div><div id="angular-gain-ranges" class="angular-gain-ranges"></div><p id="field-response-note" class="metric-detail">지원되는 모델 범위와 계산 출처를 결과에 보존합니다.</p></article>
+          <div class="results-footnote" id="results-note">수치는 실행된 시험에만 표시됩니다. 광학 MTF와 ISP 이후 SFR은 별도의 응답입니다.</div>
+        </section>
+        <details class="assumptions panel"><summary><span>모델 · 계산 조건 · 적용 범위</span><span class="subtle">SIMULATION NOTES</span></summary><div id="assumptions-content"><p>모델 기반 가상 Lab입니다. 실행 결과에는 모델 출처, 실제 계산 격자, ISP 설정과 측정 조건이 보존됩니다.</p></div></details>
+      </div>
+    </div>
+    <footer class="app-footer"><strong>CameraE2E / Virtual Lab</strong><span>Scene → Optics → Electrons → RAW → ISP → Measurement</span></footer>
+  </main>
+
+  <aside id="history-panel" class="history-panel hidden" aria-label="저장된 실행"><div class="panel-heading"><div><p class="eyebrow">SAVED EXPERIMENTS</p><h2>실행 기록</h2></div><button id="history-close" class="icon-button" aria-label="실행 기록 닫기">✕</button></div><div id="history-list"></div><button class="button secondary" id="refresh-runs">목록 새로고침</button></aside>
+  <div id="toast" class="toast hidden" role="status"></div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* Shared entry only: scoped chart-response models never replace optical models. */
+(() => {
+  'use strict';
+  const link=document.getElementById('esfr-lab-link');
+  if(!link)return;
+  const measuredLink=document.createElement('a');measuredLink.id='esfr-measured-db-link';measuredLink.className=link.className;measuredLink.textContent='실측 3+3 · 112개 + 색·계조 IQ ↗';link.insertAdjacentElement('afterend',measuredLink);
+  let sequence=0,last='';
+  function source(){const q=new URL(location.href).searchParams;return {
+    run_id:q.get('source_run')||q.get('run'),
+    candidate_id:document.getElementById('candidate-b')?.value||q.get('candidate')||q.get('candidate-b'),
+    condition_id:q.get('condition')};}
+  function url(s,path){const q=new URLSearchParams();if(s.run_id)q.set('source_run',s.run_id);if(s.candidate_id)q.set('candidate',s.candidate_id);if(s.condition_id)q.set('condition',s.condition_id);return path+(q.size?'?'+q:'');}
+  async function update(){const s=source();link.href=url(s,'/camera-validation-esfr.html');measuredLink.href=url(s,'/esfr-measured.html');
+    const card=document.getElementById('esfr-db-status');if(!card)return;
+    const key=JSON.stringify(s);if(key===last)return;last=key;const ticket=++sequence;
+    card.replaceChildren();const heading=document.createElement('h3');heading.textContent='E-SFR 실카메라 검증 · 조건부 응답 프로파일';card.append(heading);
+    const text=document.createElement('p');text.textContent='선택한 DB 조건에 연결된 차트 검증 프로파일을 확인합니다.';card.append(text);
+    if(!s.run_id||!s.candidate_id){text.textContent='완료된 DB 실행과 후보를 선택하면 E-SFR Lab으로 이어집니다.';return;}
+    try{const r=await fetch(url(s,'/api/v1/camera-validation/esfr/active'));const d=await r.json();if(!r.ok)throw Error(d.error||r.status);if(ticket!==sequence)return;
+      text.textContent=d?'적용된 E-SFR 프로파일: '+d.profile_id+' · '+d.camera_id+' · 차트 조건부 유효 응답':'이 DB 조건에 적용된 E-SFR 프로파일이 없습니다. 차트 촬영부터 시작할 수 있습니다.';
+      const a=document.createElement('a');a.href=url(s,'/camera-validation-esfr.html')+(d?'&study='+encodeURIComponent(d.run_id):'');a.textContent='E-SFR 검증 Lab 열기 ↗';card.append(a);
+      if(d){const report=document.createElement('a');report.href='/api/v1/camera-validation/esfr/studies/'+encodeURIComponent(d.run_id)+'/files/report.html';report.textContent=' · RAW·ISP 오차 보고서 ↗';card.append(report);}
+      const cr=await fetch(url(s,'/api/v1/camera-validation/esfr/calibration-completion'));if(!cr.ok)throw Error('통합 보정 보고서 조회: '+cr.status);const completion=await cr.json();if(ticket!==sequence)return;
+      if(completion){const section=document.createElement('div');section.id='esfr-full-calibration';const label=document.createElement('p');label.textContent='Calibration Lab 전체 edge 보정: '+completion.field_count+'개 · 활성 프로파일 '+completion.profile_id;section.append(label);const full=document.createElement('a');full.href=completion.lab_url+'&validation='+encodeURIComponent(completion.completion.validation_id);full.textContent='전체 edge Calibration Lab ↗';section.append(full);const report=document.createElement('a');report.href=completion.completion.report_url;report.textContent=' · 통합 보정·검증 보고서 ↗';section.append(report);if(completion.image_validation){const image=completion.image_validation;const verdict=document.createElement('p');const checks=image.validation?.checks||[];const failed=checks.filter(x=>x.status==='fail').length;const labels={pass:'수치 기준 충족',fail:'수치 기준 미충족',inconclusive:'판단 보류',not_evaluated:'미평가'};verdict.textContent=(image.validation?.scope==='raw_native_sfr_only'?'RAW 독립 검증 · ISP는 진단: ':'RAW·ISP 독립 검증: ')+(labels[image.validation?.status]||'미확인')+' · 기준 초과 '+failed+' / '+checks.length+'건 · 실카메라 검증 미확립';section.append(verdict);const raw=document.createElement('a');raw.href=image.report_url;raw.textContent='새 후보 RAW·ISP 재측정 ↗';section.append(raw);}card.append(section);}
+      const iqResponse=await fetch(url(s,'/api/v1/camera-validation/esfr/measured/iq-latest'));if(!iqResponse.ok)throw Error('IQ 보고서 조회: '+iqResponse.status);const iqData=await iqResponse.json();if(ticket!==sequence)return;const iq=iqData.report;if(iq){const section=document.createElement('div');section.id='esfr-latest-iq';const description=document.createElement('p');description.textContent='색·계조·노이즈 IQ · '+(iq.source_kind==='synthetic'?'합성 동작 검증 · 실제 촬영 아님':iq.source_kind==='measured'?'실측으로 등록된 원본 · 사용자 선언':'원본 출처는 보고서에서 확인')+' · 판정 기준 미선언';section.append(description);if(typeof iq.report_url==='string'&&iq.report_url.startsWith('/api/v1/camera-validation/esfr/measured/')&&!/[\\\r\n]/.test(iq.report_url)){const report=document.createElement('a');report.href=iq.report_url;report.textContent='전체 색·계조·노이즈 보고서 ↗';section.append(report);}if(iq.workflow_id){const work=document.createElement('a');work.href=url(s,'/esfr-measured.html')+'&workflow='+encodeURIComponent(iq.workflow_id);work.textContent=' · IQ 작업 열기 ↗';section.append(work);}card.append(section);}
+      const comparison=iqData.comparison;if(comparison){const section=document.createElement('div');section.id='esfr-latest-iq-comparison';const label=document.createElement('p');label.textContent='모드 A/B · 색·노이즈·Tone·112개 edge MTF · '+(comparison.source_kind==='synthetic'?'독립 합성 검증':'입력 출처는 보고서 확인')+' · IQ 판정 기준 미선언';section.append(label);if(comparison.mtf_status){const status=document.createElement('p');status.textContent=['a','b'].map(k=>{const m=comparison.mtf_status[k];return m&&typeof m.fail_count==='number'?'MTF '+k.toUpperCase()+' 기준 초과 '+m.fail_count+' / 판정 대상 '+m.decision_checks+' · 진단 '+m.diagnostic_checks:'MTF '+k.toUpperCase()+' 판정 미제공';}).join(' · ');section.append(status);}for(const [key,title] of [['report_url','모드 A/B 비교 보고서 ↗'],['bundle_url',' · A/B 근거 ZIP ↗']]){const href=comparison[key];if(typeof href==='string'&&href.startsWith('/api/v1/camera-validation/esfr/measured/iq-comparisons/')&&!/[\\\r\n]/.test(href)){const a=document.createElement('a');a.href=href;a.textContent=title;section.append(a);}}card.append(section);}
+      const note=document.createElement('p');note.className='small';note.textContent='원본 DB 렌즈 처방과 QE·전기 모델은 보존됩니다. 실제 카메라 대응·독립 검증 범위는 보고서에서 확인하세요.';card.append(note);
+    }catch(e){if(ticket===sequence)text.textContent='프로파일 조회 실패: '+e.message;}}
+  measuredLink.addEventListener('click',()=>{measuredLink.href=url(source(),'/esfr-measured.html');});
+  link.addEventListener('click',()=>{link.href=url(source(),'/camera-validation-esfr.html');});
+  document.addEventListener('camera-db-selection',update);window.addEventListener('popstate',update);update();
+})();

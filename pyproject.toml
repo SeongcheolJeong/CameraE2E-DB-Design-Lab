@@ -1,0 +1,132 @@
+[build-system]
+requires = ["setuptools>=80", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyisetcam"
+version = "0.16.2.dev45"
+description = "Core Python port of the ISETCam imaging pipeline."
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+  {name = "OpenAI Codex"}
+]
+dependencies = [
+  "numpy",
+  "scipy",
+  "scikit-image",
+  "matplotlib",
+  "imageio",
+  "pillow",
+  "imagecodecs",
+  "tifffile",
+  "h5py",
+  "pooch",
+]
+
+[project.optional-dependencies]
+road-study = [
+  "pycocotools>=2.0.11,<3",
+]
+platform = [
+  "fastapi>=0.115,<1",
+  "pydantic>=2.10,<3",
+  "uvicorn>=0.30,<1",
+  "httpx>=0.27,<1",
+  "python-multipart>=0.0.20,<1",
+]
+fdtd = [
+  "psutil",
+]
+factory-rayoptics = [
+  "rayoptics==0.9.8",
+  "opticalglass==1.2.0",
+]
+factory-prysm = [
+  "prysm==0.21.1",
+  "setuptools>=80,<81",
+]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "ruff",
+  "mypy",
+]
+yolo = [
+  "lap",
+  "ultralytics",
+]
+torch-vision = [
+  "torch",
+  "torchvision",
+]
+transformers = [
+  "pillow",
+  "torch",
+  "transformers",
+]
+sam = [
+  "segment-anything",
+  "torch",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+camera_platform = [
+  "static/*.html", "static/*.js", "static/*.css",
+  "data/reference_pixel_study.json",
+  "data/r1/manifest.json", "data/r1/models/*.json", "data/r1/scenes/*.json",
+  "data/r1/optics/*.json", "data/r1/pixels/*.json", "data/r1/electricals/*.json",
+  "data/r1/decisions/*", "data/r1/decisions/signal/*", "data/r1/decisions/motion/*",
+]
+pyisetcam = [
+  "data/camerae2e_registry_seed.json",
+  "data/hwisp/*.json",
+  "data/hwisp/README.md",
+  "data/sensor_estimate/*.json",
+  "data/lens_patents/*.json",
+  "data/lens_patents/*.sqlite",
+  "data/lens_patents/README.md",
+  "data/lens_patents/companies/*.json",
+  "data/lens_patents/companies/*.md",
+  "data/lens_patents/companies/*/*.json",
+  "data/lens_patents/companies/*/*.sqlite",
+  "data/lens_patents/raytrace_psf/*.json",
+  "data/lens_patents/raytrace_psf/*.md",
+  "data/lens_patents/raytrace_psf/*.npz",
+  "data/lens_patents/raytrace_psf_highres/*.json",
+  "data/lens_patents/raytrace_psf_highres/*.md",
+  "data/lens_patents/raytrace_psf_highres/*.npz",
+  "data/lens_patents/raytrace_psf_v2/*.json",
+  "data/lens_patents/raytrace_psf_v2/*.md",
+  "data/lens_patents/raytrace_psf_v2/*.npz",
+  "data/lens_patents/reviewed_prescriptions/*/*/*.csv",
+  "data/lens_patents/reviewed_prescriptions/*/*/configured_surfaces/*.csv",
+  "data/task_perception/*.json",
+  "data/task_perception/README.md",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_defs = true
+ignore_missing_imports = false

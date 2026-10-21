@@ -1,0 +1,21 @@
+.layout{grid-template-columns:minmax(310px,380px) minmax(0,1fr)}
+.model-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.model-actions button{min-height:44px}
+.saved-results{display:grid;grid-template-columns:1fr 1fr;gap:15px}.saved-results label{min-width:0}
+.comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.comparison-grid figure{margin:0;border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0}
+.comparison-grid img{display:block;width:100%;height:auto;background:#edf1ed;image-rendering:auto}
+.comparison-grid figcaption{font-size:11px;padding-top:9px;color:var(--muted)}
+.stage-controls{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.stage-controls label{min-width:135px}
+.field-heading{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.metric-good{color:#08704f}.scope-status{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}
+.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.source-grid .wide{grid-column:1 / -1}
+.progress{border-left:3px solid var(--accent);background:var(--soft);padding:12px 15px;font-size:12px}
+.model-identity{max-height:200px}.compact{min-height:180px}
+@media(max-width:1000px){.layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:620px){.comparison-grid,.saved-results{grid-template-columns:minmax(0,1fr)}.model-actions,.source-grid{grid-template-columns:minmax(0,1fr)}.source-grid .wide{grid-column:auto}}
+
+.holdout{margin-top:24px;padding-top:18px;border-top:2px solid var(--accent)}
+.holdout-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.holdout-grid figure{margin:0;border:1px solid var(--line);padding:9px;border-radius:8px}.holdout-grid img{width:100%;height:auto;display:block}.holdout-grid figcaption{font-size:12px;margin-bottom:8px}
+@media(max-width:620px){.holdout-grid{grid-template-columns:1fr}}
+
+.holdout input[type="checkbox"]{width:auto;min-height:0;margin-right:6px}

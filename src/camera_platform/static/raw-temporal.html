@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CameraE2E · 선택형 RAW 비교</title>
+<script defer src="/raw-temporal.js"></script>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#172620;background:#f3f5f2}*{box-sizing:border-box}body{margin:0}header{padding:22px 5%;background:#172620;color:white;display:flex;justify-content:space-between;align-items:center}header a{color:#daeddc}main{max-width:1320px;margin:auto;padding:28px 24px}h1{font-size:28px;margin:0 0 12px}h2{font-size:20px;margin:0 0 16px}p{line-height:1.6}.tag{font-size:12px;letter-spacing:.13em;font-weight:700}.intro{margin-bottom:24px}.warning{background:#fff3d9;border-left:4px solid #b77715;padding:16px 20px;line-height:1.6;margin:16px 0}.layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:22px}.panel{background:white;border:1px solid #dbe2da;border-radius:10px;padding:22px;margin-bottom:20px}label{display:block;margin:12px 0 6px;font-size:14px;font-weight:600}input,select,button{font:inherit}input:not([type=checkbox]):not([type=range]),select{width:100%;padding:9px;border:1px solid #b9c8bb;border-radius:6px}button{background:#255d3f;color:white;border:0;border-radius:6px;padding:11px 16px;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.wide{width:100%;margin-top:14px}.muted{font-size:13px;color:#516654}.check{font-weight:400;line-height:1.6}.triple{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}figure{margin:0;min-width:0}figure img{width:100%;aspect-ratio:1;object-fit:contain;image-rendering:pixelated;background:#111;border-radius:6px}figcaption{font-size:14px;font-weight:650;margin:8px 0}.controls{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-bottom:18px}#frame{width:240px}table{width:100%;font-size:13px;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid #e1e6e0;padding:9px;white-space:nowrap}.scroll{overflow:auto}.error{color:#a32b24;white-space:pre-wrap;overflow-wrap:anywhere}.success{color:#255d3f}.artifacts a{display:inline-block;margin:6px 12px 6px 0;color:#255d3f}.mono{font-family:monospace;overflow-wrap:anywhere;font-size:12px}summary{cursor:pointer;padding:6px 0}.counter{background:#f7f8f5;padding:12px;border-radius:6px}#status{min-height:24px}a{color:#255d3f}@media(max-width:850px){.layout{grid-template-columns:1fr}.triple{gap:7px}main{padding:20px 12px}.panel{padding:16px}h1{font-size:24px}header{padding:18px}.triple figcaption{font-size:12px}}
+</style>
+</head><body>
+<header><strong>CameraE2E.</strong><a href="/">작업실로 돌아가기</a></header>
+<main>
+<section class="intro"><p class="tag">ORIGINAL RAW → OPTIONAL RESEARCH REPLAY</p><h1>원본을 보존하는 시간 필터 비교</h1>
+<p>저장된 취득 기록의 실제 노출·gain·행별 전달 시각으로 재처리합니다. 새 촬영이나 센서 보정이 아닙니다.</p></section>
+<div class="warning"><strong>기본 적용 금지 · 실제 신호 손실 가능</strong><br>실제 장면이 두 프레임 주기로 바뀌어도 평탄화할 수 있습니다. 원본 인지 근거를 처리 영상으로 대체하지 않습니다. 평균한 픽셀에는 직전 표본이 50% 섞입니다.</div>
+<div class="layout"><aside>
+<form id="replay-form" class="panel"><h2>새 비교</h2>
+<label for="source">원본 취득 / readout</label><select id="source" required><option value="">불러오는 중…</option></select>
+<p id="source-info" class="muted"></p>
+<label for="name">비교 이름</label><input id="name" maxlength="200" value="선택형 RAW 시간 필터 비교" required>
+<label for="cadence">기대 행 전달 간격 (ms)</label><input id="cadence" type="number" value="20" min="0.000001" step="0.000001" required>
+<p class="muted">실제 행별 간격이 다르면 이력을 초기화합니다. 프레임률을 변경하지 않습니다.</p>
+<label for="noise">선언 잡음 추정치 σ (DN)</label><input id="noise" type="number" min="0" max="4095" value="0" step="0.1" required>
+<details><summary>필터 임계값</summary>
+<label for="absolute">절대 임계값 (DN)</label><input id="absolute" type="number" min="0" value="2" step="0.1" required>
+<label for="relative">상대 임계값</label><input id="relative" type="number" min="0" max="1" value="0.01" step="0.001" required>
+<label for="multiplier">잡음 배수</label><input id="multiplier" type="number" min="0" value="3" step="0.1" required>
+<label for="pair">최대 쌍 차이 비율</label><input id="pair" type="number" min="0.001" max="1" value="0.15" step="0.001" required></details>
+<label class="check"><input id="acknowledge" type="checkbox" required> 실제 주기 신호 손실 가능성을 이해하고 연구용 비교만 실행합니다.</label>
+<button class="wide" id="submit" disabled>선택한 원본으로 재처리</button><p id="status" role="status" class="muted"></p></form>
+<section class="panel"><h2>저장된 비교</h2><label for="saved">비교 기록</label><select id="saved"><option value="">선택하세요</option></select><button id="refresh" class="wide" type="button">목록 새로고침</button><p class="muted">목록은 요약만 읽습니다. 선택한 기록의 원본과 결과를 검증합니다.</p></section>
+</aside><article>
+<section class="panel" id="empty"><h2>원본과 처리 결과를 나란히 확인합니다</h2><p>완료된 촬영을 선택한 뒤 위험 확인을 체크하고 실행하세요. 기존 ISP 프로필과 센서 원본은 변경되지 않습니다.</p><p>화면에는 원본 코드, 처리된 실수 DN, 평균 적용 마스크와 추가 정보 나이가 표시됩니다. 최초 세 프레임과 취득 조건 변경 뒤에는 이력을 다시 채웁니다.</p></section>
+<section class="panel" id="result" hidden><h2 id="result-title">비교 결과</h2><p class="mono" id="provenance"></p>
+<div class="controls"><label for="frame">프레임 <span id="frame-label"></span></label><input type="range" id="frame" min="0" max="0" value="0" step="1"><label for="display-gain">공통 표시 배율</label><select id="display-gain"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select></div>
+<p class="muted">동일 black/white 범위의 그레이스케일입니다. 표시 배율은 두 영상에만 똑같이 적용되며 데이터·평가 수치는 바뀌지 않습니다. 미리보기는 최대 512px, 원본 해상도는 NPY에 보존됩니다.</p>
+<div class="triple"><figure><img id="original-image" alt="선택 프레임의 원본 RAW 코드"><figcaption>원본 RAW · 정수 DN</figcaption></figure><figure><img id="processed-image" alt="선택 프레임의 처리된 실수 DN"><figcaption>처리 결과 · 0.5 DN 보존</figcaption></figure><figure><img id="mask-image" alt="흰색은 평균 적용, 검정은 현재 원본 통과"><figcaption>마스크 · 흰색=평균</figcaption></figure></div>
+<p id="frame-info"></p><div class="scroll"><table><thead><tr><th>Frame</th><th>노출 ms</th><th>Gain</th><th>평균 적용</th><th>최대 정보 나이</th><th>변경 MAE DN</th><th>초기화</th></tr></thead><tbody id="frames-table"></tbody></table></div>
+<h3>수치 결과</h3><div class="artifacts" id="artifacts"></div><a id="export" href="#">선택 기록·출처 JSON 저장</a></section>
+<section class="panel"><h2>반드시 함께 보는 실패 사례</h2><div class="counter"><strong>실제 장면 변화: 0.98 ↔ 1.02</strong><p>이전 합성 연구에서 일정 광원 아래 실제 밝기를 교대시켰을 때, 원본 변화폭 3.79117%가 이 필터에서 0%로 사라졌습니다. 필터가 제거해야 할 센서 변동과 지켜야 할 실제 신호를 항상 구별하지는 못합니다.</p><p class="muted">출처: pwm-fixed-rate-20260926 / real_period_two_light. 이 수치는 선택한 취득의 성능이 아닙니다.</p></div><p class="muted">원본은 계속 보존됩니다. 미래 프레임 대기는 0이지만, 평균된 영역의 명목 정보 나이는 이전 행 전달 간격의 절반입니다. 실물 LFM, 실시간 처리량 또는 안전 인지 성능은 승인되지 않았습니다.</p></section>
+</article></div><p class="error" id="error" role="alert"></p>
+</main></body></html>

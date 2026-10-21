@@ -1,0 +1,253 @@
+{
+  "available_presets": {
+    "debug": {
+      "field_count": 3,
+      "psf_size": 64,
+      "pupil_samples": 13,
+      "wavelengths": "550"
+    },
+    "golden": {
+      "field_count": 7,
+      "psf_size": 768,
+      "pupil_samples": 97,
+      "wavelengths": "450,500,550,600,650"
+    },
+    "production": {
+      "field_count": 5,
+      "psf_size": 512,
+      "pupil_samples": 65,
+      "wavelengths": "450,550,650"
+    },
+    "standard": {
+      "field_count": 5,
+      "psf_size": 384,
+      "pupil_samples": 49,
+      "wavelengths": "450,550,650"
+    }
+  },
+  "built_at": "2026-09-06T00:29:09.590091+00:00",
+  "camerae2e_db": "src/pyisetcam/data/lens_patents/lens_patent_simulation_v6.sqlite",
+  "contract_version": 2,
+  "export_root": "/Users/seongcheoljeong/Lens_Patent_DB/exports/prescriptions_expanded_v6",
+  "rows": [
+    {
+      "built_at": "2026-09-06T00:28:54.908538+00:00",
+      "company": "Canon",
+      "configuration": "intermediate",
+      "contract_version": 2,
+      "example_label": "",
+      "field_height_mm": [
+        0.0,
+        3.415,
+        6.83,
+        10.245000000000001,
+        13.66
+      ],
+      "file": "p0014_intermediate.npz",
+      "lens_id": "p0014",
+      "notes": [
+        "Aperture-checked geometric pupil-ray PSF; diffraction is not included.",
+        "RI and absolute transmittance are unknown; unity arrays are compatibility placeholders.",
+        "Pupil weights are conditional uniform geometric quadrature, not calibrated radiometric weights.",
+        "Pupil and spectral sampling convergence have not been established."
+      ],
+      "preset": "production",
+      "psf_shape": [
+        512,
+        512,
+        5,
+        3
+      ],
+      "publication_number": "US10310255B2",
+      "quality": {
+        "actual_efl_mm": 35.178465940618935,
+        "code_version": "rayoptics_geometric_psf_contract_v2",
+        "diffraction_included": false,
+        "effective_f_number": 3.609999999999999,
+        "efl_relative_error": 0.001094648281699806,
+        "entrance_pupil_radius_mm": 4.872363723312298,
+        "focus_plane": "prescription image plane; no best-focus optimization",
+        "generator_sha256": "8c5cb4ae8b84b06160d06b06f32e1a860259be7ba2f2bba4ae9ffbfe6fb42f16",
+        "image_plane_last_gap_mm": 0.5,
+        "magnification": -3.517846921749501e-09,
+        "material_dispersion_model": "opticalglass ModelGlass Buchdahl2 approximation from nd/Vd",
+        "material_dispersion_validated": false,
+        "min_pupil_throughput_fraction": 0.5771268307884077,
+        "min_retained_energy_fraction": 0.9999999999999999,
+        "nominal_efl_mm": 35.14,
+        "numpy_version": "2.4.6",
+        "object_distance_m": Infinity,
+        "opticalglass_version": "1.2.0",
+        "psf_kind": "geometric",
+        "pupil_sampling_convergence_validated": false,
+        "radiometry_status": "unknown",
+        "rayoptics_version": "0.9.8",
+        "reference_wavelength_nm": 550.0,
+        "rejected_ray_reasons": {
+          "TraceRayBlockedError": 6916
+        },
+        "sample_spacing_um": 0.6128849172857022,
+        "sampling_validated_for_sensor": false,
+        "sensor_pitch_um": null,
+        "source_file": "/Users/seongcheoljeong/Documents/CameraE2E/src/pyisetcam/data/lens_patents/reviewed_prescriptions/canon/US10310255B2_p014_table-1/configured_surfaces/intermediate.csv",
+        "source_file_sha256": "de206835811fecaffa86eeb601c5775ebacedb8ec6f02e6e36105a63a8256aca",
+        "source_prescription_sha256": "6a7f9651ed05d4c341f8211b1544b0d9b9a4730b7c5d2fafe8eb0190370fc483",
+        "source_validation": {
+          "image_quality_validated": false,
+          "issues": [
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 1
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 2
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 4
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 6
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 8
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 10
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 12
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 14
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 16
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 19
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 21
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 23
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 25
+            },
+            {
+              "code": "material_identity_unknown",
+              "message": "Only nd/vd or a generic name is available; dispersion is approximate.",
+              "severity": "warning",
+              "surface_order": 27
+            },
+            {
+              "code": "aperture_convention_unverified",
+              "message": "effective_aperture has no explicit radius/diameter convention in the source schema.",
+              "severity": "warning"
+            }
+          ],
+          "metrics": {
+            "error_count": 0,
+            "powered_surface_count": 23,
+            "stop_count": 1,
+            "surface_count": 28,
+            "warning_count": 15
+          },
+          "prescription_sha256": "6a7f9651ed05d4c341f8211b1544b0d9b9a4730b7c5d2fafe8eb0190370fc483",
+          "schema_version": 1,
+          "valid": true,
+          "validation_scope": "prescription_structure_only",
+          "validator_version": "1.0.0"
+        },
+        "spectral_sampling_convergence_validated": false,
+        "system_scope": "centered rotationally symmetric transmitting sequential lens"
+      },
+      "sample_spacing_mm": [
+        0.0006128849172857022,
+        0.0006128849172857022
+      ],
+      "simulation_id": "p0014:intermediate",
+      "status": "generated",
+      "success_max": 3197,
+      "success_min": 1852,
+      "wavelength_nm": [
+        450.0,
+        550.0,
+        650.0
+      ]
+    }
+  ],
+  "schema": "camerae2e_lens_patent_raytrace_psf_manifest_v2",
+  "settings": {
+    "efl_relative_tolerance": 0.05,
+    "field_count": 5,
+    "generator_sha256": "8c5cb4ae8b84b06160d06b06f32e1a860259be7ba2f2bba4ae9ffbfe6fb42f16",
+    "min_retained_energy": 0.999,
+    "min_success_fraction": 0.25,
+    "model": "rayoptics_geometric_psf_contract_v2",
+    "numpy_version": "2.4.6",
+    "object_distance_m": Infinity,
+    "opticalglass_version": "1.2.0",
+    "preset": "production",
+    "psf_size": 512,
+    "pupil_samples": 65,
+    "rayoptics_version": "0.9.8",
+    "reference_wavelength_nm": 550.0,
+    "sample_spacing_um": null,
+    "sensor_pitch_um": null,
+    "wavelengths": [
+      450.0,
+      550.0,
+      650.0
+    ]
+  },
+  "summary": {
+    "by_company": {
+      "Canon": {
+        "generated": 1,
+        "total": 1
+      }
+    },
+    "generated": 1,
+    "total": 1
+  }
+}

@@ -1,0 +1,2699 @@
+{
+  "status": "completed",
+  "plan": {
+    "created_at_utc": "2026-09-26T14:19:29.843940+00:00",
+    "prior_selection_sha256": "513bc11167f2238efb18bc1baecd6ecf4fafbc256c0528a49e8ab92cc26cc48b",
+    "candidates": [
+      {
+        "candidate_id": "radial-e4-g1",
+        "stop": "radial",
+        "exposure_ms": 4.0,
+        "gain": 1.0,
+        "feasible": true,
+        "failures": [],
+        "failed_scenarios": {},
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 18.72780648378875,
+        "minimum_green_dn": 196.78125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "clear-e2-g1",
+        "stop": "clear",
+        "exposure_ms": 2.0,
+        "gain": 1.0,
+        "feasible": true,
+        "failures": [],
+        "failed_scenarios": {},
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 15.978425852362625,
+        "minimum_green_dn": 143.390625,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      }
+    ],
+    "source_identity": {
+      "clear": {
+        "run_id": "run-a2f9b36ad92c4cfaad3f3a545af0b131",
+        "archive_sha256": "80f00e71c835a1f92073d9c2b040319269137ab790223548a229f5625d2af351",
+        "lens_model_id": "model-e3b6428f60334958a9d1694cdc8129e5",
+        "lens_response_sha256": "d7af5860bcd662bfb04e8f0e4076e17165e561b600290de5491f150ae82bedad",
+        "psf_factory_job_id": "run-e2725342c91e4bdc94489f13e3c9cd20",
+        "sensor_model_id": "model-053d49e660ff4545abf2467d25237bf5",
+        "sensor_payload_sha256": "86623c761bdb80340924b2075f2686bc9865c41da77c923208d402474c869179",
+        "scene_render_id": "run-7340d77f8e8a4f9d861f9a412f724983",
+        "scene_render_content_hash": "5c2cde0f03d9d69b90b8b15efb74f81b361cede609249288aa7a7ffcd664e666",
+        "projection_lens_model_id": "model-e3b6428f60334958a9d1694cdc8129e5",
+        "sampling": {
+          "crop_origin": [
+            56,
+            56
+          ],
+          "full_sensor_shape": [
+            128,
+            128
+          ],
+          "kind": "native_sensor",
+          "pixel_pitch_um": 3.0
+        },
+        "spectral_axis_nm": [
+          500,
+          600
+        ],
+        "physical_instance": null,
+        "design_asset_id": "asset-14f2716f4b334920b0c66b8c77cb703a",
+        "prescription_sha256": "1eaeebfdedffcbf67f5d3df19dd9826b3f07fc75c0ecb7dcda8e4e22ba5cab5d",
+        "source_uri": "factory://run-e2725342c91e4bdc94489f13e3c9cd20",
+        "physical_validation": "not_established"
+      },
+      "radial": {
+        "run_id": "run-c2a3134e19c94708ab03e1b2487429e5",
+        "archive_sha256": "0db9d4460f1732cf1ba2e3926260cd29ea5cba2bdc287a9d8cf6618dfadcc98c",
+        "lens_model_id": "model-609a4fe02ab940ea8eee7fd04bc1844c",
+        "lens_response_sha256": "16491cfb62a55ca9bdd7c7095c6985026d15ce2318677889bf389c8f062fbb52",
+        "psf_factory_job_id": "run-1b8455898e6a4cf18baf706faff3bdb3",
+        "sensor_model_id": "model-053d49e660ff4545abf2467d25237bf5",
+        "sensor_payload_sha256": "86623c761bdb80340924b2075f2686bc9865c41da77c923208d402474c869179",
+        "scene_render_id": "run-7340d77f8e8a4f9d861f9a412f724983",
+        "scene_render_content_hash": "5c2cde0f03d9d69b90b8b15efb74f81b361cede609249288aa7a7ffcd664e666",
+        "projection_lens_model_id": "model-609a4fe02ab940ea8eee7fd04bc1844c",
+        "sampling": {
+          "crop_origin": [
+            56,
+            56
+          ],
+          "full_sensor_shape": [
+            128,
+            128
+          ],
+          "kind": "native_sensor",
+          "pixel_pitch_um": 3.0
+        },
+        "spectral_axis_nm": [
+          500,
+          600
+        ],
+        "physical_instance": null,
+        "design_asset_id": "asset-14f2716f4b334920b0c66b8c77cb703a",
+        "prescription_sha256": "f3fec19dceedd88ec1f755a50fe8ecc630ff20ae80198ee95bf6c015b85b3dc2",
+        "source_uri": "factory://run-1b8455898e6a4cf18baf706faff3bdb3",
+        "physical_validation": "not_established"
+      }
+    },
+    "development": [
+      {
+        "scenario_id": "dev-motion-500",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 500.0,
+        "phase_at_midpoint_cycles": 0.17,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      {
+        "scenario_id": "dev-motion-1000",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 1000.0,
+        "phase_at_midpoint_cycles": 0.29,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      {
+        "scenario_id": "dev-spectrum-blue",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.6,
+          0.4
+        ],
+        "modulation": 0.0
+      },
+      {
+        "scenario_id": "dev-spectrum-red",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.35,
+          1.65
+        ],
+        "modulation": 0.0
+      }
+    ],
+    "holdout_recipes": [
+      {
+        "scenario_id": "holdout-f01-v750",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 750.0,
+        "phase_at_midpoint_cycles": 0.37,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.5
+      },
+      {
+        "scenario_id": "holdout-f01-vminus1125",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": -1125.0,
+        "phase_at_midpoint_cycles": 0.61,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.5
+      },
+      {
+        "scenario_id": "holdout-f01-v1250",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 1250.0,
+        "phase_at_midpoint_cycles": 0.43,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.5
+      },
+      {
+        "scenario_id": "stress-temporal-zero",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 2000.0,
+        "phase_at_midpoint_cycles": 0.11,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      {
+        "scenario_id": "stress-contrast-inversion",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 3000.0,
+        "phase_at_midpoint_cycles": 0.19,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      }
+    ],
+    "signal_limits": {
+      "minimum_green_dn": 120.0,
+      "minimum_green_snr_p10": 10.0,
+      "maximum_well_fraction": 0.01,
+      "maximum_white_fraction": 0.01,
+      "maximum_exposure_ms": 4.0
+    },
+    "minimum_signed_motion_transfer": 0.8,
+    "maximum_post_calibration_channel_ratio_error": 0.03,
+    "calibration": "One new uniform neutral spectrum [1,1]; fixed gains before development and holdout",
+    "color_reference": "clear-e2-g1, relative RAW ratios; not absolute color accuracy",
+    "input": "Uniform shared radiance derived from archived per-band spatial means, multiplied by a moving sinusoid in the fixed original native window",
+    "timing": "Global box shutter centered at common relative time zero; not two different poses or rolling shutter",
+    "development_temporal_frequency_envelope_hz": [
+      0,
+      125
+    ],
+    "prior_holdouts": "Not reused; earlier results are development context, not fresh confirmation",
+    "implementation_sha256": {
+      "tools/run_camera_motion_color_tradeoff.py": "4a809296147736e2604eae2db19266200a95f42846426f2ac1e4c6be669870d5",
+      "src/camera_platform/motion_color_tradeoff.py": "6e4974af912d48b1fe0bb9c95f8ac2a5092821ba5fa91ca17003bdb95a8abd2f",
+      "src/camera_platform/response_chain.py": "71f3a93ae9a9c7055355ec7ab7c206157d333f6a4948ffb85e6791a49e32da96",
+      "tools/run_camera_prescription_comparison.py": "338c1478c6de7db0283651ae9b5ea2ba981dd8ebd4082eea5b46e9ca56beb23a"
+    },
+    "limits_note": "Authored research brief; not customer specifications or identified hardware support"
+  },
+  "acquisitions": [
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "neutral-calibration",
+        "split": "calibration",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-000-radial-e4-g1.npz",
+      "raw_sha256": "1bb3f8102bcadc6cdaf6483dc264f05cfa3953d36657097b8cce3b11f1d7ec28",
+      "photo_relative_error": 2.173999898523613e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 393.578125,
+      "green_snr_p10": 26.5686549643616,
+      "green_photocharge_mean_e": 976.5654698339231,
+      "mean_photocharge_e": 837.5849260532407,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 184,
+      "raw_max_dn": 528,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "neutral-calibration",
+        "split": "calibration",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-001-clear-e2-g1.npz",
+      "raw_sha256": "e4deeb8a5b0ceda99b29fbe2d7f4e7bd0beac58333d91b14d325eb83f174bfbf",
+      "photo_relative_error": 1.896818918769776e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 286.71875,
+      "green_snr_p10": 22.69404478140174,
+      "green_photocharge_mean_e": 711.4032431632938,
+      "mean_photocharge_e": 614.1077192168013,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 145,
+      "raw_max_dn": 402,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-500",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 500.0,
+        "phase_at_midpoint_cycles": 0.17,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-002-radial-e4-g1.npz",
+      "raw_sha256": "5fbc3f9d5026c0d0f99520eac89b6d278f19a7ccfa77af05a982e9abc87ae20f",
+      "photo_relative_error": 2.215409697875363e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 389.5,
+      "green_snr_p10": 24.48960323123341,
+      "green_photocharge_mean_e": 966.3313470863595,
+      "mean_photocharge_e": 828.4206808027373,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 181,
+      "raw_max_dn": 623,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-500",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 500.0,
+        "phase_at_midpoint_cycles": 0.17,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-003-clear-e2-g1.npz",
+      "raw_sha256": "bc996c6ea1b2e08077a26dd2e6ef8d27eb60d3466981d1ba88ec3a4be3426c68",
+      "photo_relative_error": 2.7727303733540697e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 283.6328125,
+      "green_snr_p10": 21.01006108768484,
+      "green_photocharge_mean_e": 703.6540035884304,
+      "mean_photocharge_e": 606.933848995341,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 146,
+      "raw_max_dn": 477,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-500-static",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.17,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-004-radial-e4-g1.npz",
+      "raw_sha256": "3a95b2dd149874f3f872b5479262dfbd87aa587a85ebd568c857570d624cbb52",
+      "photo_relative_error": 1.7716586003034978e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 389.0625,
+      "green_snr_p10": 24.34392432453629,
+      "green_photocharge_mean_e": 965.198217498381,
+      "mean_photocharge_e": 827.4060088371006,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 178,
+      "raw_max_dn": 633,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-500-static",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.17,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-005-clear-e2-g1.npz",
+      "raw_sha256": "50e7c88adcfed7458d0942011b96beadc2a3332b7cf6f9587204d0b0dfd255df",
+      "photo_relative_error": 1.9868600155742877e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 283.5703125,
+      "green_snr_p10": 20.932060623431273,
+      "green_photocharge_mean_e": 703.4511893048214,
+      "mean_photocharge_e": 606.7460933664677,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 145,
+      "raw_max_dn": 479,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-1000",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 1000.0,
+        "phase_at_midpoint_cycles": 0.29,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-006-radial-e4-g1.npz",
+      "raw_sha256": "5397793714164cb57805651347cff027dc990e3194446d613ce44f7c89ed2626",
+      "photo_relative_error": 1.7348313904143886e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 8.881784197001252e-16,
+      "green_dn": 395.140625,
+      "green_snr_p10": 25.211390977870085,
+      "green_photocharge_mean_e": 980.3011416299644,
+      "mean_photocharge_e": 840.5123169377525,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 175,
+      "raw_max_dn": 592,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-1000",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 1000.0,
+        "phase_at_midpoint_cycles": 0.29,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-007-clear-e2-g1.npz",
+      "raw_sha256": "bd84e86f1c9c65e936c99bc94d7664cab6a4b0ee66f883d4c82e1165a9658dfb",
+      "photo_relative_error": 1.810117117032358e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 8.881784197001252e-16,
+      "green_dn": 288.28125,
+      "green_snr_p10": 20.77035155837728,
+      "green_photocharge_mean_e": 715.0990351835685,
+      "mean_photocharge_e": 616.826627186581,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 141,
+      "raw_max_dn": 469,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-1000-static",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.29,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-008-radial-e4-g1.npz",
+      "raw_sha256": "7ad17237b562006214b21131f51444bb6134bfa5c1085ee12c3354e59d575893",
+      "photo_relative_error": 2.1029095447197388e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 1.1102230246251565e-15,
+      "green_dn": 396.0546875,
+      "green_snr_p10": 24.06343766553776,
+      "green_photocharge_mean_e": 982.4334493692561,
+      "mean_photocharge_e": 842.1832609017247,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 158,
+      "raw_max_dn": 631,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-1000-static",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.29,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-009-clear-e2-g1.npz",
+      "raw_sha256": "e3fe782dc9f5ba970759e74afdc5a8137cd43f361d227e78ff6934765da5e26f",
+      "photo_relative_error": 1.887458950754666e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 1.1102230246251565e-15,
+      "green_dn": 288.4140625,
+      "green_snr_p10": 20.5719578379717,
+      "green_photocharge_mean_e": 715.5082359907589,
+      "mean_photocharge_e": 617.1276666741406,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 138,
+      "raw_max_dn": 477,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-blue",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.6,
+          0.4
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-010-radial-e4-g1.npz",
+      "raw_sha256": "4152e8367be5265411ba14425d9a41a7235e1d1b625003646fffa1034062e312",
+      "photo_relative_error": 2.1962011084206033e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 427.859375,
+      "green_snr_p10": 27.74287259469264,
+      "green_photocharge_mean_e": 1061.4505866759805,
+      "mean_photocharge_e": 880.4328506321832,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 141,
+      "raw_max_dn": 565,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-blue",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.6,
+          0.4
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-011-clear-e2-g1.npz",
+      "raw_sha256": "3d3013a1c83371389470c5765ad3f3cbf00a93b748e27a2e8eeda6518c608b81",
+      "photo_relative_error": 2.5355301985257112e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 292.875,
+      "green_snr_p10": 22.95894290793947,
+      "green_photocharge_mean_e": 726.7519842686736,
+      "mean_photocharge_e": 605.0959078453352,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 124,
+      "raw_max_dn": 407,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-red",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.35,
+          1.65
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-012-radial-e4-g1.npz",
+      "raw_sha256": "d6a8ffd2dd047e6488da6f61dd8c4a9824eb1a4841b4c5cb593b23d24c72f051",
+      "photo_relative_error": 2.3243444198091637e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 356.546875,
+      "green_snr_p10": 25.235014000721907,
+      "green_photocharge_mean_e": 884.6065932550275,
+      "mean_photocharge_e": 791.1663410927198,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 111,
+      "raw_max_dn": 616,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-red",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.35,
+          1.65
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-013-clear-e2-g1.npz",
+      "raw_sha256": "4e604713a2025b223aaced77d9533fbc993abb406ade63120df60cc6325c7b64",
+      "photo_relative_error": 2.8504108563179858e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 280.171875,
+      "green_snr_p10": 22.40353860308204,
+      "green_photocharge_mean_e": 694.7754402991327,
+      "mean_photocharge_e": 623.8705148692229,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 97,
+      "raw_max_dn": 514,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 750.0,
+        "phase_at_midpoint_cycles": 0.37,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-014-radial-e4-g1.npz",
+      "raw_sha256": "5b4a0f651d5e56f2b828cdabe3bbb9ab628ae5fb0543a06bd22c1267bc107b35",
+      "photo_relative_error": 2.779768723559381e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 403.0390625,
+      "green_snr_p10": 25.288038430280533,
+      "green_photocharge_mean_e": 999.7592973086877,
+      "mean_photocharge_e": 867.3082061097693,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 177,
+      "raw_max_dn": 625,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 750.0,
+        "phase_at_midpoint_cycles": 0.37,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-015-clear-e2-g1.npz",
+      "raw_sha256": "fcac72271c5cf5e9bad616b38b52698edd8e899f9ce740d453635c386d20cd0b",
+      "photo_relative_error": 3.1952273876187272e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 302.03125,
+      "green_snr_p10": 21.730966534158238,
+      "green_photocharge_mean_e": 749.2206530833976,
+      "mean_photocharge_e": 653.8331455240941,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 137,
+      "raw_max_dn": 494,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750-flat",
+        "split": "holdout",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-016-radial-e4-g1.npz",
+      "raw_sha256": "c8ebe5375378a821e03444870b26fdc74c9dd9f8b92cea2eb321a872e3b0eac2",
+      "photo_relative_error": 2.4365134457734746e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 382.296875,
+      "green_snr_p10": 26.165543584381407,
+      "green_photocharge_mean_e": 948.2704308865705,
+      "mean_photocharge_e": 823.3022845269265,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 162,
+      "raw_max_dn": 515,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750-static",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.37,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-017-radial-e4-g1.npz",
+      "raw_sha256": "1ea88a745db326f874930df4b7d9b2fb625ebc14dcd577807cebd2c9a87f88fd",
+      "photo_relative_error": 2.8478331795388136e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 406.46875,
+      "green_snr_p10": 25.097034024967602,
+      "green_photocharge_mean_e": 1008.2532417365567,
+      "mean_photocharge_e": 874.5677143956474,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 171,
+      "raw_max_dn": 643,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750-flat",
+        "split": "holdout",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-018-clear-e2-g1.npz",
+      "raw_sha256": "b118f24241242998333696c9ef440f928531519dbcfcfa8fa1c3879ed2552bc6",
+      "photo_relative_error": 1.87333365457098e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 284.71875,
+      "green_snr_p10": 22.605055790878115,
+      "green_photocharge_mean_e": 706.2869961281674,
+      "mean_photocharge_e": 617.1116563406233,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 130,
+      "raw_max_dn": 406,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750-static",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.37,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-019-clear-e2-g1.npz",
+      "raw_sha256": "c4158315a1f515fb863cd5affbc291a580786a019777f3c58e03560dcbb5251b",
+      "photo_relative_error": 2.0071700055355654e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 302.6640625,
+      "green_snr_p10": 21.68654914870572,
+      "green_photocharge_mean_e": 750.8518255771347,
+      "mean_photocharge_e": 655.2282999864219,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 136,
+      "raw_max_dn": 498,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": -1125.0,
+        "phase_at_midpoint_cycles": 0.61,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-020-radial-e4-g1.npz",
+      "raw_sha256": "713592871a5d8cd7f5359b123aa8e699fdd986569fa6ab8be2d18becb8669613",
+      "photo_relative_error": 1.906680336050446e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 431.296875,
+      "green_snr_p10": 26.834596225407598,
+      "green_photocharge_mean_e": 1069.980155465148,
+      "mean_photocharge_e": 901.5849631817404,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 202,
+      "raw_max_dn": 641,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": -1125.0,
+        "phase_at_midpoint_cycles": 0.61,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-021-clear-e2-g1.npz",
+      "raw_sha256": "7c1ae555e142735dc89d1c4e9abd06955542cadc4e2d07b5057e9cd8bc89cd66",
+      "photo_relative_error": 1.929130652633468e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 308.84375,
+      "green_snr_p10": 22.41600899797459,
+      "green_photocharge_mean_e": 766.2034362138975,
+      "mean_photocharge_e": 649.3618803231266,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 161,
+      "raw_max_dn": 492,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125-flat",
+        "split": "holdout",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-022-radial-e4-g1.npz",
+      "raw_sha256": "0d2f6b1b4d56c3d9bc2e52d5e5373d7716b03185d47f9d4e026b66199abae957",
+      "photo_relative_error": 2.280549746158393e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 410.765625,
+      "green_snr_p10": 27.16210877872238,
+      "green_photocharge_mean_e": 1019.0080282549517,
+      "mean_photocharge_e": 859.0088883427119,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 173,
+      "raw_max_dn": 546,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125-static",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.61,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-023-radial-e4-g1.npz",
+      "raw_sha256": "eccfe9d1997104d0a7ae4929886f50932d04168cbe39d17d07f9cb58e868145d",
+      "photo_relative_error": 1.7741071413898795e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 440.1640625,
+      "green_snr_p10": 26.559064850063365,
+      "green_photocharge_mean_e": 1091.966414225377,
+      "mean_photocharge_e": 919.9496783631483,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 192,
+      "raw_max_dn": 684,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125-flat",
+        "split": "holdout",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-024-clear-e2-g1.npz",
+      "raw_sha256": "131f08709f25644e7748e42c17aa84a2d832025e8829677b5736ebd5f2fc3bb0",
+      "photo_relative_error": 2.1513646225938037e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 289.890625,
+      "green_snr_p10": 22.826877994796885,
+      "green_photocharge_mean_e": 719.0776137159837,
+      "mean_photocharge_e": 609.6018135310682,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 152,
+      "raw_max_dn": 405,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125-static",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.61,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-025-clear-e2-g1.npz",
+      "raw_sha256": "eeee11ef352109b0cd46edfc6daa480240cc07372bf108f6f1674dc585c6eb27",
+      "photo_relative_error": 1.9982903188426976e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 310.5859375,
+      "green_snr_p10": 22.352211712677043,
+      "green_photocharge_mean_e": 770.3692929815659,
+      "mean_photocharge_e": 652.876614592984,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 160,
+      "raw_max_dn": 500,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 1250.0,
+        "phase_at_midpoint_cycles": 0.43,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-026-radial-e4-g1.npz",
+      "raw_sha256": "c31f6396cc013e008821e909818d97724722faa42334cbe28b32cdb2d67f462f",
+      "photo_relative_error": 2.580367713219257e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 387.5,
+      "green_snr_p10": 26.182587412990763,
+      "green_photocharge_mean_e": 961.3412728220127,
+      "mean_photocharge_e": 847.6159697828745,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 148,
+      "raw_max_dn": 632,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 1250.0,
+        "phase_at_midpoint_cycles": 0.43,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-027-clear-e2-g1.npz",
+      "raw_sha256": "1e9e1213a8669fde75b8bdda66206fce96b14a0c8c92e55fcae1214afb6b940c",
+      "photo_relative_error": 2.070638961300635e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 8.881784197001252e-16,
+      "green_dn": 303.265625,
+      "green_snr_p10": 23.025370645792,
+      "green_photocharge_mean_e": 752.3275675877186,
+      "mean_photocharge_e": 666.6735316380398,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 121,
+      "raw_max_dn": 551,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250-flat",
+        "split": "holdout",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-028-radial-e4-g1.npz",
+      "raw_sha256": "807d22771f24df30977aef81c1488daf157ee7a87c6b6b1bd675af732e52a49e",
+      "photo_relative_error": 1.8504888165236592e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 367.921875,
+      "green_snr_p10": 25.652749463255347,
+      "green_photocharge_mean_e": 912.9016322023799,
+      "mean_photocharge_e": 805.4489826190339,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 134,
+      "raw_max_dn": 559,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250-static",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.43,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-029-radial-e4-g1.npz",
+      "raw_sha256": "28ac8b79044dddccadb3e9c1809bf0d1583ef6eab4780555707971f45a0915fd",
+      "photo_relative_error": 1.7950599904661908e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 3.3306690738754696e-16,
+      "green_dn": 398.65625,
+      "green_snr_p10": 26.428868391059734,
+      "green_photocharge_mean_e": 988.990441758964,
+      "mean_photocharge_e": 871.684731168002,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 144,
+      "raw_max_dn": 677,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250-flat",
+        "split": "holdout",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-030-clear-e2-g1.npz",
+      "raw_sha256": "b4370a4ae6d29bf9bae6213c41401926542384ea61728910f9e33ca2f83b328c",
+      "photo_relative_error": 3.303422810153381e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 282.140625,
+      "green_snr_p10": 22.49332461887245,
+      "green_photocharge_mean_e": 699.8916873342591,
+      "mean_photocharge_e": 620.866577745401,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 112,
+      "raw_max_dn": 466,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250-static",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.43,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-031-clear-e2-g1.npz",
+      "raw_sha256": "54a0ad88cd463884e46535cbd9443fbfa53988df83384100afb52c17007235fd",
+      "photo_relative_error": 2.2132550155911346e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 3.3306690738754696e-16,
+      "green_dn": 305.625,
+      "green_snr_p10": 23.071696947613468,
+      "green_photocharge_mean_e": 758.1333067656117,
+      "mean_photocharge_e": 671.745311220054,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 119,
+      "raw_max_dn": 561,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "stress-temporal-zero",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 2000.0,
+        "phase_at_midpoint_cycles": 0.11,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-032-radial-e4-g1.npz",
+      "raw_sha256": "1bb3f8102bcadc6cdaf6483dc264f05cfa3953d36657097b8cce3b11f1d7ec28",
+      "photo_relative_error": 2.173999898523613e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 393.578125,
+      "green_snr_p10": 26.5686549643616,
+      "green_photocharge_mean_e": 976.5654698339231,
+      "mean_photocharge_e": 837.5849260532407,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 184,
+      "raw_max_dn": 528,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "stress-temporal-zero",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 2000.0,
+        "phase_at_midpoint_cycles": 0.11,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-033-clear-e2-g1.npz",
+      "raw_sha256": "0d2f5e7b82e63890e1e6f40bb1aa58f81403014f8ccff03a8af8b609723a841e",
+      "photo_relative_error": 2.1379657397532923e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 283.5,
+      "green_snr_p10": 22.435766297340244,
+      "green_photocharge_mean_e": 703.3064227340753,
+      "mean_photocharge_e": 606.8791968435182,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 161,
+      "raw_max_dn": 450,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "stress-temporal-zero-static",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.11,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-034-radial-e4-g1.npz",
+      "raw_sha256": "a0741b57e9e64407da83bc635d23796674d363e9459cd671a19cf44bfddd8894",
+      "photo_relative_error": 2.1057898920791114e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 386.34375,
+      "green_snr_p10": 25.845730092731017,
+      "green_photocharge_mean_e": 958.3847710051273,
+      "mean_photocharge_e": 821.6577246572508,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 195,
+      "raw_max_dn": 630,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "stress-temporal-zero-static",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.11,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-035-clear-e2-g1.npz",
+      "raw_sha256": "6375e0e52976b1bbc59a8e9e1eb49585554f6f2168fc7109f409148f195c8bb9",
+      "photo_relative_error": 1.664455565880611e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 281.6015625,
+      "green_snr_p10": 22.147035168806624,
+      "green_photocharge_mean_e": 698.6847873743595,
+      "mean_photocharge_e": 602.7531828246936,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 155,
+      "raw_max_dn": 477,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "stress-contrast-inversion",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 3000.0,
+        "phase_at_midpoint_cycles": 0.19,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-036-radial-e4-g1.npz",
+      "raw_sha256": "0bfad7d2b6764c8c107329f899e82d83855da91891a92e08249eb09729510efb",
+      "photo_relative_error": 2.2730657336461254e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 3.3306690738754696e-16,
+      "green_dn": 394.390625,
+      "green_snr_p10": 26.039357713389787,
+      "green_photocharge_mean_e": 978.4087193049438,
+      "mean_photocharge_e": 839.2609771704614,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 175,
+      "raw_max_dn": 548,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "stress-contrast-inversion",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 3000.0,
+        "phase_at_midpoint_cycles": 0.19,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-037-clear-e2-g1.npz",
+      "raw_sha256": "bd4a3fe7ab9b250cc8bf3ffa2b7afa644aa2263ec20b53701015625329af351f",
+      "photo_relative_error": 2.0307297600736017e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 5.551115123125783e-16,
+      "green_dn": 285.9765625,
+      "green_snr_p10": 22.184504914019563,
+      "green_photocharge_mean_e": 709.5796711103121,
+      "mean_photocharge_e": 612.3766726333558,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 154,
+      "raw_max_dn": 425,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "stress-contrast-inversion-static",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.19,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-038-radial-e4-g1.npz",
+      "raw_sha256": "cbe8bf1b007d0b2e93d28fbf684d3ce3cdb5cb6ba158711631c8cdb64680ff4e",
+      "photo_relative_error": 1.9304815142041824e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 390.1484375,
+      "green_snr_p10": 24.377796078547046,
+      "green_photocharge_mean_e": 967.879361338585,
+      "mean_photocharge_e": 829.6867212378887,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 173,
+      "raw_max_dn": 634,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "stress-contrast-inversion-static",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.19,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-039-clear-e2-g1.npz",
+      "raw_sha256": "c2a38db33106c23154cb48461a8c73d2bae77becf3f2b53992ad59a7e9e99252",
+      "photo_relative_error": 1.764024016930881e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 284.3203125,
+      "green_snr_p10": 20.810430754677103,
+      "green_photocharge_mean_e": 705.3268052927722,
+      "mean_photocharge_e": 608.3395912187408,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 143,
+      "raw_max_dn": 480,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured"
+    }
+  ],
+  "development": [
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-500",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 500.0,
+        "phase_at_midpoint_cycles": 0.17,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-002-radial-e4-g1.npz",
+      "raw_sha256": "5fbc3f9d5026c0d0f99520eac89b6d278f19a7ccfa77af05a982e9abc87ae20f",
+      "photo_relative_error": 2.215409697875363e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 389.5,
+      "green_snr_p10": 24.48960323123341,
+      "green_photocharge_mean_e": 966.3313470863595,
+      "mean_photocharge_e": 828.4206808027373,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 181,
+      "raw_max_dn": 623,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-motion-500",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 0.7773587933247753,
+        "B_over_G": 0.6519977535301669,
+        "relative_R_over_G_error": -0.09142968927770367,
+        "relative_B_over_G_error": 0.09637695423403003,
+        "maximum_absolute_relative_error": 0.09637695423403003,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8554881656615076,
+        "B_over_G": 0.5951438589545756,
+        "relative_R_over_G_error": -0.00011274694671836727,
+        "relative_B_over_G_error": 0.0007734043235694266,
+        "maximum_absolute_relative_error": 0.0007734043235694266,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.9003163161571061,
+        "charge": {
+          "signed_transfer": 0.9003163161571063,
+          "template_relative_residual": 1.1191093929212922e-15,
+          "template_rms": 188.9350549986373
+        },
+        "raw": {
+          "signed_transfer": 0.9010876101970535,
+          "template_relative_residual": 0.004951503776425722,
+          "template_rms": 76.11802102656111
+        },
+        "motion_path_px": 2.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": []
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-500",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 500.0,
+        "phase_at_midpoint_cycles": 0.17,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-003-clear-e2-g1.npz",
+      "raw_sha256": "bc996c6ea1b2e08077a26dd2e6ef8d27eb60d3466981d1ba88ec3a4be3426c68",
+      "photo_relative_error": 2.7727303733540697e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 283.6328125,
+      "green_snr_p10": 21.01006108768484,
+      "green_photocharge_mean_e": 703.6540035884304,
+      "mean_photocharge_e": 606.933848995341,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 146,
+      "raw_max_dn": 477,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-motion-500",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 0.8555846302162237,
+        "B_over_G": 0.5946839278336318,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8555846302162237,
+        "B_over_G": 0.5946839278336318,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.9744953584044327,
+        "charge": {
+          "signed_transfer": 0.9744953584044327,
+          "template_relative_residual": 1.2738282308345744e-15,
+          "template_rms": 138.08024508739067
+        },
+        "raw": {
+          "signed_transfer": 0.9750297565647656,
+          "template_relative_residual": 0.007331363034884494,
+          "template_rms": 55.60118872380338
+        },
+        "motion_path_px": 1.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": []
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-1000",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 1000.0,
+        "phase_at_midpoint_cycles": 0.29,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-006-radial-e4-g1.npz",
+      "raw_sha256": "5397793714164cb57805651347cff027dc990e3194446d613ce44f7c89ed2626",
+      "photo_relative_error": 1.7348313904143886e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 8.881784197001252e-16,
+      "green_dn": 395.140625,
+      "green_snr_p10": 25.211390977870085,
+      "green_photocharge_mean_e": 980.3011416299644,
+      "mean_photocharge_e": 840.5123169377525,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 175,
+      "raw_max_dn": 592,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-motion-1000",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 0.779271620071968,
+        "B_over_G": 0.6504804460437345,
+        "relative_R_over_G_error": -0.08956678126090367,
+        "relative_B_over_G_error": 0.09491508343279831,
+        "maximum_absolute_relative_error": 0.09491508343279831,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8575932433415133,
+        "B_over_G": 0.5937588599606268,
+        "relative_R_over_G_error": 0.0019373948613805592,
+        "relative_B_over_G_error": -0.0005609920378099043,
+        "maximum_absolute_relative_error": 0.0019373948613805592,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.6366197723675814,
+        "charge": {
+          "signed_transfer": 0.6366197723675815,
+          "template_relative_residual": 1.1216731984378848e-15,
+          "template_rms": 194.5948458311837
+        },
+        "raw": {
+          "signed_transfer": 0.6369353611491125,
+          "template_relative_residual": 0.004616194505884171,
+          "template_rms": 78.424476010363
+        },
+        "motion_path_px": 4.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": [
+        "dynamic_contrast_retention"
+      ]
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-motion-1000",
+        "split": "development",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 1000.0,
+        "phase_at_midpoint_cycles": 0.29,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-007-clear-e2-g1.npz",
+      "raw_sha256": "bd84e86f1c9c65e936c99bc94d7664cab6a4b0ee66f883d4c82e1165a9658dfb",
+      "photo_relative_error": 1.810117117032358e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 8.881784197001252e-16,
+      "green_dn": 288.28125,
+      "green_snr_p10": 20.77035155837728,
+      "green_photocharge_mean_e": 715.0990351835685,
+      "mean_photocharge_e": 616.826627186581,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 141,
+      "raw_max_dn": 469,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-motion-1000",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 0.8559349593495935,
+        "B_over_G": 0.5940921409214092,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8559349593495935,
+        "B_over_G": 0.5940921409214092,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.9003163161571061,
+        "charge": {
+          "signed_transfer": 0.9003163161571063,
+          "template_relative_residual": 1.1083704263728263e-15,
+          "template_rms": 142.04315873371215
+        },
+        "raw": {
+          "signed_transfer": 0.899782389520375,
+          "template_relative_residual": 0.006393493822654435,
+          "template_rms": 57.25197867759681
+        },
+        "motion_path_px": 2.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": []
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-blue",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.6,
+          0.4
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-010-radial-e4-g1.npz",
+      "raw_sha256": "4152e8367be5265411ba14425d9a41a7235e1d1b625003646fffa1034062e312",
+      "photo_relative_error": 2.1962011084206033e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 427.859375,
+      "green_snr_p10": 27.74287259469264,
+      "green_photocharge_mean_e": 1061.4505866759805,
+      "mean_photocharge_e": 880.4328506321832,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 141,
+      "raw_max_dn": 565,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-spectrum-blue",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 0.389402183836687,
+        "B_over_G": 0.9282401489975532,
+        "relative_R_over_G_error": -0.10519130393099652,
+        "relative_B_over_G_error": 0.03657630937206657,
+        "maximum_absolute_relative_error": 0.10519130393099652,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.42853951459175615,
+        "B_over_G": 0.8472980486817179,
+        "relative_R_over_G_error": -0.015257489088160159,
+        "relative_B_over_G_error": -0.05381265269644808,
+        "maximum_absolute_relative_error": 0.05381265269644808,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": null,
+      "failures": [
+        "RAW_channel_ratio_consistency"
+      ]
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-blue",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          1.6,
+          0.4
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-011-clear-e2-g1.npz",
+      "raw_sha256": "3d3013a1c83371389470c5765ad3f3cbf00a93b748e27a2e8eeda6518c608b81",
+      "photo_relative_error": 2.5355301985257112e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 292.875,
+      "green_snr_p10": 22.95894290793947,
+      "green_photocharge_mean_e": 726.7519842686736,
+      "mean_photocharge_e": 605.0959078453352,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 124,
+      "raw_max_dn": 407,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-spectrum-blue",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 0.43517925736235596,
+        "B_over_G": 0.8954865556978233,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.43517925736235596,
+        "B_over_G": 0.8954865556978233,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": null,
+      "failures": []
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-red",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.35,
+          1.65
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-012-radial-e4-g1.npz",
+      "raw_sha256": "d6a8ffd2dd047e6488da6f61dd8c4a9824eb1a4841b4c5cb593b23d24c72f051",
+      "photo_relative_error": 2.3243444198091637e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 356.546875,
+      "green_snr_p10": 25.235014000721907,
+      "green_photocharge_mean_e": 884.6065932550275,
+      "mean_photocharge_e": 791.1663410927198,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 111,
+      "raw_max_dn": 616,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-spectrum-red",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 1.29755905166747,
+        "B_over_G": 0.280424207896928,
+        "relative_R_over_G_error": -0.0375788477580391,
+        "relative_B_over_G_error": 0.15327671371555418,
+        "maximum_absolute_relative_error": 0.15327671371555418,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 1.4279717711827817,
+        "B_over_G": 0.25597135009811967,
+        "relative_R_over_G_error": 0.05915043760407279,
+        "relative_B_over_G_error": 0.052711531791143074,
+        "maximum_absolute_relative_error": 0.05915043760407279,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": null,
+      "failures": [
+        "RAW_channel_ratio_consistency"
+      ]
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "dev-spectrum-red",
+        "split": "development",
+        "frequency_cpp": 0.0,
+        "velocity_px_s": 0.0,
+        "phase_at_midpoint_cycles": 0.0,
+        "band_factors": [
+          0.35,
+          1.65
+        ],
+        "modulation": 0.0
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-013-clear-e2-g1.npz",
+      "raw_sha256": "4e604713a2025b223aaced77d9533fbc993abb406ade63120df60cc6325c7b64",
+      "photo_relative_error": 2.8504108563179858e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 280.171875,
+      "green_snr_p10": 22.40353860308204,
+      "green_photocharge_mean_e": 694.7754402991327,
+      "mean_photocharge_e": 623.8705148692229,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 97,
+      "raw_max_dn": 514,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "dev-spectrum-red",
+      "split": "development",
+      "color_before": {
+        "R_over_G": 1.348223746584128,
+        "B_over_G": 0.2431543137582957,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 1.348223746584128,
+        "B_over_G": 0.2431543137582957,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": null,
+      "failures": []
+    }
+  ],
+  "holdout": [
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 750.0,
+        "phase_at_midpoint_cycles": 0.37,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-014-radial-e4-g1.npz",
+      "raw_sha256": "5b4a0f651d5e56f2b828cdabe3bbb9ab628ae5fb0543a06bd22c1267bc107b35",
+      "photo_relative_error": 2.779768723559381e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 403.0390625,
+      "green_snr_p10": 25.288038430280533,
+      "green_photocharge_mean_e": 999.7592973086877,
+      "mean_photocharge_e": 867.3082061097693,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 177,
+      "raw_max_dn": 625,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "holdout-f01-v750",
+      "split": "holdout",
+      "color_before": {
+        "R_over_G": 0.9239566574269709,
+        "B_over_G": 0.5460854058035628,
+        "relative_R_over_G_error": -0.07742744005044944,
+        "relative_B_over_G_error": 0.11583836090728017,
+        "maximum_absolute_relative_error": 0.11583836090728017,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 1.0168200228780317,
+        "B_over_G": 0.4984670176684443,
+        "relative_R_over_G_error": 0.015296815033439604,
+        "relative_B_over_G_error": 0.01853778557410446,
+        "maximum_absolute_relative_error": 0.01853778557410446,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.8583936913341398,
+        "charge": {
+          "signed_transfer": 0.8583936913341396,
+          "template_relative_residual": 9.793779709468795e-16,
+          "template_rms": 213.62483724738274
+        },
+        "raw": {
+          "signed_transfer": 0.8582656174926032,
+          "template_relative_residual": 0.004770616117537655,
+          "template_rms": 86.1078538810485
+        },
+        "motion_path_px": 3.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": []
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v750",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 750.0,
+        "phase_at_midpoint_cycles": 0.37,
+        "band_factors": [
+          0.8,
+          1.2
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-015-clear-e2-g1.npz",
+      "raw_sha256": "fcac72271c5cf5e9bad616b38b52698edd8e899f9ce740d453635c386d20cd0b",
+      "photo_relative_error": 3.1952273876187272e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 2.220446049250313e-16,
+      "green_dn": 302.03125,
+      "green_snr_p10": 21.730966534158238,
+      "green_photocharge_mean_e": 749.2206530833976,
+      "mean_photocharge_e": 653.8331455240941,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 137,
+      "raw_max_dn": 494,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "holdout-f01-v750",
+      "split": "holdout",
+      "color_before": {
+        "R_over_G": 1.001500258665287,
+        "B_over_G": 0.48939472322814276,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 1.001500258665287,
+        "B_over_G": 0.48939472322814276,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.963397762004116,
+        "charge": {
+          "signed_transfer": 0.9633977620041161,
+          "template_relative_residual": 1.0000356043078944e-15,
+          "template_rms": 157.91352467034253
+        },
+        "raw": {
+          "signed_transfer": 0.9631912831903585,
+          "template_relative_residual": 0.006159797400191978,
+          "template_rms": 63.681887632983994
+        },
+        "motion_path_px": 1.5,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": []
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": -1125.0,
+        "phase_at_midpoint_cycles": 0.61,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-020-radial-e4-g1.npz",
+      "raw_sha256": "713592871a5d8cd7f5359b123aa8e699fdd986569fa6ab8be2d18becb8669613",
+      "photo_relative_error": 1.906680336050446e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 431.296875,
+      "green_snr_p10": 26.834596225407598,
+      "green_photocharge_mean_e": 1069.980155465148,
+      "mean_photocharge_e": 901.5849631817404,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 202,
+      "raw_max_dn": 641,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "holdout-f01-vminus1125",
+      "split": "holdout",
+      "color_before": {
+        "R_over_G": 0.581168713545629,
+        "B_over_G": 0.7891171249501866,
+        "relative_R_over_G_error": -0.10742961989565625,
+        "relative_B_over_G_error": 0.0676036339332915,
+        "maximum_absolute_relative_error": 0.10742961989565625,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.6395797680046165,
+        "B_over_G": 0.7203064862834142,
+        "relative_R_over_G_error": -0.017720769667502023,
+        "relative_B_over_G_error": -0.02549089610691546,
+        "maximum_absolute_relative_error": 0.02549089610691546,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.6986465850664342,
+        "charge": {
+          "signed_transfer": 0.6986465850664341,
+          "template_relative_residual": 9.809745461315318e-16,
+          "template_rms": 238.45151041133013
+        },
+        "raw": {
+          "signed_transfer": 0.6982815992179632,
+          "template_relative_residual": 0.0039529162961878216,
+          "template_rms": 96.11813206934475
+        },
+        "motion_path_px": 4.5,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": [
+        "dynamic_contrast_retention"
+      ]
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-vminus1125",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": -1125.0,
+        "phase_at_midpoint_cycles": 0.61,
+        "band_factors": [
+          1.3,
+          0.7
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-021-clear-e2-g1.npz",
+      "raw_sha256": "7c1ae555e142735dc89d1c4e9abd06955542cadc4e2d07b5057e9cd8bc89cd66",
+      "photo_relative_error": 1.929130652633468e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 308.84375,
+      "green_snr_p10": 22.41600899797459,
+      "green_photocharge_mean_e": 766.2034362138975,
+      "mean_photocharge_e": 649.3618803231266,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 161,
+      "raw_max_dn": 492,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "holdout-f01-vminus1125",
+      "split": "holdout",
+      "color_before": {
+        "R_over_G": 0.6511180815541839,
+        "B_over_G": 0.739148031974097,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.6511180815541839,
+        "B_over_G": 0.739148031974097,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.9187810415389589,
+        "charge": {
+          "signed_transfer": 0.9187810415389591,
+          "template_relative_residual": 9.738089836140865e-16,
+          "template_rms": 166.36548958600184
+        },
+        "raw": {
+          "signed_transfer": 0.9180191969802034,
+          "template_relative_residual": 0.005562153495513281,
+          "template_rms": 67.04726644315933
+        },
+        "motion_path_px": 2.25,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": []
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 1250.0,
+        "phase_at_midpoint_cycles": 0.43,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-026-radial-e4-g1.npz",
+      "raw_sha256": "c31f6396cc013e008821e909818d97724722faa42334cbe28b32cdb2d67f462f",
+      "photo_relative_error": 2.580367713219257e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 387.5,
+      "green_snr_p10": 26.182587412990763,
+      "green_photocharge_mean_e": 961.3412728220127,
+      "mean_photocharge_e": 847.6159697828745,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 148,
+      "raw_max_dn": 632,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "holdout-f01-v1250",
+      "split": "holdout",
+      "color_before": {
+        "R_over_G": 1.1243951612903227,
+        "B_over_G": 0.40254032258064515,
+        "relative_R_over_G_error": -0.056163580767932264,
+        "relative_B_over_G_error": 0.138907452036114,
+        "maximum_absolute_relative_error": 0.138907452036114,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 1.2374038375469367,
+        "B_over_G": 0.36743899755535026,
+        "relative_R_over_G_error": 0.03869782384519049,
+        "relative_B_over_G_error": 0.03959526290842463,
+        "maximum_absolute_relative_error": 0.03959526290842463,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.6366197723675814,
+        "charge": {
+          "signed_transfer": 0.6366197723675815,
+          "template_relative_residual": 1.0698685840989489e-15,
+          "template_rms": 210.81348964582622
+        },
+        "raw": {
+          "signed_transfer": 0.6366925059013757,
+          "template_relative_residual": 0.003838975892414609,
+          "template_rms": 85.01874793244134
+        },
+        "motion_path_px": 5.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": [
+        "RAW_channel_ratio_consistency",
+        "dynamic_contrast_retention"
+      ]
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "holdout-f01-v1250",
+        "split": "holdout",
+        "frequency_cpp": 0.1,
+        "velocity_px_s": 1250.0,
+        "phase_at_midpoint_cycles": 0.43,
+        "band_factors": [
+          0.55,
+          1.45
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-027-clear-e2-g1.npz",
+      "raw_sha256": "1e9e1213a8669fde75b8bdda66206fce96b14a0c8c92e55fcae1214afb6b940c",
+      "photo_relative_error": 2.070638961300635e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 8.881784197001252e-16,
+      "green_dn": 303.265625,
+      "green_snr_p10": 23.025370645792,
+      "green_photocharge_mean_e": 752.3275675877186,
+      "mean_photocharge_e": 666.6735316380398,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 121,
+      "raw_max_dn": 551,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "holdout-f01-v1250",
+      "split": "holdout",
+      "color_before": {
+        "R_over_G": 1.1913030037611418,
+        "B_over_G": 0.3534442784275336,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 1.1913030037611418,
+        "B_over_G": 0.3534442784275336,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.9003163161571061,
+        "charge": {
+          "signed_transfer": 0.9003163161571058,
+          "template_relative_residual": 1.2128762213922661e-15,
+          "template_rms": 160.4843999686821
+        },
+        "raw": {
+          "signed_transfer": 0.9001737019051177,
+          "template_relative_residual": 0.0058915370381329435,
+          "template_rms": 64.67466660138264
+        },
+        "motion_path_px": 2.5,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": []
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "stress-temporal-zero",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 2000.0,
+        "phase_at_midpoint_cycles": 0.11,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-032-radial-e4-g1.npz",
+      "raw_sha256": "1bb3f8102bcadc6cdaf6483dc264f05cfa3953d36657097b8cce3b11f1d7ec28",
+      "photo_relative_error": 2.173999898523613e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 4.440892098500626e-16,
+      "green_dn": 393.578125,
+      "green_snr_p10": 26.5686549643616,
+      "green_photocharge_mean_e": 976.5654698339231,
+      "mean_photocharge_e": 837.5849260532407,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 184,
+      "raw_max_dn": 528,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "stress-temporal-zero",
+      "split": "stress",
+      "color_before": {
+        "R_over_G": 0.7844297113819524,
+        "B_over_G": 0.6467505657231332,
+        "relative_R_over_G_error": -0.08741390848203745,
+        "relative_B_over_G_error": 0.09250928819295501,
+        "maximum_absolute_relative_error": 0.09250928819295501,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8632697547683925,
+        "B_over_G": 0.5903542234332425,
+        "relative_R_over_G_error": 0.0043066446856703244,
+        "relative_B_over_G_error": -0.002757003074876363,
+        "maximum_absolute_relative_error": 0.0043066446856703244,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 3.8981718325193755e-17,
+        "charge": {
+          "signed_transfer": 0.0,
+          "template_relative_residual": 0.0,
+          "template_rms": 176.31139063947953
+        },
+        "raw": {
+          "signed_transfer": 0.0,
+          "template_relative_residual": 0.0,
+          "template_rms": 71.01980357618571
+        },
+        "motion_path_px": 8.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": [
+        "dynamic_contrast_retention"
+      ]
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "stress-temporal-zero",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 2000.0,
+        "phase_at_midpoint_cycles": 0.11,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-033-clear-e2-g1.npz",
+      "raw_sha256": "0d2f5e7b82e63890e1e6f40bb1aa58f81403014f8ccff03a8af8b609723a841e",
+      "photo_relative_error": 2.1379657397532923e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 6.661338147750939e-16,
+      "green_dn": 283.5,
+      "green_snr_p10": 22.435766297340244,
+      "green_photocharge_mean_e": 703.3064227340753,
+      "mean_photocharge_e": 606.8791968435182,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 161,
+      "raw_max_dn": 450,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "stress-temporal-zero",
+      "split": "stress",
+      "color_before": {
+        "R_over_G": 0.8595679012345679,
+        "B_over_G": 0.5919863315696648,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8595679012345679,
+        "B_over_G": 0.5919863315696648,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.6366197723675814,
+        "charge": {
+          "signed_transfer": 0.6366197723675812,
+          "template_relative_residual": 1.0281512550379337e-15,
+          "template_rms": 129.26019244829737
+        },
+        "raw": {
+          "signed_transfer": 0.6358278875565799,
+          "template_relative_residual": 0.007361814030695646,
+          "template_rms": 52.105436976384716
+        },
+        "motion_path_px": 4.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": [
+        "dynamic_contrast_retention"
+      ]
+    },
+    {
+      "candidate_id": "radial-e4-g1",
+      "scenario": {
+        "scenario_id": "stress-contrast-inversion",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 3000.0,
+        "phase_at_midpoint_cycles": 0.19,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-036-radial-e4-g1.npz",
+      "raw_sha256": "0bfad7d2b6764c8c107329f899e82d83855da91891a92e08249eb09729510efb",
+      "photo_relative_error": 2.2730657336461254e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 3.3306690738754696e-16,
+      "green_dn": 394.390625,
+      "green_snr_p10": 26.039357713389787,
+      "green_photocharge_mean_e": 978.4087193049438,
+      "mean_photocharge_e": 839.2609771704614,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 175,
+      "raw_max_dn": 548,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "stress-contrast-inversion",
+      "split": "stress",
+      "color_before": {
+        "R_over_G": 0.7857850322887365,
+        "B_over_G": 0.6452993146071867,
+        "relative_R_over_G_error": -0.0873314790287727,
+        "relative_B_over_G_error": 0.09155182121978145,
+        "maximum_absolute_relative_error": 0.09155182121978145,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8647612938188076,
+        "B_over_G": 0.5890295207256333,
+        "relative_R_over_G_error": 0.004397358809412832,
+        "relative_B_over_G_error": -0.0036309793825411996,
+        "maximum_absolute_relative_error": 0.004397358809412832,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": -0.2122065907891938,
+        "charge": {
+          "signed_transfer": -0.2122065907891937,
+          "template_relative_residual": 1.3431915739619124e-15,
+          "template_rms": 192.1661090409052
+        },
+        "raw": {
+          "signed_transfer": -0.2117247462343933,
+          "template_relative_residual": 0.006172881494540162,
+          "template_rms": 77.43641544841806
+        },
+        "motion_path_px": 12.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": [
+        "dynamic_contrast_retention"
+      ]
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "scenario": {
+        "scenario_id": "stress-contrast-inversion",
+        "split": "stress",
+        "frequency_cpp": 0.125,
+        "velocity_px_s": 3000.0,
+        "phase_at_midpoint_cycles": 0.19,
+        "band_factors": [
+          1.0,
+          1.0
+        ],
+        "modulation": 0.5
+      },
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "arrays_file": "acquisition-037-clear-e2-g1.npz",
+      "raw_sha256": "bd4a3fe7ab9b250cc8bf3ffa2b7afa644aa2263ec20b53701015625329af351f",
+      "photo_relative_error": 2.0307297600736017e-15,
+      "independent_raw_difference_dn": 0,
+      "time_integral_maximum_error": 5.551115123125783e-16,
+      "green_dn": 285.9765625,
+      "green_snr_p10": 22.184504914019563,
+      "green_photocharge_mean_e": 709.5796711103121,
+      "mean_photocharge_e": 612.3766726333558,
+      "well_fraction": 0.0,
+      "adc_high_before_rounding_fraction": 0.0,
+      "white_fraction": 0.0,
+      "raw_min_dn": 154,
+      "raw_max_dn": 425,
+      "snr_basis": "predicted_photo_dark_read_postgain_quantization_not_measured",
+      "scenario_id": "stress-contrast-inversion",
+      "split": "stress",
+      "color_before": {
+        "R_over_G": 0.8609752766015571,
+        "B_over_G": 0.5911760688430542,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "color_after": {
+        "R_over_G": 0.8609752766015571,
+        "B_over_G": 0.5911760688430542,
+        "relative_R_over_G_error": 0.0,
+        "relative_B_over_G_error": 0.0,
+        "maximum_absolute_relative_error": 0.0,
+        "meaning": "RAW_channel_ratio_consistency_not_physical_color_accuracy"
+      },
+      "motion": {
+        "expected_signed_transfer": 0.3001054387190354,
+        "charge": {
+          "signed_transfer": 0.30010543871903556,
+          "template_relative_residual": 1.1277973429781116e-15,
+          "template_rms": 140.34199699463827
+        },
+        "raw": {
+          "signed_transfer": 0.2992680447801575,
+          "template_relative_residual": 0.00635518773840417,
+          "template_rms": 56.61485836333073
+        },
+        "motion_path_px": 6.0,
+        "raw_contrast_unscorable_due_clipping": false
+      },
+      "failures": [
+        "dynamic_contrast_retention"
+      ]
+    }
+  ],
+  "new_captures": 40,
+  "new_factory_jobs": 0,
+  "reused_factory_jobs": 4,
+  "physical_validation": "not_established",
+  "conditional_choice": {
+    "selected_candidate_id": "clear-e2-g1",
+    "feasible_candidates": [
+      "clear-e2-g1"
+    ],
+    "selection_basis": "additional_development_motion_color_gates_then_prior_training_SNR_rank",
+    "original_selection_unchanged": true,
+    "calibration_sha256": "4d81e82b628ce03ba091993b4beff8eef340d518ef4abed36ef0cbc5b3c8617f",
+    "frozen_at_utc": "2026-09-26T14:19:30.840486+00:00",
+    "holdout_seen": false,
+    "automatic_approval": false
+  },
+  "prior_selection_unchanged": true,
+  "conditional_choice_sha256": "7ec692a77bddff1e9c29fb9c28c7e0a2dadfcb8b0241ba4b6f1f65de060b310d",
+  "calibration_sha256": "4d81e82b628ce03ba091993b4beff8eef340d518ef4abed36ef0cbc5b3c8617f",
+  "no_reselection_after_holdout": true
+}

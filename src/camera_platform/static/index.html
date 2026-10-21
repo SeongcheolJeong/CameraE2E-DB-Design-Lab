@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#172620">
+  <title>CameraE2E · Engineering Workbench</title>
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/studies.js"></script>
+  <script defer src="/surrogates.js"></script>
+  <script defer src="/workbench.js"></script>
+  <script defer src="/cases.js"></script>
+  <script defer src="/controls.js"></script>
+  <script defer src="/scenes.js"></script>
+  <script defer src="/response-import.js"></script>
+  <script defer src="/nonlinear-captures.js"></script>
+  <script defer src="/readout-fitting.js"></script>
+  <script defer src="/capture-analysis.js"></script>
+  <script defer src="/control-response.js"></script>
+  <script defer src="/dcg.js"></script>
+  <script defer src="/isp-v2.js"></script>
+  <script defer src="/isp-studies.js"></script>
+  <script defer src="/retained-isp.js"></script>
+  <script defer src="/electrical-control.js"></script>
+  <script defer src="/electrical-response.js"></script>
+  <script defer src="/electrical-response-controller.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <aside class="sidebar" aria-label="주 메뉴">
+    <a class="brand" href="#overview" aria-label="CameraE2E 사례 개요">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span><strong>CameraE2E<span class="brand-dot">.</span></strong><small>ENGINEERING PLATFORM</small></span>
+    </a>
+    <div class="workspace-label">WORKSPACE <span>01</span></div>
+    <nav id="navigation" aria-label="엔지니어링 작업"></nav>
+    <div class="sidebar-bottom">
+      <a href="/calibration-lab.html" class="topbar-docs">실측 보정 · Calibration Lab ↗</a>
+      <a href="/db-comparisons.html" class="topbar-docs">보유 DB revision 비교 ↗</a>
+      <a href="/saved-sensor-workbench.html" class="topbar-docs">저장 센서 화질·노출 작업실 ↗</a>
+      <a href="/integration-workbench.html" class="topbar-docs">Lens × Sensor 결합 작업실 ↗</a>
+      <a href="/road-hdr.html" class="topbar-docs">도로 HDR ↗</a>
+      <a href="/virtual-lab.html" class="topbar-docs">Camera Virtual Lab ↗</a>
+      <a href="/road-design.html" class="topbar-docs">도로 장면 설계평가 ↗</a>
+      <a href="/pedestrian-braking.html" class="topbar-docs">보행자 인지·제동 여유 ↗</a>
+      <a href="/raw-temporal.html" class="topbar-docs">선택형 RAW 비교 · 연구용 ↗</a>
+      <div class="side-note"><span class="tiny-orbit" aria-hidden="true">◎</span><div>Evidence before decisions<small>설계부터 검증까지, 하나의 근거</small></div></div>
+      <div class="workspace-identity"><span class="avatar">CE</span><div>Camera Engineering<small>Local workspace</small></div><span class="local-dot" title="로컬 작업공간"></span></div>
+    </div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="breadcrumb">Workspace <span>/</span> <strong id="view-label">사례 개요</strong></div>
+      <div class="topbar-actions"><span id="connection" class="connection"><i></i> 연결 중</span><button class="icon-button" data-action="refresh" aria-label="데이터 새로고침" title="데이터 새로고침">↻</button><a class="topbar-docs" href="/docs" target="_blank" rel="noopener">API <span aria-hidden="true">↗</span></a></div>
+    </header>
+    <main id="main" tabindex="-1"><div class="loading-state"><span class="spinner"></span><p>자산과 실험 근거를 불러오고 있습니다.</p></div></main>
+    <footer class="app-footer"><span>Camera System Engineering & Validation</span><span id="workspace-path">조건 · 버전 · 출처 · 적용 범위</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-header"><div><span class="eyebrow">REGISTRY RECORD</span><h2 id="record-title">기록 원본</h2></div><button class="icon-button" data-action="close-dialog" aria-label="닫기">×</button></div><pre id="record-content"></pre><div class="dialog-footer"><button class="button secondary" data-action="copy-record">JSON 복사</button><button class="button primary" data-action="close-dialog">닫기</button></div></dialog>
+</body>
+</html>

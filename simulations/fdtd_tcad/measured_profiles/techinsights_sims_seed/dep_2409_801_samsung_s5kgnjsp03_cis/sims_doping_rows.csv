@@ -1,0 +1,14 @@
+source_index,feature,role,polarity,dopant,concentration_text,seed_concentration_cm3,seed_method,depth_text,depth_um,source_table_caption
+1,P^+^ V~SS~ contact,p_plus_contact,acceptor,P-type/11B,2 ×10^20^,2e+20,max_component_for_local_high_dose_feature,,,CIS P- and N-Type Regions – Doping Levels
+2,P-well,p_well,acceptor,P-type/11B,4 ×10^19^,4e+19,single_reported_value,,,CIS P- and N-Type Regions – Doping Levels
+3,P-type F-DTI polysilicon fill,dti_non_silicon_or_interface_metadata,acceptor,P-type/11B,6 ×10^19^,6e+19,single_reported_value,,,CIS P- and N-Type Regions – Doping Levels
+4,P-type F-DTI polysilicon fill,dti_non_silicon_or_interface_metadata,acceptor,P-type/10B,2 ×10^19^,2e+19,single_reported_value,,,CIS P- and N-Type Regions – Doping Levels
+5,N^+^ S/D and FD,fd_and_source_drain,donor,N-type/31P,1 ×10^20^,1e+20,max_component_for_local_high_dose_feature,,,CIS P- and N-Type Regions – Doping Levels
+6,N^+^ S/D and FDVTG,fd_and_source_drain,donor,N-type/75As,3 ×10^19^,3e+19,max_component_for_local_high_dose_feature,,,CIS P- and N-Type Regions – Doping Levels
+7,VTG,vertical_transfer_gate,donor,N-type/31P,6 ×10^19^,6e+19,max_component_for_local_high_dose_feature,,,CIS P- and N-Type Regions – Doping Levels
+8,N-type cathode,photocathode,donor,N-type/75As,2 ×10^15^ - 1 ×10^17^,1.4142135623731012e+16,geometric_mean_of_reported_components_or_range,,,CIS P- and N-Type Regions – Doping Levels
+9,N^+^contact,generic_silicon_region,donor,N-type/31P/75As,3 ×10^20^ / 1 ×10^20^,3e+20,max_component_for_local_high_dose_feature,,,CIS P- and N-Type Regions – Doping Levels
+10,Shallow N-well,n_well,donor,N-type/31P/75As,5 ×10^16^ / 5 ×10^16^,4.999999999999996e+16,geometric_mean_of_reported_components_or_range,,,CIS P- and N-Type Regions – Doping Levels
+11,P^+^contact,p_plus_contact,acceptor,P-type/11B/10B,2 ×10^20^ / 5 ×10^19^,2e+20,max_component_for_local_high_dose_feature,,,CIS P- and N-Type Regions – Doping Levels
+12,P-well,p_well,acceptor,P-type/11B/10B,1 ×10^19^ / 1 ×10^18^,3.162277660168382e+18,geometric_mean_of_reported_components_or_range,,,CIS P- and N-Type Regions – Doping Levels
+13,Active Si,active_si_background,acceptor,P-type/11B,<1 ×10^15^,500000000000000.0,half_of_reported_upper_bound,,,CIS P- and N-Type Regions – Doping Levels

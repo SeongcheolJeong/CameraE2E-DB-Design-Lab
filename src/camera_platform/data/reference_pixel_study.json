@@ -1,0 +1,34 @@
+{
+  "schema": "camera_reference_pixel_study_v1",
+  "name": "Reference Pixel Design Lab",
+  "baseline_candidate_id": "candidate-01",
+  "sources": [
+    {
+      "id": "candidate-00",
+      "cfa_thickness_scale": 0.9,
+      "source_run_id": "run-c07bf344f52848be9727c122ccde8257",
+      "source_candidate_id": "candidate-00",
+      "source_manifest_sha256": "9a39aa3d5f568ac33c6b097e2506ff468938f68d2f4a8837d29a8105f7b73255",
+      "color_run_id": "run-e6c237d2a04d432b84f34cbc3a7f27c5",
+      "color_manifest_sha256": "3de5872f01b0d0be5398411ef033dfce94f9ad82bec3cb83079acc7b89ea47aa"
+    },
+    {
+      "id": "candidate-01",
+      "cfa_thickness_scale": 1.0,
+      "source_run_id": "run-c07bf344f52848be9727c122ccde8257",
+      "source_candidate_id": "candidate-01",
+      "source_manifest_sha256": "9a39aa3d5f568ac33c6b097e2506ff468938f68d2f4a8837d29a8105f7b73255",
+      "color_run_id": "run-b68d3643ffa14ca5886489e3bb989308",
+      "color_manifest_sha256": "efe2c0fcb58687f7b5ee42c82ccd84c550c32f322ac03479f17ec0f83b0113c6"
+    },
+    {
+      "id": "candidate-02",
+      "cfa_thickness_scale": 1.1,
+      "source_run_id": "run-c07bf344f52848be9727c122ccde8257",
+      "source_candidate_id": "candidate-02",
+      "source_manifest_sha256": "9a39aa3d5f568ac33c6b097e2506ff468938f68d2f4a8837d29a8105f7b73255",
+      "color_run_id": "run-36d939ce2be742cfa2caa9a41f7cd53c",
+      "color_manifest_sha256": "8aaf1daad0036b8853c238137bc2feba08e3a6d0784e62ba4b1cd39e10bd9055"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+source_index,feature,role,polarity,dopant,concentration_text,seed_concentration_cm3,seed_method,depth_text,depth_um,source_table_caption
+1,P-pinning,p_pinning,acceptor,11B/10B,4 × 10^21^ / 1 × 10^21^,4e+21,max_component_for_local_high_dose_feature,0.12,0.12,Table 9.0.1: Pixel Array SIMS Doping Concentration
+2,P^+^ V~SS~ contact,p_plus_contact,acceptor,11B/10B,-,,missing_concentration,60 nm,0.06,Table 9.0.1: Pixel Array SIMS Doping Concentration
+3,P-well,p_well,acceptor,11B/10B,6 × 10^17^ / 1 × 10^17^,2.44948974278318e+17,geometric_mean_of_reported_components_or_range,0.50,0.5,Table 9.0.1: Pixel Array SIMS Doping Concentration
+4,Isolation,pixel_isolation,acceptor,11B,3 - 5×10^16^,5e+16,single_reported_value,0.50 – 0.85,0.5,Table 9.0.1: Pixel Array SIMS Doping Concentration
+5,B-DTI passivation,dti_non_silicon_or_interface_metadata,acceptor,11B,~1 × 10^16^,1e+16,single_reported_value,-,,Table 9.0.1: Pixel Array SIMS Doping Concentration
+6,Backside passivation,backside_passivation_metadata,acceptor,11B,~4 × 10^16^,4e+16,single_reported_value,0.12,0.12,Table 9.0.1: Pixel Array SIMS Doping Concentration
+7,N+ S/D and FD,fd_and_source_drain,donor,31P,1 × 10^21^,1e+21,max_component_for_local_high_dose_feature,0.15,0.15,Table 9.0.1: Pixel Array SIMS Doping Concentration
+8,Photocathode,photocathode,donor,75As,1 × 10^16^ - 1 × 10^19^,3.16227766016839e+17,geometric_mean_of_reported_components_or_range,2.8,2.8,Table 9.0.1: Pixel Array SIMS Doping Concentration
+9,Active Si,active_si_background,acceptor,11B,<1 × 10^15^,500000000000000.0,half_of_reported_upper_bound,2.9,2.9,Table 9.0.2: Periphery SIMS Doping Concentration Profiles
+10,P^+^ contact,p_plus_contact,acceptor,11B / 10B,8 × 10^21^/ 2 × 10^21^,8e+21,max_component_for_local_high_dose_feature,–,,Table 9.0.2: Periphery SIMS Doping Concentration Profiles
+11,P-well,p_well,acceptor,11B / 10B,~4 × 10^20^/ 1 × 10^20^,1.999999999999991e+20,geometric_mean_of_reported_components_or_range,1.8,1.8,Table 9.0.2: Periphery SIMS Doping Concentration Profiles
+12,N^+^ contact,generic_silicon_region,donor,31P / 75As,~1 × 10^21^/ 1.2 × 10^19^,1e+21,max_component_for_local_high_dose_feature,–,,Table 9.0.2: Periphery SIMS Doping Concentration Profiles
+13,N-well,n_well,acceptor,11B,~1 × 10^20^/ 2 × 10^18^,1.414213562373101e+19,geometric_mean_of_reported_components_or_range,2.2,2.2,Table 9.0.2: Periphery SIMS Doping Concentration Profiles
+14,Backside passivation,backside_passivation_metadata,acceptor,11B,~4× 10^16^,4e+16,single_reported_value,0.12,0.12,Table 9.0.2: Periphery SIMS Doping Concentration Profiles

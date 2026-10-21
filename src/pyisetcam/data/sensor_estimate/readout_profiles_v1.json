@@ -1,0 +1,495 @@
+{
+  "schema": "camerae2e_readout_profiles_v1",
+  "estimate_only": true,
+  "created_at": "2026-09-05",
+  "sources": {
+    "zwo_asi462_v1_1": {
+      "title": "ZWO ASI462 Manual EN V1.1",
+      "url": "https://i.zwoastro.com/zwo-website/manuals/ASI462_Manual_EN_V1.1.pdf",
+      "accessed_at": "2026-09-05",
+      "sha256": "acdfbf644d3b2e8de315c4090f2fb5275b2698a111ec390ef66f4e31fe02302e",
+      "evidence_pages": [
+        5,
+        6,
+        7
+      ],
+      "scope": "Complete ASI462MC camera performance; Sony IMX462 sensor.",
+      "method": "Manually read paired markers on page 7; all operating-point values from the same chart.",
+      "redistribution": "Only factual extracted parameters and source digest are bundled; source PDF is not redistributed."
+    },
+    "zwo_asi662_v1_0": {
+      "title": "ZWO ASI662 Manual EN V1.0",
+      "url": "https://i.zwoastro.com/zwo-website/manuals/ASI662_Manual_EN_V1.0.pdf",
+      "accessed_at": "2026-09-05",
+      "sha256": "517bbfde0c620e73a19f9c02cb7116ca972e4b3201245581c7adf6b2393d5ddc",
+      "evidence_pages": [
+        5,
+        6,
+        7,
+        10
+      ],
+      "scope": "Complete original ASI662MC camera performance; Sony IMX662AAQR-C sensor.",
+      "method": "Manually read paired markers on page 7. Low-gain FWC and maximum RN are also in page 5. HCG fullwell derives from chart electrons/ADU times 4096.",
+      "revision_warning": "This V1.0 MC manual says HCG starts at vendor gain 252; the later combined MC/MM product page says 200. Profiles deliberately pin V1.0 and do not combine revisions.",
+      "redistribution": "Only factual extracted parameters and source digest are bundled; source PDF is not redistributed."
+    },
+    "sony_imx307_flyer_2018": {
+      "title": "Sony IMX307LQD/LQR Flyer02 (2017/2018)",
+      "url": "https://www.sony-semicon.com/files/62/pdf/p-12_IMX307LQD_LQR_Flyer02.pdf",
+      "accessed_at": "2026-09-05",
+      "sha256": "36c1adc67042400ac84e5d65daf00e7bbbe9468c1cf4517869e4b1dcbaf5bff5",
+      "evidence_pages": [
+        2
+      ],
+      "scope": "Public Sony sensor flyer.",
+      "method": "Supports ADC 10/12-bit modes. Saturation and sensitivity are in digital units; absent e-/DN conversion prevents electron fullwell or read-noise extraction.",
+      "redistribution": "Only factual scope and digest are bundled; source PDF is not redistributed."
+    },
+    "zwo_asi662_page_20260905": {
+      "title": "ZWO ASI662MC/MM combined product page, accessed 2026-09-05",
+      "url": "https://us.zwoastro.com/products/asi662mc",
+      "accessed_at": "2026-09-05",
+      "sha256": "39b5aa205111941be90ff516287d5b6becbad12da4251780683870252ff93883",
+      "scope": "Noise-definition and revision-conflict evidence only. No numeric operating-point values are taken from this changing combined-model page.",
+      "method": "Camera Curve section explicitly includes ADC quantization in read noise and states HCG register200. V1.0 calibration retains its own register252 transition.",
+      "redistribution": "Only factual scope and source digest are bundled; HTML is not redistributed."
+    }
+  },
+  "common_assumptions": {
+    "gain": {
+      "value": 1,
+      "range": [
+        1,
+        1
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "No extra physical amplifier gain beyond the selected discrete operating point."
+    },
+    "dark_current_e_per_s": {
+      "value": 10,
+      "range": [
+        0,
+        100
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "Unknown at reference temperature; conservative placeholder. No fitted temperature law."
+    },
+    "bit_depth": {
+      "value": 12,
+      "range": [
+        12,
+        12
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "12-bit ADC mode selected; transport bit depth is separate."
+    },
+    "black_level_dn": {
+      "value": 64,
+      "range": [
+        64,
+        64
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "Simulation digital pedestal, not a manufacturer offset register."
+    },
+    "prnu_fraction": {
+      "value": 0.005,
+      "range": [
+        0,
+        0.02
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "Assumed residual fractional RMS; no sensor-specific PRNU measurement."
+    },
+    "dsnu_e": {
+      "value": 1,
+      "range": [
+        0,
+        5
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "Assumed fixed bias-offset RMS in e-/capture, not exposure-dependent dark-current DSNU."
+    },
+    "column_prnu_fraction": {
+      "value": 0,
+      "range": [
+        0,
+        0.005
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "Unknown column gain FPN disabled in nominal case; available for sensitivity analysis."
+    },
+    "column_dsnu_e": {
+      "value": 0,
+      "range": [
+        0,
+        2
+      ],
+      "classification": "assumption",
+      "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+      "notes": "Unknown fixed column offset RMS e-/capture disabled in nominal case."
+    }
+  },
+  "sensors": [
+    {
+      "sensor_id": "def_1807_801_sony_imx307lqd_c",
+      "report_code": "DEF-1807-801",
+      "default_profile": "generic_assumption"
+    },
+    {
+      "sensor_id": "def_2011_804_sony_imx462",
+      "report_code": "DEF-2011-804",
+      "default_profile": "zwo_asi462mc_v1_1"
+    },
+    {
+      "sensor_id": "def_2206_805_sony_imx662",
+      "report_code": "DEF-2206-805",
+      "default_profile": "zwo_asi662mc_v1_0"
+    },
+    {
+      "sensor_id": "dep_2206_801_sony_imx662",
+      "report_code": "DEP-2206-801",
+      "default_profile": "zwo_asi662mc_v1_0"
+    }
+  ],
+  "profiles": {
+    "generic_assumption": {
+      "camera_model": null,
+      "classification": "unmeasured_assumption",
+      "sensor_ids": [],
+      "source_ids": [],
+      "default_operating_point": "assumed_reference",
+      "limitations": [
+        "No matched public electron-domain readout data selected. Values and ranges are scenario assumptions, not product specifications.",
+        "Do not convert reported saturation DN to electrons without independently known system gain.",
+        "No HCG mode, vendor gain curve, temperature model, or FPS dependence is inferred."
+      ],
+      "operating_points": {
+        "assumed_reference": {
+          "conditions": {
+            "vendor_gain_register": null,
+            "vendor_gain_unit": null,
+            "conversion_mode": "unspecified",
+            "adc_bit_depth": 12,
+            "temperature_c": null,
+            "readout_rate_fps": null,
+            "exposure_s": null
+          },
+          "fields": {
+            "full_well_e": {
+              "value": 10000,
+              "range": [
+                5000,
+                40000
+              ],
+              "classification": "assumption",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Unmeasured reference capacity; broad sensitivity interval, not an IMX307 specification."
+            },
+            "read_noise_e": {
+              "value": 10,
+              "range": [
+                1,
+                15
+              ],
+              "classification": "assumption",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Unmeasured pre-ADC RMS. No camera total noise measurement has been de-embedded."
+            }
+          }
+        }
+      }
+    },
+    "zwo_asi462mc_v1_1": {
+      "camera_model": "ZWO ASI462MC",
+      "classification": "camera_proxy_with_assumptions",
+      "sensor_ids": [
+        "def_2011_804_sony_imx462"
+      ],
+      "source_ids": [
+        "zwo_asi462_v1_1"
+      ],
+      "default_operating_point": "low_gain",
+      "limitations": [
+        "Camera-level observations transferred as a proxy for this sensor; not measured bare-sensor specifications.",
+        "Discrete operating points only; no continuous vendor gain curve or HCG threshold interpolation.",
+        "Chart digitization and engineering ranges do not quantify sample-to-sample production variability.",
+        "Temperature, exposure and readout rate used for the manufacturer noise chart are not specified; no FPS- or temperature-dependent claim.",
+        "Dark current, fixed-pattern noise and digital pedestal remain explicit simulation assumptions.",
+        "Effective charge capacity includes camera gain/ADC saturation. Blooming, analog nonlinearity and HDR are not modeled."
+      ],
+      "operating_points": {
+        "low_gain": {
+          "conditions": {
+            "vendor_gain_register": 0,
+            "vendor_gain_unit": "0.1 dB chart units; not a physical gain multiplier",
+            "conversion_mode": "LCG",
+            "adc_bit_depth": 12,
+            "transport": "RAW16 may carry 12-bit ADC samples; no extra ADC precision implied.",
+            "temperature_c": null,
+            "temperature_status": "Manufacturer chart condition unspecified. Dark-current assumption is not calibrated at a known temperature.",
+            "readout_rate_fps": null,
+            "exposure_s": null,
+            "source_page": 7
+          },
+          "fields": {
+            "full_well_e": {
+              "value": 11200,
+              "range": [
+                10600,
+                11800
+              ],
+              "classification": "reported_camera_specification",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Manual fullwell 11.2ke; engineering +/- about 5% range, not a manufacturer tolerance. Paired gain0 chart noise, not minimum HCG noise.",
+              "source_id": "zwo_asi462_v1_1"
+            },
+            "reported_total_read_noise_e": {
+              "value": 2.45,
+              "range": [
+                2.35,
+                2.65
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Camera temporal read-noise RMS including ADC quantization; not pre-ADC amplifier noise.",
+              "source_id": "zwo_asi462_v1_1"
+            },
+            "reported_electrons_per_adu": {
+              "value": 2.73,
+              "range": [
+                2.6,
+                2.85
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "System gain at the same vendor register, in native 12-bit ADC units.",
+              "source_id": "zwo_asi462_v1_1"
+            },
+            "bit_depth": {
+              "value": 12,
+              "range": [
+                12,
+                12
+              ],
+              "classification": "reported_camera_specification",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "12-bit ADC mode; readout frame rate unspecified for chart.",
+              "source_id": "zwo_asi462_v1_1"
+            }
+          }
+        },
+        "hcg": {
+          "conditions": {
+            "vendor_gain_register": 100,
+            "vendor_gain_unit": "0.1 dB chart units; not a physical gain multiplier",
+            "conversion_mode": "HCG",
+            "adc_bit_depth": 12,
+            "transport": "RAW16 may carry 12-bit ADC samples; no extra ADC precision implied.",
+            "temperature_c": null,
+            "temperature_status": "Manufacturer chart condition unspecified. Dark-current assumption is not calibrated at a known temperature.",
+            "readout_rate_fps": null,
+            "exposure_s": null,
+            "source_page": 7
+          },
+          "fields": {
+            "full_well_e": {
+              "value": 3500,
+              "range": [
+                3200,
+                3900
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Approximate matched operating-point chart marker.",
+              "source_id": "zwo_asi462_v1_1"
+            },
+            "reported_total_read_noise_e": {
+              "value": 1,
+              "range": [
+                0.94,
+                1.08
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Camera temporal read-noise RMS including ADC quantization; not pre-ADC amplifier noise.",
+              "source_id": "zwo_asi462_v1_1"
+            },
+            "reported_electrons_per_adu": {
+              "value": 0.85,
+              "range": [
+                0.78,
+                0.95
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "System gain at the same vendor register, in native 12-bit ADC units.",
+              "source_id": "zwo_asi462_v1_1"
+            },
+            "bit_depth": {
+              "value": 12,
+              "range": [
+                12,
+                12
+              ],
+              "classification": "reported_camera_specification",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "12-bit ADC mode; readout frame rate unspecified for chart.",
+              "source_id": "zwo_asi462_v1_1"
+            }
+          }
+        }
+      }
+    },
+    "zwo_asi662mc_v1_0": {
+      "camera_model": "ZWO ASI662MC (V1.0 manual)",
+      "classification": "camera_proxy_with_assumptions",
+      "sensor_ids": [
+        "def_2206_805_sony_imx662",
+        "dep_2206_801_sony_imx662"
+      ],
+      "source_ids": [
+        "zwo_asi662_v1_0",
+        "zwo_asi662_page_20260905"
+      ],
+      "default_operating_point": "low_gain",
+      "limitations": [
+        "Camera-level observations transferred as a proxy for this sensor; not measured bare-sensor specifications.",
+        "Discrete operating points only; no continuous vendor gain curve or HCG threshold interpolation.",
+        "Chart digitization and engineering ranges do not quantify sample-to-sample production variability.",
+        "Temperature, exposure and readout rate used for the manufacturer noise chart are not specified; no FPS- or temperature-dependent claim.",
+        "Dark current, fixed-pattern noise and digital pedestal remain explicit simulation assumptions.",
+        "Effective charge capacity includes camera gain/ADC saturation. Blooming, analog nonlinearity and HDR are not modeled."
+      ],
+      "operating_points": {
+        "low_gain": {
+          "conditions": {
+            "vendor_gain_register": 0,
+            "vendor_gain_unit": "0.1 dB chart units; not a physical gain multiplier",
+            "conversion_mode": "LCG",
+            "adc_bit_depth": 12,
+            "transport": "RAW16 may carry 12-bit ADC samples; no extra ADC precision implied.",
+            "temperature_c": null,
+            "temperature_status": "Manufacturer chart condition unspecified. Dark-current assumption is not calibrated at a known temperature.",
+            "readout_rate_fps": null,
+            "exposure_s": null,
+            "source_page": 7
+          },
+          "fields": {
+            "full_well_e": {
+              "value": 38200,
+              "range": [
+                36300,
+                40100
+              ],
+              "classification": "reported_camera_specification",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Manual fullwell 38.2ke; engineering +/- about 5% range, not a manufacturer tolerance. Paired gain0 noise about6.9e, not minimumHCG0.8e.",
+              "source_id": "zwo_asi662_v1_0"
+            },
+            "reported_total_read_noise_e": {
+              "value": 6.9,
+              "range": [
+                6.7,
+                7.2
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Camera temporal read-noise RMS including ADC quantization; not pre-ADC amplifier noise.",
+              "source_id": "zwo_asi662_v1_0"
+            },
+            "reported_electrons_per_adu": {
+              "value": 9.3,
+              "range": [
+                8.9,
+                9.7
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "System gain at the same vendor register, in native 12-bit ADC units.",
+              "source_id": "zwo_asi662_v1_0"
+            },
+            "bit_depth": {
+              "value": 12,
+              "range": [
+                12,
+                12
+              ],
+              "classification": "reported_camera_specification",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "12-bit ADC mode; readout frame rate unspecified for chart.",
+              "source_id": "zwo_asi662_v1_0"
+            }
+          }
+        },
+        "hcg": {
+          "conditions": {
+            "vendor_gain_register": 300,
+            "vendor_gain_unit": "0.1 dB chart units; not a physical gain multiplier",
+            "conversion_mode": "HCG",
+            "adc_bit_depth": 12,
+            "transport": "RAW16 may carry 12-bit ADC samples; no extra ADC precision implied.",
+            "temperature_c": null,
+            "temperature_status": "Manufacturer chart condition unspecified. Dark-current assumption is not calibrated at a known temperature.",
+            "readout_rate_fps": null,
+            "exposure_s": null,
+            "source_page": 7
+          },
+          "fields": {
+            "full_well_e": {
+              "value": 1228.8,
+              "range": [
+                1024.0,
+                1433.6
+              ],
+              "classification": "derived_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Page7 FW axis numeric labels missing, so effective saturation derives from matched system gain approximately0.30e/ADU times4096 native ADC steps; rounded chart estimate, not measured physicalwell.",
+              "source_id": "zwo_asi662_v1_0"
+            },
+            "reported_total_read_noise_e": {
+              "value": 1,
+              "range": [
+                0.9,
+                1.1
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "Camera temporal read-noise RMS including ADC quantization; not pre-ADC amplifier noise.",
+              "source_id": "zwo_asi662_v1_0"
+            },
+            "reported_electrons_per_adu": {
+              "value": 0.3,
+              "range": [
+                0.25,
+                0.35
+              ],
+              "classification": "digitized_camera_chart",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "System gain at the same vendor register, in native 12-bit ADC units.",
+              "source_id": "zwo_asi662_v1_0"
+            },
+            "bit_depth": {
+              "value": 12,
+              "range": [
+                12,
+                12
+              ],
+              "classification": "reported_camera_specification",
+              "range_interpretation": "Engineering scenario bounds, not a confidence interval or measured production spread.",
+              "notes": "12-bit ADC mode; readout frame rate unspecified for chart.",
+              "source_id": "zwo_asi662_v1_0"
+            }
+          }
+        }
+      }
+    }
+  }
+}

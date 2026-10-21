@@ -1,0 +1,476 @@
+"""Independent reaction/time/RAW references for an authored bounded trap model.
+
+The continuous ODE and finite-state CTMC below are reference models, not claims
+that the product's bounded Lie steps are exact chemistry or measured silicon.
+"""
+
+import hashlib
+import json
+import math
+from copy import deepcopy
+
+import numpy as np
+import pytest
+from test_hdr_runtime import request_data as request_data
+
+from camera_platform import dcg_electrical, nonlinear_examples
+from camera_platform.retained_charge_runtime import RetainedChargeRuntime, default_capture_program
+
+
+def ode_reference(intervals, *, trap_capacity, capture_rate, release_time):
+    """Independent high-accuracy unsaturated mass-action integration.
+
+    Each interval is (seconds, incident electron rate). This reference does not
+    call product segmentation, generation, capture, release or state helpers.
+    """
+    from scipy.integrate import solve_ivp
+
+    state = np.zeros(2)
+    for duration, generation in intervals:
+        def derivative(_time, value, inflow=generation):
+            free, trapped = value
+            capture = capture_rate * free * (1 - trapped / trap_capacity)
+            release = trapped / release_time
+            return [inflow - capture + release, capture - release]
+
+        solution = solve_ivp(
+            derivative, (0, duration), state, method="DOP853", rtol=2e-12, atol=2e-12
+        )
+        assert solution.success
+        state = solution.y[:, -1]
+    return state
+
+
+def exact_ctmc(total, capacity, rate, lifetime, duration):
+    """Matrix exponential of the finite-state continuous capture/release chain."""
+    from scipy.linalg import expm
+
+    count = min(total, capacity) + 1
+    generator = np.zeros((count, count))
+    for trapped in range(count):
+        if trapped + 1 < count:
+            generator[trapped, trapped + 1] = rate * (total - trapped) * (
+                1 - trapped / capacity
+            )
+        if trapped:
+            generator[trapped, trapped - 1] = trapped / lifetime
+        generator[trapped, trapped] = -generator[trapped].sum()
+    return expm(generator * duration)
+
+
+def split_distribution(total, capacity, rate, lifetime, duration, steps):
+    """Enumerate each possible release/capture count, including vacancy clipping.
+
+    Comparing this complete discrete transition matrix with a continuous CTMC
+    separates integration bias from Monte Carlo sampling uncertainty.
+    """
+    count = min(total, capacity) + 1
+    transition = np.zeros((count, count))
+    dt = duration / steps
+    release_probability = -math.expm1(-dt / lifetime)
+    for trapped in range(count):
+        for released in range(trapped + 1):
+            probability_release = (
+                math.comb(trapped, released)
+                * release_probability**released
+                * (1 - release_probability) ** (trapped - released)
+            )
+            remaining = trapped - released
+            available = total - remaining
+            capture_probability = -math.expm1(-rate * (1 - remaining / capacity) * dt)
+            for captured in range(available + 1):
+                probability_capture = (
+                    math.comb(available, captured)
+                    * capture_probability**captured
+                    * (1 - capture_probability) ** (available - captured)
+                )
+                destination = remaining + min(capacity - remaining, captured)
+                transition[trapped, destination] += probability_release * probability_capture
+    np.testing.assert_allclose(transition.sum(axis=1), 1, atol=1e-14)
+    return np.linalg.matrix_power(transition, steps)
+
+
+def retained_case(data, family, noise):
+    data = deepcopy(data)
+    data["noise_enabled"] = noise
+    program = default_capture_program(
+        data["readout"], [f["frame_id"] for f in data["control_sequence"]["frames"]]
+    )
+    model = {
+        "linear": lambda: program["electrical_model"],
+        "nonlinear": lambda: nonlinear_examples.single_model(data["readout"]),
+        "paired": lambda: dcg_electrical.default_model(data["readout"]),
+        "paired_nonlinear": lambda: nonlinear_examples.shared_model(data["readout"]),
+    }[family]()
+    model["dark_current_e_per_s"] = 123
+    model["fixed_pattern"].update(prnu_sigma=0.02, dsnu_e_per_s=3, seed=19)
+    program["electrical_model"] = model
+    program["retained_charge_model"]["transfer_efficiency"] = [0.25, 0.5, 0.75, 1]
+    data["capture_program"] = program
+    return data
+
+
+def result_fingerprint(result):
+    arrays = {
+        name: {
+            "shape": list(value.shape),
+            "dtype": value.dtype.str,
+            "sha256": hashlib.sha256(np.ascontiguousarray(value).tobytes()).hexdigest(),
+        }
+        for name, value in result["arrays"].items()
+    }
+    payload = {"arrays": arrays, "summary": result["summary"]}
+    return hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ).hexdigest()
+
+
+# Generated by executing the immutable pre-trap source snapshot in a separate
+# Python process with the same dependency environment. The original receipt is
+# reports/camera_platform/trapped-charge-v0161/independent-v1-before.json.
+V1_FINGERPRINTS = {
+    "linear/False": "bafa4443c4de74c1d4da7431c4d6f875306775abf286612bf7d379179aa1b72e",
+    "nonlinear/False": "d2668ef57cda7c3583eda346bb1a6ceda6a8a10ffdb316c68172310ec78ab0eb",
+    "paired/False": "30858ac2260a8cbb969d056750ff569ad1c2ef4c2242eb533c0626a12f8682dc",
+    "paired_nonlinear/False": "d64de75227ca152a697a59a3a6accb00da4991c444a1747a5c7e28f42f11427b",
+    "linear/True": "174b221b4aba6adde1ec033f479fd208941357ef59e0cb21da3ff2aea2099f9a",
+    "nonlinear/True": "1991965bbc3f8b28c4512b04d018a50f61bfb36b46f59a914653bea0a51acfa8",
+    "paired/True": "a20efa16dd9ac402d72296fc26b8432fa7be1ec38a998aaed4939c39a678bc0f",
+    "paired_nonlinear/True": "37a880c036db78616962e399c1e6a25e599aadf3cca8b3fe2cce5cc4fafa4a0e",
+}
+
+
+@pytest.mark.parametrize("family", ["linear", "nonlinear", "paired", "paired_nonlinear"])
+@pytest.mark.parametrize("noise", [False, True])
+def test_original_v1_arrays_and_historical_summary_view_match_pre_trap_snapshot(
+    request_data, family, noise
+):
+    result = RetainedChargeRuntime().execute(retained_case(request_data, family, noise))
+    # The archived dev8 source still reproduces V1_FINGERPRINTS for these exact
+    # fixtures. A side-by-side run confirmed all 37 arrays remain byte-identical
+    # under today's source for all eight modes. Later gain-path/photo-HDR work
+    # intentionally added two summary flags and clarified one limitation. Map
+    # only those metadata edits back to their historical view before comparison;
+    # the golden hash still protects every array and every other summary field.
+    legacy = deepcopy(result)
+    summary = legacy["summary"]
+    assert summary.pop("gain_path_merge_applied") is False
+    assert summary["waveform"].pop("photo_hdr_row_integral_normalization") is False
+    assert summary["limitations"][1] == (
+        "No release, decay, charge traps, current-exposure inverse or "
+        "multi-exposure HDR fusion."
+    )
+    summary["limitations"][1] = (
+        "No release, decay, charge traps, current-exposure inverse or HDR fusion."
+    )
+    assert result_fingerprint(legacy) == V1_FINGERPRINTS[f"{family}/{noise}"]
+
+
+def trap_model(*, step_ns=1_000_000, efficiency=0.0):
+    from camera_platform import trapped_charge as traps
+
+    return {
+        "schema": traps.SCHEMA,
+        "capacity_e": 200,
+        "transfer_efficiency": [efficiency] * 4,
+        "trap_capacity_e": [30] * 4,
+        "capture_rate_s": [2.5] * 4,
+        "release_time_s": [0.7] * 4,
+        "integration": {
+            "method": "bounded_split_step_v1",
+            "max_step_ns": step_ns,
+            "max_transition_probability": 0.02,
+        },
+    }
+
+
+def segment(phase, duration_ns, photo, shape=(2, 2)):
+    return {
+        "phase": phase,
+        "duration_ns": np.full(shape[0], duration_ns, dtype=np.int64),
+        "expected_photo_e": np.full(shape, photo, dtype=float),
+    }
+
+
+def advance(model, segments, *, state=None, noise=False, clear=False, dark=0, seed=83):
+    from camera_platform import trapped_charge as traps
+
+    shape = segments[0]["expected_photo_e"].shape
+    if state is None:
+        state = traps.initial_state(shape, model, noise_enabled=noise)
+    return traps.step(
+        state, segments, model, np.ones(shape), np.full(shape, dark, dtype=float),
+        clear, noise, np.random.default_rng(seed) if noise else None,
+    )
+
+
+def assert_conservation(result, *, exact):
+    a = result["arrays"]
+    incoming = (
+        a["initial_residual_e"] + a["initial_trapped_e"]
+        + a["gap_generated_e"] + a["exposure_generated_e"]
+    )
+    outgoing = (
+        a["gap_overflow_e"] + a["exposure_overflow_e"] + a["clear_loss_e"]
+        + a["delivered_e"] + a["residual_e"] + a["trapped_e"]
+    )
+    if exact:
+        np.testing.assert_array_equal(incoming, outgoing)
+    else:
+        np.testing.assert_allclose(incoming, outgoing, rtol=1e-12, atol=2e-10)
+
+
+def test_unsaturated_generation_and_exchange_converge_to_independent_mass_action_ode():
+    intervals = [(0.2, 100.0), (0.15, 0.0), (0.25, 60.0)]
+    expected = ode_reference(intervals, trap_capacity=30, capture_rate=2.5, release_time=0.7)
+    errors = []
+    for step in (1_000_000, 500_000, 250_000, 125_000):
+        result = advance(
+            trap_model(step_ns=step),
+            [segment("exposure", round(dt * 1e9), dt * rate) for dt, rate in intervals],
+        )
+        actual = np.array([result["state"]["charge_e"][0, 0], result["state"]["trapped_e"][0, 0]])
+        assert not np.any(result["arrays"]["exposure_overflow_e"])
+        assert_conservation(result, exact=False)
+        errors.append(float(np.max(np.abs(actual - expected))))
+    assert all(fine < coarse * 0.6 for coarse, fine in zip(errors[:-1], errors[1:], strict=True))
+    assert errors[-1] < 0.005  # Electrons, in this specific unsaturated fixture.
+
+
+def test_release_subflow_matches_analytic_survival_and_preserves_one_population():
+    from camera_platform.trapped_charge import _react
+
+    trapped = np.array([[1.0, 3.0], [50.0, 80.0]])
+    dt = np.array([[0.0], [0.125]])
+    result = _react(np.zeros_like(trapped), trapped, 100, 0, 4, 200, dt, False, None)
+    survival = trapped * np.exp(-4 * dt)
+    np.testing.assert_allclose(result["trapped"], survival, rtol=1e-15)
+    np.testing.assert_allclose(result["free"], trapped - survival, rtol=1e-15)
+    np.testing.assert_array_equal(result["free"] + result["trapped"], trapped)
+    assert not np.any(result["captured"]) and not np.any(result["overflow"])
+
+
+@pytest.mark.parametrize("steps", [50, 100])
+def test_integer_reaction_distribution_matches_count_enumeration_with_ctmc_bias_explicit(steps):
+    from camera_platform.trapped_charge import _react
+
+    total, capacity, rate, lifetime, duration = 3, 2, 1.3, 0.4, 0.2
+    exact = exact_ctmc(total, capacity, rate, lifetime, duration)[0]
+    distributions = [
+        split_distribution(total, capacity, rate, lifetime, duration, n)[0]
+        for n in (50, 100, 200)
+    ]
+    bias = [float(np.max(np.abs(p - exact))) for p in distributions]
+    assert bias[1] < 0.6 * bias[0] and bias[2] < 0.6 * bias[1]
+    assert bias[-1] < 0.001
+    # This independent ensemble tests the production reaction, not the enumerator.
+    size = 30_000
+    free, trapped = np.full(size, total, dtype=np.int64), np.zeros(size, dtype=np.int64)
+    rng = np.random.default_rng(9371)
+    for _ in range(steps):
+        result = _react(
+            free, trapped, capacity, rate, 1 / lifetime, total,
+            duration / steps, True, rng,
+        )
+        free, trapped = result["free"], result["trapped"]
+        np.testing.assert_array_equal(free + trapped, total)
+        assert not np.any(result["overflow"])
+    measured = np.bincount(trapped, minlength=capacity + 1) / size
+    reference = distributions[(50, 100).index(steps)]
+    sampling_allowance = 6 * np.sqrt(reference * (1 - reference) / size) + 2 / size
+    assert np.all(np.abs(measured - reference) <= sampling_allowance)
+    assert np.all(np.abs(measured - exact) <= sampling_allowance + np.abs(reference - exact))
+
+
+@pytest.mark.parametrize("noise", [False, True])
+def test_clear_retains_traps_and_both_capacity_losses_conserve_full_population(noise):
+    model = trap_model(efficiency=0.4)
+    model.update(capacity_e=100, trap_capacity_e=[10, 20, 30, 40])
+    prior = advance(model, [segment("exposure", 20_000_000, 800)], noise=noise)
+    result = advance(
+        model,
+        [segment("gap", 10_000_000, 0), segment("exposure", 50_000_000, 300)],
+        state=prior["state"], noise=noise, clear=True, dark=17,
+    )
+    assert_conservation(prior, exact=noise)
+    assert_conservation(result, exact=noise)
+    assert np.any(result["arrays"]["clear_loss_e"] > 0)
+    assert np.any(result["arrays"]["exposure_overflow_e"] > 0)
+    assert np.any(result["state"]["trapped_e"] > 0)
+    assert np.all(result["state"]["trapped_e"] <= np.array([[10, 20], [30, 40]]))
+    assert result["state"]["charge_e"].dtype.kind == ("i" if noise else "f")
+
+
+def test_eta_one_still_has_dark_lag_and_gap_clear_does_not_erase_trap_occupancy():
+    model = trap_model(efficiency=1)
+    prior = advance(model, [segment("exposure", 100_000_000, 100)])
+    np.testing.assert_array_equal(prior["state"]["charge_e"], 0)
+    assert np.min(prior["state"]["trapped_e"]) > 0
+    dark = advance(model, [segment("exposure", 100_000_000, 0)], state=prior["state"])
+    assert np.min(dark["arrays"]["delivered_e"]) > 0
+    assert not np.any(dark["arrays"]["exposure_generated_e"])
+    segments = [segment("gap", 100_000_000, 0), segment("exposure", 0, 0)]
+    uncleared = advance(model, segments, state=prior["state"])
+    cleared = advance(model, segments, state=prior["state"], clear=True)
+    np.testing.assert_array_equal(
+        cleared["arrays"]["clear_loss_e"], uncleared["arrays"]["delivered_e"]
+    )
+    np.testing.assert_array_equal(cleared["state"]["trapped_e"], uncleared["state"]["trapped_e"])
+    assert np.min(cleared["state"]["trapped_e"]) > 0
+    assert not np.any(cleared["arrays"]["delivered_e"])
+
+
+def test_equal_total_photons_in_reverse_order_are_not_equivalent_state_inputs():
+    model = trap_model(efficiency=1)
+    early = [segment("exposure", 100_000_000, 50), segment("exposure", 100_000_000, 0)]
+    late = list(reversed(early))
+    left, right = advance(model, early), advance(model, late)
+    np.testing.assert_array_equal(
+        left["arrays"]["expected_exposure_e"], right["arrays"]["expected_exposure_e"]
+    )
+    assert np.min(left["state"]["trapped_e"] - right["state"]["trapped_e"]) > 1
+    assert np.min(right["arrays"]["delivered_e"] - left["arrays"]["delivered_e"]) > 1
+    for result in (left, right):
+        assert_conservation(result, exact=False)
+
+
+def trapped_runtime_case(data, *, family="linear", noise=False, phase=0):
+    from camera_platform.retained_charge_runtime import default_trapped_capture_program
+
+    data = retained_case(data, family, noise)
+    controls = data["control_sequence"]
+    for frame, start, exposure in zip(
+        controls["frames"], [0, 30_000_000], [20_000_000, 10_000_000], strict=True
+    ):
+        frame["frame_start_ns"] = start
+        frame["applied"].update(applied_at_ns=start, exposure_ns=exposure, gain=1)
+    program = default_trapped_capture_program(
+        data["readout"], [f["frame_id"] for f in controls["frames"]]
+    )
+    program["electrical_model"] = data["capture_program"]["electrical_model"]
+    model = program["electrical_model"]
+    model["dark_current_e_per_s"] = 0
+    model["fixed_pattern"].update(prnu_sigma=0, dsnu_e_per_s=0)
+    if family == "linear":
+        model.update(read_noise_e=0, post_gain_noise_v=0)
+    program["retained_charge_model"]["transfer_efficiency"] = [1] * 4
+    program["waveform"] = {
+        "schema": "camera_light_waveform_v1", "kind": "pwm",
+        "clock_id": controls["clock"]["clock_id"], "period_ns": 20_000_000,
+        "on_time_ns": 10_000_000, "phase_origin_ns": phase, "low": 0, "high": 1,
+    }
+    scene = deepcopy(data["scene_sequence"]["knots"][0]["scene"])
+    dark = deepcopy(scene)
+    dark["spectral_irradiance"] = np.zeros_like(scene["spectral_irradiance"])
+    data["scene_sequence"].update(
+        interpolation="zero_order_hold",
+        knots=[
+            {"time_ns": 0, "scene": scene}, {"time_ns": 20_000_000, "scene": dark},
+            {"time_ns": 60_000_000, "scene": dark},
+        ],
+    )
+    data["capture_program"] = program
+    return data
+
+
+def test_actual_pwm_chronology_changes_raw_despite_identical_integrated_photons(request_data):
+    early = trapped_runtime_case(request_data)
+    late = trapped_runtime_case(request_data, phase=10_000_000)
+    left = RetainedChargeRuntime().execute(early)
+    right = RetainedChargeRuntime().execute(late)
+    a, b = left["arrays"], right["arrays"]
+    np.testing.assert_array_equal(a["mean_electrons"], b["mean_electrons"])
+    assert np.max(np.abs(a["retained_trapped_e"] - b["retained_trapped_e"])) > 0.1
+    assert not np.array_equal(a["raw_groups"], b["raw_groups"])
+    assert not np.any(a["mean_electrons"][1])
+    assert np.min(a["retained_delivered_e"][1]) > 0
+    black = left["summary"]["raw_formats"][0]["black_level_dn"]
+    assert np.max(a["raw_groups"][1] - black) > 0
+    np.testing.assert_array_equal(a["retained_residual_e"], 0)
+    assert left["summary"]["simulation_oracle"]["used_by_preview"] is False
+    for output, request in ((left, early), (right, late)):
+        estimate = RetainedChargeRuntime().estimate_resources(request)
+        actual_bytes = sum(x.nbytes for x in output["arrays"].values())
+        assert actual_bytes <= estimate["output_array_bytes_estimate"]
+        assert set(output["arrays"]) == set(output["summary"]["array_units"])
+
+
+@pytest.mark.parametrize("nonlinear", [False, True])
+@pytest.mark.parametrize("noise", [False, True])
+def test_both_readers_share_one_trap_delivered_population_and_retry(
+    request_data, monkeypatch, nonlinear, noise
+):
+    from camera_platform import nonlinear_dcg
+
+    family = "paired_nonlinear" if nonlinear else "paired"
+    data = trapped_runtime_case(request_data, family=family, noise=noise)
+    module = nonlinear_dcg if nonlinear else dcg_electrical
+    original = module.read_delivered_charge
+    seen = []
+
+    def capture(population, model, **kwargs):
+        seen.append(population.copy())
+        return original(population, model, **kwargs)
+
+    monkeypatch.setattr(module, "read_delivered_charge", capture)
+    output = RetainedChargeRuntime().execute(data)
+    assert len(seen) == 2
+    np.testing.assert_array_equal(seen, output["arrays"]["retained_delivered_e"])
+    assert output["arrays"]["raw_groups"].shape == (2, 2, 8, 10)
+    assert output["summary"]["readout_ids"] == ["HCG", "LCG"]
+    assert all(x["input_quantity"] == "delivered_total_read_node_charge_e"
+               for x in output["summary"]["readout_descriptors"])
+    retry = RetainedChargeRuntime().execute(data)
+    for name, array in output["arrays"].items():
+        np.testing.assert_array_equal(array, retry["arrays"][name], err_msg=name)
+
+
+def test_reader_noise_changes_raw_without_advancing_different_trap_randomness(request_data):
+    data = trapped_runtime_case(request_data, noise=True)
+    altered = deepcopy(data)
+    altered["capture_program"]["electrical_model"]["read_noise_e"] = 100
+    before = RetainedChargeRuntime().execute(data)
+    after = RetainedChargeRuntime().execute(altered)
+    for name, value in before["arrays"].items():
+        if name.startswith("retained_"):
+            np.testing.assert_array_equal(value, after["arrays"][name], err_msg=name)
+    assert not np.array_equal(before["arrays"]["raw_groups"], after["arrays"]["raw_groups"])
+
+
+def test_large_negative_clock_translation_preserves_trap_state_and_actual_raw(request_data):
+    data = trapped_runtime_case(request_data)
+    data["control_sequence"]["mode"].update(shutter="rolling", line_time_ns=73_000)
+    shifted = deepcopy(data)
+    offset = -(2**52) + 37
+    for knot in shifted["scene_sequence"]["knots"]:
+        knot["time_ns"] += offset
+    for frame in shifted["control_sequence"]["frames"]:
+        frame["frame_start_ns"] += offset
+        frame["applied"]["applied_at_ns"] += offset
+    shifted["capture_program"]["waveform"]["phase_origin_ns"] += offset
+    left = RetainedChargeRuntime().execute(data)["arrays"]
+    right = RetainedChargeRuntime().execute(shifted)["arrays"]
+    for name in ("raw_groups", "mean_electrons", "retained_delivered_e", "retained_trapped_e",
+                 "row_gap_ns", "trap_segment_duration_ns"):
+        np.testing.assert_array_equal(left[name], right[name], err_msg=name)
+    for fi, count in enumerate(left["trap_segment_count"]):
+        for name in ("trap_segment_start_ns", "trap_segment_end_ns"):
+            np.testing.assert_array_equal(right[name][fi, :count], left[name][fi, :count] + offset)
+
+
+@pytest.mark.parametrize("disguise", [False, True])
+def test_electrical_feedback_refuses_traps_until_its_stateful_path_is_explicitly_integrated(
+    request_data, disguise
+):
+    from camera_platform import electrical_control
+    from camera_platform.electrical_control_runtime import ElectricalControlRuntime
+    from camera_platform.runtime import RuntimeRequestError
+
+    data = trapped_runtime_case(request_data)
+    if disguise:
+        data["capture_program"].update(
+            schema="camera_electrical_control_capture_program_v1",
+            electrical_control_policy=electrical_control.default_policy([8, 10]),
+        )
+    with pytest.raises(RuntimeRequestError):
+        ElectricalControlRuntime().execute(data)

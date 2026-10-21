@@ -1,0 +1,14 @@
+source_index,feature,role,polarity,dopant,concentration_text,seed_concentration_cm3,seed_method,depth_text,depth_um,source_table_caption
+1,P-pinning,p_pinning,acceptor,"P-type, 11B",7 x 10 17,7e+17,max_component_for_local_high_dose_feature,50 nm,0.05,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+2,P-well,p_well,acceptor,"P-type, 11B/10B",1 x 10 18 /2 x 10 17,4.472135954999599e+17,geometric_mean_of_reported_components_or_range,670 nm,0.67,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+3,Low-doped P-well,p_well,acceptor,"P-type, 11B/10B",-,,missing_concentration,2.0,2.0,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+4,Buried P-well,p_well,acceptor,"P-type, 11B/10B",3 - 4 x 10 17 /8 x 10 16 - 1 x 10 17,1.473612599456162e+17,geometric_mean_of_reported_components_or_range,7.0,7.0,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+5,Backside Passivation,backside_passivation_metadata,acceptor,"P-type, 11B/10B",2 x 10 18 /5 x 10 17,9.999999999999986e+17,geometric_mean_of_reported_components_or_range,-,,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+6,Counter-doping,generic_silicon_region,donor,"N-type, P",9 x 10 16 - 3 x 10 17,1.6431676725154906e+17,geometric_mean_of_reported_components_or_range,-,,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+7,S/D and FD Contact,fd_and_source_drain,donor,"N-type, P",2 x 10 20,2e+20,max_component_for_local_high_dose_feature,170 nm,0.17,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+8,Photocathode,photocathode,donor,"N-type, P/As",2 x 10 19 /2 x 10 18,6.324555320336731e+18,geometric_mean_of_reported_components_or_range,550 nm,0.55,Fig. 8.12: Pixel Center Details in Y-direction – SMIM-C
+9,Active Si,active_si_background,acceptor,"P-type, 11B/10B",5 x 10 15 /<1 x 10 15,2236067977499790.2,geometric_mean_of_reported_components_or_range,-,,Fig. 8.13: Pixel Array SIMS Doping Concentration Profiles
+10,P-well,p_well,acceptor,"P-type, 11B",9 x 10 17,9e+17,single_reported_value,1.2,1.2,Fig. 8.13: Pixel Array SIMS Doping Concentration Profiles
+11,Buried P-well,p_well,acceptor,"P-type, 11B/10B",1 x 10 17 /3x 10 16,5.477225575051647e+16,geometric_mean_of_reported_components_or_range,~ 2.5 - 9.6,2.5,Fig. 8.13: Pixel Array SIMS Doping Concentration Profiles
+12,Backside Passivation,backside_passivation_metadata,acceptor,"P-type, 11B/10B",6 x 10 17 /2x 10 17,3.4641016151377606e+17,geometric_mean_of_reported_components_or_range,-,,Fig. 8.13: Pixel Array SIMS Doping Concentration Profiles
+13,N+ Contact,generic_silicon_region,donor,"N-type, P",2 x 10 20,2e+20,max_component_for_local_high_dose_feature,-,,Fig. 8.13: Pixel Array SIMS Doping Concentration Profiles

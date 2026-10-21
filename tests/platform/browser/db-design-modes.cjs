@@ -1,0 +1,18 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const repo=path.resolve(__dirname,'../../..'),html=fs.readFileSync(path.join(repo,'src/camera_platform/static/db-design.html'),'utf8'),code=fs.readFileSync(path.join(repo,'src/camera_platform/static/db-design.js'),'utf8');
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]),nodes=new Map(ids.map(id=>[id,{value:'',dataset:{},disabled:false,innerHTML:'',textContent:''}]));
+const context={console,URL,URLSearchParams,document:{getElementById:id=>nodes.get(id)},location:{href:'http://127.0.0.1:8780/db-design.html'},setTimeout(){},clearTimeout(){}};
+vm.createContext(context);vm.runInContext(code.replace('  init().catch(error=>notice(error.message,true));','  globalThis.test={state,renderSensorModeInput,renderSensorModeResult,sensorShutterAxes,sensorModeMarkup};'),context);
+const ui=context.test,catalog=JSON.parse(fs.readFileSync(path.join(repo,'camerae2e_db/sources/sensor_timing/imx462/operating-mode-evidence.v1.json'),'utf8'));
+ui.state.options={sensor_operating_modes:catalog,recipes:{aperture_sweep:{f_numbers:[4.12]}}};
+for(const[k,v]of Object.entries({'sensor-shutter-luminances':'100,1000','sensor-shutter-speeds':'0,4','sensor-shutter-exposures':'1,4,16','sensor-shutter-distance':'20','sensor-shutter-line-times':'0,10,20','sensor-shutter-fnumbers':'4.12','field':'outer-ne','chart':'resolution','stage':'isp'}))nodes.get(k).value=v;
+ui.renderSensorModeInput();assert.equal(nodes.get('sensor-shutter-mode').value,'kurokesu_1080p30_raw10');assert.equal(nodes.get('sensor-shutter-line-times').disabled,true);assert.equal(nodes.get('sensor-shutter-fps').value,30);
+let axes=ui.sensorShutterAxes();assert.equal(axes.operating_mode_id,'kurokesu_1080p30_raw10');assert.equal(axes.line_time_us[1],4400/148500000*1e6);assert.match(nodes.get('sensor-mode-input').innerHTML,/제조사 드라이버 근거/);
+nodes.get('sensor-shutter-fps').value='15';ui.renderSensorModeInput();assert.match(nodes.get('sensor-mode-input').innerHTML,/66.6667 ms/);assert.equal(ui.sensorShutterAxes().fps,15);
+nodes.get('sensor-shutter-fps').value='60';assert.throws(()=>ui.sensorShutterAxes(),/FPS/);
+nodes.get('sensor-shutter-mode').value='assumed_1080p120';ui.renderSensorModeInput(true);axes=ui.sensorShutterAxes();assert.equal(axes.fps,120);assert.match(nodes.get('sensor-mode-input').innerHTML,/미확보 timing · 가정/);
+const m=catalog.modes[2];ui.state.result={operating_mode:m,exposure_schedule:[{requested_exposure_ms:16,actual_exposure_ms:null,status:'blocked',reasons:['above_mode_exposure_maximum']}],configuration:{},timing_readout_application:{source_mode_bit_depth:null,simulated_readout:{bit_depth:12,read_noise_e:10,full_well_e:10000}}};ui.renderSensorModeResult();assert.match(nodes.get('sensor-mode-result').innerHTML,/차단 · RAW 없음/);assert.match(nodes.get('sensor-mode-result').innerHTML,/Timing만 적용/);assert.match(nodes.get('sensor-mode-result').innerHTML,/계산 센서 12bit/);
+nodes.get('sensor-shutter-mode').value='';ui.renderSensorModeInput();assert.equal(nodes.get('sensor-shutter-line-times').disabled,false);assert.equal(nodes.get('sensor-shutter-fps').disabled,true);nodes.get('sensor-shutter-line-times').value='0,10,20';assert.equal(ui.sensorShutterAxes().operating_mode_id,undefined);
+ui.state.result={};ui.renderSensorModeResult();assert.equal(nodes.get('sensor-mode-result').innerHTML,'');
+console.log('Sensor modes UI: source/assumption classification, mode-locked line time, FPS bounds, prospective cadence, blocked exposures, retained readout and legacy controls passed');

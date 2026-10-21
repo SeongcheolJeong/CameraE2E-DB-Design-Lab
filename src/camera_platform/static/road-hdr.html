@@ -1,0 +1,10 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><title>도로 HDR 설계평가</title>
+<style>body{font:16px system-ui;background:#101827;color:#e8eef7;margin:32px;max-width:1000px}input,textarea,button,select{font:inherit;padding:10px;margin:6px;background:#24334b;color:white;border:1px solid #637894}input,textarea{width:90%}a{color:#83c7ff}pre{white-space:pre-wrap}button{cursor:pointer}</style>
+<h1>도로 HDR의 인지 이득과 지연 비용</h1><p>동일 DB 카메라의 native RAW 취득 → 원본 보존 → 공통 ISP·HDR 재합성 → 사건별 평가.</p>
+<p>640×360은 표시 관측창입니다. native 계산 격자는 유지합니다. 전체 평가는 외부 저장소와 12개 독립 구간이 필요합니다.</p>
+<label>패키지 경로<input id="package" value="outputs/road-hdr-pedestrian-first-20261004"></label>
+<label>고정 명세 SHA256<input id="sha"></label>
+<label>단계<select id="action"><option value="first-photo">첫 사진 RAW 취득</option><option value="reprocess">동일 RAW HDR 재합성</option><option value="acquire">전체 시퀀스 취득</option><option value="evaluate">선정·별도 평가</option></select></label>
+<label>재합성 프로필<select id="profiles"><option value="all">모든 지원 프로필</option><option value="static">정적 진단</option><option value="global">기존 전역 이동 adapter</option><option value="local">국소·subpixel</option></select></label>
+<p><button id="freeze">새 첫 사진 명세 고정</button><button id="preflight">자원 확인</button><button id="submit">실행</button><button id="refresh">작업 조회</button></p>
+<pre id="status"></pre><main id="jobs"></main><script src="/road-hdr.js"></script></html>

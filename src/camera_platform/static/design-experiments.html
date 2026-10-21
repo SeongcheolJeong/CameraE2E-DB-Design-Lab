@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CameraE2E · 새 설계 실험</title><link rel="stylesheet" href="/design-experiments.css">
+<script defer src="/design-experiments.js"></script></head><body>
+<header><span class="eyebrow">CAMERAE2E / DESIGN EXPERIMENTS</span><nav><a href="/decision-review.html">이전 두 결정</a><a href="/#experiments">실험 작업실</a></nav>
+<h1>조건을 정하고, 새 결과를 계산합니다.</h1><p>등록 모델·장면과 노출·gain 후보를 고정해 비교합니다. 결과와 원본은 현재 작업공간에 저장합니다.</p><p id="connection" role="status">작업공간에 연결 중…</p></header>
+<main><div id="error" class="error" role="alert" hidden></div><div class="layout">
+<section class="panel"><h2>새 실험</h2><form id="experiment-form">
+<label>실험 이름<input id="name" maxlength="160" required></label>
+<fieldset id="registered-models" hidden><legend>등록 광학·전기 모델 · 1–3개 선택</legend><div id="model-options"></div><p class="note">각 후보는 선택한 모델 ID와 버전을 고정합니다. 서버가 지원 조합과 원본을 다시 검사합니다.</p></fieldset>
+<label id="registered-scene" hidden>등록 분광 장면 · 고정 버전<select id="scene"></select></label>
+<p id="catalog-source" class="note" hidden></p>
+<fieldset id="legacy-stops" hidden><legend>구 연구 예제의 처방 투과 조건</legend><label class="inline"><input type="checkbox" name="stop" value="clear" checked> 투명</label><label class="inline"><input type="checkbox" name="stop" value="quarter" checked> 균일 25%</label><label class="inline"><input type="checkbox" name="stop" value="radial" checked> 반경별 감쇠</label></fieldset>
+<div class="two"><label>노출 후보 (ms, 쉼표 구분)<input id="exposures" required value="1, 2, 4"></label><label>아날로그 gain 후보<input id="gains" required value="1, 2"></label></div>
+<label>선택용 광입력 배율<input id="training" required value="0.5, 2, 6"></label>
+<label>선택 후 평가용 광입력 배율<input id="evaluation" required value="0.85, 3.5"></label>
+<p class="note">평가는 상하 반전 또는 좌우 반전·파장 비율 변환을 사용합니다. 이번 선택에는 넣지 않지만, 여러 번 보고 수정하면 개발 데이터이며 독립 검증 자료가 아닙니다.</p>
+<fieldset><legend>동시에 만족해야 할 기준</legend><div class="two">
+<label>Green 최소 신호 (DN)<input id="signal" type="number" min="0" max="4031" step="any" value="120" required></label>
+<label>예측 Green SNR p10 최소 (선형비)<input id="snr" type="number" min="0" step="any" value="10" required></label>
+<label>Well 포화 상한 (%)<input id="well" type="number" min="0" max="100" step="any" value="1" required></label>
+<label>최종 RAW 상단 상한 (%)<input id="white" type="number" min="0" max="100" step="any" value="1" required></label>
+<label>노출 상한 (ms)<input id="cap" type="number" min="0.05" max="20" step="any" value="4" required></label>
+<label>평가용 잡음 반복 수<input id="repeats" type="number" min="0" max="4" step="1" value="2" required></label>
+<label>난수 seed<input id="seed" type="number" min="0" max="4294967286" step="1" value="2601" required></label></div></fieldset>
+<div id="scope-warning" class="warning">지원 계약을 확인하고 있습니다.</div>
+<label class="inline"><input id="acknowledge" type="checkbox"> <span id="acknowledge-label">시뮬레이션의 지원 범위와 평가 한계를 확인했습니다.</span></label>
+<p id="budget" class="note"></p><button id="submit" type="submit" disabled>새 실험 실행</button>
+<button id="cancel" type="button" class="secondary" hidden>진행 중 실험 취소</button>
+<p id="status" role="status" aria-live="polite"></p>
+</form></section>
+<section class="panel"><h2>저장한 실험</h2><label>실험 선택<select id="saved"><option value="">선택하세요</option></select></label><button id="reload" class="secondary">목록 새로고침</button>
+<p class="note">불러오기는 재계산하지 않습니다. 이름과 모든 입력이 같은 재제출은 기존 작업을 재사용합니다.</p>
+<p><a id="job-export" hidden>선택한 실행 원본 JSON</a></p>
+<div id="result" hidden><h3 id="choice"></h3><p id="verdict"></p><p id="scope" class="warning"></p>
+<div id="downloads" class="links"></div><details><summary>이번 실행의 고정 입력과 출처</summary><pre id="provenance"></pre></details>
+<h3>후보별 선택 결과</h3><div class="table-wrap"><table><thead><tr><th>후보</th><th>최소 Green DN</th><th>최악 SNR p10</th><th>판정 / 미달 기준</th></tr></thead><tbody id="candidates"></tbody></table></div>
+<h3>취득별 결과</h3><label>표시할 입력<select id="split"><option value="all">모든 결과</option><option value="train">선택용</option><option value="evaluation">선택 후 평가용</option><option value="failed">기준 미달</option></select></label>
+<div class="table-wrap"><table><thead><tr><th>후보 / 입력</th><th>Green DN</th><th>SNR p10</th><th>Well / RAW 상단</th><th>잡음</th><th>판정</th><th>원본</th></tr></thead><tbody id="rows"></tbody></table></div>
+<section id="preview" hidden><h3 id="preview-title"></h3><div class="images"><figure><img id="raw-image" alt="원본 RAW, 선언된 black-to-white 고정 범위"><figcaption>원본 RAW · 고정 표시 범위</figcaption></figure><figure><img id="rail-image" alt="최종 RAW 상단 코드 마스크"><figcaption>최종 RAW 상단 · well 마스크와 다름</figcaption></figure><figure id="rgb-preview" hidden><img id="rgb-image" alt="고정 ISP 프로필로 처리한 RGB 미리보기"><figcaption>원본 고정 ISP RGB</figcaption></figure><figure id="replay-preview" hidden><img id="replay-rgb-image" alt="저장된 동일 RAW를 새 ISP 프로필로 재처리한 RGB"><figcaption>재처리 ISP RGB · 동일 원본 RAW</figcaption></figure></div><a id="raw-download">원본 RAW NPY 저장</a><a id="diagnostics-download">전하·well·ADC 진단 NPZ 저장</a><a id="rgb-download" hidden>원본 ISP RGB NPY 저장</a><a id="replay-rgb-download" hidden>재처리 RGB NPY 저장</a>
+<section id="isp-replay" hidden><h4>저장된 RAW에서 ISP 재처리</h4><p class="note">광학·픽셀·노출을 다시 계산하지 않습니다. 고정 WB·3×3 CCM·tone만 바꾼 Software ISP 결과이며, 색 정확도나 HW ISP 등가성은 검증되지 않았습니다.</p>
+<form id="replay-form"><label>재처리 이름<input id="replay-name" maxlength="160" required value="저장 RAW · ISP 비교"></label><div class="two"><label>WB R gain<input id="wb-r" type="number" min="0.0625" max="16" step="any" required value="1"></label><label>WB G gain<input id="wb-g" type="number" min="0.0625" max="16" step="any" required value="1"></label><label>WB B gain<input id="wb-b" type="number" min="0.0625" max="16" step="any" required value="1"></label><label>Tone<select id="replay-tone"><option value="srgb">sRGB transfer</option><option value="linear">Linear</option></select></label></div><label>CCM · 각 행을 세미콜론, 열을 쉼표로 구분<input id="replay-ccm" required value="1,0,0; 0,1,0; 0,0,1"></label><button id="replay-submit" type="submit">원본 RAW 재처리·저장</button></form>
+<label>저장한 ISP 재처리<select id="replay-saved"><option value="">선택하세요</option></select></label><p id="replay-status" role="status" aria-live="polite"></p><p id="replay-comparison" class="warning" hidden></p><a id="replay-export" hidden>재처리 전체 기록 JSON 저장</a><details id="replay-provenance" hidden><summary>원본 RAW·프로필·결과 해시</summary><pre id="replay-evidence"></pre></details></section></section>
+</div></section></div></main><footer>원본 모델·과거 결정은 변경하지 않습니다. 조건부 선택이며 자동 승인 또는 배포가 아닙니다.</footer></body></html>

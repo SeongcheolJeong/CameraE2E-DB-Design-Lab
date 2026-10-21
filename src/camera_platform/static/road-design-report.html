@@ -1,0 +1,31 @@
+<!doctype html><html lang="ko"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>도로 카메라 설계평가</title><style>
+:root{color-scheme:dark;font:15px/1.65 system-ui;background:#101820;color:#e8edf3}
+body{margin:0}main{max-width:1480px;margin:auto;padding:32px}h1{font-size:27px;line-height:1.4;margin:8px 0}
+h2{font-size:19px}p{max-width:1080px;color:#b8c5d3}a{color:#82cbd2}header,.box{border:1px solid #314250;border-radius:12px;padding:22px;margin-bottom:20px;background:#18232e}
+.pill{display:inline-block;background:#25474a;color:#b3eee1;padding:3px 12px;border-radius:20px;font-size:13px}
+.controls{display:flex;flex-wrap:wrap;gap:16px;align-items:end;margin:20px 0}label{display:grid;gap:5px;color:#b8c5d3;font-size:13px}
+select{min-height:40px;max-width:480px;background:#223341;border:1px solid #4d6472;color:#fff;padding:8px;border-radius:6px}
+.context{width:100%;max-height:480px;object-fit:contain;background:#0b1118}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.card{background:#14232d;border:1px solid #344651;border-radius:10px;padding:16px}.card img,.card canvas{max-width:100%;height:240px;width:100%;object-fit:contain;image-rendering:pixelated;background:#0d1217}
+.kv{display:grid;grid-template-columns:1fr auto;font-size:13px;margin-top:10px;gap:4px}small{color:#acbdcb}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;border-bottom:1px solid #344651;padding:9px}td.num{text-align:right;font-variant-numeric:tabular-nums}
+.pass{color:#90e0b0}.fail{color:#ffb69f}.muted{color:#a6b8c7}details{margin:14px 0}#summary{white-space:pre-line}#sourceCrop{width:220px;height:220px;object-fit:contain;image-rendering:pixelated}
+@media(max-width:700px){main{padding:16px}h1{font-size:21px}select{max-width:90vw}header,.box{padding:15px}}
+</style><main><header><span class="pill" id="status"></span><h1>도로 사진 기반 분광 근사 장면에서의 상대 설계평가</h1>
+<div id="summary"></div><p>원본 RGB 촬영 흔적을 유지한 분광 근사 입력입니다. 4 ms · gain 1 · 공통 고정 ISP. 기하 PSF·저장 QE·가정 readout을 사용하며, 실측 정확도·제품 순위·검출 정확도를 뜻하지 않습니다.</p>
+<nav id="downloads"></nav></header>
+<section class="box"><h2>같은 물체각에서 비교</h2><div class="controls">
+<label>사진<select id="image"></select></label><label>관심 영역<select id="roi"></select></label>
+<label>가상 광량<select id="light"><option value="0.25">0.25× 저광량</option><option value="1" selected>1× 기준</option><option value="4">4× 밝은 조건</option></select></label>
+<label>공통 표시 배율<select id="display"><option value="1" selected>1× 고정 sRGB</option><option value="2">2× 표시만 증폭</option><option value="4">4× 표시만 증폭</option></select></label></div>
+<img class="context" id="context" alt="원본 도로 사진과 사전에 고정한 ROI 위치"><p id="sourceInfo"></p>
+<details><summary>원본 관심 영역과 고정 마스크</summary><canvas id="sourceCrop"></canvas><img id="mask" alt="공통 물체각 격자의 고정 물체·배경 마스크" style="width:220px;height:220px;object-fit:contain;image-rendering:pixelated"><p>왼쪽은 원본 사진의 문맥입니다. 오른쪽은 공통 물체각 격자의 물체(노랑)·배경(파랑) 마스크입니다. 밝은 영역에는 별도 배경 마스크가 없습니다.</p></details>
+<div class="grid" id="panels"></div><p>공통 표시 배율은 모든 후보에 동일하게 적용되며 저장 RAW·ISP·지표를 바꾸지 않습니다. 영상 표시 크기는 확대할 수 있지만 유효 표본 수는 아래 수치와 같습니다.</p></section>
+<section class="box"><h2>물체를 지나는 선의 신호</h2><canvas id="profile" width="1100" height="270" style="width:100%;height:270px"></canvas><p id="profileInfo"></p><p>잡음 없는 고정 ISP의 선형 휘도입니다. 모든 후보는 같은 선과 같은 축을 사용합니다. 자연 영상의 프로파일이며 MTF·검출 정확도나 새 선정 기준을 뜻하지 않습니다.</p></section>
+<section class="box"><h2>고정된 후보와 적용 범위</h2><div style="overflow:auto"><table id="candidates"></table></div>
+<p>저장 센서의 pixel pitch를 유지한 가상 센서 영역으로 공통 시야를 계산했습니다. 제품의 실제 active-array 크기와 장착 가능 FOV는 이 결과로 인증하지 않습니다. 투과율·상대 조도는 동일 unity 가정이며 회절과 CRA–픽셀 각도 결합은 검증되지 않았습니다.</p></section>
+<section class="box"><h2>선정과 독립 평가</h2><div id="metrics"></div><details><summary>입력 격자 확인</summary><div id="sampling"></div></details>
+<details><summary>제약과 재실행</summary><p id="limits"></p><p>원본 RAW·평균 광전자·선형 ISP·반복 취득 지표는 calculations 아래에 있습니다. README의 명령 하나로 같은 명세를 실행하거나 중단 이후 재개할 수 있습니다. nuImages 자료는 비상업 연구 범위이며 상업적 사용 권한은 확인되지 않았습니다. <a href="https://www.nuscenes.org/nuimages">공식 이용 안내</a></p></details></section>
+<footer><small>nuImages / Motional · RGB-derived spectral proxy · 자연 영상 대비는 렌즈 MTF가 아닙니다.</small></footer></main>
+<script id="payload" type="application/json">__PAYLOAD__</script><script src="road-design-report.js"></script></html>

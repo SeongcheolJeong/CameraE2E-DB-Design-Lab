@@ -1,0 +1,723 @@
+{
+  "schema": "camerae2e_sensor_simulation_scope_v1",
+  "version": "2026-09-06.1",
+  "purpose": "Conservative batch-simulation scope policy based on existing local TechInsights evidence; no measured accuracy certification.",
+  "default_action": "allow",
+  "default_action_meaning": "No listed scope exception was established by this bounded audit. Existing modality, CFA, geometry, spectral-domain and numeric validation remain mandatory.",
+  "sources": [
+    {
+      "path": "camerae2e_db/fdtd_tcad/sensor_db/sensor_catalog.json",
+      "sha256": "b9018deb20edf2bb00517a4f221aaeefcc60658301a7c1d87dd328c32063209c"
+    },
+    {
+      "path": "camerae2e_db/fdtd_tcad/image_sensor_db/sensor_catalog.json",
+      "sha256": "f1695c4cf67bb7737ea21fecd0e0da74cd6a2177e8b7c5d36c7749168110c547"
+    },
+    {
+      "path": "reports/techinsights_sensor_e2e/corpus_audit.json",
+      "sha256": "7e575fed6b3d66425092379e4848b8b4856b0b748bb30376bcf8082f4916c1c7"
+    },
+    {
+      "path": "reports/techinsights_sensor_e2e/pdf_text_scan.json",
+      "sha256": "5e093997763682ac64441c648151c3addfd8f879e230088f62e875fd354d2ab9"
+    }
+  ],
+  "entries": {
+    "DEF-1809-802": {
+      "action": "exclude",
+      "reason": "Polarization-resolving IMX250MZR cannot use an unfiltered clear-pixel transmission of one; polarizer throughput and orientation response are absent.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-1809-802",
+          "source_path": "camerae2e_db/fdtd_tcad/image_sensor_db/sensor_catalog.json",
+          "source_sha256": "f1695c4cf67bb7737ea21fecd0e0da74cd6a2177e8b7c5d36c7749168110c547",
+          "pdf_page_1_based": null,
+          "source_kind": "catalog_description",
+          "quote": "Device Essentials Image Set and Summary",
+          "json_pointer": "/records[code=DEF-1809-802]/description_excerpt"
+        },
+        {
+          "source_report_code": "DEP-1811-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/041_DEP-1811-802.html",
+          "source_sha256": "bb230ea52599a91830bbaa195497a0cf1a3a0c1944447dd19de0e757545dc6df",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ts a Device Essentials Plus (DEP) project on Sony IMX250MZR 5.0-megapixel (MP) monochrome polarized 2/3\" CMOS image sensor (CIS) with global shutter functionality fabricated using Sony’s Polarsens technology platform for industrial equipment market. Product Benefit Statement The Device Essentials Plus (DEP"
+        }
+      ]
+    },
+    "DEF-2003-801": {
+      "action": "override",
+      "reason": "Report identifies a four-cell CFA; render 2x2 pixels per color in the existing Quad Bayer DB estimate, with no physical microlens/angular claim.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2003-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/106_DEF-2003-801.html",
+          "source_sha256": "ad7d7a3cfa680d6f7c73cd2d7da50b8830def789f3374fa1939d60d01e14d122",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "irst 0.8 µm pixel generation stacked (PureCel Plus-S) imager from OmniVision, featuring a•four-cell color filter array (CFA) and on-chip lens phase detection autofocus (PDAF). Product Benefit Statement The Device Essentials deliverable for imaging devices includes a one page summary of observed device metric"
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2011-803": {
+      "action": "exclude",
+      "reason": "8.4 um pixel-unit pitch and 4.2 um cells are mixed in the extracted Quad Bayer record; native RAW pitch/area cannot be selected without resolving the readout unit.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2011-803",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/101_DEF-2011-803/Sony_IMX510AQL_DEF-2011-803_WM.pdf",
+          "source_sha256": "a9fb43401d7328aba7226990db075fbac9cd26dca2edb926e55dd1be2b1cbac0",
+          "pdf_page_1_based": 8,
+          "source_kind": "cached_pdf_text",
+          "quote": "mage sensor (CIS) technology platform – Sony fabricated CIS die (90 nm process metrics)  8.4 µm pixel unit pitch, with four-shared 4.2 μm pixel cells – Planar Quad Bayer patterned RGB color filter array (CFA) (2×2 pixel cells/filter/pixel unit)  Tungsten (W) light shield/grid structure, aperture grid fill factor FF 51.5%. – Planar shield/gri"
+        }
+      ]
+    },
+    "DEF-2102-801": {
+      "action": "exclude",
+      "reason": "OX08A source describes four pixel cells per filter/pixel unit; native 2.1 um pitch versus shared-cell readout semantics are unresolved. Do not force ordinary or Quad Bayer RAW.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2102-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_missing_def_a6pf30000000GqhAAE/html/pdfs/037_DEF-2102-801/OmniVision_OX08A_DEF-2102-801.pdf",
+          "source_sha256": "6ee0a3531bee21479a28a39c3262443cc5ae29b92480b51ebd0b06e7c7dad28a",
+          "pdf_page_1_based": 8,
+          "source_kind": "cached_pdf_text",
+          "quote": "ion ‒ Tungsten (W) metal light shield/grid structure, aperture grid fill factor FF 90%. ‒ Four-cell buried Bayer patterned RGB color filter array (CFA) (2×2 pixel cells/filter/pixel unit) ‒ Gapless on-chip microlens (OCL) array  86 pin imager ball grid array (iBGA) Package type ‒ Gold (Au) wire bonds connec"
+        },
+        {
+          "source_report_code": "DEF-2102-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_missing_def_a6pf30000000GqhAAE/html/pdfs/037_DEF-2102-801/OmniVision_OX08A_DEF-2102-801.pdf",
+          "source_sha256": "6ee0a3531bee21479a28a39c3262443cc5ae29b92480b51ebd0b06e7c7dad28a",
+          "pdf_page_1_based": 8,
+          "source_kind": "cached_pdf_text",
+          "quote": "ion ‒ Tungsten (W) metal light shield/grid structure, aperture grid fill factor FF 90%. ‒ Four-cell buried Bayer patterned RGB color filter array (CFA) (2×2 pixel cells/filter/pixel unit) ‒ Gapless on-chip microlens (OCL) array  86 pin imager ball grid array (iBGA) Package type ‒ Gold (Au) wire bonds connec"
+        }
+      ]
+    },
+    "DEF-2201-802": {
+      "action": "override",
+      "reason": "The report explicitly states one Bayer RGB filter for 2x2 shared pixels; use the existing Quad Bayer DB estimate rather than ordinary Bayer geometry.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2201-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/081_DEF-2201-802/OmniVision_OV50A_DEF-2201-802.pdf",
+          "source_sha256": "c0dc1f33967f53e98f93a9b4bfa16d43c889911cab29036e1e5f6b23f7ce9dc4",
+          "pdf_page_1_based": 8,
+          "source_kind": "cached_pdf_text",
+          "quote": "icon vias (TSVs) in use for CIS/ISP interconnect  1.008 μm pixel generation ‒ OmniVision 4-cell color filter array (CFA) employing single buried Bayer RGB filter for 2×2 shared pixels ‒ Composite metal grid (CMG) structure featuring embedded (buried) CFA, aperture grid fill factor FF 92% ‒ Gapless on-chip microlens ("
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2204-804": {
+      "action": "exclude",
+      "reason": "Nonacell CFA is not the implemented ordinary Bayer or 2x2 Quad Bayer RAW pattern.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2204-804",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/078_DEF-2204-804.html",
+          "source_sha256": "032c42835764a7404db114319174577212958c37382e37625dd1d40046bf37cf",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ormat, 108 MP class stacked imager featuring 0.64 µm pixel pitch, ISOCELL 2.0 pixels, and Nonacell Bayer RGB color filters. Product Benefit Statement This report presents a device essentials folder (DEF) of the Samsung S5KHM6 CMOS image sensor from the Realme 9 smartphone rear camera. The Samsung S5KHM6 is "
+        }
+      ]
+    },
+    "DEF-2209-801": {
+      "action": "exclude",
+      "reason": "Tetra2pixel/4x4 binning modes do not establish the implemented ordinary Bayer native RAW pattern; 4x4-filter-cell remosaic is unsupported.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2209-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/072_DEF-2209-801.html",
+          "source_sha256": "c6a807e5077a75367d88ab891e408d88c62e2d8ca854b4b4eeac5ea5f7e6085f",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "DEF-2209-801 - Samsung S5KHP1SP 200 MP 0.64 μm Pixel Pitch Tetra2pixel CMOS Image Sensor Device Essentials Folder :root { color-scheme: light; --border:#d9e2ea; --muted:#5f6b76; --accent:#1f6fb2; } body { margin:0; background:#fff; color:#17212b; font-family: Arial, Helvetica, sa"
+        }
+      ]
+    },
+    "DEF-2304-807": {
+      "action": "exclude",
+      "reason": "HP3 color-filter pitch is four native pixel pitches; a 4x4-pixels-per-filter CFA is outside the implemented 2x2 Quad Bayer native RAW support.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2304-807",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/061_DEF-2304-807/Samsung_S5KHP3SP_DEF-2304-807.pdf",
+          "source_sha256": "350f56acca7abb664f23d6ca03d7cec5b6fdf633498f944e412c61e1204a7c20",
+          "pdf_page_1_based": 8,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 1.12 μm, color filter pitch of 2.24 μm, and grid pitch of 1.12 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        },
+        {
+          "source_report_code": "DEF-2304-807",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/061_DEF-2304-807/Samsung_S5KHP3SP_DEF-2304-807.pdf",
+          "source_sha256": "350f56acca7abb664f23d6ca03d7cec5b6fdf633498f944e412c61e1204a7c20",
+          "pdf_page_1_based": 8,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 1.12 μm, color filter pitch of 2.24 μm, and grid pitch of 1.12 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ]
+    },
+    "DEF-2305-802": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2305-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/058_DEF-2305-802/OmniVision_OS12D40_DEF-2305-802.pdf",
+          "source_sha256": "cfa8011d1bf1f51cd942ebb21d4d2c405a93716775ff4a3d2a3b4f74a4dc3507",
+          "pdf_page_1_based": 8,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 1.4 µm, color filter pitch of 2.8 µm, and grid pitch of 1.4 µm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2307-801": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2307-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/056_DEF-2307-801/SK hynix_Hi-5021Q_DEF-2307-801.pdf",
+          "source_sha256": "bc00d4a6c87c01104aad75b8df3f066573825429656b0d99791a28a38073715a",
+          "pdf_page_1_based": null,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 0.70 μm, color filter pitch of 1.4 μm, and air gap/W grid pitch of 0.70 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": true
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2312-801": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2312-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/047_DEF-2312-801/Samsung_S5KGM5SX_DEF-2312-801.pdf",
+          "source_sha256": "db36bf06e60d5d4825374277e40c786a01d03ea0d81ca455cb7d62376755d83f",
+          "pdf_page_1_based": 8,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 0.70 μm, color filter pitch of 1.40 μm, and grid pitch of 0.70 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2403-801": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2403-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/043_DEF-2403-801/OmniVision_OV50H_DEF-2403-801.pdf",
+          "source_sha256": "91eddb3f6e3da40c35bfdc4ac478d9f138f54c0cfb93a004f4a59cd84e4804f5",
+          "pdf_page_1_based": 12,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 2.4 μm, color filter pitch of 2.4 μm, and grid pitch of 2.4 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2405-802": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2405-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/039_DEF-2405-802/OmniVision OV50K DEF-2405-802.pdf",
+          "source_sha256": "7363b2e09299dd5fece50a76c17810e3d8aaccefc61f64b620becf7de48afff9",
+          "pdf_page_1_based": 12,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 2.4 μm, color filter pitch of 2.4 μm, and grid pitch of 2.4 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2409-801": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2409-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/032_DEF-2409-801/Samsung_JN5_DEF-2409-801.pdf",
+          "source_sha256": "0c258578f1911b753e1e04e366ce28da2a1966ab32c686b950668a231c05e19e",
+          "pdf_page_1_based": 12,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 1.28 μm, color filter pitch of 1.28 μm, and grid pitch of 1.28 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2409-803": {
+      "action": "exclude",
+      "reason": "GNJ source mixes four 0.5 um subpixels per 1.0 um pixel and Tetrapixel filter terminology; native pixel/filter/readout-unit mapping is unresolved, so do not guess a Quad Bayer RAW layout.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2409-803",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/031_DEF-2409-803/Samsung GNJ DEF-2409-803.pdf",
+          "source_sha256": "ecacd5188ab33658a4452fc4df08bb3593aabca96aa75c29ff2d4e0cb8637d8e",
+          "pdf_page_1_based": 4,
+          "source_kind": "cached_pdf_text",
+          "quote": "riple conversion gain (TCG) and something that is not so evident from its specifications: four sub-pixels pixels per pixel, while previous dual pixels had two subpixels per pixel.  Furthermore, TechInsights has also analyzed previous Samsung CIS with D-VTG, including the HP2 (DEF-2302-801 and DEP-2304-801)"
+        },
+        {
+          "source_report_code": "DEF-2409-803",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/031_DEF-2409-803/Samsung GNJ DEF-2409-803.pdf",
+          "source_sha256": "ecacd5188ab33658a4452fc4df08bb3593aabca96aa75c29ff2d4e0cb8637d8e",
+          "pdf_page_1_based": 5,
+          "source_kind": "cached_pdf_text",
+          "quote": "tecture with 2 × 1 pixel configuration, and 2 × 2 transfer gate configuration per pixel – Four sub-pixel configuration per pixel – Dual vertical transfer gate per subpixel, with the gates connected with a polySi strap – Triple conversion gain (TCG) to improve high dynamic range (HDR)  New high precision on"
+        },
+        {
+          "source_report_code": "DEP-2409-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/011_DEP-2409-801.html",
+          "source_sha256": "c7ad4a89a52ce5815f2a679d507ea1faa437d77b4522cfd644ff010ae628eb02",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ve (AR) layers, and ISOCELL grid structure without metal liner. Additionally, besides the Tetrapixel RGB Bayer patterned color filter array (CFA), it uses four sub-pxiels (0.5 μm) per pixel, D-VTG and the phase autofocus (PDAF) implemented through Super Quad Phase Detection (QPD) strategy. These structural fe"
+        }
+      ]
+    },
+    "DEF-2502-802": {
+      "action": "exclude",
+      "reason": "UV-targeted IMX487 is outside this visible 400–700 nm camera-response database scope; no UV response model is available.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2502-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/025_DEF-2502-802.html",
+          "source_sha256": "0470e7f01443681e8d2ecffaddbe0465ac9c6edb3d762d7a285458f6cd883e0d",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "X487 is a monochrome, 8.13 MP, stacked, back-illuminated (BI) global shutter (Pregius® S) UltraViolet (UV) CIS with a 2/3” format for industrial and commercial applications. Content Title Sony IMX487 Device Essentials Folder Document Assets Name Type Classification File Type Size ID Sony IMX487 Device Essentia"
+        }
+      ]
+    },
+    "DEF-2506-802": {
+      "action": "override",
+      "reason": "The on-chip metaphotonic lens replaces the conventional organic microlens. Retain only the lumped visible DB estimate with explicit proxy CFA/collection assumptions; ordinary organic-lens geometry and angular response are unsupported.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2506-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/021_DEF-2506-802.html",
+          "source_sha256": "2c3252eff7150a1ccc38148a6a1aa35b8159767d80617a9257defee26b5f533b",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "S) for smartphone camera applications. It is the first stacked BI CIS employed with a new meta-photonics micro-lens array (MPMA), replacing the traditional organic micro-lens array. Content Title Samsung ISOCELL JNP Stacked Back-Illuminated CMOS Image Sensor Document Assets Name Type Classification File Type S"
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2511-802": {
+      "action": "exclude",
+      "reason": "HP5 DEF Tetrapixel wording conflicts with detailed DEP Tetra2cell 4x4 pixels/filter at 2.0 um; ordinary Bayer is unsupported and native readout layout requires review.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2511-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/014_DEF-2511-802.html",
+          "source_sha256": "6967ad203584f1b6ce73a01ccc92e4e1d5b1af2eb12b26b4ade2c6f8cd4f4220",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "al gate transistors (D-VTG) connected together by a polysilicon strap. The HP5 CIS uses a Tetrapixel Bayer color filter arrangement embedded in a composite grid structure (ISOCELL) The CIS features 2×2 gapless on-chip lens (OCL) that uses full pixel array phase detection autofocus (PDAF) The HP5 CIS die is st"
+        },
+        {
+          "source_report_code": "DEP-2511-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/003_DEP-2511-801.html",
+          "source_sha256": "145a596494e35f71fe8f3d718b9cfcfb3f13a86ea11fe81e748ccd4c6412505f",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "Filters_40kx_468470.png · /Report Images The HP5 uses an embedded(buried) Bayer-patterned Tetra^2^cell(4 ×4 pixels/filter) color filter array with a pitch of 2.0 μm. Also, the HP5 CIS uses a full array phase-detection autofocus (PDAF), known as Samsung’s Super QPD auto-focusing technology. The PDAF pixels group"
+        }
+      ]
+    },
+    "DEF-2603-802": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2603-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/007_DEF-2603-802.html",
+          "source_sha256": "d47c04e4609c379757613f331473b1d017b9f6d49c5375ef7f436b7781c7c9f5",
+          "pdf_page_1_based": null,
+          "source_kind": "html_design_snippet",
+          "quote": "Partially embedded (buried) 4-Cell (2 × 2) Bayer patterned CFA Gapless on-chip lens (OCL) array OCL pitch of 3.2 μm, color filter pitch of 3.2 μm, and grid pitch of 3.2 μm Full array phase detection autofocus (PDAF) and...",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEF-2604-801": {
+      "action": "exclude",
+      "reason": "LYT-901 uses Quad-Quad Bayer Coding; this is not the implemented 2x2 Quad Bayer RAW pattern.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2604-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/003_DEF-2604-801.html",
+          "source_sha256": "f1ffa828831ac5cc38ac79611d3f41a78fe34da9b7273965f0299269f74f9498",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "r smartphone camera applications, and the first to be analyzed. It also introduces Sony’s Quad-Quad Bayer Coding (QQBC) color filter array. This report provides an overview of the structure of Sony's LYT-901 image sensor. The analysis provides foundry identification, details of the fabrication process used t"
+        },
+        {
+          "source_report_code": "DEF-2604-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/003_DEF-2604-801.html",
+          "source_sha256": "f1ffa828831ac5cc38ac79611d3f41a78fe34da9b7273965f0299269f74f9498",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "r smartphone camera applications, and the first to be analyzed. It also introduces Sony’s Quad-Quad Bayer Coding (QQBC) color filter array. This report provides an overview of the structure of Sony's LYT-901 image sensor. The analysis provides foundry identification, details of the fabrication process used t"
+        }
+      ]
+    },
+    "DEF-2605-801": {
+      "action": "exclude",
+      "reason": "OV52A report states a 4x4 Bayer CFA while extracted filter-pitch ratio is 2; conflicting layout evidence and unsupported 4x4 cells require review.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEF-2605-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/002_DEF-2605-801.html",
+          "source_sha256": "bc208f37fc7e67c8e8773b4cc702ee70d545d6ece053b0d6234290fbb76ebf85",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "h, for mobile applications, and the first 200 MP from OmniVision to be analyzed. It has a 4×4 Bayer color filter array. This report provides an overview of the structure of the OmniVision OV52A image sensor. The analysis provides foundry identification, details of the fabrication process used to manufacture "
+        },
+        {
+          "source_report_code": "DEF-2605-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/002_DEF-2605-801.html",
+          "source_sha256": "bc208f37fc7e67c8e8773b4cc702ee70d545d6ece053b0d6234290fbb76ebf85",
+          "pdf_page_1_based": null,
+          "source_kind": "html_design_snippet",
+          "quote": "Use of CMG with Aluminum (Al) and oxide extension Overview Stacked back-illuminated, stacked CMOS image sensor (CIS) for mobile applications XMC-fabricated 40 nm process generation CIS XMC-fabricated 40 nm process gener...",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ]
+    },
+    "DEP-1811-802": {
+      "action": "exclude",
+      "reason": "Polarization-resolving IMX250MZR cannot use an unfiltered clear-pixel transmission of one; polarizer throughput and orientation response are absent.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-1811-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/041_DEP-1811-802.html",
+          "source_sha256": "bb230ea52599a91830bbaa195497a0cf1a3a0c1944447dd19de0e757545dc6df",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ts a Device Essentials Plus (DEP) project on Sony IMX250MZR 5.0-megapixel (MP) monochrome polarized 2/3\" CMOS image sensor (CIS) with global shutter functionality fabricated using Sony’s Polarsens technology platform for industrial equipment market. Product Benefit Statement The Device Essentials Plus (DEP"
+        },
+        {
+          "source_report_code": "DEP-1811-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/041_DEP-1811-802.html",
+          "source_sha256": "bb230ea52599a91830bbaa195497a0cf1a3a0c1944447dd19de0e757545dc6df",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ts a Device Essentials Plus (DEP) project on Sony IMX250MZR 5.0-megapixel (MP) monochrome polarized 2/3\" CMOS image sensor (CIS) with global shutter functionality fabricated using Sony’s Polarsens technology platform for industrial equipment market. Product Benefit Statement The Device Essentials Plus (DEP"
+        }
+      ]
+    },
+    "DEP-1902-801": {
+      "action": "override",
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "monochrome",
+      "source_reviewed": true,
+      "reason": "The exact DEP-1902-801 GMAX0505-BM report explicitly identifies a monochromatic sensor. Recover its missing CFA as an uncalibrated clear absorption-only DB estimate; retain generated 5 um active-Si thickness and assumed lumped efficiency.",
+      "missing_cfa_recovery": {
+        "transmission_model": "unity_color_filter_absorption_only",
+        "transmission_scope": "Unity represents no modeled color-filter absorption only. It does not imply unit optical-stack throughput or QE. Silicon absorption remains finite, and reflection, collection and other losses remain lumped into assumed effective_efficiency (default 0.75).",
+        "original_db_modified": false
+      },
+      "simulation_scope": "uncalibrated_visible_400_700nm_monochrome_optical_and_charge_estimate",
+      "angular_response_supported": false,
+      "evidence": [
+        {
+          "source_report_code": "DEP-1902-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/pdfs/038_DEP-1902-801/GPixel_GMAX0505_FI_GS_CIS_DEP-1902-801.pdf",
+          "source_sha256": "35da7b9e3b42b4156fba88fc85b06bd768507a3582a8f1a3aa04aebbbc8aff83",
+          "pdf_page_1_based": 4,
+          "source_kind": "cached_pdf_text",
+          "quote": "All rights reserved. Overview  The G pixel GMAX0505 is a 25 megapixel (MP) charge domain monochromatic global shutter (GS) CIS for machine vision, industrial, and surveillance applications [1].  The GMAX0505 is 1.1” format front-illu minated (FI) CIS with gapless microlens array.  2.5 µm x 2.5 µm pixel si"
+        }
+      ]
+    },
+    "DEP-2004-802": {
+      "action": "exclude",
+      "reason": "Quad Quad Bayer 4x4 pixel/color-filter blocks cannot be rendered as the implemented 2x2 Quad Bayer pattern.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2004-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/033_DEP-2004-802.html",
+          "source_sha256": "114406e1f4b3bb075cc6e761628e2494c97b120e418d15e6f6f07223e0eec484",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ge sensor used in Huawei's Mate 30 Pro and P40 Pro smartphones. The IMX608 features a new 4x4 pixel/color filter “Quad Quad Bayer” array and new PDAF pattern. Product Benefit Statement The Device Essentials Plus (DEP) deliverable builds on the content generated in a Device Essentials (DEF) project. The"
+        }
+      ]
+    },
+    "DEP-2103-801": {
+      "action": "exclude",
+      "reason": "OX08A source describes four pixel cells per filter/pixel unit; native 2.1 um pitch versus shared-cell readout semantics are unresolved. Do not force ordinary or Quad Bayer RAW.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2103-801",
+          "source_path": "camerae2e_db/fdtd_tcad/image_sensor_db/sensor_catalog.json",
+          "source_sha256": "f1695c4cf67bb7737ea21fecd0e0da74cd6a2177e8b7c5d36c7749168110c547",
+          "pdf_page_1_based": null,
+          "source_kind": "catalog_description",
+          "quote": "The OmniVision OV08A4Y is a color, 8.3 MP, PureCel Plus-S stacked back-illuminated (BI) CMOS image sensor (CIS) with a 1/1.73” format, LED flicker mitigation (LFM), and 140 dB high dynamic range (HDR) for automotive applications.",
+          "json_pointer": "/records[code=DEP-2103-801]/description_excerpt"
+        },
+        {
+          "source_report_code": "DEF-2102-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_missing_def_a6pf30000000GqhAAE/html/pdfs/037_DEF-2102-801/OmniVision_OX08A_DEF-2102-801.pdf",
+          "source_sha256": "6ee0a3531bee21479a28a39c3262443cc5ae29b92480b51ebd0b06e7c7dad28a",
+          "pdf_page_1_based": 8,
+          "source_kind": "cached_pdf_text",
+          "quote": "ion ‒ Tungsten (W) metal light shield/grid structure, aperture grid fill factor FF 90%. ‒ Four-cell buried Bayer patterned RGB color filter array (CFA) (2×2 pixel cells/filter/pixel unit) ‒ Gapless on-chip microlens (OCL) array  86 pin imager ball grid array (iBGA) Package type ‒ Gold (Au) wire bonds connec"
+        }
+      ]
+    },
+    "DEP-2305-801": {
+      "action": "exclude",
+      "reason": "HP3 color-filter pitch is four native pixel pitches; a 4x4-pixels-per-filter CFA is outside the implemented 2x2 Quad Bayer native RAW support.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2305-801",
+          "source_path": "camerae2e_db/fdtd_tcad/image_sensor_db/sensor_catalog.json",
+          "source_sha256": "f1695c4cf67bb7737ea21fecd0e0da74cd6a2177e8b7c5d36c7749168110c547",
+          "pdf_page_1_based": null,
+          "source_kind": "catalog_description",
+          "quote": "This is a Device Essentials Plus analysis of the Samsung S5KHP3SP CMOS image sensor (CIS) extracted from the Honor 80 Pro rear wide-angle camera.",
+          "json_pointer": "/records[code=DEP-2305-801]/description_excerpt"
+        },
+        {
+          "source_report_code": "DEF-2304-807",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/pdfs/061_DEF-2304-807/Samsung_S5KHP3SP_DEF-2304-807.pdf",
+          "source_sha256": "350f56acca7abb664f23d6ca03d7cec5b6fdf633498f944e412c61e1204a7c20",
+          "pdf_page_1_based": 8,
+          "source_kind": "pdf_design_snippet",
+          "quote": "– OCL pitch of 1.12 μm, color filter pitch of 2.24 μm, and grid pitch of 1.12 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ]
+    },
+    "DEP-2403-801": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2403-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/pdfs/016_DEP-2403-801/OmniVision_OV50H_DEP-2403-801.pdf",
+          "source_sha256": "2b0517a3225121d0427792c76538136e978dd545eea5e0f4e9bfd383922b684c",
+          "pdf_page_1_based": 5,
+          "source_kind": "pdf_design_snippet",
+          "quote": " OCL pitch of 2.4μm, color filter pitch of 2.4 μm, and grid pitch of 2.4 μm",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEP-2409-801": {
+      "action": "exclude",
+      "reason": "GNJ source mixes four 0.5 um subpixels per 1.0 um pixel and Tetrapixel filter terminology; native pixel/filter/readout-unit mapping is unresolved, so do not guess a Quad Bayer RAW layout.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2409-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/011_DEP-2409-801.html",
+          "source_sha256": "c7ad4a89a52ce5815f2a679d507ea1faa437d77b4522cfd644ff010ae628eb02",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ve (AR) layers, and ISOCELL grid structure without metal liner. Additionally, besides the Tetrapixel RGB Bayer patterned color filter array (CFA), it uses four sub-pxiels (0.5 μm) per pixel, D-VTG and the phase autofocus (PDAF) implemented through Super Quad Phase Detection (QPD) strategy. These structural fe"
+        },
+        {
+          "source_report_code": "DEP-2409-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/011_DEP-2409-801.html",
+          "source_sha256": "c7ad4a89a52ce5815f2a679d507ea1faa437d77b4522cfd644ff010ae628eb02",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ve (AR) layers, and ISOCELL grid structure without metal liner. Additionally, besides the Tetrapixel RGB Bayer patterned color filter array (CFA), it uses four sub-pxiels (0.5 μm) per pixel, D-VTG and the phase autofocus (PDAF) implemented through Super Quad Phase Detection (QPD) strategy. These structural fe"
+        }
+      ]
+    },
+    "DEP-2504-801": {
+      "action": "exclude",
+      "reason": "UV-targeted IMX487 is outside this visible 400–700 nm camera-response database scope; no UV response model is available.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2504-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/005_DEP-2504-801.html",
+          "source_sha256": "f73ee32d37200a3007d2d8d7a4e09e4f295d02b6ea0ed7a0edd410e2ba30de7a",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "ich deliver distortion-free images, and is particularly designed to capture images in the UV (ultraviolet) wavelengths. Sony's global shutter technology, Pregius S™, with monochrome and new materials in the structure of back-layers, including OCL and high-k dielectrics (HKD)/antireflective (AR) layers"
+        }
+      ]
+    },
+    "DEP-2505-802": {
+      "action": "override",
+      "reason": "Reported color-filter pitch is twice native pixel pitch and the context names color filters; use 2x2 pixels per filter in the Quad Bayer DB estimate. The ordinary Bayer microlens model is inapplicable.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2505-802",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/007_DEP-2505-802.html",
+          "source_sha256": "0e346a52fa19d4b1e099ea88c2244a8fd50b6238e2f6e7f14c15dde1500dc4bc",
+          "pdf_page_1_based": null,
+          "source_kind": "html_design_snippet",
+          "quote": "2 × 2 gapless OCL array with silicon oxide (SiO) coating OCL radius of curvature is 1.3 µm OCL pitch of 2.0 µm, color filter pitch of 2.0 µm, and grid pitch of 2.0 µm 2.1 µm optical stack height The periphery region use...",
+          "field": "color_filter_pitch_um",
+          "page_unavailable_in_cached_scan": false
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "cfa_pattern_override": "quad_bayer",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEP-2506-801": {
+      "action": "override",
+      "reason": "The on-chip metaphotonic lens replaces the conventional organic microlens. Retain only the lumped visible DB estimate with explicit proxy CFA/collection assumptions; ordinary organic-lens geometry and angular response are unsupported.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2506-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/004_DEP-2506-801.html",
+          "source_sha256": "b61035d1f684d82344c66c180d99bff92ade591d0b55d6da9686bf8d471561d5",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "39e658ebfbe Description The Samsung ISOCELL JNP is the first commercial use of an on-chip metaphotonics microlens array (MPMA) on an image sensor, replacing the traditional organic on-chip lens (OCL) array. Metaphotonic structures are an emerging technology that manipulates light at the nanoscale to enhance o"
+        }
+      ],
+      "model_override": "db_estimate_v1",
+      "simulation_scope": "uncalibrated_visible_400_700nm_optical_and_charge_estimate",
+      "angular_response_supported": false
+    },
+    "DEP-2511-801": {
+      "action": "exclude",
+      "reason": "HP5 DEF Tetrapixel wording conflicts with detailed DEP Tetra2cell 4x4 pixels/filter at 2.0 um; ordinary Bayer is unsupported and native readout layout requires review.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2511-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/003_DEP-2511-801.html",
+          "source_sha256": "145a596494e35f71fe8f3d718b9cfcfb3f13a86ea11fe81e748ccd4c6412505f",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "Filters_40kx_468470.png · /Report Images The HP5 uses an embedded(buried) Bayer-patterned Tetra^2^cell(4 ×4 pixels/filter) color filter array with a pitch of 2.0 μm. Also, the HP5 CIS uses a full array phase-detection autofocus (PDAF), known as Samsung’s Super QPD auto-focusing technology. The PDAF pixels group"
+        },
+        {
+          "source_report_code": "DEP-2511-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download_dep_a6pf30000009PYHAA2/html/reports/003_DEP-2511-801.html",
+          "source_sha256": "145a596494e35f71fe8f3d718b9cfcfb3f13a86ea11fe81e748ccd4c6412505f",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "Filters_40kx_468470.png · /Report Images The HP5 uses an embedded(buried) Bayer-patterned Tetra^2^cell(4 ×4 pixels/filter) color filter array with a pitch of 2.0 μm. Also, the HP5 CIS uses a full array phase-detection autofocus (PDAF), known as Samsung’s Super QPD auto-focusing technology. The PDAF pixels group"
+        }
+      ]
+    },
+    "DEP-2606-801": {
+      "action": "exclude",
+      "reason": "LYT-901 uses Quad-Quad Bayer Coding; this is not the implemented 2x2 Quad Bayer RAW pattern.",
+      "source_reviewed": true,
+      "evidence": [
+        {
+          "source_report_code": "DEP-2606-801",
+          "source_path": "camerae2e_db/fdtd_tcad/image_sensor_db/sensor_catalog.json",
+          "source_sha256": "f1695c4cf67bb7737ea21fecd0e0da74cd6a2177e8b7c5d36c7749168110c547",
+          "pdf_page_1_based": null,
+          "source_kind": "catalog_description",
+          "quote": "Technical Report: Sony LYT-901 Device Essentials Plus",
+          "json_pointer": "/records[code=DEP-2606-801]/description_excerpt"
+        },
+        {
+          "source_report_code": "DEF-2604-801",
+          "source_path": "/Users/seongcheoljeong/Sensor_DB_TechInsight/techinsights_html_download/html/reports/003_DEF-2604-801.html",
+          "source_sha256": "f1ffa828831ac5cc38ac79611d3f41a78fe34da9b7273965f0299269f74f9498",
+          "pdf_page_1_based": null,
+          "source_kind": "local_report_html",
+          "quote": "r smartphone camera applications, and the first to be analyzed. It also introduces Sony’s Quad-Quad Bayer Coding (QQBC) color filter array. This report provides an overview of the structure of Sony's LYT-901 image sensor. The analysis provides foundry identification, details of the fabrication process used t"
+        }
+      ]
+    }
+  }
+}

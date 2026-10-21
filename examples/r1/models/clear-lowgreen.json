@@ -1,0 +1,1 @@
+{"base_model_id":"r1-stop-clear-v1","components":{"electrical_id":"r1-readout-base-v1","optics_id":"r1-opt-clear-v1","pixel_id":"r1-pixel-lowgreen-v1"},"id":"r1-clear-lowgreen-v1","name":"Clear stop + lower-green-EQE pixel","physical_validation":"not_established","revision":"1","schema":"camerae2e_r1_design_composition_v1"}

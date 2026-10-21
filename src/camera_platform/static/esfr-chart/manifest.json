@@ -1,0 +1,4126 @@
+{
+  "schema": "camera_esfr_chart_geometry_v1",
+  "id": "imatest-esfr-2023-extended-reconstruction-v1",
+  "revision": "2023",
+  "title": "Extended E-SFR ISO 2023 · 16:9",
+  "artwork_shape": [
+    370.0,
+    640.0
+  ],
+  "nominal_camera_aspect_ratio": "16:9",
+  "active_box_xywh": [
+    11,
+    11,
+    618,
+    348
+  ],
+  "framing": "Uniform scale of full 640×370 artwork, centered in sensor raster; no anisotropic stretch",
+  "geometry_status": "Reconstructed from official public preview; vendor vector master not available",
+  "coordinate_precision_note": "coordinates estimated from the 640 px preview; exact manufacturing dimensions and tolerances unknown",
+  "physical_size_mm": null,
+  "source": {
+    "url": "https://docs.imatest.com/assets/wp-content/uploads/2018/09/23.2-12233-chart-web.png",
+    "sha256": "b2c859a750217d7e83699d90f19ccc46242d636df5753d2fc5df1d461a4be476",
+    "documentation": "https://docs.imatest.com/docs/esfriso_instructions",
+    "algorithm_paper": "https://www.imatest.com/wp-content/uploads/2024/03/Kerr_EI2024_IQSP_Recommendations_for_the_Detection_and_Analysis_of_the_ISO_12233-2023_e-SFR_Slanted_Star.pdf"
+  },
+  "stars": [
+    {
+      "id": "star-corner-top-left",
+      "center_xy": [
+        53,
+        56
+      ],
+      "half_extent": 40,
+      "slant_deg": -5,
+      "dark_phase_deg": 45,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "extended_corner"
+    },
+    {
+      "id": "star-top-left",
+      "center_xy": [
+        160,
+        60
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-top-center",
+      "center_xy": [
+        320,
+        57
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-top-right",
+      "center_xy": [
+        482,
+        60
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-corner-top-right",
+      "center_xy": [
+        588,
+        56
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "extended_corner"
+    },
+    {
+      "id": "star-middle-left",
+      "center_xy": [
+        180,
+        186
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-center",
+      "center_xy": [
+        320,
+        186
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-middle-right",
+      "center_xy": [
+        461,
+        186
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-corner-bottom-left",
+      "center_xy": [
+        53,
+        315
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "extended_corner"
+    },
+    {
+      "id": "star-bottom-left",
+      "center_xy": [
+        160,
+        311
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-bottom-center",
+      "center_xy": [
+        320,
+        314
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-bottom-right",
+      "center_xy": [
+        482,
+        311
+      ],
+      "half_extent": 40,
+      "slant_deg": 5,
+      "dark_phase_deg": 0,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "core"
+    },
+    {
+      "id": "star-corner-bottom-right",
+      "center_xy": [
+        588,
+        315
+      ],
+      "half_extent": 40,
+      "slant_deg": -5,
+      "dark_phase_deg": 45,
+      "cycles": 4,
+      "radial_edges": 8,
+      "role": "extended_corner"
+    }
+  ],
+  "side_squares": [
+    {
+      "id": "side-square-left",
+      "center_xy": [
+        58,
+        186
+      ],
+      "half_extent": 24,
+      "slant_deg": -5,
+      "focus_aid_radius": 7
+    },
+    {
+      "id": "side-square-right",
+      "center_xy": [
+        582,
+        186
+      ],
+      "half_extent": 24,
+      "slant_deg": -5,
+      "focus_aid_radius": 7
+    }
+  ],
+  "gray_patches": [
+    {
+      "id": "gray-01",
+      "center_xy": [
+        309,
+        112
+      ],
+      "size": 22,
+      "nominal_density": 0.1,
+      "nominal_linear_reflectance": 0.7943282347242815
+    },
+    {
+      "id": "gray-02",
+      "center_xy": [
+        331,
+        112
+      ],
+      "size": 22,
+      "nominal_density": 0.16,
+      "nominal_linear_reflectance": 0.6918309709189365
+    },
+    {
+      "id": "gray-03",
+      "center_xy": [
+        287,
+        118
+      ],
+      "size": 22,
+      "nominal_density": 0.22,
+      "nominal_linear_reflectance": 0.6025595860743578
+    },
+    {
+      "id": "gray-04",
+      "center_xy": [
+        353,
+        118
+      ],
+      "size": 22,
+      "nominal_density": 0.28,
+      "nominal_linear_reflectance": 0.5248074602497725
+    },
+    {
+      "id": "gray-05",
+      "center_xy": [
+        265,
+        130
+      ],
+      "size": 22,
+      "nominal_density": 0.35,
+      "nominal_linear_reflectance": 0.44668359215096315
+    },
+    {
+      "id": "gray-06",
+      "center_xy": [
+        376,
+        130
+      ],
+      "size": 22,
+      "nominal_density": 0.41,
+      "nominal_linear_reflectance": 0.3890451449942806
+    },
+    {
+      "id": "gray-07",
+      "center_xy": [
+        253,
+        152
+      ],
+      "size": 22,
+      "nominal_density": 0.49,
+      "nominal_linear_reflectance": 0.32359365692962827
+    },
+    {
+      "id": "gray-08",
+      "center_xy": [
+        388,
+        152
+      ],
+      "size": 22,
+      "nominal_density": 0.57,
+      "nominal_linear_reflectance": 0.2691534803926916
+    },
+    {
+      "id": "gray-09",
+      "center_xy": [
+        247,
+        174
+      ],
+      "size": 22,
+      "nominal_density": 0.65,
+      "nominal_linear_reflectance": 0.22387211385683395
+    },
+    {
+      "id": "gray-10",
+      "center_xy": [
+        394,
+        174
+      ],
+      "size": 22,
+      "nominal_density": 0.74,
+      "nominal_linear_reflectance": 0.18197008586099836
+    },
+    {
+      "id": "gray-11",
+      "center_xy": [
+        247,
+        196
+      ],
+      "size": 22,
+      "nominal_density": 0.83,
+      "nominal_linear_reflectance": 0.14791083881682077
+    },
+    {
+      "id": "gray-12",
+      "center_xy": [
+        394,
+        196
+      ],
+      "size": 22,
+      "nominal_density": 0.93,
+      "nominal_linear_reflectance": 0.11748975549395294
+    },
+    {
+      "id": "gray-13",
+      "center_xy": [
+        253,
+        219
+      ],
+      "size": 22,
+      "nominal_density": 1.04,
+      "nominal_linear_reflectance": 0.09120108393559097
+    },
+    {
+      "id": "gray-14",
+      "center_xy": [
+        388,
+        219
+      ],
+      "size": 22,
+      "nominal_density": 1.16,
+      "nominal_linear_reflectance": 0.06918309709189366
+    },
+    {
+      "id": "gray-15",
+      "center_xy": [
+        265,
+        242
+      ],
+      "size": 22,
+      "nominal_density": 1.3,
+      "nominal_linear_reflectance": 0.05011872336272722
+    },
+    {
+      "id": "gray-16",
+      "center_xy": [
+        376,
+        242
+      ],
+      "size": 22,
+      "nominal_density": 1.44,
+      "nominal_linear_reflectance": 0.03630780547701014
+    },
+    {
+      "id": "gray-17",
+      "center_xy": [
+        287,
+        254
+      ],
+      "size": 22,
+      "nominal_density": 1.61,
+      "nominal_linear_reflectance": 0.024547089156850298
+    },
+    {
+      "id": "gray-18",
+      "center_xy": [
+        353,
+        254
+      ],
+      "size": 22,
+      "nominal_density": 1.8,
+      "nominal_linear_reflectance": 0.015848931924611134
+    },
+    {
+      "id": "gray-19",
+      "center_xy": [
+        309,
+        259
+      ],
+      "size": 22,
+      "nominal_density": 2.03,
+      "nominal_linear_reflectance": 0.009332543007969915
+    },
+    {
+      "id": "gray-20",
+      "center_xy": [
+        331,
+        259
+      ],
+      "size": 22,
+      "nominal_density": 2.3,
+      "nominal_linear_reflectance": 0.005011872336272725
+    }
+  ],
+  "color_patches": [
+    {
+      "id": "color-16",
+      "nominal_table_index": 16,
+      "box_xywh": [
+        224,
+        67,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        72.49,
+        -23.46,
+        57.08
+      ],
+      "nominal_linear_rgb": [
+        0.3469819127117193,
+        0.5073210852455967,
+        0.05000825085309937
+      ]
+    },
+    {
+      "id": "color-17",
+      "nominal_table_index": 17,
+      "box_xywh": [
+        247,
+        67,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        40.18,
+        9.55,
+        -44.29
+      ],
+      "nominal_linear_rgb": [
+        0.05950090051822943,
+        0.10697600196516391,
+        0.39048715475795814
+      ]
+    },
+    {
+      "id": "color-11",
+      "nominal_table_index": 11,
+      "box_xywh": [
+        224,
+        89,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        55.05,
+        -38.09,
+        31.62
+      ],
+      "nominal_linear_rgb": [
+        0.056637118343622034,
+        0.29729846524472975,
+        0.06688374463260022
+      ]
+    },
+    {
+      "id": "color-10",
+      "nominal_table_index": 10,
+      "box_xywh": [
+        247,
+        89,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        28.65,
+        15.6,
+        -50.52
+      ],
+      "nominal_linear_rgb": [
+        0.020609829140730812,
+        0.04842977952708356,
+        0.29239777686824253
+      ]
+    },
+    {
+      "id": "color-12",
+      "nominal_table_index": 12,
+      "box_xywh": [
+        224,
+        112,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        42.18,
+        54.89,
+        28.79
+      ],
+      "nominal_linear_rgb": [
+        0.46786645522811215,
+        0.02739814355709153,
+        0.03998716806004723
+      ]
+    },
+    {
+      "id": "color-15",
+      "nominal_table_index": 15,
+      "box_xywh": [
+        394,
+        67,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        30.38,
+        21.13,
+        -20.31
+      ],
+      "nominal_linear_rgb": [
+        0.10671124570984905,
+        0.04441204286925265,
+        0.13751126206349026
+      ]
+    },
+    {
+      "id": "color-09",
+      "nominal_table_index": 9,
+      "box_xywh": [
+        372,
+        89,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        50.55,
+        -27.97,
+        -28.14
+      ],
+      "nominal_linear_rgb": [
+        0.0,
+        0.24089392626832473,
+        0.3892059201812057
+      ]
+    },
+    {
+      "id": "color-08",
+      "nominal_table_index": 8,
+      "box_xywh": [
+        394,
+        89,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        51.82,
+        49.79,
+        -13.9
+      ],
+      "nominal_linear_rgb": [
+        0.5315332046903425,
+        0.08834075095374366,
+        0.3010663690895212
+      ]
+    },
+    {
+      "id": "color-07",
+      "nominal_table_index": 7,
+      "box_xywh": [
+        394,
+        112,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        82.23,
+        4.05,
+        79.84
+      ],
+      "nominal_linear_rgb": [
+        0.8699348405970729,
+        0.5763465614200542,
+        0.008288895406351332
+      ]
+    },
+    {
+      "id": "color-01",
+      "nominal_table_index": 1,
+      "box_xywh": [
+        224,
+        237,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        38.36,
+        13.8,
+        14.65
+      ],
+      "nominal_linear_rgb": [
+        0.17779924508887468,
+        0.08358576103263583,
+        0.05657901606100759
+      ]
+    },
+    {
+      "id": "color-02",
+      "nominal_table_index": 2,
+      "box_xywh": [
+        224,
+        259,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        66.06,
+        17.74,
+        17.85
+      ],
+      "nominal_linear_rgb": [
+        0.5708691585857123,
+        0.29792884623215127,
+        0.22129747076218836
+      ]
+    },
+    {
+      "id": "color-03",
+      "nominal_table_index": 3,
+      "box_xywh": [
+        247,
+        260,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        50.09,
+        -4.41,
+        -22.51
+      ],
+      "nominal_linear_rgb": [
+        0.10566999139067088,
+        0.1965849728261626,
+        0.3382131412966008
+      ]
+    },
+    {
+      "id": "color-13",
+      "nominal_table_index": 13,
+      "box_xywh": [
+        224,
+        282,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        62.56,
+        35.13,
+        58.05
+      ],
+      "nominal_linear_rgb": [
+        0.7363958159963655,
+        0.20261559129263373,
+        0.025052732731980526
+      ]
+    },
+    {
+      "id": "color-06",
+      "nominal_table_index": 6,
+      "box_xywh": [
+        394,
+        237,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        70.7,
+        -32.89,
+        -0.24
+      ],
+      "nominal_linear_rgb": [
+        0.11205387734106012,
+        0.5127319641797341,
+        0.4128674988664336
+      ]
+    },
+    {
+      "id": "color-04",
+      "nominal_table_index": 4,
+      "box_xywh": [
+        372,
+        259,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        43.2,
+        -13.46,
+        21.73
+      ],
+      "nominal_linear_rgb": [
+        0.10022699819039534,
+        0.1498623426428187,
+        0.05256276270043885
+      ]
+    },
+    {
+      "id": "color-05",
+      "nominal_table_index": 5,
+      "box_xywh": [
+        394,
+        259,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        55.36,
+        8.89,
+        -24.82
+      ],
+      "nominal_linear_rgb": [
+        0.22625752089844703,
+        0.2179248051622712,
+        0.4328021976685435
+      ]
+    },
+    {
+      "id": "color-18",
+      "nominal_table_index": 18,
+      "box_xywh": [
+        372,
+        282,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        71.96,
+        19.49,
+        68.0
+      ],
+      "nominal_linear_rgb": [
+        0.7966844936999501,
+        0.35920504082156945,
+        0.020174847073908472
+      ]
+    },
+    {
+      "id": "color-14",
+      "nominal_table_index": 14,
+      "box_xywh": [
+        394,
+        282,
+        22,
+        22
+      ],
+      "nominal_lab_d50": [
+        51.71,
+        47.69,
+        16.86
+      ],
+      "nominal_linear_rgb": [
+        0.5743200658802062,
+        0.08896418804516802,
+        0.12062094899175381
+      ]
+    }
+  ],
+  "fiducials": [
+    {
+      "id": "top-left",
+      "center_xy": [
+        207,
+        118
+      ],
+      "radius": 11,
+      "center_normalized_xy": [
+        0.3234375,
+        0.31891891891891894
+      ]
+    },
+    {
+      "id": "top-right",
+      "center_xy": [
+        433,
+        118
+      ],
+      "radius": 11,
+      "center_normalized_xy": [
+        0.6765625,
+        0.31891891891891894
+      ]
+    },
+    {
+      "id": "bottom-left",
+      "center_xy": [
+        207,
+        254
+      ],
+      "radius": 11,
+      "center_normalized_xy": [
+        0.3234375,
+        0.6864864864864865
+      ]
+    },
+    {
+      "id": "bottom-right",
+      "center_xy": [
+        433,
+        254
+      ],
+      "radius": 11,
+      "center_normalized_xy": [
+        0.6765625,
+        0.6864864864864865
+      ]
+    }
+  ],
+  "orientation_dots": [
+    {
+      "center_xy": [
+        156,
+        254
+      ],
+      "radius": 7
+    },
+    {
+      "center_xy": [
+        178,
+        254
+      ],
+      "radius": 7
+    }
+  ],
+  "wedges": [
+    {
+      "id": "outer-left-top",
+      "wide_center_xy": [
+        108,
+        101
+      ],
+      "length": 88,
+      "width": 21,
+      "direction_deg": -90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "outer-left-middle",
+      "wide_center_xy": [
+        110,
+        263
+      ],
+      "length": 126,
+      "width": 23,
+      "direction_deg": -90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "outer-left-bottom",
+      "wide_center_xy": [
+        110,
+        270
+      ],
+      "length": 87,
+      "width": 23,
+      "direction_deg": 90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "outer-right-top",
+      "wide_center_xy": [
+        531,
+        101
+      ],
+      "length": 88,
+      "width": 21,
+      "direction_deg": -90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "outer-right-middle",
+      "wide_center_xy": [
+        531,
+        109
+      ],
+      "length": 126,
+      "width": 23,
+      "direction_deg": 90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "outer-right-bottom",
+      "wide_center_xy": [
+        531,
+        270
+      ],
+      "length": 87,
+      "width": 23,
+      "direction_deg": 90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "upper-horizontal",
+      "wide_center_xy": [
+        222,
+        36
+      ],
+      "length": 58,
+      "width": 32,
+      "direction_deg": 0,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "upper-vertical",
+      "wide_center_xy": [
+        382,
+        37
+      ],
+      "length": 47,
+      "width": 38,
+      "direction_deg": 90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "left-horizontal",
+      "wide_center_xy": [
+        84,
+        120
+      ],
+      "length": 104,
+      "width": 22,
+      "direction_deg": 0,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "right-horizontal",
+      "wide_center_xy": [
+        556,
+        252
+      ],
+      "length": 104,
+      "width": 22,
+      "direction_deg": 180,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "lower-vertical",
+      "wide_center_xy": [
+        258,
+        334
+      ],
+      "length": 47,
+      "width": 38,
+      "direction_deg": -90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "lower-horizontal",
+      "wide_center_xy": [
+        418,
+        334
+      ],
+      "length": 56,
+      "width": 32,
+      "direction_deg": 180,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "center-top",
+      "wide_center_xy": [
+        276,
+        136
+      ],
+      "length": 88,
+      "width": 13,
+      "direction_deg": 0,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "center-left",
+      "wide_center_xy": [
+        270,
+        229
+      ],
+      "length": 86,
+      "width": 13,
+      "direction_deg": -90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "center-right",
+      "wide_center_xy": [
+        370,
+        143
+      ],
+      "length": 86,
+      "width": 13,
+      "direction_deg": 90,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    },
+    {
+      "id": "center-bottom",
+      "wide_center_xy": [
+        364,
+        236
+      ],
+      "length": 88,
+      "width": 13,
+      "direction_deg": 180,
+      "frequency_ratio": 18,
+      "transverse_cycles": 5,
+      "design": "logarithmic transverse-frequency growth; schematic ticks; no calibrated LW/PH labels"
+    }
+  ],
+  "feature_counts": {
+    "slanted_stars": 13,
+    "core_stars": 9,
+    "extended_corner_stars": 4,
+    "radial_star_edges": 104,
+    "side_squares": 2,
+    "side_square_edges": 8,
+    "gray_patches": 20,
+    "color_patches": 18,
+    "registration_fiducials": 4,
+    "orientation_dots": 2,
+    "visible_wedge_components": 16
+  },
+  "wedge_source_description": "12 pairs of added wedge patterns",
+  "wedge_pair_mapping": "unverified against 16 visible components; no invented additional patterns",
+  "edge_levels": {
+    "background": 0.2,
+    "dark": 0.05,
+    "linear_contrast_ratio": 4,
+    "status": "declared nominal rendering values; not measured print reflectance"
+  },
+  "photometry": {
+    "color_target_source": "https://docs.imatest.com/docs/esfriso_instructions",
+    "gray_target_source": "https://docs.imatest.com/docs/esfriso_instructions",
+    "nominal_color_space": "CIELAB D50",
+    "preview_conversion": "Bradford D50→D65, linear sRGB, sRGB encoding",
+    "coordinate_color_mapping": "visually reconstructed; verify before absolute color validation",
+    "actual_print_reflectance": "unavailable",
+    "spectral_reflectance": "unavailable",
+    "printed_chart_mtf": "unavailable",
+    "screenshot_used_as_radiance": false
+  },
+  "validation": {
+    "physical_camera_validation": "not_established",
+    "iso_conformance": "not_established",
+    "printing_master": "not_established",
+    "wedge_frequency_calibration": "not_established",
+    "focus_aids": "schematic concentric/sector target; excluded from SFR ROIs",
+    "roi_guidance": "~62 px at 2560×1440, below published nominal 100–400 px guidance; engineering workflow only"
+  },
+  "registration_template": {
+    "shape": [
+      1440,
+      2560
+    ],
+    "rois": [
+      {
+        "id": "star-corner-top-left-edge-1",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          178,
+          306,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          77.90486745229364,
+          53.82110643130854
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "arm-1",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-left-edge-2",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          266,
+          306,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          77.51342217980729,
+          76.56920350996926
+        ],
+        "edge_tangent_deg": 40,
+        "orientation_label": "arm-2",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-left-edge-3",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          284,
+          218,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          55.17889356869145,
+          80.90486745229364
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "arm-3",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-left-edge-4",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          282,
+          130,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          32.430796490030744,
+          80.51342217980729
+        ],
+        "edge_tangent_deg": 130,
+        "orientation_label": "arm-4",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-left-edge-5",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          196,
+          112,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          28.09513254770636,
+          58.17889356869146
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "arm-5",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-left-edge-6",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          106,
+          114,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          28.486577820192704,
+          35.430796490030744
+        ],
+        "edge_tangent_deg": 40,
+        "orientation_label": "arm-6",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-left-edge-7",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          90,
+          202,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          50.82110643130854,
+          31.09513254770636
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "arm-7",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-left-edge-8",
+        "field_id": "star-corner-top-left",
+        "kind": "edge",
+        "box": [
+          92,
+          290,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          73.56920350996926,
+          31.4865778201927
+        ],
+        "edge_tangent_deg": 130,
+        "orientation_label": "arm-8",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-1",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          210,
+          724,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          184.90486745229364,
+          62.17889356869146
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-2",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          298,
+          706,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          180.56920350996927,
+          84.51342217980729
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-3",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          300,
+          618,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          157.82110643130855,
+          84.90486745229364
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-4",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          282,
+          530,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          135.4865778201927,
+          80.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-5",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          194,
+          530,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          135.09513254770636,
+          57.82110643130855
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-6",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          108,
+          546,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          139.43079649003073,
+          35.48657782019271
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-7",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          106,
+          634,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          162.17889356869145,
+          35.095132547706356
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-left-edge-8",
+        "field_id": "star-top-left",
+        "kind": "edge",
+        "box": [
+          122,
+          722,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          184.5134221798073,
+          39.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-1",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          200,
+          1346,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          344.9048674522936,
+          59.17889356869146
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-2",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          286,
+          1330,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          340.56920350996927,
+          81.51342217980729
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-3",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          288,
+          1240,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          317.8211064313085,
+          81.90486745229364
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-4",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          270,
+          1154,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          295.4865778201927,
+          77.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-5",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          182,
+          1152,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          295.0951325477064,
+          54.82110643130855
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-6",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          96,
+          1168,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          299.43079649003073,
+          32.48657782019271
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-7",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          94,
+          1258,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          322.1788935686914,
+          32.095132547706356
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-center-edge-8",
+        "field_id": "star-top-center",
+        "kind": "edge",
+        "box": [
+          110,
+          1344,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          344.51342217980726,
+          36.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-1",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          210,
+          1976,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          506.9048674522936,
+          62.17889356869146
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-2",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          298,
+          1960,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          502.56920350996927,
+          84.51342217980729
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-3",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          300,
+          1872,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          479.8211064313085,
+          84.90486745229364
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-4",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          282,
+          1784,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          457.4865778201927,
+          80.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-5",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          194,
+          1782,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          457.0951325477064,
+          57.82110643130855
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-6",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          108,
+          1800,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          461.43079649003073,
+          35.48657782019271
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-7",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          106,
+          1888,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          484.1788935686914,
+          35.095132547706356
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-top-right-edge-8",
+        "field_id": "star-top-right",
+        "kind": "edge",
+        "box": [
+          122,
+          1974,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          506.51342217980726,
+          39.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-1",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          196,
+          2388,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          612.9048674522936,
+          58.17889356869146
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-2",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          282,
+          2372,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          608.5692035099693,
+          80.51342217980729
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-3",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          284,
+          2284,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          585.8211064313085,
+          80.90486745229364
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-4",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          266,
+          2196,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          563.4865778201927,
+          76.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-5",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          178,
+          2196,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          563.0951325477064,
+          53.82110643130855
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-6",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          92,
+          2212,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          567.4307964900307,
+          31.486577820192707
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-7",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          90,
+          2300,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          590.1788935686915,
+          31.09513254770636
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-top-right-edge-8",
+        "field_id": "star-corner-top-right",
+        "kind": "edge",
+        "box": [
+          106,
+          2388,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          612.5134221798073,
+          35.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-1",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          702,
+          802,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          204.90486745229364,
+          188.17889356869145
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-2",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          788,
+          784,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          200.56920350996927,
+          210.5134221798073
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-3",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          790,
+          696,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          177.82110643130855,
+          210.90486745229364
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-4",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          772,
+          608,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          155.4865778201927,
+          206.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-5",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          684,
+          608,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          155.09513254770636,
+          183.82110643130855
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-6",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          598,
+          624,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          159.43079649003073,
+          161.4865778201927
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-7",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          596,
+          712,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          182.17889356869145,
+          161.09513254770636
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-left-edge-8",
+        "field_id": "star-middle-left",
+        "kind": "edge",
+        "box": [
+          612,
+          800,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          204.5134221798073,
+          165.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-1",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          702,
+          1346,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          344.9048674522936,
+          188.17889356869145
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-2",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          788,
+          1330,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          340.56920350996927,
+          210.5134221798073
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-3",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          790,
+          1240,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          317.8211064313085,
+          210.90486745229364
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-4",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          772,
+          1154,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          295.4865778201927,
+          206.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-5",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          684,
+          1152,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          295.0951325477064,
+          183.82110643130855
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-6",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          598,
+          1168,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          299.43079649003073,
+          161.4865778201927
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-7",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          596,
+          1258,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          322.1788935686914,
+          161.09513254770636
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-center-edge-8",
+        "field_id": "star-center",
+        "kind": "edge",
+        "box": [
+          612,
+          1344,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          344.51342217980726,
+          165.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-1",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          702,
+          1894,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          485.9048674522936,
+          188.17889356869145
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-2",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          788,
+          1878,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          481.56920350996927,
+          210.5134221798073
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-3",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          790,
+          1790,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          458.8211064313085,
+          210.90486745229364
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-4",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          772,
+          1702,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          436.4865778201927,
+          206.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-5",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          684,
+          1700,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          436.0951325477064,
+          183.82110643130855
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-6",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          598,
+          1718,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          440.43079649003073,
+          161.4865778201927
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-7",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          596,
+          1806,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          463.1788935686914,
+          161.09513254770636
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-middle-right-edge-8",
+        "field_id": "star-middle-right",
+        "kind": "edge",
+        "box": [
+          612,
+          1894,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          485.51342217980726,
+          165.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-1",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1204,
+          306,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          77.90486745229364,
+          317.1788935686915
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-2",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1290,
+          290,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          73.56920350996926,
+          339.5134221798073
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-3",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1292,
+          202,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          50.82110643130854,
+          339.9048674522936
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-4",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1274,
+          114,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          28.486577820192707,
+          335.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-5",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1186,
+          112,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          28.09513254770636,
+          312.8211064313086
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-6",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1100,
+          130,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          32.43079649003074,
+          290.4865778201927
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-7",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1098,
+          218,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          55.17889356869145,
+          290.0951325477064
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-left-edge-8",
+        "field_id": "star-corner-bottom-left",
+        "kind": "edge",
+        "box": [
+          1114,
+          306,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          77.51342217980729,
+          294.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-1",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1188,
+          724,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          184.90486745229364,
+          313.1788935686915
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-2",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1274,
+          706,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          180.56920350996927,
+          335.5134221798073
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-3",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1276,
+          618,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          157.82110643130855,
+          335.9048674522936
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-4",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1260,
+          530,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          135.4865778201927,
+          331.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-5",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1170,
+          530,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          135.09513254770636,
+          308.8211064313086
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-6",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1084,
+          546,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          139.43079649003073,
+          286.4865778201927
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-7",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1082,
+          634,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          162.17889356869145,
+          286.0951325477064
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-left-edge-8",
+        "field_id": "star-bottom-left",
+        "kind": "edge",
+        "box": [
+          1100,
+          722,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          184.5134221798073,
+          290.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-1",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1200,
+          1346,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          344.9048674522936,
+          316.1788935686915
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-2",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1286,
+          1330,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          340.56920350996927,
+          338.5134221798073
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-3",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1288,
+          1240,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          317.8211064313085,
+          338.9048674522936
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-4",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1272,
+          1154,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          295.4865778201927,
+          334.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-5",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1182,
+          1152,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          295.0951325477064,
+          311.8211064313086
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-6",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1096,
+          1168,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          299.43079649003073,
+          289.4865778201927
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-7",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1094,
+          1258,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          322.1788935686914,
+          289.0951325477064
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-center-edge-8",
+        "field_id": "star-bottom-center",
+        "kind": "edge",
+        "box": [
+          1112,
+          1344,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          344.51342217980726,
+          293.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-1",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1188,
+          1976,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          506.9048674522936,
+          313.1788935686915
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-1",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-2",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1274,
+          1960,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          502.56920350996927,
+          335.5134221798073
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-2",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-3",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1276,
+          1872,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          479.8211064313085,
+          335.9048674522936
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-3",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-4",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1260,
+          1784,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          457.4865778201927,
+          331.56920350996927
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-4",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-5",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1170,
+          1782,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          457.0951325477064,
+          308.8211064313086
+        ],
+        "edge_tangent_deg": 5,
+        "orientation_label": "arm-5",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-6",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1084,
+          1800,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          461.43079649003073,
+          286.4865778201927
+        ],
+        "edge_tangent_deg": 50,
+        "orientation_label": "arm-6",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-7",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1082,
+          1888,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          484.1788935686914,
+          286.0951325477064
+        ],
+        "edge_tangent_deg": 95,
+        "orientation_label": "arm-7",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-bottom-right-edge-8",
+        "field_id": "star-bottom-right",
+        "kind": "edge",
+        "box": [
+          1100,
+          1974,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          506.51342217980726,
+          290.43079649003073
+        ],
+        "edge_tangent_deg": 140,
+        "orientation_label": "arm-8",
+        "feature_role": "core",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-1",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1186,
+          2388,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          612.9048674522936,
+          312.8211064313085
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "arm-1",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-2",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1274,
+          2388,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          612.5134221798073,
+          335.56920350996927
+        ],
+        "edge_tangent_deg": 40,
+        "orientation_label": "arm-2",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-3",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1292,
+          2300,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          590.1788935686915,
+          339.9048674522936
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "arm-3",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-4",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1290,
+          2212,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          567.4307964900307,
+          339.5134221798073
+        ],
+        "edge_tangent_deg": 130,
+        "orientation_label": "arm-4",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-5",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1204,
+          2196,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          563.0951325477064,
+          317.1788935686915
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "arm-5",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-6",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1114,
+          2196,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          563.4865778201927,
+          294.43079649003073
+        ],
+        "edge_tangent_deg": 40,
+        "orientation_label": "arm-6",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-7",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1098,
+          2284,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          585.8211064313085,
+          290.0951325477064
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "arm-7",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "star-corner-bottom-right-edge-8",
+        "field_id": "star-corner-bottom-right",
+        "kind": "edge",
+        "box": [
+          1100,
+          2372,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          608.5692035099693,
+          290.4865778201927
+        ],
+        "edge_tangent_deg": 130,
+        "orientation_label": "arm-8",
+        "feature_role": "extended_corner",
+        "geometry_source": "analytic slanted-star radial edge"
+      },
+      {
+        "id": "side-square-left-edge-1",
+        "field_id": "side-square-left",
+        "kind": "edge",
+        "box": [
+          600,
+          222,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          55.908262174056205,
+          162.0913272457981
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "square-side-1",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "side-square-left-edge-2",
+        "field_id": "side-square-left",
+        "kind": "edge",
+        "box": [
+          684,
+          322,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          81.90867275420189,
+          183.9082621740562
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "square-side-2",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "side-square-left-edge-3",
+        "field_id": "side-square-left",
+        "kind": "edge",
+        "box": [
+          786,
+          238,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          60.091737825943795,
+          209.9086727542019
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "square-side-3",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "side-square-left-edge-4",
+        "field_id": "side-square-left",
+        "kind": "edge",
+        "box": [
+          702,
+          136,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          34.091327245798105,
+          188.0917378259438
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "square-side-4",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "side-square-right-edge-1",
+        "field_id": "side-square-right",
+        "kind": "edge",
+        "box": [
+          600,
+          2260,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          579.9082621740562,
+          162.0913272457981
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "square-side-1",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "side-square-right-edge-2",
+        "field_id": "side-square-right",
+        "kind": "edge",
+        "box": [
+          684,
+          2362,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          605.9086727542019,
+          183.9082621740562
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "square-side-2",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "side-square-right-edge-3",
+        "field_id": "side-square-right",
+        "kind": "edge",
+        "box": [
+          786,
+          2276,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          584.0917378259438,
+          209.9086727542019
+        ],
+        "edge_tangent_deg": 175,
+        "orientation_label": "square-side-3",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "side-square-right-edge-4",
+        "field_id": "side-square-right",
+        "kind": "edge",
+        "box": [
+          702,
+          2176,
+          62,
+          62
+        ],
+        "artwork_center_xy": [
+          558.0913272457981,
+          188.0917378259438
+        ],
+        "edge_tangent_deg": 85,
+        "orientation_label": "square-side-4",
+        "feature_role": "side_square",
+        "geometry_source": "analytic rotated square edge"
+      },
+      {
+        "id": "gray-01",
+        "field_id": "gray-01",
+        "kind": "gray",
+        "box": [
+          408,
+          1210,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          309,
+          112
+        ]
+      },
+      {
+        "id": "gray-02",
+        "field_id": "gray-02",
+        "kind": "gray",
+        "box": [
+          408,
+          1296,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          331,
+          112
+        ]
+      },
+      {
+        "id": "gray-03",
+        "field_id": "gray-03",
+        "kind": "gray",
+        "box": [
+          432,
+          1124,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          287,
+          118
+        ]
+      },
+      {
+        "id": "gray-04",
+        "field_id": "gray-04",
+        "kind": "gray",
+        "box": [
+          432,
+          1382,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          353,
+          118
+        ]
+      },
+      {
+        "id": "gray-05",
+        "field_id": "gray-05",
+        "kind": "gray",
+        "box": [
+          478,
+          1038,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          265,
+          130
+        ]
+      },
+      {
+        "id": "gray-06",
+        "field_id": "gray-06",
+        "kind": "gray",
+        "box": [
+          478,
+          1470,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          376,
+          130
+        ]
+      },
+      {
+        "id": "gray-07",
+        "field_id": "gray-07",
+        "kind": "gray",
+        "box": [
+          564,
+          992,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          253,
+          152
+        ]
+      },
+      {
+        "id": "gray-08",
+        "field_id": "gray-08",
+        "kind": "gray",
+        "box": [
+          564,
+          1518,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          388,
+          152
+        ]
+      },
+      {
+        "id": "gray-09",
+        "field_id": "gray-09",
+        "kind": "gray",
+        "box": [
+          650,
+          968,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          247,
+          174
+        ]
+      },
+      {
+        "id": "gray-10",
+        "field_id": "gray-10",
+        "kind": "gray",
+        "box": [
+          650,
+          1540,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          394,
+          174
+        ]
+      },
+      {
+        "id": "gray-11",
+        "field_id": "gray-11",
+        "kind": "gray",
+        "box": [
+          736,
+          968,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          247,
+          196
+        ]
+      },
+      {
+        "id": "gray-12",
+        "field_id": "gray-12",
+        "kind": "gray",
+        "box": [
+          736,
+          1540,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          394,
+          196
+        ]
+      },
+      {
+        "id": "gray-13",
+        "field_id": "gray-13",
+        "kind": "gray",
+        "box": [
+          826,
+          992,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          253,
+          219
+        ]
+      },
+      {
+        "id": "gray-14",
+        "field_id": "gray-14",
+        "kind": "gray",
+        "box": [
+          826,
+          1518,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          388,
+          219
+        ]
+      },
+      {
+        "id": "gray-15",
+        "field_id": "gray-15",
+        "kind": "gray",
+        "box": [
+          914,
+          1038,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          265,
+          242
+        ]
+      },
+      {
+        "id": "gray-16",
+        "field_id": "gray-16",
+        "kind": "gray",
+        "box": [
+          914,
+          1470,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          376,
+          242
+        ]
+      },
+      {
+        "id": "gray-17",
+        "field_id": "gray-17",
+        "kind": "gray",
+        "box": [
+          962,
+          1124,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          287,
+          254
+        ]
+      },
+      {
+        "id": "gray-18",
+        "field_id": "gray-18",
+        "kind": "gray",
+        "box": [
+          962,
+          1382,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          353,
+          254
+        ]
+      },
+      {
+        "id": "gray-19",
+        "field_id": "gray-19",
+        "kind": "gray",
+        "box": [
+          980,
+          1210,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          309,
+          259
+        ]
+      },
+      {
+        "id": "gray-20",
+        "field_id": "gray-20",
+        "kind": "gray",
+        "box": [
+          980,
+          1296,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          331,
+          259
+        ]
+      },
+      {
+        "id": "color-16",
+        "field_id": "color-16",
+        "kind": "color",
+        "box": [
+          276,
+          922,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          235.0,
+          78.0
+        ],
+        "nominal_table_index": 16
+      },
+      {
+        "id": "color-17",
+        "field_id": "color-17",
+        "kind": "color",
+        "box": [
+          276,
+          1012,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          258.0,
+          78.0
+        ],
+        "nominal_table_index": 17
+      },
+      {
+        "id": "color-11",
+        "field_id": "color-11",
+        "kind": "color",
+        "box": [
+          362,
+          922,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          235.0,
+          100.0
+        ],
+        "nominal_table_index": 11
+      },
+      {
+        "id": "color-10",
+        "field_id": "color-10",
+        "kind": "color",
+        "box": [
+          362,
+          1012,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          258.0,
+          100.0
+        ],
+        "nominal_table_index": 10
+      },
+      {
+        "id": "color-12",
+        "field_id": "color-12",
+        "kind": "color",
+        "box": [
+          452,
+          922,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          235.0,
+          123.0
+        ],
+        "nominal_table_index": 12
+      },
+      {
+        "id": "color-15",
+        "field_id": "color-15",
+        "kind": "color",
+        "box": [
+          276,
+          1584,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          405.0,
+          78.0
+        ],
+        "nominal_table_index": 15
+      },
+      {
+        "id": "color-09",
+        "field_id": "color-09",
+        "kind": "color",
+        "box": [
+          362,
+          1498,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          383.0,
+          100.0
+        ],
+        "nominal_table_index": 9
+      },
+      {
+        "id": "color-08",
+        "field_id": "color-08",
+        "kind": "color",
+        "box": [
+          362,
+          1584,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          405.0,
+          100.0
+        ],
+        "nominal_table_index": 8
+      },
+      {
+        "id": "color-07",
+        "field_id": "color-07",
+        "kind": "color",
+        "box": [
+          452,
+          1584,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          405.0,
+          123.0
+        ],
+        "nominal_table_index": 7
+      },
+      {
+        "id": "color-01",
+        "field_id": "color-01",
+        "kind": "color",
+        "box": [
+          938,
+          922,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          235.0,
+          248.0
+        ],
+        "nominal_table_index": 1
+      },
+      {
+        "id": "color-02",
+        "field_id": "color-02",
+        "kind": "color",
+        "box": [
+          1024,
+          922,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          235.0,
+          270.0
+        ],
+        "nominal_table_index": 2
+      },
+      {
+        "id": "color-03",
+        "field_id": "color-03",
+        "kind": "color",
+        "box": [
+          1028,
+          1012,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          258.0,
+          271.0
+        ],
+        "nominal_table_index": 3
+      },
+      {
+        "id": "color-13",
+        "field_id": "color-13",
+        "kind": "color",
+        "box": [
+          1114,
+          922,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          235.0,
+          293.0
+        ],
+        "nominal_table_index": 13
+      },
+      {
+        "id": "color-06",
+        "field_id": "color-06",
+        "kind": "color",
+        "box": [
+          938,
+          1584,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          405.0,
+          248.0
+        ],
+        "nominal_table_index": 6
+      },
+      {
+        "id": "color-04",
+        "field_id": "color-04",
+        "kind": "color",
+        "box": [
+          1024,
+          1498,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          383.0,
+          270.0
+        ],
+        "nominal_table_index": 4
+      },
+      {
+        "id": "color-05",
+        "field_id": "color-05",
+        "kind": "color",
+        "box": [
+          1024,
+          1584,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          405.0,
+          270.0
+        ],
+        "nominal_table_index": 5
+      },
+      {
+        "id": "color-18",
+        "field_id": "color-18",
+        "kind": "color",
+        "box": [
+          1114,
+          1498,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          383.0,
+          293.0
+        ],
+        "nominal_table_index": 18
+      },
+      {
+        "id": "color-14",
+        "field_id": "color-14",
+        "kind": "color",
+        "box": [
+          1114,
+          1584,
+          54,
+          54
+        ],
+        "artwork_center_xy": [
+          405.0,
+          293.0
+        ],
+        "nominal_table_index": 14
+      }
+    ],
+    "fiducial_order": [
+      "top_left",
+      "top_right",
+      "bottom_left",
+      "bottom_right"
+    ],
+    "fiducials_xy": [
+      [
+        840.2162162162163,
+        459.2432432432433
+      ],
+      [
+        1719.783783783784,
+        459.2432432432433
+      ],
+      [
+        840.2162162162163,
+        988.5405405405406
+      ],
+      [
+        1719.783783783784,
+        988.5405405405406
+      ]
+    ],
+    "meaning": "coordinate proposals only; native pixels are never warped"
+  },
+  "counts": {
+    "slanted_stars": 13,
+    "core_stars": 9,
+    "extended_corner_stars": 4,
+    "radial_star_edges": 104,
+    "side_squares": 2,
+    "side_square_edges": 8,
+    "gray_patches": 20,
+    "color_patches": 18,
+    "registration_fiducials": 4,
+    "orientation_dots": 2,
+    "visible_wedge_components": 16,
+    "wedge_groups": 16
+  },
+  "sources": [
+    {
+      "title": "Imatest E-SFR ISO 안내·설계 기준값",
+      "url": "https://docs.imatest.com/docs/esfriso_instructions"
+    },
+    {
+      "title": "Imatest ISO 12233 차트와 분석 방법",
+      "url": "https://www.imatest.com/imaging/iso-12233/"
+    },
+    {
+      "title": "Imatest slanted-star 분석 논문 (Kerr, 2024)",
+      "url": "https://www.imatest.com/wp-content/uploads/2024/03/Kerr_EI2024_IQSP_Recommendations_for_the_Detection_and_Analysis_of_the_ISO_12233-2023_e-SFR_Slanted_Star.pdf"
+    },
+    {
+      "title": "ISO 12233:2023 판본 정보",
+      "url": "https://www.iso.org/standard/79169.html"
+    }
+  ],
+  "qualification": {
+    "chart_revision": "Imatest Extended E-SFR ISO 2023",
+    "geometry": "공식 공개 도면에서 형상·좌표 재구성; 제작용 원본 도면이 아님",
+    "algorithm": "camera_esfr_projected_edge_v1 — straight-edge engineering SFR; ISO conformance not established",
+    "iso_status": "ISO 12233:2023 replaced by2024; full normative Annex not inspected",
+    "photometry": "공개 D50 Lab·gray density는 명목 설계값; 보유 인쇄물의 실측값은 미확보",
+    "physical_chart_mtf": "unavailable; no chart-MTF deconvolution",
+    "wedge_pair_interpretation": "unverified against 16 visible components; no invented additional patterns",
+    "wedge_frequency": "nominal rendering law only; printed LW/PH not calibrated",
+    "sampling": "~62 px at 2560×1440, below published nominal 100–400 px guidance; engineering workflow only",
+    "physical_camera_validation": "not_established"
+  },
+  "source_evidence": {
+    "schema": "camerae2e.esfr-chart-sources/1",
+    "reviewed_on": "2026-10-18",
+    "target": "Imatest Extended E-SFR ISO 2023",
+    "nominal_camera_aspect_ratio": "16:9",
+    "official_preview": {
+      "url": "https://docs.imatest.com/assets/wp-content/uploads/2018/09/23.2-12233-chart-web.png",
+      "linked_from": "https://docs.imatest.com/docs/esfriso_instructions",
+      "local_file": "imatest-esfr-2023-extended-official.png",
+      "sha256": "b2c859a750217d7e83699d90f19ccc46242d636df5753d2fc5df1d461a4be476",
+      "bytes": 75871,
+      "width": 640,
+      "height": 370,
+      "mode": "RGB",
+      "same_decoded_pixels_as_user_attachment": true,
+      "user_attachment_sha256": "89e678d5326835f0bd2a81bfe7f99124c7c838cb8e829eb74f8e6e73a44c0924",
+      "use": "layout reference only; encoded display RGB is not calibrated reflectance or spectral data",
+      "geometry_status": "feature topology supported by official documentation; precise coordinates reconstructed from preview",
+      "vendor_vector_asset_found": false
+    },
+    "feature_counts": {
+      "slanted_stars": {
+        "count": 13,
+        "basis": "nine core plus four additional corner stars; confirmed by Imatest Kerr EI2024 Figure 2"
+      },
+      "slanted_side_squares": {
+        "count": 2,
+        "basis": "current Imatest documentation and official preview"
+      },
+      "interior_radial_edges_per_star": {
+        "count": 8,
+        "basis": "four-cycle slanted star; Kerr EI2024 minimum 72 ROIs for nine stars"
+      },
+      "gray_patches": {
+        "count": 20,
+        "basis": "current Imatest documentation"
+      },
+      "color_patches": {
+        "count": 18,
+        "basis": "current Imatest documentation"
+      },
+      "registration_fiducials": {
+        "count": 4,
+        "basis": "current Imatest documentation and official preview"
+      },
+      "orientation_dots": {
+        "count": 2,
+        "basis": "observed in the specific official preview; prose elsewhere describes a singular orientation mark"
+      },
+      "wedge_components": {
+        "count": 16,
+        "basis": "observed distinct wedge shapes in official preview: six outer vertical, four surrounding center star, six medium wedges"
+      },
+      "manufacturer_wedge_description": "12 pairs of added wedge patterns",
+      "wedge_pair_mapping": "unverified; the public descriptor has not been reconciled with 16 visible components; do not invent extra shapes"
+    },
+    "nominal_color_reference": {
+      "source": "https://docs.imatest.com/docs/esfriso_instructions",
+      "section": "Target color CIELAB values and grayscale densities",
+      "type": "manufacturer nominal design target, not measurement of the user's chart",
+      "space": "CIELAB",
+      "illuminant": "D50",
+      "patch_order": "published table order; coordinate-to-patch-number mapping must be verified separately",
+      "values": [
+        [
+          38.36,
+          13.8,
+          14.65
+        ],
+        [
+          66.06,
+          17.74,
+          17.85
+        ],
+        [
+          50.09,
+          -4.41,
+          -22.51
+        ],
+        [
+          43.2,
+          -13.46,
+          21.73
+        ],
+        [
+          55.36,
+          8.89,
+          -24.82
+        ],
+        [
+          70.7,
+          -32.89,
+          -0.24
+        ],
+        [
+          82.23,
+          4.05,
+          79.84
+        ],
+        [
+          51.82,
+          49.79,
+          -13.9
+        ],
+        [
+          50.55,
+          -27.97,
+          -28.14
+        ],
+        [
+          28.65,
+          15.6,
+          -50.52
+        ],
+        [
+          55.05,
+          -38.09,
+          31.62
+        ],
+        [
+          42.18,
+          54.89,
+          28.79
+        ],
+        [
+          62.56,
+          35.13,
+          58.05
+        ],
+        [
+          51.71,
+          47.69,
+          16.86
+        ],
+        [
+          30.38,
+          21.13,
+          -20.31
+        ],
+        [
+          72.49,
+          -23.46,
+          57.08
+        ],
+        [
+          40.18,
+          9.55,
+          -44.29
+        ],
+        [
+          71.96,
+          19.49,
+          68.0
+        ]
+      ],
+      "last_two_patches": "standard for 2023; absent from most 2017 charts",
+      "spectrum_available": false,
+      "actual_print_values_available": false
+    },
+    "nominal_gray_reference": {
+      "source": "https://docs.imatest.com/docs/esfriso_instructions",
+      "type": "manufacturer nominal design target, not measurement of the user's chart",
+      "quantity": "optical_density",
+      "ordering": "light to dark",
+      "values": [
+        0.1,
+        0.16,
+        0.22,
+        0.28,
+        0.35,
+        0.41,
+        0.49,
+        0.57,
+        0.65,
+        0.74,
+        0.83,
+        0.93,
+        1.04,
+        1.16,
+        1.3,
+        1.44,
+        1.61,
+        1.8,
+        2.03,
+        2.3
+      ],
+      "matte_maximum_density_note": 1.75,
+      "actual_substrate": "unknown; do not silently clamp the generic targets or assume matte"
+    },
+    "edge_design": {
+      "source": "https://www.imatest.com/imaging/iso-12233/",
+      "feature": "four-cycle slanted star, not sinusoidal Siemens star",
+      "nominal_reflectance_contrast_ratio": 4,
+      "ratio_domain": "linear reflectance; not encoded display RGB"
+    },
+    "logarithmic_wedges": {
+      "source": "https://www.imatest.com/2021/12/logarithmic-wedges/",
+      "frequency_law": "f(x) = f0 * 10 ** (k * (x - x0))",
+      "maximum_frequency_for_user_chart": "unverified",
+      "frequency_label_units": "printed labels times 100 give LW/PH only with the reference framing",
+      "implementation_requirement": "record rendered frequency range and pixel integration; do not derive calibrated aliasing frequency from thumbnail pixels"
+    },
+    "algorithm_sources": {
+      "primary_paper": {
+        "title": "Recommendations for the Detection and Analysis of the ISO 12233:2023 e-SFR Slanted Star",
+        "author": "Sarah Kerr, Imatest LLC",
+        "url": "https://www.imatest.com/wp-content/uploads/2024/03/Kerr_EI2024_IQSP_Recommendations_for_the_Detection_and_Analysis_of_the_ISO_12233-2023_e-SFR_Slanted_Star.pdf",
+        "local_file": "kerr-esfr-slanted-star-ei2024.pdf",
+        "sha256": "c61b661d91a4de3f6383acfb260d8545cbc9f34354be5794a7fc8c7c59bb4edc",
+        "reported_2023_updates": [
+          "edge angle cosine correction",
+          "fifth-order polynomial edge fit",
+          "Hann window, equivalent to Tukey alpha one"
+        ],
+        "reported_roi_guidance": "rectangular ROI with each side 100 to 400 pixels, documented exceptions allowed; edge crosses opposite sides; diagonal star edges pose ROI-consistency challenges"
+      },
+      "current_imatest_algorithm_options": "https://www.imatest.com/imaging/iso-12233/",
+      "iso_official_2023": "https://www.iso.org/standard/79169.html",
+      "iso_official_2024": "https://www.iso.org/standard/88626.html",
+      "iso_2023_status": "withdrawn 2024-09-16 and replaced by ISO 12233:2024",
+      "iso_full_annex_text_inspected": false,
+      "iso_public_preview_attempt": "public OBP URL returned a JavaScript application shell; Annex C and D not available in inspected response",
+      "reference_software_linked_by_iso": "https://www.imaging.org/IST/IST/Standards/Digital_Camera_Resolution_Tools.aspx",
+      "sfrmat5_author_url": "https://burnsdigitalimaging.com/software/iso12233-sfrmat5/",
+      "implementation_claim": "engineering implementation referencing public methods; conformance is not established by chart appearance"
+    },
+    "source_conflicts": [
+      "Product page says six extra slanted stars; current detailed documentation and Figure 2 support four added stars plus two side squares. Use the exact supplied/official artwork topology.",
+      "Nominal 16:9 names camera framing; supplied and official whole-chart preview is 640 by 370 including borders, so do not force the full raster to 16:9 by anisotropic scaling.",
+      "Product-page PDF info sheet is a 2021/2017 chart document, not a 2023 geometry reference.",
+      "Current documentation retains some 2017 text near 2023 additions; record section and chart revision for every reference."
+    ]
+  }
+}

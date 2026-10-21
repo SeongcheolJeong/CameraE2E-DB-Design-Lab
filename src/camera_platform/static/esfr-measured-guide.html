@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CameraE2E · 실측 112 Edge 촬영 가이드</title>
+<style>body{font:15px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#243b32;background:#f4f6f2;margin:0}main{max-width:1000px;margin:32px auto;padding:32px 40px;background:white;border:1px solid #d9e2d7;border-radius:12px}h1{font-size:32px;line-height:1.4}h2{font-size:22px;margin:34px 0 12px}h3{font-size:17px}p{margin:10px 0}a{color:#087763}table{border-collapse:collapse;width:100%;font-size:13px;margin:16px 0}th,td{border:1px solid #dce5d9;padding:12px;text-align:left;vertical-align:top}th{background:#edf4ea}.note{border-left:4px solid #3c8e65;background:#eff7ef;padding:16px}.warn{border-left-color:#a96c28;background:#fff7e6}code{font:12px ui-monospace,monospace;background:#eff3ec;padding:2px 4px;overflow-wrap:anywhere}.small{font-size:12px;color:#68796c}.steps{padding-left:22px}.steps li{padding:4px 0}button{font:inherit;padding:8px 14px;background:#087763;border:0;border-radius:7px;color:white;cursor:pointer}@media(max-width:700px){main{margin:0;padding:22px 16px}h1{font-size:25px}table{font-size:11px}th,td{padding:8px}}@media print{body{background:white}main{border:0;margin:0;max-width:none;padding:0}button,.navigation{display:none}a{color:inherit;text-decoration:none}table{break-inside:avoid}h2{break-after:avoid}}</style></head><body><main>
+<p class="small">CameraE2E · 실측 파일 입력 프로토콜 · 2026-10-18</p><h1>실물 E-SFR 차트로<br>112개 위치를 보정·검증하는 촬영 가이드</h1>
+<p class="navigation"><a href="/esfr-measured.html">실측 Calibration 열기</a> · <a href="/camera-validation-esfr.html">기준점·ROI 편집기</a> · <button onclick="window.print()">인쇄 / PDF 저장</button></p>
+<p>대상은 보유한 <b>Imatest Extended E-SFR ISO 2023, 16:9</b> 차트입니다. 카메라 모델과 RAW 형식이 확인되지 않았으므로 아래 수치를 장비 기본값으로 가정하지 않습니다. 실제 설정 기록과 native 파일을 준비한 뒤 업로드합니다.</p>
+<div class="note"><b>한 작업의 순서</b><p>개발 촬영 3쌍 → 112개 ROI 검토 → 개발 RAW Gr로 후보 보정 → 후보·기준 고정 계약 → 별도 세션의 새 검증 촬영 3쌍 → 고정 후보 재시뮬레이션 → RAW 판정·ISP 진단 → DB 조건 연결·통합 보고서.</p><p class="small">3+3은 이 시스템의 시작 프로토콜이며 ISO가 정한 표본 수가 아닙니다. 검증 데이터를 보고 보정했다면 그 자료는 개발 이력으로 남기고 다음 판정에는 새 검증을 취득합니다.</p></div>
+
+<h2>1. 장비와 촬영 모드를 확인합니다</h2>
+<table><thead><tr><th>준비할 항목</th><th>기록할 근거</th></tr></thead><tbody>
+<tr><td>장비 식별</td><td>카메라/센서·렌즈의 실제 모델·시리얼, firmware/ISP preset, pixel pitch, 선택한 DB 실행·후보·조건 ID. DB 연결만으로 실카메라 동일성을 증명하지 않습니다.</td></tr>
+<tr><td>RAW 저장 형식</td><td>가로·세로, bit depth, packing, byte order, stride, header bytes, bit shift, full-sensor CFA와 crop origin. RAW black/white level은 장비 기록에서 확인합니다. 파일 확장자만으로 결정하지 않습니다.</td></tr>
+<tr><td>동일 노출 RAW·ISP</td><td>pair ID, RAW/ISP sensor frame ID, 실제 노출 시각 <code>captured_at</code>(시간대 포함), session/acquisition ID. 디코딩 결과와 원본 파일의 출처를 기록합니다.</td></tr>
+<tr><td>고정 조건</td><td><code>conditions</code>: exposure, gain, aperture, focus 설정·거리, 차트 거리, 광원 ID, mode ID와 기준 온도. <code>settings_provenance</code>: device metadata 또는 operator 기록의 참조.</td></tr>
+<tr><td>촬영별 관측값</td><td><code>capture_observations</code>: 실제 온도·조도 등. 고정 설정과 센서/조도계의 매 촬영 관측값을 섞지 않습니다. 세션 간 변화는 보고서에서 확인할 근거로 보존합니다.</td></tr>
+</tbody></table>
+<div class="note warn"><b>첫 버전의 지원 범위</b><p>RAW는 명시적으로 디코딩된 Bayer byte 파일이며 unpacked8/unpacked16/MIPI RAW10·12·14를 지원합니다. 일반 분석기는 여러 CFA를 읽지만 <b>이 112개 DB 보정 연결은 RGGB만 지원</b>합니다. 현재 ISP는 같은 native raster의 PNG/JPEG/단일 페이지 TIFF이며, 확인된 linear 또는 sRGB encoding이어야 합니다.</p><p>DNG/CR2/CR3/NEF/ARW/YUV·제조사 container를 이름만 RAW로 바꾸어 제출하지 않습니다. binning, subsampling, resize, 회전, mirror, 미등록 crop 또는 unknown transfer는 이 경로에서 지원하지 않습니다. 필요한 native RAW·ISP 출력을 장비에서 확보해야 합니다. 원본 파일당 128 MiB, 촬영당 40 MP 한도가 있습니다.</p></div>
+
+<h2>2. 차트·조명·정렬을 고정합니다</h2>
+<table><thead><tr><th>항목</th><th>실무 설정</th><th>근거의 성격</th></tr></thead><tbody>
+<tr><td>실물 차트</td><td>제품 버전·개체 ID·실물 크기·재질을 기록하고 평탄하게 고정합니다. 인쇄물의 MTF·반사율 기준이 없다면 차트가 포함된 유효 응답으로 보고합니다. 화면 PNG의 RGB를 반사율로 대체하지 않습니다.</td><td><a href="https://docs.imatest.com/24.2/esfriso_instructions">Imatest 차트 설명</a></td></tr>
+<tr><td>조명</td><td>주변광·glare를 줄이고 양측 조명을 배치합니다. 35–45°를 출발점으로 반사·그림자를 확인합니다. 중앙·모서리·가장자리 조도를 기록합니다.</td><td><a href="https://www.imatest.com/solutions/test-lab-setup/">Imatest 촬영실 가이드</a>의 권장 배치</td></tr>
+<tr><td>균일도</td><td>Imatest는 SFR/MTF에 조명 변동 20% 이내, 색·톤에 ±5% 수준을 안내합니다. 우리 실측 기준은 측정 방법·분모·허용치를 촬영 전에 명시하고 적용합니다.</td><td>Imatest 안내이며 ISO 판정 기준으로 표기하지 않음</td></tr>
+<tr><td>정렬·거리</td><td>광축을 차트에 수직으로 맞추고 중심을 정렬합니다. 거리의 일률적인 숫자 대신 차트 크기·인쇄 해상도·렌즈 FOV를 고려합니다. 4개 기준점과 112개 edge가 모두 들어오고 ROI 여백이 있어야 합니다.</td><td><a href="https://imatest.atlassian.net/wiki/spaces/KB/pages/11408900129/Camera%2Bto%2BChart%2BAlignment">Imatest 정렬 가이드</a>. 112개 전체 포함은 이 작업의 완전성 조건</td></tr>
+<tr><td>노출·초점</td><td>삼각대/지그를 사용하고 밝은 쪽·어두운 쪽 edge의 clipping을 피합니다. 개발에서 focus를 정한 뒤 고정합니다. 실제 촬영을 미리보기의 밝기만으로 판정하지 않습니다.</td><td><a href="https://docs.imatest.com/24.2/esfriso_instructions">Imatest 촬영 가이드</a></td></tr>
+</tbody></table>
+<p>sharpness는 noise·exposure·sharpening에 영향을 받습니다. 모든 반복의 곡선과 오차를 남기고 좋은 프레임만 골라 전체 결과를 대체하지 않습니다. 반복 수와 ROI 크기를 늘리면 노이즈 영향을 줄일 수 있지만, 비선형 ISP 처리에는 단순 영상 평균의 한계가 있습니다. <a href="https://docs.imatest.com/kb/increasing-the-repeatability-of-your-sharpness-tests">Imatest 반복성 가이드</a>.</p>
+
+<h2>3. 개발 3쌍과 112개 ROI를 등록합니다</h2>
+<ol class="steps"><li>동일 노출 설정으로 독립적으로 촬영한 3프레임의 RAW·ISP 쌍을 취득합니다. 역할은 development, session ID는 개발 세션, acquisition/frame ID는 각 노출마다 다르게 기록합니다.</li><li>실측 화면에서 빈 metadata JSON을 저장하고 실제 값으로 채웁니다. null을 임의의 “그럴듯한 값”으로 채우지 않습니다. 업로드 전 설정과 원본을 대조합니다.</li><li>기존 ROI 편집기에서 촬영을 선택하고 차트 기준 왼쪽 위 → 오른쪽 위 → 왼쪽 아래 → 오른쪽 아래의 원형 기준점을 지정합니다. 제안은 좌표 찾기일 뿐 정확성 승인이 아닙니다.</li><li>ROI JSON과 차트 프로파일을 실측 화면에 가져옵니다. 정확한 112개 edge ID, 서로 다른 native ROI, edge마다 가로·세로 최소 32px가 필요합니다. 왜곡·가림·경계가 있으면 직접 수정합니다.</li><li>각 촬영 원본 미리보기에서 112개 ROI 위치·clipping·glare·가림과 고정 배치를 확인합니다. 세 촬영 모두 검토한 다음 개발 보정을 실행합니다. ROI를 바꾸면 확인을 다시 합니다.</li></ol>
+
+<h2>4. 후보 고정 후 새 검증 3쌍을 취득합니다</h2>
+<ol class="steps"><li>후보 hash와 취득 계약이 발급될 때까지 기다립니다. 검증용 템플릿에는 고정된 실제 조건과 계약 ID/hash가 복사됩니다.</li><li>새 session ID로 후보 고정 시각 이후 동일 노출 설정의 독립 3프레임을 취득합니다. 카메라·차트·focus·exposure·gain·ISP 설정을 유지합니다. 고정 지그를 해체하거나 다시 framing한 촬영은 현재 공통 ROI 계약에 적합하지 않습니다.</li><li>captured_at과 원본 frame ID, 취득 검토자와 확인 항목을 기록합니다. 파일 이름이나 재인코딩만 바꾼 개발 원본은 새 검증이 아닙니다.</li><li>validation 역할로 업로드하고 각 촬영의 같은 112개 ROI를 확인한 뒤 검증을 제출합니다. 검증에서 후보를 다시 피팅하지 않습니다.</li><li>전체 위치의 RAW·ISP 영상/SFR·오차와 기준 초과 항목을 확인합니다. 실패도 보고서에 보존합니다. 작업 URL의 workflow ID로 다시 열거나 중단된 계산을 재개할 수 있습니다.</li></ol>
+<p class="small">촬영 시각·장비·검토 확인은 operator 선언입니다. 서버는 계약·원본 hash·자료 분리·시간 순서의 일관성을 확인하지만 외부 카메라의 정체나 실제 노출 시각을 독립적으로 인증하지 않습니다.</p>
+
+<h2>5. RAW와 ISP의 판정 범위를 구분합니다</h2>
+<p><b>보정 목적함수는 개발 RAW Gr SFR입니다.</b> 차트·렌즈·센서·픽셀 효과가 섞인 조건부 Gaussian 유효 응답을 맞춥니다. MTF 크기만으로 비대칭·위상까지 포함한 순수 렌즈 PSF를 유일하게 복원하지 않습니다. QE·Dark·PTC를 이 edge 촬영으로 새로 추정하지 않습니다. 아래 IQ 옵션은 별도의 색 패치에서 조건부 reference ISP 보정을 수행합니다.</p>
+<p>현재 작업의 ‘보정 전 기준’은 초기 Gaussian 응답(기본 σ=1.5 native pixel)입니다. 선택한 DB 렌즈 처방에서 직접 계산한 PSF로 표시하지 않습니다. DB 실행·후보·조건 ID에 보정 프로파일과 보고서를 연결하며, 실제 장비와 DB 광학계의 대응은 별도로 확인해야 합니다.</p>
+<p>제조사 ISP가 불명확하면 <code>comparison_mode: diagnostic</code>으로 ISP 잔차를 기록하고 RAW 기준만 판정합니다. linear/sRGB 역변환은 영상 encoding 처리이며 demosaic·CCM·NR·sharpening·tone mapping 일치의 증거가 아닙니다. <code>matched_bilinear</code>는 실제 출력이 선언된 고정 bilinear 파이프라인과 일치할 때만 사용합니다. <a href="https://www.imatest.com/imaging/tonal-response-gamma/">Imatest gamma·tonal response 설명</a>.</p>
+<p>자동 보고서에는 개발/검증 ID·역할, 후보 고정 계약, native 좌표, 원본/결과 hash, 112개 범위와 누락·실패, 전체/최대 오차, ISP 진단 여부, DB 프로파일 적용 여부를 남깁니다. 활성화되지 않은 후보도 보존하며 이전 활성 모델을 실패한 후보로 덮어쓰지 않습니다.</p>
+<h2>6. 색·계조 IQ 옵션: 기준과 데이터 범위를 먼저 고정합니다</h2>
+<p>IQ를 켜면 112개 edge 외에 <b>18개 색 패치·20개 계조 패치</b> ROI를 각 촬영에서 확인합니다. 실제 인쇄물의 실측 반사율 대신 <code>imatest_esfr_2023_nominal_v1</code> 명목 설계값을 사용하므로 절대 색 정확도 인증이 아닙니다. 기준 ID/hash와 모든 패치의 clipping·제외 원인을 보고서에 남깁니다.</p>
+<p>실제 ISP 색 공간은 확인된 sRGB 또는 미확인으로 선언합니다. sRGB encoding과 sRGB 색 공간은 별개입니다. 미확인 출력의 ΔE는 미제공으로 남기며 값을 0으로 채우지 않습니다. 명목 타깃·보정 전 reference ISP·WB/노출 스케일/CCM 후 reference ISP·실제 ISP를 비교합니다. 같은 RAW를 사용하며 실제 제조사 ISP 출력은 변경하지 않습니다.</p>
+<p>개발 3프레임에서 WB·노출 스케일·CCM과 명목 반사율→관측 응답의 계조 전방 모델을 맞춥니다. 계조 전방 모델은 영상에 추가 적용하는 tone correction이 아닙니다. 후보 고정 뒤 새 검증에는 피팅하지 않습니다. IQ 허용치는 아직 정하지 않았으므로 판정 대기이며 복합 후보를 자동 활성화하지 않습니다.</p>
+<p>노이즈는 기본 3프레임으로 계산합니다. 같은 역할·조건의 <b>추가 0–5프레임</b>을 등록하면 총 3–8프레임이며, 반복 안정성을 위해 8프레임을 권장합니다. 이 숫자는 시스템 프로토콜이며 ISO 요구가 아닙니다. 추가 촬영도 38개 패치를 검토하고 기본 3개와 ID가 겹치지 않게 합니다. 개발에서 선택한 추가 수를 고정하고 검증도 같은 수를 새로 취득합니다. 노이즈 반복은 CCM 피팅에 추가하지 않습니다.</p>
+<p>RAW R/Gr/Gb/B 및 실제 ISP RGB의 공간·시간 변동을 구분합니다. 시간 변동에는 조명 드리프트도 포함되므로 Dark/PTC, sensor gain, full well 또는 카메라 전체 DR을 뜻하지 않습니다. 계조 차트가 보여 주는 반사율 범위 안에서만 해석합니다.</p>
+<p>일반/HDR 등 모드를 비교하려면 각 모드의 고정 조건으로 보정·새 검증을 완료한 두 workflow ID를 입력합니다. 같은 차트·ROI·광학/조명 조건에서 mode/exposure/gain 차이만 비교하며, 한 작업 안에서 조건을 느슨하게 섞지 않습니다. HDR 합성·동적 물체·flare·전체 DR 검증은 포함되지 않습니다.</p>
+<div class="note warn"><b>표준·측정 범위</b><p>ISO 12233:2023은 후속 2024판으로 대체되었습니다. 이 경로는 보유한 2023 차트 형상과 engineering SFR 분석을 지원하며, ISO 조항별 적합성이나 인증을 선언하지 않습니다. 실측 촬영을 업로드했다는 사실과 독립 물리 검증 확립은 별개입니다. <a href="https://www.iso.org/standard/79169.html">ISO 12233:2023</a> · <a href="https://www.iso.org/standard/88626.html">ISO 12233:2024</a>.</p></div>
+<p class="small">이 문서는 장비 미지정 상태의 일반 입력 가이드입니다. RAW 형식과 실제 ISP 출력이 확인되면 해당 장비의 검증된 설정으로 템플릿을 작성합니다.</p>
+</main></body></html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>CameraE2E · 저장 센서 작업실</title>
+  <link rel="stylesheet" href="/saved-sensor-workbench.css">
+  <script defer src="/saved-sensor-workbench.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="hero">
+    <div class="topline"><span class="eyebrow">CAMERAE2E / SAVED SENSOR WORKBENCH</span><nav aria-label="다른 작업실"><a href="/integration-workbench.html">엔진 통합 작업실</a><a href="/db-comparisons.html">DB revision 비교</a><a href="/">기본 작업실</a></nav></div>
+    <h1>보유 센서 run에서 장면 응답과 노출 조건을 확인하세요.</h1>
+    <p>기존 CameraE2E의 저장 센서 모델, 장면 생성기, 평가기와 최적화기를 같은 작업 기록에 연결합니다. 원본 run ID와 입력 자산을 고정해 실행하고 결과 파일을 보존합니다.</p>
+    <div class="scope"><span>저장 센서 모델 · 고정 F/4 · 4 mm ideal optics</span><span>RAW·화질 진단</span><span>노출·gain 최대 4개 조합</span><strong>제품 순위·실측 정확도·HDR fusion은 미검증</strong></div>
+    <p id="connection" class="connection" role="status">로컬 작업공간 연결 중…</p>
+  </header>
+  <main id="main">
+    <div id="error" class="error" role="alert" hidden></div>
+    <div class="layout">
+      <div class="forms">
+        <section class="panel" aria-labelledby="quality-title">
+          <div class="section-heading"><span class="step">01</span><div><h2 id="quality-title">저장 센서 run 화질·RAW 진단</h2><p>기존 Scene과 평가 계산을 하나 또는 두 센서에 적용합니다.</p></div></div>
+          <form id="quality-form">
+            <label for="quality-name">작업 이름</label><input id="quality-name" maxlength="160" required>
+            <fieldset><legend>고정할 센서 run</legend>
+              <label for="sensor-filter">목록 필터</label><input id="sensor-filter" type="search" placeholder="제조사·제품명·report code" autocomplete="off">
+              <div class="two"><div><label for="quality-sensor-a">센서 A</label><select id="quality-sensor-a" required></select></div><div><label for="quality-sensor-b">센서 B · 선택</label><select id="quality-sensor-b"></select></div></div>
+              <p id="sensor-count" class="note"></p>
+            </fieldset>
+            <fieldset><legend>장면 · 최대 3개</legend>
+              <div class="scene-options"><label><input type="checkbox" name="quality-scene" value="uniform" checked> 균일 입력 · 시간 RAW SNR</label><label><input type="checkbox" name="quality-scene" value="slanted_edge" checked> Slanted edge · 시스템 MTF50</label><label><input type="checkbox" name="quality-scene" value="macbeth_d65"> Macbeth D65 · 동일 패치 보정 잔차</label><label><input type="checkbox" name="quality-scene" value="hdr_chart_d65"> HDR chart D65 · 6단 밝기 단일 노출 응답</label></div>
+              <p class="note">HDR chart는 장면의 명암비, RAW와 포화 반응을 봅니다. 다중 노출 합성·LFM 검증이 아닙니다. 선택 시 출력 크기는 32×32가 필요합니다.</p>
+            </fieldset>
+            <fieldset><legend>공통 계산 조건</legend>
+              <div class="three"><div><label for="quality-luminance">평균 휘도 (cd/m²)</label><input id="quality-luminance" type="number" min="0.01" max="10000" step="any" required></div><div><label for="quality-exposure">노출 (ms)</label><input id="quality-exposure" type="number" min="0.001" max="1000" step="any" required></div><div><label for="quality-frames">독립 RAW 프레임</label><input id="quality-frames" type="number" min="2" max="4" step="1" required></div></div>
+              <div class="three"><div><label for="quality-rows">출력 행</label><input id="quality-rows" type="number" min="16" max="32" step="1" required></div><div><label for="quality-cols">출력 열</label><input id="quality-cols" type="number" min="16" max="32" step="1" required></div><div><label for="quality-seed">난수 seed</label><input id="quality-seed" type="number" min="0" max="4294967295" step="1" required></div></div>
+            </fieldset>
+            <p id="quality-limits" class="warning"></p>
+            <label class="check"><input id="quality-acknowledge" type="checkbox"> <span>이 결과가 모델 진단이며 실측 성능이나 센서 제품 순위가 아님을 확인했습니다.</span></label>
+            <button id="quality-submit" type="submit" disabled>화질 진단 실행</button>
+          </form>
+        </section>
+        <section class="panel" aria-labelledby="search-title">
+          <div class="section-heading"><span class="step">02</span><div><h2 id="search-title">저장 run 노출·gain 탐색</h2><p>기존 CameraE2E 최적화기로 선언된 후보만 평가합니다.</p></div></div>
+          <form id="search-form">
+            <label for="search-name">작업 이름</label><input id="search-name" maxlength="160" required>
+            <label for="search-sensor">고정할 센서 run</label><select id="search-sensor" required></select>
+            <p class="note">위의 목록 필터를 함께 사용합니다. 저장된 모델·readout 출처는 결과에 남습니다.</p>
+            <fieldset><legend>후보와 제약</legend>
+              <div class="two"><div><label for="search-exposures">노출 후보 (ms, 쉼표 구분)</label><input id="search-exposures" type="text" inputmode="decimal" placeholder="1, 4" required></div><div><label for="search-gains">Analog gain 후보 (쉼표 구분)</label><input id="search-gains" type="text" inputmode="decimal" placeholder="1, 2" required></div></div>
+              <p id="candidate-count" class="note" role="status">노출×gain 최대 4개 조합</p>
+              <div class="three"><div><label for="search-luminance">휘도 (cd/m²)</label><input id="search-luminance" type="number" min="0.01" max="10000" step="any" required></div><div><label for="search-ceiling">최대 포화 비율 (0–1)</label><input id="search-ceiling" type="number" min="0" max="1" step="any" required></div><div><label for="search-seed">난수 seed</label><input id="search-seed" type="number" min="0" max="4294967295" step="1" required></div></div>
+              <div class="two"><div><label for="search-rows">계산 행</label><input id="search-rows" type="number" min="8" max="32" step="1" required></div><div><label for="search-cols">계산 열</label><input id="search-cols" type="number" min="8" max="32" step="1" required></div></div>
+              <p class="note">목적함수는 gain 적용 전 평균 광전자 최대화입니다. Well·ADC white 포화 비율을 제약합니다. RAW 배열은 이 탐색 보고서에 포함되지 않습니다.</p>
+            </fieldset>
+            <p id="search-limits" class="warning"></p>
+            <label class="check"><input id="search-acknowledge" type="checkbox"> <span>이 탐색이 지정한 최대 4개 후보와 모델 제약 안에서만 유효함을 확인했습니다.</span></label>
+            <button id="search-submit" type="submit" disabled>후보 탐색 실행</button>
+          </form>
+        </section>
+      </div>
+      <section class="panel results" aria-labelledby="result-title">
+        <div class="section-heading"><span class="step">03</span><div><h2 id="result-title">저장 결과</h2><p>기존 작업 ID를 열면 보존된 결과와 파일을 조회합니다.</p></div></div>
+        <div class="open-controls"><form id="open-form"><label for="open-id">작업 ID로 열기</label><div class="inline"><select id="open-kind"><option value="quality">화질 진단</option><option value="search">노출·gain 탐색</option></select><input id="open-id" placeholder="run-…" autocomplete="off" required><button type="submit" class="secondary">열기</button></div></form><button id="refresh-list" type="button" class="secondary">목록 새로고침</button></div>
+        <div id="recent" class="recent" aria-label="최근 저장 작업"></div>
+        <p id="status" class="status" role="status" aria-live="polite">작업을 선택하거나 새 작업을 제출하세요.</p>
+        <div id="result" hidden>
+          <div class="result-actions"><a id="permalink">이 결과 링크</a><a id="export" download>전체 작업 JSON 저장</a><button id="cancel" type="button" class="secondary" hidden>실행 취소</button></div>
+          <p id="result-limits" class="warning"></p>
+          <div id="result-summary"></div>
+          <details><summary>고정 입력·출처·검증 상태</summary><pre id="provenance"></pre></details>
+          <h3>저장된 산출물</h3><div id="artifacts" class="artifacts"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>수치 결과는 선언된 모델·장면·광학 조건의 진단입니다. 물리적 제품 검증과 설계 승인 근거는 별도로 필요합니다.</footer>
+</body>
+</html>

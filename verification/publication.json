@@ -1,0 +1,76 @@
+{
+  "schema": "db_design_lab_publication_verification_v1",
+  "source_files_sha_verified": 3114,
+  "all_manifest_files_tracked": true,
+  "python_ast_validation": "passed",
+  "targeted_pytest": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "125",
+    "time": "22.120",
+    "timestamp": "2026-10-21T10:27:41.798199+09:00",
+    "hostname": "ClaudeGPTNets-Mac-mini.local"
+  },
+  "restored_workspace_smoke": {
+    "status": "passed",
+    "workspace": "isolated-clone-layout",
+    "http_db_page": 200,
+    "http_options": 200,
+    "lenses": [
+      {
+        "key": "reference",
+        "ready": true,
+        "reason": null
+      },
+      {
+        "key": "canon_p0248",
+        "ready": true,
+        "reason": null
+      },
+      {
+        "key": "canon_p0248_open",
+        "ready": true,
+        "reason": null
+      }
+    ],
+    "sensors": [
+      {
+        "key": "reference_imx462",
+        "ready": true,
+        "reason": null
+      },
+      {
+        "key": "imx662",
+        "ready": true,
+        "reason": null
+      },
+      {
+        "key": "imx307",
+        "ready": true,
+        "reason": null
+      }
+    ],
+    "bound_lenses": [
+      "reference",
+      "canon_p0248"
+    ],
+    "bound_sensors": [
+      "reference_imx462",
+      "imx662"
+    ],
+    "esfr_ab_route_present": true,
+    "production_8780_modified": false
+  },
+  "source_review": {
+    "source_manifest_files_verified": 3114,
+    "secret_pattern_hits": [],
+    "credential_filename_hits": [],
+    "oversize_git_files": []
+  },
+  "db_seed_files_sha_verified": 7780,
+  "private_only": true,
+  "existing_project_head_unchanged": true,
+  "scope": "software packaging and DB binding, not physical camera validation"
+}

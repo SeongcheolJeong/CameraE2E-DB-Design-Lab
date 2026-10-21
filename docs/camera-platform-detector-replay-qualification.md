@@ -1,0 +1,11 @@
+# Lens × Sensor 검출기 재생 자격 검사
+
+저장된 Lens DB × Sensor DB RAW와 ISP RGB에 실제 YOLO 추론을 수행한 `lens_sensor_isp_detector` Job을 코호트 후보로 검사한다. 입력은 `camerae2e_lens_sensor_detector_replay_qualification_v1`이며, `detector_replay_intake_template(service, job_ids)` 또는 `GET /api/v1/lens-sensor-isp-detectors/replay-qualifications/template?detector_job_id=...`로 각 Job의 결과 해시, 추론 해시, 정확한 RGB 결속 해시와 원본 장면 계열을 채운다. 여러 Job ID는 쿼리 파라미터를 반복한다. 사용자는 dataset ID·revision과 각 장면의 `split`을 선언한다. `qualify_saved_detector_replay(service, intake)` 또는 `POST /api/v1/lens-sensor-isp-detectors/replay-qualifications`가 감사 결과를 만든다. HTTP 응답에는 내용 주소로 저장한 보고서 artifact도 포함된다.
+
+자격 검사는 완료된 detector·RAW·ISP Job과 artifact를 다시 읽고, ISP NPZ의 RGB 배열에서 detector의 uint8 RGB 및 BGR 입력 해시를 재계산한다. 모델 weight·worker 해시, 클래스 매핑, 추론 출력 박스, 주석 파일과 단일 프레임 metric을 확인한다. 등록된 물체측 radiance 장면은 원본 NPY와 metadata의 저장 ID까지 확인한다. 같은 장면 source가 train·validation·test에 동시에 속하거나 RAW/RGB가 중복되면 거부한다. `camerae2e_lens_sensor_detector_scene_splits_v1` artifact를 지정하면 선언한 장면 그룹·split과 정확히 일치해야 한다. 그 artifact는 분할 **선언의 바이트**를 고정하지만, 모델 훈련 때 해당 분할이 지켜졌다는 외부 증명은 아니다.
+
+양성·음성 이미지 모두 주석으로 받을 수 있다. 음성 이미지는 `objects: []`로 선언하며, 그 이미지에서 실제 검출기가 낸 박스는 false positive로 계산한다. 두 개 이상의 서로 다른 test 장면이 있고 같은 label set·annotation set·source dataset ID에 속하며 클래스별 양성 정답이 존재하면 이미지 ID별 `diagnostic_map`을 계산할 수 있다. 해당 숫자는 저장된 추론 출력과 제공된 박스 사이의 진단이다.
+
+`product_map.available`은 계속 `false`다. 현지 가중치의 공급 출처는 해시만으로 인증되지 않고, 주석의 의미적 정확성과 독립 검토, 모델 훈련 데이터와 test 분할의 불교차, 장면의 대표성, 물리 카메라 예측 정확도가 아직 입증되지 않았다. 내장 uniform/slanted-edge 장면은 독립 물체 장면이 아니며 `synthetic_contract_fixture` 박스에는 의미 있는 물체 정답이 없다. 자격 보고서는 이 조건을 `product_map.blockers`에 개별 코드로 남긴다. 이 코드를 숨기거나 단순히 sample 수를 늘려 제품 mAP를 표시하면 안 된다.
+
+현재 로컬 자산에는 YOLO11n 가중치와 실제 추론을 보존한 dev15 Job이 있으나, 그 Job에는 주석이 없고 입력은 내장 slanted-edge다. `tools/audit_camera_detector_replay.py`로 저장 Job을 재생 없이 읽은 [dev35 자격 감사 결과](../reports/camera_platform/integrated-workflows-20260928/detector-dev35-replay-qualification-audit.json)는 `annotation_missing`, `independent_scene_asset_missing`, `split_assignment_artifact_missing` 등을 기록하며 제품 mAP를 막는다. 독립 장면·라벨·훈련 분할 근거를 확보한 뒤에는 같은 intake로 먼저 결속·누락 조건을 검사해야 한다. 원본 장면의 고유 ID를 가진 radiance asset은 현재 최대 256×256 입력, Lens RAW는 최대 32×32 출력이므로 대표 객체 검출 benchmark의 해상도·통계 요건도 별도로 해결해야 한다.

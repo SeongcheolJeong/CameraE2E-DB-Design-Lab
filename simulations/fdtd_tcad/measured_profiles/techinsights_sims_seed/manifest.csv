@@ -1,0 +1,10 @@
+code,manufacturer,device_name,profile,doping_row_count,executable_implant_count,metadata_only_row_count,pixel_pitch_um,active_si_thickness_um,dti_type,dti_depth_um,dti_width_nm
+DEP-2511-801,Samsung,HP5,dep_2511_801_samsung_hp5/profile.json,12,5,7,0.5,4.0,full_depth_front_dti,4.2,95.4
+DEP-2506-801,Samsung,JNP (S5KJNP),dep_2506_801_samsung_jnp_s5kjnp/profile.json,15,9,8,0.64,3.8,full_depth_front_dti,3.8,96.0
+DEP-2504-801,Sony,IMX487-AAMJ-C,dep_2504_801_sony_imx487_aamj_c/profile.json,14,9,6,2.74,3.1,full_depth_front_dti,3.0,
+DEP-2505-802,SmartSens,SC550XS,dep_2505_802_smartsens_sc550xs/profile.json,14,6,9,1.0,2.9,partial_depth_back_dti,0.18,180.0
+DEP-2409-801,Samsung,S5KGNJSP03_CIS,dep_2409_801_samsung_s5kgnjsp03_cis/profile.json,13,6,7,1.0,4.2,full_depth_front_dti,4.1,87.9
+DEP-2412-801,Sony,IMX900,dep_2412_801_sony_imx900/profile.json,13,7,7,2.25,6.0,full_depth_front_dti,1.9,185.0
+DEP-2411-801,OmniVision,OX08D10,dep_2411_801_omnivision_ox08d10/profile.json,14,7,8,2.1,3.0,partial_depth_back_dti,2.3,190.0
+DEP-2511-802,STMicroelectronics,56G812A1A_CIS,dep_2511_802_stmicroelectronics_56g812a1a_cis/profile.json,13,9,4,2.9,9.7,full_depth_front_dti,0.48,480.0
+DEP-2407-801,SmartSens,SC100AT-CS1AF00,dep_2407_801_smartsens_sc100at_cs1af00/profile.json,13,7,7,3.0,2.3,back_dti,,

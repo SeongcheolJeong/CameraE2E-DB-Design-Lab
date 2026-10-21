@@ -1,0 +1,239 @@
+{
+  "created_at_utc": "2026-09-26T14:19:29.843940+00:00",
+  "prior_selection_sha256": "513bc11167f2238efb18bc1baecd6ecf4fafbc256c0528a49e8ab92cc26cc48b",
+  "candidates": [
+    {
+      "candidate_id": "radial-e4-g1",
+      "stop": "radial",
+      "exposure_ms": 4.0,
+      "gain": 1.0,
+      "feasible": true,
+      "failures": [],
+      "failed_scenarios": {},
+      "evaluated_scenarios": 3,
+      "worst_green_snr_p10": 18.72780648378875,
+      "minimum_green_dn": 196.78125,
+      "maximum_well_fraction": 0.0,
+      "maximum_white_fraction": 0.0
+    },
+    {
+      "candidate_id": "clear-e2-g1",
+      "stop": "clear",
+      "exposure_ms": 2.0,
+      "gain": 1.0,
+      "feasible": true,
+      "failures": [],
+      "failed_scenarios": {},
+      "evaluated_scenarios": 3,
+      "worst_green_snr_p10": 15.978425852362625,
+      "minimum_green_dn": 143.390625,
+      "maximum_well_fraction": 0.0,
+      "maximum_white_fraction": 0.0
+    }
+  ],
+  "source_identity": {
+    "clear": {
+      "run_id": "run-a2f9b36ad92c4cfaad3f3a545af0b131",
+      "archive_sha256": "80f00e71c835a1f92073d9c2b040319269137ab790223548a229f5625d2af351",
+      "lens_model_id": "model-e3b6428f60334958a9d1694cdc8129e5",
+      "lens_response_sha256": "d7af5860bcd662bfb04e8f0e4076e17165e561b600290de5491f150ae82bedad",
+      "psf_factory_job_id": "run-e2725342c91e4bdc94489f13e3c9cd20",
+      "sensor_model_id": "model-053d49e660ff4545abf2467d25237bf5",
+      "sensor_payload_sha256": "86623c761bdb80340924b2075f2686bc9865c41da77c923208d402474c869179",
+      "scene_render_id": "run-7340d77f8e8a4f9d861f9a412f724983",
+      "scene_render_content_hash": "5c2cde0f03d9d69b90b8b15efb74f81b361cede609249288aa7a7ffcd664e666",
+      "projection_lens_model_id": "model-e3b6428f60334958a9d1694cdc8129e5",
+      "sampling": {
+        "crop_origin": [
+          56,
+          56
+        ],
+        "full_sensor_shape": [
+          128,
+          128
+        ],
+        "kind": "native_sensor",
+        "pixel_pitch_um": 3.0
+      },
+      "spectral_axis_nm": [
+        500,
+        600
+      ],
+      "physical_instance": null,
+      "design_asset_id": "asset-14f2716f4b334920b0c66b8c77cb703a",
+      "prescription_sha256": "1eaeebfdedffcbf67f5d3df19dd9826b3f07fc75c0ecb7dcda8e4e22ba5cab5d",
+      "source_uri": "factory://run-e2725342c91e4bdc94489f13e3c9cd20",
+      "physical_validation": "not_established"
+    },
+    "radial": {
+      "run_id": "run-c2a3134e19c94708ab03e1b2487429e5",
+      "archive_sha256": "0db9d4460f1732cf1ba2e3926260cd29ea5cba2bdc287a9d8cf6618dfadcc98c",
+      "lens_model_id": "model-609a4fe02ab940ea8eee7fd04bc1844c",
+      "lens_response_sha256": "16491cfb62a55ca9bdd7c7095c6985026d15ce2318677889bf389c8f062fbb52",
+      "psf_factory_job_id": "run-1b8455898e6a4cf18baf706faff3bdb3",
+      "sensor_model_id": "model-053d49e660ff4545abf2467d25237bf5",
+      "sensor_payload_sha256": "86623c761bdb80340924b2075f2686bc9865c41da77c923208d402474c869179",
+      "scene_render_id": "run-7340d77f8e8a4f9d861f9a412f724983",
+      "scene_render_content_hash": "5c2cde0f03d9d69b90b8b15efb74f81b361cede609249288aa7a7ffcd664e666",
+      "projection_lens_model_id": "model-609a4fe02ab940ea8eee7fd04bc1844c",
+      "sampling": {
+        "crop_origin": [
+          56,
+          56
+        ],
+        "full_sensor_shape": [
+          128,
+          128
+        ],
+        "kind": "native_sensor",
+        "pixel_pitch_um": 3.0
+      },
+      "spectral_axis_nm": [
+        500,
+        600
+      ],
+      "physical_instance": null,
+      "design_asset_id": "asset-14f2716f4b334920b0c66b8c77cb703a",
+      "prescription_sha256": "f3fec19dceedd88ec1f755a50fe8ecc630ff20ae80198ee95bf6c015b85b3dc2",
+      "source_uri": "factory://run-1b8455898e6a4cf18baf706faff3bdb3",
+      "physical_validation": "not_established"
+    }
+  },
+  "development": [
+    {
+      "scenario_id": "dev-motion-500",
+      "split": "development",
+      "frequency_cpp": 0.125,
+      "velocity_px_s": 500.0,
+      "phase_at_midpoint_cycles": 0.17,
+      "band_factors": [
+        1.0,
+        1.0
+      ],
+      "modulation": 0.5
+    },
+    {
+      "scenario_id": "dev-motion-1000",
+      "split": "development",
+      "frequency_cpp": 0.125,
+      "velocity_px_s": 1000.0,
+      "phase_at_midpoint_cycles": 0.29,
+      "band_factors": [
+        1.0,
+        1.0
+      ],
+      "modulation": 0.5
+    },
+    {
+      "scenario_id": "dev-spectrum-blue",
+      "split": "development",
+      "frequency_cpp": 0.0,
+      "velocity_px_s": 0.0,
+      "phase_at_midpoint_cycles": 0.0,
+      "band_factors": [
+        1.6,
+        0.4
+      ],
+      "modulation": 0.0
+    },
+    {
+      "scenario_id": "dev-spectrum-red",
+      "split": "development",
+      "frequency_cpp": 0.0,
+      "velocity_px_s": 0.0,
+      "phase_at_midpoint_cycles": 0.0,
+      "band_factors": [
+        0.35,
+        1.65
+      ],
+      "modulation": 0.0
+    }
+  ],
+  "holdout_recipes": [
+    {
+      "scenario_id": "holdout-f01-v750",
+      "split": "holdout",
+      "frequency_cpp": 0.1,
+      "velocity_px_s": 750.0,
+      "phase_at_midpoint_cycles": 0.37,
+      "band_factors": [
+        0.8,
+        1.2
+      ],
+      "modulation": 0.5
+    },
+    {
+      "scenario_id": "holdout-f01-vminus1125",
+      "split": "holdout",
+      "frequency_cpp": 0.1,
+      "velocity_px_s": -1125.0,
+      "phase_at_midpoint_cycles": 0.61,
+      "band_factors": [
+        1.3,
+        0.7
+      ],
+      "modulation": 0.5
+    },
+    {
+      "scenario_id": "holdout-f01-v1250",
+      "split": "holdout",
+      "frequency_cpp": 0.1,
+      "velocity_px_s": 1250.0,
+      "phase_at_midpoint_cycles": 0.43,
+      "band_factors": [
+        0.55,
+        1.45
+      ],
+      "modulation": 0.5
+    },
+    {
+      "scenario_id": "stress-temporal-zero",
+      "split": "stress",
+      "frequency_cpp": 0.125,
+      "velocity_px_s": 2000.0,
+      "phase_at_midpoint_cycles": 0.11,
+      "band_factors": [
+        1.0,
+        1.0
+      ],
+      "modulation": 0.5
+    },
+    {
+      "scenario_id": "stress-contrast-inversion",
+      "split": "stress",
+      "frequency_cpp": 0.125,
+      "velocity_px_s": 3000.0,
+      "phase_at_midpoint_cycles": 0.19,
+      "band_factors": [
+        1.0,
+        1.0
+      ],
+      "modulation": 0.5
+    }
+  ],
+  "signal_limits": {
+    "minimum_green_dn": 120.0,
+    "minimum_green_snr_p10": 10.0,
+    "maximum_well_fraction": 0.01,
+    "maximum_white_fraction": 0.01,
+    "maximum_exposure_ms": 4.0
+  },
+  "minimum_signed_motion_transfer": 0.8,
+  "maximum_post_calibration_channel_ratio_error": 0.03,
+  "calibration": "One new uniform neutral spectrum [1,1]; fixed gains before development and holdout",
+  "color_reference": "clear-e2-g1, relative RAW ratios; not absolute color accuracy",
+  "input": "Uniform shared radiance derived from archived per-band spatial means, multiplied by a moving sinusoid in the fixed original native window",
+  "timing": "Global box shutter centered at common relative time zero; not two different poses or rolling shutter",
+  "development_temporal_frequency_envelope_hz": [
+    0,
+    125
+  ],
+  "prior_holdouts": "Not reused; earlier results are development context, not fresh confirmation",
+  "implementation_sha256": {
+    "tools/run_camera_motion_color_tradeoff.py": "4a809296147736e2604eae2db19266200a95f42846426f2ac1e4c6be669870d5",
+    "src/camera_platform/motion_color_tradeoff.py": "6e4974af912d48b1fe0bb9c95f8ac2a5092821ba5fa91ca17003bdb95a8abd2f",
+    "src/camera_platform/response_chain.py": "71f3a93ae9a9c7055355ec7ab7c206157d333f6a4948ffb85e6791a49e32da96",
+    "tools/run_camera_prescription_comparison.py": "338c1478c6de7db0283651ae9b5ea2ba981dd8ebd4082eea5b46e9ca56beb23a"
+  },
+  "limits_note": "Authored research brief; not customer specifications or identified hardware support"
+}

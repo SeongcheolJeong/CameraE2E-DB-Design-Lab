@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CameraE2E · 저장된 설계 결정 비교</title>
+  <link rel="stylesheet" href="/decision-review.css">
+  <script defer src="/decision-review.js"></script>
+</head>
+<body>
+  <header><a id="workspace-link" href="/#experiments">CameraE2E / 실험 · 비교</a><span class="pill">읽기 전용 · 저장 결과</span></header>
+  <main>
+    <div class="eyebrow">SAVED DESIGN DECISIONS</div>
+    <h1>무엇을 우선하느냐에 따라<br>선택은 달라집니다.</h1>
+    <p class="lede">신호 여유와 움직임·채널비 유지의 두 결정을 나란히 검토합니다. 이전 결정을 덮어쓰거나 새 후보를 선택하지 않습니다.</p>
+    <div id="error" class="error" role="alert" hidden></div>
+    <p id="loading" role="status">저장된 선택과 평가 결과를 불러오는 중입니다.</p>
+    <section id="cards" class="cards" aria-label="저장된 결정 두 개"></section>
+    <section id="decision" hidden>
+      <div class="section-head"><div><span class="eyebrow">FIXED OBJECTIVE / EVIDENCE</span><h2 id="decision-title"></h2></div><button id="reload" type="button">기록 새로 읽기</button></div>
+      <p id="decision-meta"></p>
+      <div class="columns"><div><h3>저장된 선택 기준</h3><dl id="limits"></dl></div><div><h3>선택 후보의 평가 구분</h3><div id="groups"></div><p class="note">새 시드 반복과 서로 다른 장면 수를 같은 것으로 세지 않습니다. 스트레스 실패는 미사용 평가 통과와 합산하지 않습니다.</p></div></div>
+      <details id="scope" open><summary>이 결과가 설명하는 범위</summary><ul id="scope-notes"></ul><div id="calibration"></div></details>
+      <div id="documents" class="downloads" aria-label="동결된 원본 문서"></div>
+      <div class="section-head"><div><span class="eyebrow">MATCHED CASE COMPARISON</span><h2>같은 입력에서 후보 비교</h2></div></div>
+      <div class="filters">
+        <label>평가 구분<select id="split"><option value="holdout">미사용 평가</option><option value="stress">스트레스 · 적용 경계</option><option value="development">선택용 개발 입력</option><option value="train">선택용 입력</option><option value="all">전체</option></select></label>
+        <label>입력 사례<select id="scenario"></select></label>
+        <label class="check"><input id="noise" type="checkbox"> 잡음 ON 표본 포함</label>
+        <label class="check"><input id="failures" type="checkbox"> 실패가 있는 사례만</label>
+      </div>
+      <p id="case-count" class="note" role="status"></p>
+      <div class="table-wrap" tabindex="0" aria-label="후보별 수치 비교, 작은 화면에서는 가로 스크롤"><table><thead><tr>
+        <th>후보 / 입력</th><th>결과</th><th>Green DN</th><th>예측 SNR p10</th><th>Well / RAW 상단</th><th>광전하 대비<br>부호 보존</th><th>정수 RAW 대비<br>부호 보존</th><th>고정 보정 후<br>채널비 차이</th><th>원본</th>
+      </tr></thead><tbody id="rows"></tbody></table></div>
+      <section id="raw-panel" hidden aria-live="polite"><h3 id="raw-title">선택한 원본 RAW</h3><p class="note">모든 영상은 64–4095 DN의 동일 표시 범위입니다. Bayer 코드의 회색조 미리보기이며, ISP 처리 영상이 아닙니다. 흰 마스크는 최종 코드 4095이며 well 포화 마스크가 아닙니다.</p><div id="raw-cards" class="cards"></div></section>
+      <details><summary>렌즈·센서·장면 출처</summary><pre id="provenance"></pre></details>
+    </section>
+    <footer>합성 처방·두 파장·제한된 입력의 연구 결과입니다. 실물 검증, 제품 승인, 기본 앱 적용을 의미하지 않습니다.</footer>
+  </main>
+</body>
+</html>

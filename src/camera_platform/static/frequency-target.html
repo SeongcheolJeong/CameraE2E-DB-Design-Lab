@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>CameraE2E · Scene/PSF 목표 주파수 표본화</title>
+  <link rel="stylesheet" href="/integration-workbench.css">
+  <link rel="stylesheet" href="/frequency-target.css">
+  <script defer src="/frequency-target.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="hero">
+    <div class="topline"><span class="eyebrow">CAMERAE2E / FREQUENCY-TARGETED SAMPLING</span><nav aria-label="작업실 이동"><a href="/integration-workbench.html">Lens × Sensor 작업실</a><a href="/">기본 작업실</a><a href="/docs">API 문서</a></nav></div>
+    <h1>목표 주파수에 맞춰 Scene 격자를 선택하고 수렴 여부를 검사합니다.</h1>
+    <p>등록한 Lens revision·Sensor run·active mode의 한 ROI에서 동일 화각의 연속 slanted edge를 다시 표본화합니다. 저장 기하 PSF의 실제 convolution 간격, 센서 pitch와 기준 대비 변화를 함께 기록합니다.</p>
+    <div class="scope"><span>Adaptive 또는 명시적 고정 화각 격자</span><span>평균 광전자·subpixel 이동·지원 시 선언한 주파수 점</span><strong>모델 수치 진단 · 실측 FOV/MTF 또는 제품 순위 아님</strong></div>
+    <p id="connection" class="connection" role="status">로컬 작업공간 연결 중…</p>
+  </header>
+  <main id="main">
+    <div id="error" class="error" role="alert" hidden></div>
+    <section class="panel scope-panel"><h2>정확도 판정의 경계</h2><p>목표는 영상면 <strong>센서 열 방향 native Nyquist의 일부</strong>입니다. Bayer RAW의 평균 광전자 변화가 안정돼도 RGB 시스템 MTF가 수렴했다고 판정하지 않습니다. 저장 기하 PSF의 보간은 새 광학 정보를 만들지 않으며, 같은 광선의 재추적은 회절·광선 밀도·실측을 검증하지 않습니다. 정책상 장면 크기 또는 작업 메모리를 초과하면 결과를 inconclusive로 남깁니다.</p></section>
+    <div class="layout">
+      <div class="forms">
+        <section class="panel"><h2><span class="step">01</span> 등록한 모델·ROI</h2>
+          <p>기존 등록 active mode의 전역 센서 좌표를 사용합니다. 렌즈 revision UUID, 저장 센서 run SHA-256 및 선언 ID가 필요합니다. 선택한 영역만 계산하며 전체 FOV 촬영을 주장하지 않습니다.</p>
+          <form id="study-form">
+            <label for="study-name">작업 이름</label><input id="study-name" maxlength="160" required>
+            <label for="lens-id">Lens DB revision UUID</label><input id="lens-id" spellcheck="false" autocomplete="off" required pattern="[0-9a-fA-F-]{36}">
+            <div class="two"><div><label for="sensor-id">Sensor DB identifier / 보고서 코드</label><input id="sensor-id" spellcheck="false" autocomplete="off" required pattern="[A-Za-z0-9-]{1,64}"></div><div><label for="sensor-run">저장 Sensor run SHA-256</label><input id="sensor-run" spellcheck="false" autocomplete="off" required pattern="[0-9a-f]{64}" maxlength="64"></div></div>
+            <label for="mode-id">등록 active-mode declaration ID</label><input id="mode-id" spellcheck="false" autocomplete="off" required pattern="[A-Za-z0-9_-]{1,128}"><p class="note">등록·조회는 <a href="/docs">lens-sensor-active-modes API</a>를 사용합니다. 이 화면은 등록 ID의 실제 제품 사양을 검증하지 않습니다.</p>
+            <fieldset><legend>전역 센서 ROI · 끝 좌표 제외</legend><div class="four"><div><label for="roi-r0">행 시작</label><input id="roi-r0" type="number" min="0" max="65536" step="1" required></div><div><label for="roi-r1">행 끝</label><input id="roi-r1" type="number" min="1" max="65536" step="1" required></div><div><label for="roi-c0">열 시작</label><input id="roi-c0" type="number" min="0" max="65536" step="1" required></div><div><label for="roi-c1">열 끝</label><input id="roi-c1" type="number" min="1" max="65536" step="1" required></div></div><p class="note">각 축 8–128 픽셀, 최대 16,384 픽셀. 단일-site monochrome의 선언한 주파수 점 평가는 각 축 최소 48 픽셀이 필요합니다.</p></fieldset>
+            <div class="two"><div><label for="scene-fov">장면 수평 화각 (deg)</label><input id="scene-fov" type="number" min="0.001" max="90" step="any" required></div><div><label for="edge-offset">Edge 중심 오프셋 (deg)</label><input id="edge-offset" type="number" min="-45" max="45" step="any" required></div></div>
+            <div class="two"><div><label for="scene-luminance">밝은 쪽 휘도 (cd/m²)</label><input id="scene-luminance" type="number" min="0.01" max="10000" step="any" required></div><div><label for="exposure">노출 시간 (ms)</label><input id="exposure" type="number" min="0.001" max="1000" step="any" required></div></div>
+            <fieldset><legend>Scene 격자와 정확도 목표</legend>
+              <div class="two"><div><label for="sampling-mode">Scene 격자</label><select id="sampling-mode"><option value="adaptive">Adaptive · 목표 주파수에서 시작</option><option value="explicit">명시적 시작 해상도</option></select></div><div><label for="refinements">최대 2× 정련 횟수</label><select id="refinements"><option value="2">2회 · 최소 수렴 검사</option><option value="3">3회</option><option value="4">4회</option></select></div></div>
+              <div id="explicit-grid" class="two" hidden><div><label for="scene-rows">시작 Scene 행</label><input id="scene-rows" type="number" min="32" max="65536" step="1"></div><div><label for="scene-cols">시작 Scene 열</label><input id="scene-cols" type="number" min="32" max="65536" step="1"></div></div>
+              <p id="mode-note" class="note">Adaptive 모드에서는 이 입력 shape를 실행 격자로 사용하지 않습니다. 센서 pitch, 목표 주파수, 고정 화각과 정책 상한에서 시작 격자를 계획합니다.</p>
+              <div class="two"><div><label for="target-fraction">목표 · native Nyquist 비율 (0.05–1)</label><input id="target-fraction" type="number" min="0.05" max="1" step="any" required></div><div><label for="samples-per-period">목표 주기당 Scene 표본 탐색 시드 (2–16)</label><input id="samples-per-period" type="number" min="2" max="16" step="1" required></div></div>
+              <label for="evaluation-fractions">평가 주파수 · native Nyquist 비율, 쉼표 구분</label><input id="evaluation-fractions" type="text" inputmode="decimal" required><p class="note">0과 1 사이에서 오름차순이며 목표 비율 이하여야 합니다. 1.0 자체의 edge endpoint는 현재 검사하지 않습니다.</p>
+              <div class="three"><div><label for="mean-tol">평균 광전자 최대 변화 / 전체 신호 스케일 허용값</label><input id="mean-tol" type="number" min="0.000001" max="0.1" step="any" required></div><div><label for="shift-tol">subpixel 응답 최대 변화 / 전체 신호 스케일 허용값</label><input id="shift-tol" type="number" min="0.000001" max="0.1" step="any" required></div><div><label for="mtf-tol">선언 주파수 점 MTF 절댓값 허용 오차</label><input id="mtf-tol" type="number" min="0.000001" max="0.1" step="any" required></div></div>
+              <div class="three"><div><label for="shift-fraction">Edge 이동 · 센서 pixel 비율</label><input id="shift-fraction" type="number" min="0.01" max="0.5" step="any" required></div><div><label for="contrast-floor">정규화 edge 대비 하한</label><input id="contrast-floor" type="number" min="0.0001" max="0.5" step="any" required></div><div><label for="tile-budget">광학 tile 작업 추정 예산 (MiB)</label><input id="tile-budget" type="number" min="256" max="8192" step="1" required></div></div>
+              <label for="alias-probe">선택형 above-Nyquist alias probe <strong>격자 계획 시드</strong> 배율 (비우면 미설정)</label><input id="alias-probe" type="number" min="1.01" max="8" step="any"><p class="note">이 입력은 격자 계획만 조정하며 alias 응답을 실제로 계산하지 않습니다. 정책 예산은 하드웨어 한계나 실행 시간 보장이 아닙니다.</p>
+            </fieldset>
+            <fieldset><legend>PSF 해상도 경로</legend><div class="two"><div><label for="psf-mode">PSF 평가</label><select id="psf-mode"><option value="stored_geometric_only">저장 기하 PSF만 사용</option><option value="pinned_same_ray_retrace_diagnostic">고정 처방·같은 광선 재추적 진단</option></select></div><div id="psf-pitch-box" hidden><label for="psf-pitch">목표 PSF bin 간격 (μm)</label><input id="psf-pitch" type="number" min="0.01" max="100" step="any"><p class="note">Adaptive에서 비워 두면 실행 격자 기준 선택. 명시적 모드에서 재추적을 택하면 입력 필수.</p></div></div><p class="note">같은 광선 재추적은 저장 histogram bin 민감도 진단입니다. 광선 밀도·회절·ROI 위치별 물리 PSF 수렴을 뜻하지 않습니다.</p></fieldset>
+            <details><summary>실행 tile 설정</summary><div class="two"><div><label for="sensor-tile-rows">센서 tile 행</label><input id="sensor-tile-rows" type="number" min="2" max="64" step="1" required></div><div><label for="sensor-tile-cols">센서 tile 열</label><input id="sensor-tile-cols" type="number" min="2" max="64" step="1" required></div><div><label for="source-tile-rows">광학 source tile 행</label><input id="source-tile-rows" type="number" min="16" max="256" step="1" required></div><div><label for="source-tile-cols">광학 source tile 열</label><input id="source-tile-cols" type="number" min="16" max="256" step="1" required></div></div><label for="readout-chunk">기본 등록 ROI 계약의 Readout 행 chunk</label><input id="readout-chunk" type="number" min="1" max="256" step="1" required><p class="note">이 진단은 잡음 전 평균 광전자를 비교하며 ADC RAW·ISP를 실행하지 않습니다. Readout chunk는 등록 ROI 요청 계약을 유지하는 입력입니다.</p></details>
+            <label class="check"><input id="ack" type="checkbox" required><span>등록 mode와 저장 센서의 주변부 응답은 검증되지 않았으며, 렌즈 절대 광량·회절·CRA를 이 결과로 승인하지 않음을 확인했습니다.</span></label>
+            <button id="submit" type="submit" disabled>목표 주파수 표본화 진단 제출</button>
+          </form>
+        </section>
+      </div>
+      <section class="panel results"><h2><span class="step">02</span> 저장 작업·수렴 근거</h2><p>작업 성공은 수치 진단 완료를 뜻합니다. 각 수렴·PSF 상태와 물리 검증 상태를 별도로 확인하세요.</p>
+        <form id="open-form"><label for="open-id">작업 ID로 열기</label><div class="inline"><input id="open-id" autocomplete="off" placeholder="작업 ID" required><button class="secondary" type="submit">열기</button></div></form>
+        <button id="refresh-list" class="secondary" type="button">목록 새로고침</button><div id="recent" class="recent" aria-label="최근 작업"></div>
+        <p id="status" class="status" role="status" aria-live="polite">작업을 선택하거나 제출하세요.</p>
+        <div id="result" hidden><div class="result-actions"><a id="permalink">결과 링크</a><a id="export" download="frequency-target-study.json">전체 기록 JSON</a><button id="cancel" class="secondary" type="button" hidden>실행 취소</button></div><p id="result-limits" class="warning"></p><div id="result-summary"></div><h3>원본 보고서</h3><div id="artifacts" class="artifacts"></div><details><summary>고정 입력·출처·전체 결과</summary><pre id="provenance"></pre></details></div>
+      </section>
+    </div>
+  </main>
+  <footer>수렴은 선택한 수치 모델·ROI·선언한 이산 주파수 점·허용 오차에서만 판단합니다. 제품 FOV·MTF·색 성능·실측 정확도는 별도 검증이 필요합니다.</footer>
+</body>
+</html>

@@ -1,0 +1,712 @@
+{
+  "frozen_at_utc": "2026-09-26T13:41:15.041415+00:00",
+  "plan_sha256": "8db4f0f37e4eec9a493104819d71a3f15fac9726f29b72442805d8b698b6cb12",
+  "decision": {
+    "selected_candidate_id": "radial-e4-g1",
+    "status": "selected_on_training_only",
+    "limits": {
+      "minimum_green_dn": 120.0,
+      "minimum_green_snr_p10": 10.0,
+      "maximum_well_fraction": 0.01,
+      "maximum_white_fraction": 0.01,
+      "maximum_exposure_ms": 4.0
+    },
+    "feasible_count": 5,
+    "candidate_count": 36,
+    "candidates": [
+      {
+        "candidate_id": "clear-e1-g1",
+        "stop": "clear",
+        "exposure_ms": 1.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 11.203198863028879,
+        "minimum_green_dn": 71.703125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "clear-e1-g2",
+        "stop": "clear",
+        "exposure_ms": 1.0,
+        "gain": 2.0,
+        "feasible": true,
+        "failures": [],
+        "failed_scenarios": {},
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 11.219266064936546,
+        "minimum_green_dn": 143.390625,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "clear-e1-g4",
+        "stop": "clear",
+        "exposure_ms": 1.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 11.223293678434938,
+        "minimum_green_dn": 286.71875,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.03125
+      },
+      {
+        "candidate_id": "clear-e2-g1",
+        "stop": "clear",
+        "exposure_ms": 2.0,
+        "gain": 1.0,
+        "feasible": true,
+        "failures": [],
+        "failed_scenarios": {},
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 15.978425852362625,
+        "minimum_green_dn": 143.390625,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "clear-e2-g2",
+        "stop": "clear",
+        "exposure_ms": 2.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 15.99006703272522,
+        "minimum_green_dn": 286.71875,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.03125
+      },
+      {
+        "candidate_id": "clear-e2-g4",
+        "stop": "clear",
+        "exposure_ms": 2.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 15.992981305576821,
+        "minimum_green_dn": 573.515625,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.88671875
+      },
+      {
+        "candidate_id": "clear-e4-g1",
+        "stop": "clear",
+        "exposure_ms": 4.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping",
+          "well_saturation"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "well_saturation",
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 22.694001473145725,
+        "minimum_green_dn": 286.71875,
+        "maximum_well_fraction": 0.03125,
+        "maximum_white_fraction": 0.03125
+      },
+      {
+        "candidate_id": "clear-e4-g2",
+        "stop": "clear",
+        "exposure_ms": 4.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping",
+          "well_saturation"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "well_saturation",
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 22.702335080729668,
+        "minimum_green_dn": 573.515625,
+        "maximum_well_fraction": 0.03125,
+        "maximum_white_fraction": 0.88671875
+      },
+      {
+        "candidate_id": "clear-e4-g4",
+        "stop": "clear",
+        "exposure_ms": 4.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping",
+          "well_saturation"
+        ],
+        "failed_scenarios": {
+          "train-L2": [
+            "raw_clipping"
+          ],
+          "train-L6": [
+            "well_saturation",
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 22.70441991750676,
+        "minimum_green_dn": 1147.078125,
+        "maximum_well_fraction": 0.03125,
+        "maximum_white_fraction": 0.99609375
+      },
+      {
+        "candidate_id": "clear-e8-g1",
+        "stop": "clear",
+        "exposure_ms": 8.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "clear-e8-g2",
+        "stop": "clear",
+        "exposure_ms": 8.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "clear-e8-g4",
+        "stop": "clear",
+        "exposure_ms": 8.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "quarter-e1-g1",
+        "stop": "quarter",
+        "exposure_ms": 1.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal",
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal",
+            "minimum_snr"
+          ],
+          "train-L2": [
+            "minimum_signal"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 5.339059691974686,
+        "minimum_green_dn": 17.96875,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e1-g2",
+        "stop": "quarter",
+        "exposure_ms": 1.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal",
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal",
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 5.367042990067932,
+        "minimum_green_dn": 35.84375,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e1-g4",
+        "stop": "quarter",
+        "exposure_ms": 1.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal",
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal",
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 5.37410783603501,
+        "minimum_green_dn": 71.703125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e2-g1",
+        "stop": "quarter",
+        "exposure_ms": 2.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal",
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal",
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 7.7920213362453,
+        "minimum_green_dn": 35.84375,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e2-g2",
+        "stop": "quarter",
+        "exposure_ms": 2.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal",
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal",
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 7.813688373316153,
+        "minimum_green_dn": 71.703125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e2-g4",
+        "stop": "quarter",
+        "exposure_ms": 2.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 7.8191334332488855,
+        "minimum_green_dn": 143.390625,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e4-g1",
+        "stop": "quarter",
+        "exposure_ms": 4.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 11.203073818031537,
+        "minimum_green_dn": 71.703125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e4-g2",
+        "stop": "quarter",
+        "exposure_ms": 4.0,
+        "gain": 2.0,
+        "feasible": true,
+        "failures": [],
+        "failed_scenarios": {},
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 11.219140481168942,
+        "minimum_green_dn": 143.390625,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "quarter-e4-g4",
+        "stop": "quarter",
+        "exposure_ms": 4.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 11.223167959370032,
+        "minimum_green_dn": 286.71875,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.03125
+      },
+      {
+        "candidate_id": "quarter-e8-g1",
+        "stop": "quarter",
+        "exposure_ms": 8.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "quarter-e8-g2",
+        "stop": "quarter",
+        "exposure_ms": 8.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "quarter-e8-g4",
+        "stop": "quarter",
+        "exposure_ms": 8.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "radial-e1-g1",
+        "stop": "radial",
+        "exposure_ms": 1.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal",
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal",
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 9.192508771404567,
+        "minimum_green_dn": 49.171875,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "radial-e1-g2",
+        "stop": "radial",
+        "exposure_ms": 1.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal",
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal",
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 9.211513784601067,
+        "minimum_green_dn": 98.5,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "radial-e1-g4",
+        "stop": "radial",
+        "exposure_ms": 1.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "minimum_snr"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_snr"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 9.216283484545018,
+        "minimum_green_dn": 196.78125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "radial-e2-g1",
+        "stop": "radial",
+        "exposure_ms": 2.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "minimum_signal"
+        ],
+        "failed_scenarios": {
+          "train-L0.5": [
+            "minimum_signal"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 13.160262677251195,
+        "minimum_green_dn": 98.5,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "radial-e2-g2",
+        "stop": "radial",
+        "exposure_ms": 2.0,
+        "gain": 2.0,
+        "feasible": true,
+        "failures": [],
+        "failed_scenarios": {},
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 13.174182802113314,
+        "minimum_green_dn": 196.78125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "radial-e2-g4",
+        "stop": "radial",
+        "exposure_ms": 2.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 13.17766974061767,
+        "minimum_green_dn": 393.578125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.51171875
+      },
+      {
+        "candidate_id": "radial-e4-g1",
+        "stop": "radial",
+        "exposure_ms": 4.0,
+        "gain": 1.0,
+        "feasible": true,
+        "failures": [],
+        "failed_scenarios": {},
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 18.72780648378875,
+        "minimum_green_dn": 196.78125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.0
+      },
+      {
+        "candidate_id": "radial-e4-g2",
+        "stop": "radial",
+        "exposure_ms": 4.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 18.73782746027354,
+        "minimum_green_dn": 393.578125,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.51171875
+      },
+      {
+        "candidate_id": "radial-e4-g4",
+        "stop": "radial",
+        "exposure_ms": 4.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "raw_clipping"
+        ],
+        "failed_scenarios": {
+          "train-L6": [
+            "raw_clipping"
+          ]
+        },
+        "evaluated_scenarios": 3,
+        "worst_green_snr_p10": 18.740335218878112,
+        "minimum_green_dn": 787.265625,
+        "maximum_well_fraction": 0.0,
+        "maximum_white_fraction": 0.984375
+      },
+      {
+        "candidate_id": "radial-e8-g1",
+        "stop": "radial",
+        "exposure_ms": 8.0,
+        "gain": 1.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "radial-e8-g2",
+        "stop": "radial",
+        "exposure_ms": 8.0,
+        "gain": 2.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      },
+      {
+        "candidate_id": "radial-e8-g4",
+        "stop": "radial",
+        "exposure_ms": 8.0,
+        "gain": 4.0,
+        "feasible": false,
+        "failures": [
+          "exposure_time"
+        ],
+        "evaluated_scenarios": 0,
+        "worst_green_snr_p10": null,
+        "failed_scenarios": {
+          "exposure_time": "preexcluded_without_runtime"
+        }
+      }
+    ],
+    "feasible_ranking": [
+      "radial-e4-g1",
+      "clear-e2-g1",
+      "radial-e2-g2",
+      "clear-e1-g2",
+      "quarter-e4-g2"
+    ],
+    "failure_counts_nonexclusive": {
+      "minimum_signal": 10,
+      "raw_clipping": 10,
+      "well_saturation": 3,
+      "exposure_time": 9,
+      "minimum_snr": 9
+    },
+    "training_scenario_ids": [
+      "train-L0.5",
+      "train-L2",
+      "train-L6"
+    ],
+    "objective": "maximize_worst_green_SNR_p10_then_shorter_exposure_lower_gain_id",
+    "automatic_approval": false,
+    "physical_validation": "not_established"
+  }
+}

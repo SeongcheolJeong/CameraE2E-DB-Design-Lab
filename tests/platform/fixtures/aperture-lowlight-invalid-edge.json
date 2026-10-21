@@ -1,0 +1,18 @@
+{
+  "source_run_id": "run-9692f54b37ab4c5d80f4e9edbd4e83dd",
+  "candidate": "candidate-03",
+  "field": "center",
+  "chart": "resolution",
+  "roi": "lower_left",
+  "bounds": [
+    179,
+    219,
+    36,
+    76
+  ],
+  "luminance_cd_m2": 10,
+  "exposure_ms": 1,
+  "seed": 7,
+  "repeat_count": 8,
+  "meaning": "mean of independent linear RGB frames converted to Rec709 luma; native ROI; retained failing iso12233 numeric estimator sample"
+}
