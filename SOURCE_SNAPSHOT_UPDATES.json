@@ -79,7 +79,7 @@
       "source": "portable-example-integration-20261021"
     },
     "tools/run_esfr_hdr_ab_live.py": {
-      "sha256": "37b62932aa4032d5f1b25eaa2b836053c00f716ecac4ed63014d46077ee14e6c",
+      "sha256": "7468cf617c684d4874f15c90b8807aa4eacbacf66241564faaac736dcae22d30",
       "bytes": 11462,
       "source": "portable-example-integration-20261021"
     },
@@ -89,13 +89,18 @@
       "source": "portable-example-integration-20261021"
     },
     "tools/verify_esfr_iq_live.py": {
-      "sha256": "c5fbffd054adb434fe75c1459a103c7562f994167824ea6fdd18ec9b8219431a",
+      "sha256": "6f1793702f3cfe508dbf98c27964d8ac1a592559609293e653ddde2e78e32b9a",
       "bytes": 10314,
       "source": "portable-example-integration-20261021"
     },
     "verification/esfr-examples.json": {
-      "sha256": "a62d48ace4969193812a98bc532a99506c0e5c9f5679913b892bf639bf5c12ba",
-      "bytes": 1701,
+      "sha256": "b3bb77458db01645aa2dcb69495079431ac6836ec31c14020060b7d6fcfc474e",
+      "bytes": 3401,
+      "source": "portable-example-integration-20261021"
+    },
+    "verification/esfr-fresh-execution.json": {
+      "sha256": "e4d377d01e1e94075b46fc7a06a605ba7b394b7f74d2fa212d26b6d215040069",
+      "bytes": 10520,
       "source": "portable-example-integration-20261021"
     }
   },

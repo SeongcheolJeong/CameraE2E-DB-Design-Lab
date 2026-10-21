@@ -29,7 +29,7 @@ from esfr_demo_source import arguments, source_selection, bind_server, latest_qu
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--base-url',default='http://127.0.0.1:8784')
+    parser.add_argument('--base-url',default='http://127.0.0.1:8781')
     parser.add_argument('--output',required=True,type=Path)
     arguments(parser)
     args=parser.parse_args(); out=args.output; out.mkdir(parents=True,exist_ok=True)

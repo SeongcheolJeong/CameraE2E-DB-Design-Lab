@@ -52,6 +52,54 @@
     "passed": 69,
     "failed": 0
   },
-  "fresh_full_recalculation": "Recorded separately after completion; not inferred from gallery tests",
-  "original_8780_preserved": true
+  "fresh_full_recalculation": {
+    "status": "verified",
+    "evidence": "esfr-fresh-execution.json",
+    "fresh_pairs": 12,
+    "source_created_from_empty_state": true
+  },
+  "original_8780_preserved": true,
+  "fresh_github_clone": {
+    "status": "verified",
+    "cloned_from": "github-private-main",
+    "commit": "9b5e58003c8c62e7dd01e717a1ccfb7aca677fe6",
+    "no_camera_db_installed": true,
+    "no_upstream_cache": true,
+    "no_old_outputs_or_state": true,
+    "installed_example_files": 7539,
+    "live_state_imported": false,
+    "report_http_checks": 5,
+    "python_dependencies": "Reused existing environment; clean OS dependency install is not claimed"
+  },
+  "browser": {
+    "historical_example_url": "http://127.0.0.1:8786/examples/esfr-normal-hdr-v1/index.html",
+    "browser_heading_verified": true,
+    "raw_links": 12,
+    "loaded_preview_images": 2,
+    "raw_download_sha256": "bcb640c03822b158ad53a17da60bc0ece3d7e6199ef065ad905eea584795d899",
+    "raw_download_matches_original": true,
+    "db_design_example_link_present": true,
+    "screenshot": "installed-example-browser.png"
+  },
+  "remote_release": {
+    "assets": [
+      {
+        "digest": "sha256:0b3040eb817884ba7a4421c43f44ac7044952d13aa1832c1aa68bd39bb28921e",
+        "name": "esfr-normal-hdr-examples-v1.tar.gz",
+        "size": 638542508,
+        "state": "uploaded"
+      },
+      {
+        "digest": "sha256:13c964eb4645c3527cdc3b3a6978cafb9df4a4dfb142fe02a9df695a5cc2c24d",
+        "name": "EXAMPLE_PACK_MANIFEST.json",
+        "size": 1921918,
+        "state": "uploaded"
+      }
+    ],
+    "draft": false,
+    "html_url": "https://github.com/SeongcheolJeong/CameraE2E-DB-Design-Lab/releases/tag/esfr-examples-v1",
+    "id": 419089441,
+    "tag_name": "esfr-examples-v1",
+    "target_commitish": "9b5e58003c8c62e7dd01e717a1ccfb7aca677fe6"
+  }
 }

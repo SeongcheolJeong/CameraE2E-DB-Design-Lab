@@ -1,0 +1,312 @@
+{
+  "schema": "esfr_portable_example_fresh_execution_v1",
+  "status": "verified",
+  "source_kind": "synthetic",
+  "physical_validation": "not_established",
+  "source": {
+    "run_id": "run-1fcd1bc4aa92462f9c81dcb5df280da8",
+    "candidate_id": "candidate-00"
+  },
+  "new_db_source_created_in_empty_state": true,
+  "client_uses_http_only": true,
+  "historical_inputs_reused": false,
+  "fresh_pairs": 12,
+  "validation_after_frozen_contract": true,
+  "inputs": [
+    {
+      "mode": "normal",
+      "role": "development",
+      "index": 0,
+      "raw_sha256": "bb72ae76364345865fc34c8d089205e398aa860742a9bead2cec89a9a59790a8",
+      "isp_sha256": "806807a8bb2ee193d3b49586c6ffbbbc0ab320c072626289888c7df0d206610c",
+      "acquisition_id": "normal-development-0-de248e9d38897e5c",
+      "session_id": "development-normal-de248e9d38897e5c"
+    },
+    {
+      "mode": "normal",
+      "role": "development",
+      "index": 1,
+      "raw_sha256": "ca903914686c22402132385269868626c8a32f2b3780be9f3f2c2aa64956e277",
+      "isp_sha256": "6d2dd3a40891b423fd5f5cbab182187ff66be1dc6ca492661488757b9a2e1e42",
+      "acquisition_id": "normal-development-1-de248e9d38897e5c",
+      "session_id": "development-normal-de248e9d38897e5c"
+    },
+    {
+      "mode": "normal",
+      "role": "development",
+      "index": 2,
+      "raw_sha256": "eebf9eb67be17c5659f4dac35feb4c776635a2ee38281a4bba1c4f02dc6886c1",
+      "isp_sha256": "40529eb2ef7cf92960096c1ae2f988dea7cd2d8173a1c061277b133a5a2e9259",
+      "acquisition_id": "normal-development-2-de248e9d38897e5c",
+      "session_id": "development-normal-de248e9d38897e5c"
+    },
+    {
+      "mode": "normal",
+      "role": "validation",
+      "index": 0,
+      "raw_sha256": "b08212d5eff8e42e6e80e294728fcdb3d5cbb76efd3309f24c0ca1fae43a2b5d",
+      "isp_sha256": "e0d0365dd39843593cd6662afac06118c50aa476357e157af8073bd12ac8ec7c",
+      "acquisition_id": "normal-validation-0-de248e9d38897e5c",
+      "session_id": "validation-normal-de248e9d38897e5c"
+    },
+    {
+      "mode": "normal",
+      "role": "validation",
+      "index": 1,
+      "raw_sha256": "00f94e84d07facd4af53ee88632667e1dc812033c0741ac5193956d7ab0a47f0",
+      "isp_sha256": "957182f1ad1ab5ff20254f05675c1ce922a630047a90fba62a36ffa7a4410b65",
+      "acquisition_id": "normal-validation-1-de248e9d38897e5c",
+      "session_id": "validation-normal-de248e9d38897e5c"
+    },
+    {
+      "mode": "normal",
+      "role": "validation",
+      "index": 2,
+      "raw_sha256": "6662215f1a39b3990afc1b1386c721b3c0800640edebab6ccc764f76ad24512b",
+      "isp_sha256": "49b8e10345c9f28b8f221cb8b3942ef0ca1a104d9de3ff8b1ab55a93166382ce",
+      "acquisition_id": "normal-validation-2-de248e9d38897e5c",
+      "session_id": "validation-normal-de248e9d38897e5c"
+    },
+    {
+      "mode": "hdr",
+      "role": "development",
+      "index": 0,
+      "raw_sha256": "c6d9fd803ec2519aafe6fb93d98ef15e1a00cb1aab19e253da1fad0c4f070ec2",
+      "isp_sha256": "085ed2ccd05bba2fbd7853675de7a3720a024c7919aac97af703e7c42e28546b",
+      "acquisition_id": "hdr-development-0-de248e9d38897e5c",
+      "session_id": "development-hdr-de248e9d38897e5c"
+    },
+    {
+      "mode": "hdr",
+      "role": "development",
+      "index": 1,
+      "raw_sha256": "d155423eb8b1a78e56be6c43817d21e317fa9511ef7b4d7c2f6d5d79f4c97a5b",
+      "isp_sha256": "800a020cad2b649f8f66938183069437d7fbe869f7e0ac3dbf07ab49c62d7ff8",
+      "acquisition_id": "hdr-development-1-de248e9d38897e5c",
+      "session_id": "development-hdr-de248e9d38897e5c"
+    },
+    {
+      "mode": "hdr",
+      "role": "development",
+      "index": 2,
+      "raw_sha256": "5eb128d418d06f6260d26709dd9f8c67051da5c1fee6fbc87df7748c6bd61e7e",
+      "isp_sha256": "b9566e544ed0df01e59a859b34c271081885db7fab1c54956c6d4ba6e01154e6",
+      "acquisition_id": "hdr-development-2-de248e9d38897e5c",
+      "session_id": "development-hdr-de248e9d38897e5c"
+    },
+    {
+      "mode": "hdr",
+      "role": "validation",
+      "index": 0,
+      "raw_sha256": "26e43a6e42452e1e11cd6bacad136068ed24d8aa535621703a265b36759af339",
+      "isp_sha256": "2eb84208aee70bac2010237a1131be295fa348f7359173e41679c6ef26f57f73",
+      "acquisition_id": "hdr-validation-0-de248e9d38897e5c",
+      "session_id": "validation-hdr-de248e9d38897e5c"
+    },
+    {
+      "mode": "hdr",
+      "role": "validation",
+      "index": 1,
+      "raw_sha256": "6f0c78c0ec2c50633d55b80d48ce45fe074f0c7b913c2be7645b85fcef593ead",
+      "isp_sha256": "718dde74d1bf429933525f481d12126df51e159ce331503063c9b01d892e1428",
+      "acquisition_id": "hdr-validation-1-de248e9d38897e5c",
+      "session_id": "validation-hdr-de248e9d38897e5c"
+    },
+    {
+      "mode": "hdr",
+      "role": "validation",
+      "index": 2,
+      "raw_sha256": "06d47dc990b9e2e7b8d7652a15a8f75b1ca9b60cd3938c3fe4e24c2740ec717f",
+      "isp_sha256": "9865107fbd6a3367f20390c028341afcd5915868528d41ed3b10cd5dad64d5d0",
+      "acquisition_id": "hdr-validation-2-de248e9d38897e5c",
+      "session_id": "validation-hdr-de248e9d38897e5c"
+    }
+  ],
+  "modes": {
+    "normal": {
+      "workflow_id": "measured-esfr-39a9322b3eda45db9e99da19ba4ba9fc",
+      "source": {
+        "run_id": "run-1fcd1bc4aa92462f9c81dcb5df280da8",
+        "candidate_id": "candidate-00"
+      },
+      "profile_sha256": "d400d723bfbd09d51a5c8e46dffa00f1dd423b07092001dd4003648c70654c6d",
+      "reference_isp_color_after": {
+        "actual_isp": {
+          "delta_e00": {
+            "count": 54,
+            "max": 15.131125783746326,
+            "mean": 10.347405666496616,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.18550434866180537,
+            "mean": 0.1005119954115875,
+            "unavailable_count": 0
+          }
+        },
+        "after": {
+          "delta_e00": {
+            "count": 54,
+            "max": 2.081017980517203,
+            "mean": 0.3054037221890248,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.01582700545025539,
+            "mean": 0.002276721348516596,
+            "unavailable_count": 0
+          }
+        },
+        "before": {
+          "delta_e00": {
+            "count": 54,
+            "max": 15.129957574708909,
+            "mean": 10.34739372820198,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.1855034577725299,
+            "mean": 0.10051229894837854,
+            "unavailable_count": 0
+          }
+        },
+        "wb_only": {
+          "delta_e00": {
+            "count": 54,
+            "max": 8.778522289647407,
+            "mean": 6.759873744812188,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.11553197293672653,
+            "mean": 0.059371600572475626,
+            "unavailable_count": 0
+          }
+        }
+      },
+      "same_raw_before_after_ccm": true,
+      "validation_fit_performed": false
+    },
+    "hdr": {
+      "workflow_id": "measured-esfr-4a5fa934a488468e965a3cf4cee1c7cc",
+      "source": {
+        "run_id": "run-1fcd1bc4aa92462f9c81dcb5df280da8",
+        "candidate_id": "candidate-00"
+      },
+      "profile_sha256": "1f75e5feba9cbc9f394fbb8c51ea24b8e6cddfe38071df17ad5f158f2cc317d0",
+      "reference_isp_color_after": {
+        "actual_isp": {
+          "delta_e00": {
+            "count": 54,
+            "max": 15.246642517083329,
+            "mean": 10.306032175235236,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.12508520229451753,
+            "mean": 0.06577088940943165,
+            "unavailable_count": 0
+          }
+        },
+        "after": {
+          "delta_e00": {
+            "count": 54,
+            "max": 2.0579431572296563,
+            "mean": 0.29943612241789663,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.015915681861826556,
+            "mean": 0.0022585641111886458,
+            "unavailable_count": 0
+          }
+        },
+        "before": {
+          "delta_e00": {
+            "count": 54,
+            "max": 15.129290934189838,
+            "mean": 10.34656042380888,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.1855515724542615,
+            "mean": 0.10051639768143535,
+            "unavailable_count": 0
+          }
+        },
+        "wb_only": {
+          "delta_e00": {
+            "count": 54,
+            "max": 8.792778572581184,
+            "mean": 6.760750362604206,
+            "unavailable_count": 0
+          },
+          "linear_rgb_rmse": {
+            "count": 54,
+            "max": 0.11588538795502891,
+            "mean": 0.05943751609703313,
+            "unavailable_count": 0
+          }
+        }
+      },
+      "same_raw_before_after_ccm": true,
+      "validation_fit_performed": false
+    }
+  },
+  "archives": {
+    "normal": {
+      "zip_sha256": "6f9e13ae771c03f7f28554aae92ad7f9f8950a22f24380db20b190fc6977dda6",
+      "zip_entries": 250
+    },
+    "hdr": {
+      "zip_sha256": "ff0e833521c108d0dddefbe79d47d0eaee9ab06743f8877a3ddc443d93691246",
+      "zip_entries": 250
+    },
+    "comparison": {
+      "zip_sha256": "d12de2168b5ea17f49530de1b26df996e8a6c28acdadb5c5b59bdbe3ae252059",
+      "zip_entries": 22
+    }
+  },
+  "mtf_status_counts": [
+    {
+      "mode": "A",
+      "status": "pass",
+      "count": 670
+    },
+    {
+      "mode": "A",
+      "status": "fail",
+      "count": 2
+    },
+    {
+      "mode": "B",
+      "status": "pass",
+      "count": 336
+    },
+    {
+      "mode": "B",
+      "status": "diagnostic",
+      "count": 336
+    }
+  ],
+  "comparison_id": "esfr-iq-comparison-30ac7ffa8ad6d36aea9df9533f49e20b",
+  "report_url": "http://127.0.0.1:8786/api/v1/camera-validation/esfr/measured/iq-comparisons/esfr-iq-comparison-30ac7ffa8ad6d36aea9df9533f49e20b/files/report.html",
+  "bundle_url": "http://127.0.0.1:8786/api/v1/camera-validation/esfr/measured/iq-comparisons/esfr-iq-comparison-30ac7ffa8ad6d36aea9df9533f49e20b/files/bundle.zip",
+  "db_active_models_unchanged": true,
+  "unchanged_thresholds": {
+    "raw_sfr_rmse": 0.03,
+    "isp_sfr_rmse": 0.05
+  },
+  "python_environment": "Existing dependencies and approved local pinned ISET snapshot; no clean OS installation claim",
+  "prior_failures_preserved": [
+    "upstream-cache-missing",
+    "optional-condition-null"
+  ]
+}
