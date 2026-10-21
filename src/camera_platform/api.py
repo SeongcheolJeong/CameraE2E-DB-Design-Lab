@@ -127,6 +127,8 @@ def create_app(state_dir=None, workspace=None, *, start_worker=True, seed_demo=T
     from .calibration_lab import install_routes as install_calibration_lab_routes
 
     install_calibration_lab_routes(app, service)
+    from .example_gallery import install_routes as install_example_routes
+    install_example_routes(app, service)
     from .esfr_lab import install_routes as install_esfr_routes
     install_esfr_routes(app, service)
     from .esfr_measured_workflow import install_routes as install_esfr_measured_routes

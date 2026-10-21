@@ -1,7 +1,7 @@
 """Run fresh normal/DCG-HDR development+holdout workflows on the live Lab API.
 
-All inputs remain synthetic. Local state files are read only for compact polling;
-all uploads, fits, validation and reports go through the existing HTTP API.
+All inputs remain synthetic. Sources, polling, uploads, fits and validation use
+HTTP only. No historical run ID, server SQLite or external disk is required.
 """
 from copy import deepcopy
 from datetime import datetime, timezone
@@ -10,12 +10,11 @@ import argparse
 import hashlib
 import json
 import secrets
-import sqlite3
 import time
 import zipfile
 
 import numpy as np
-import requests
+import httpx
 import tifffile
 
 from camera_platform.esfr_chart import render_chart
@@ -25,20 +24,24 @@ from camera_platform.service import environment_fingerprint
 from esfr_hdr_ab_fixture import capture, declaration
 
 ROOT='/api/v1/camera-validation/esfr'
-SOURCE={'run_id':'run-08c20c6eb15d486f889382f516ad4966','candidate_id':'candidate-03','condition_id':'condition-006'}
+from esfr_demo_source import arguments, source_selection, bind_server, latest_query
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base-url',default='http://127.0.0.1:8780')
     parser.add_argument('--output',type=Path,required=True)
+    arguments(parser)
     args=parser.parse_args();out=args.output;out.mkdir(parents=True,exist_ok=True)
-    session=requests.Session()
+    deadline=time.monotonic()+args.timeout
+    def check():
+        if time.monotonic()>deadline:raise TimeoutError('E-SFR example deadline exceeded; receipts are preserved')
+    session=httpx.Client()
     def request(path,payload=None):
         if payload is None:
             for attempt in range(4):
                 try:r=session.get(args.base_url+path,timeout=900);break
-                except (requests.ConnectionError,requests.Timeout):
+                except (httpx.TransportError,httpx.TimeoutException):
                     if attempt==3:raise
                     time.sleep(attempt+1)
         else:r=session.post(args.base_url+path,json=payload,timeout=1800)
@@ -50,17 +53,13 @@ def main():
         value=fn();save(path,value);return value
     session.headers['X-Platform-Token']=request('/api/v1/session')['token']
     health=request('/api/v1/health');save(out/'health.json',health)
-    state_dir=Path(health['state_dir'])
+    bind_server(out,health)
+    source=source_selection(request,args,out,check=check)
     fixture=saved(out/'private-generator.json',lambda:{'schema':'esfr_normal_dcg_ab_experiment_v1',
         'token':secrets.token_hex(8),'seeds':[secrets.randbits(50) for _ in range(12)],
         'matrix':[[.72,.12,.06],[.18,.78,.16],[.10,.10,.78]],'channel_gains':[.78,.92,.68],
         'sigma':1.4,'scope':'Private color/blur truth is never supplied to calibration; both modes use this same camera.',
         'created_at':datetime.now(timezone.utc).isoformat()})
-    backup=out/'registry-before-ab.sqlite'
-    if not backup.exists():
-        with sqlite3.connect('file:'+str(state_dir/'registry.sqlite')+'?mode=ro',uri=True) as c,sqlite3.connect(backup) as dst:
-            assert not c.execute("select id from jobs where status in ('queued','running')").fetchall()
-            c.backup(dst)
     scene,rois,render_manifest=render_chart(shape=(1440,2560),supersample=4)
     camera_scene=(scene@np.asarray(fixture['matrix']))*np.asarray(fixture['channel_gains'])
     template=request(ROOT+'/template');chart=deepcopy(template['chart_profile'])
@@ -103,20 +102,18 @@ def main():
         directory=out/mode;directory.mkdir(exist_ok=True)
         dev=[acquire(mode,'development',i) for i in range(3)]
         start=saved(directory/'workflow-submitted.json',lambda:request(ROOT+'/measured/software-workflows',{
-            'source':SOURCE,'development_ids':[c['id'] for c in dev],'rois':rois,'chart_profile':chart,
+            'source':source,'development_ids':[c['id'] for c in dev],'rois':rois,'chart_profile':chart,
             'iq':{'enabled':True,'reference_id':'imatest_esfr_2023_nominal_v1','actual_isp_color_space':'srgb',
                 'patch_roi_reviewed_capture_ids':[c['id'] for c in dev],'noise_repeat_ids':[]}}))
         work[mode]=start['id']
     save(out/'workflows.json',work)
     done={};markers={}
     while len(done)<2:
+        check()
         for mode,identity in work.items():
             if mode in done:continue
             directory=out/mode
-            path=state_dir/'esfr-measured-workflows'/identity/'state.json'
-            if not path.exists():continue
-            try:state=json.loads(path.read_text())
-            except json.JSONDecodeError:continue
+            state=request(ROOT+'/measured/workflows/'+identity)
             marker=(state.get('status'),state.get('stage'),state.get('pending_operation'))
             if markers.get(mode)!=marker:
                 markers[mode]=marker;print(json.dumps({'mode':mode,'workflow':identity,'state':marker}),flush=True)
@@ -132,7 +129,7 @@ def main():
                 value=request(ROOT+'/measured/workflows/'+identity);save(directory/'completed.json',value)
                 iq=value['iq_result']
                 assert iq['provenance']['source_code']==environment_fingerprint()
-                assert iq['source']==SOURCE and iq['physical_validation']=='not_established'
+                assert iq['source']==source and iq['physical_validation']=='not_established'
                 assert iq['validation']['same_raw_before_after'] and not iq['provenance']['validation_fit_performed']
                 assert not iq['db_active_model_updated'] and len(iq['combined_replay']['comparisons'])==336
                 assert value['thresholds']=={'raw_sfr_rmse':.03,'isp_sfr_rmse':.05}
@@ -162,21 +159,14 @@ def main():
         return {'zip_sha256':hashlib.sha256((directory/'evidence.zip').read_bytes()).hexdigest(),'zip_entries':len(manifest['files'])+1}
     archives={mode:download_bundle(out/mode,iq) for mode,iq in done.items()}
     archives['comparison']=download_bundle(out/'comparison',comparison)
-    latest=request(ROOT+'/measured/iq-latest?source_run='+SOURCE['run_id']+'&candidate='+SOURCE['candidate_id']+'&condition='+SOURCE['condition_id'])
+    latest=request(ROOT+'/measured/iq-latest?'+latest_query(source))
     save(out/'db-latest.json',latest)
     assert latest['comparison']['id']==comparison['id']
-    # Original records and DB activation sets must survive all new evidence.
-    with sqlite3.connect('file:'+str(backup)+'?mode=ro',uri=True) as before,sqlite3.connect('file:'+str(state_dir/'registry.sqlite')+'?mode=ro',uri=True) as after:
-        original_records=before.execute('select * from records').fetchall()
-        columns=[r[1] for r in before.execute('pragma table_info(records)')];index=columns.index('id')
-        for row in original_records:assert after.execute('select * from records where id=?',(row[index],)).fetchone()==row
-        for kind in ('calibration_db_color_activations','calibration_db_core_activations','calibration_unified_activations'):
-            assert before.execute('select * from records where kind=? order by id',(kind,)).fetchall()==after.execute('select * from records where kind=? order by id',(kind,)).fetchall()
-        assert not after.execute("select id from jobs where status in ('queued','running')").fetchall()
     summary={'status':'verified','source_kind':'synthetic','physical_validation':'not_established',
         'workflow_ids':work,'comparison_id':comparison['id'],'report_url':args.base_url+comparison['report_url'],
         'bundle_url':args.base_url+comparison['bundle_url'],'archives':archives,
-        'original_records_preserved':len(original_records),'db_active_models_unchanged':True,
+        'db_active_models_unchanged':all(not iq['db_active_model_updated'] for iq in done.values()),
+        'preservation_scope':'Workflow assertion: no active model update; no broad registry audit claimed',
         'mode_metrics':{mode:{'color':iq['validation']['color']['summary'],'tone':iq['validation']['tone']['summary'],
             'mtf':iq['mtf_evidence']['image_validation'],'combined_isp':iq['combined_replay']['isp_sfr_rmse']}
             for mode,iq in done.items()},'ab_tables':comparison['ab_comparison']}

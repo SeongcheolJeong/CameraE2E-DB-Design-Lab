@@ -1,0 +1,57 @@
+{
+  "schema": "esfr_portable_examples_verification_v1",
+  "historical_pack": {
+    "files": 7539,
+    "archive_bytes": 638542508,
+    "sha256": "0b3040eb817884ba7a4421c43f44ac7044952d13aa1832c1aa68bd39bb28921e",
+    "links_checked": 152,
+    "source_kind": "synthetic",
+    "live_state_imported": false,
+    "raw_mtf_failures": {
+      "normal": 2,
+      "hdr": 5
+    }
+  },
+  "installer": {
+    "status": "installed",
+    "example_id": "esfr-normal-hdr-v1",
+    "files": 7539,
+    "source_kind": "synthetic",
+    "live_state_imported": false,
+    "url": "/examples/esfr-normal-hdr-v1/index.html"
+  },
+  "http": {
+    "status": "verified",
+    "http_files_sha256_checked": 16,
+    "catalogue": {
+      "examples": [
+        {
+          "title": "E-SFR \uc77c\ubc18/HDR \u00b7 \uac00\uc0c1 \uc2e4\uce21 12\uc30d",
+          "input_pairs": 12,
+          "edge_count": 112,
+          "raw_mtf_failures": {
+            "normal": 2,
+            "hdr": 5
+          },
+          "iq_acceptance": "pending",
+          "historical_evidence": true,
+          "id": "esfr-normal-hdr-v1",
+          "installed": true,
+          "url": "/examples/esfr-normal-hdr-v1/index.html",
+          "source_kind": "synthetic",
+          "physical_validation": "not_established",
+          "live_workflow_registered": false,
+          "archive_sha256": "0b3040eb817884ba7a4421c43f44ac7044952d13aa1832c1aa68bd39bb28921e"
+        }
+      ]
+    },
+    "read_only_historical_example": true,
+    "live_state_imported": false
+  },
+  "targeted_tests": {
+    "passed": 69,
+    "failed": 0
+  },
+  "fresh_full_recalculation": "Recorded separately after completion; not inferred from gallery tests",
+  "original_8780_preserved": true
+}

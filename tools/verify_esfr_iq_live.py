@@ -15,7 +15,7 @@ import time
 import zipfile
 
 import numpy as np
-import requests
+import httpx
 import tifffile
 
 from camera_platform.esfr_chart import render_chart
@@ -24,23 +24,26 @@ from camera_platform.esfr_lab import chart_template
 from camera_platform.registry import canonical
 
 ROOT = '/api/v1/camera-validation/esfr'
-SOURCE = {'run_id':'run-08c20c6eb15d486f889382f516ad4966',
-          'candidate_id':'candidate-03','condition_id':'condition-006'}
+from esfr_demo_source import arguments, source_selection, bind_server, latest_query
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base-url',default='http://127.0.0.1:8784')
     parser.add_argument('--output',required=True,type=Path)
+    arguments(parser)
     args=parser.parse_args(); out=args.output; out.mkdir(parents=True,exist_ok=True)
-    session=requests.Session()
+    deadline=time.monotonic()+args.timeout
+    def check():
+        if time.monotonic()>deadline:raise TimeoutError("E-SFR example deadline exceeded; receipts preserved")
+    session=httpx.Client()
     def request(path,payload=None):
         # Retry only idempotent reads. An uncertain mutation needs reconciliation.
         for attempt in range(4):
             try:
                 response=session.get(args.base_url+path,timeout=180) if payload is None else session.post(args.base_url+path,json=payload,timeout=900)
                 break
-            except (requests.ConnectionError, requests.Timeout):
+            except (httpx.TransportError, httpx.TimeoutException):
                 if payload is not None or attempt == 3: raise
                 time.sleep(1 + attempt)
         response.raise_for_status(); return response.json()
@@ -51,6 +54,8 @@ def main():
         if p.exists(): return json.loads(p.read_text())
         result=fn(); save(name,result); return result
     health=request('/api/v1/health');save('health.json',health)
+    bind_server(out,health)
+    source=source_selection(request,args,out,check=check)
     fixture=saved('private-generator.json',lambda:{'token':secrets.token_hex(8),
         'seeds': [secrets.randbits(50) for _ in range(6)],
         'matrix':[[.72,.12,.06],[.18,.78,.16],[.10,.10,.78]], 'channel_gains':[.78,.92,.68],
@@ -91,12 +96,13 @@ def main():
         print('Uploaded '+role+' '+str(index+1),flush=True);return result
     dev=[acquire('development',i) for i in range(3)]
     start=saved('workflow-submitted.json',lambda:request(ROOT+'/measured/software-workflows',{
-        'source':SOURCE,'development_ids':[c['id'] for c in dev],'rois':rois,'chart_profile':chart,
+        'source':source,'development_ids':[c['id'] for c in dev],'rois':rois,'chart_profile':chart,
         'iq':{'enabled':True,'reference_id':'imatest_esfr_2023_nominal_v1','actual_isp_color_space':'srgb',
               'patch_roi_reviewed_capture_ids':[c['id'] for c in dev],'noise_repeat_ids':[]}}))
     def wait(target):
         marker=None
         while True:
+            check()
             state=request(ROOT+'/measured/workflows/'+start['id'])
             now=(state['status'],state['stage'],state.get('current_job',{}).get('status') if state.get('current_job') else None)
             if now!=marker:print(json.dumps({'workflow':start['id'],'status':now},ensure_ascii=False),flush=True);marker=now
@@ -116,7 +122,7 @@ def main():
     iq=completed['iq_result']
     from camera_platform.service import environment_fingerprint
     assert iq['provenance']['source_code'] == environment_fingerprint()
-    assert iq['source'] == SOURCE and iq['db_active_model_updated'] is False
+    assert iq['source'] == source and iq['db_active_model_updated'] is False
     assert iq['provenance']['same_raw_before_after'] is True
     assert iq['provenance']['validation_fit_performed'] is False
     assert iq['validation']['color']['total_patch_observations'] == 54
@@ -128,7 +134,7 @@ def main():
     original_raw={json.loads((out/f'validation-{i}-upload.json').read_text())['files']['raw']['sha256'] for i in range(3)}
     assert set(iq['validation']['raw_sha256']) == original_raw
     assert {c['raw_sha256'] for c in iq['provenance']['validation_captures']} == original_raw
-    save('result-summary.json',{'workflow_id':start['id'],'source':SOURCE,'source_kind':'synthetic',
+    save('result-summary.json',{'workflow_id':start['id'],'source':source,'source_kind':'synthetic',
         'physical_validation':'not_established','mtf':iq['mtf_evidence']['image_validation'],
         'color':iq['validation']['color']['summary'],'combined_isp':combined['isp_sfr_rmse'],
         'profile_sha256':iq['provenance']['profile_sha256'],'db_active_model_updated':False,
@@ -143,10 +149,10 @@ def main():
             assert entries[item['path']] == item['sha256'], item['path']
             assert len(z.read(item['path'])) == item['bytes'], item['path']
         assert set(entries) == {item['path'] for item in manifest['files']} | {'bundle-manifest.json'}
-    latest=request(ROOT+'/measured/iq-latest?source_run='+SOURCE['run_id']+'&candidate='+SOURCE['candidate_id']+'&condition='+SOURCE['condition_id'])
+    latest=request(ROOT+'/measured/iq-latest?'+latest_query(source))
     save('db-latest.json',latest)
     assert latest['report']['workflow_id']==start['id']
-    save('verification.json',{'status':'verified','workflow_id':start['id'],'source':SOURCE,
+    save('verification.json',{'status':'verified','workflow_id':start['id'],'source':source,
         'source_kind':'synthetic','physical_validation':'not_established','report_url':iq['report_url'],
         'bundle_url':iq['bundle_url'],'zip_entries_sha256':entries,'iq_result':iq})
     print(json.dumps({'status':'verified','workflow_id':start['id'],'report':iq['report_url'],'zip_entries':len(entries)}),flush=True)

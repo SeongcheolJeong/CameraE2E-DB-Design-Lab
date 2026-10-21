@@ -21,3 +21,5 @@ camerae2e_db/
 *.pem
 *.key
 *.log
+
+/examples-data/

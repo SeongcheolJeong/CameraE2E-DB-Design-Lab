@@ -381,9 +381,10 @@ def install_routes(app, service):
         return compare(service, payload)
 
     @app.get(ROOT + "/iq-latest")
-    def iq_latest(source_run: str, candidate: str, condition: str):
+    def iq_latest(source_run: str, candidate: str, condition: str | None = None):
         from .esfr_iq_service import latest, latest_comparison
-        source = {"run_id": source_run, "candidate_id": candidate, "condition_id": condition}
+        source = {"run_id": source_run, "candidate_id": candidate}
+        if condition is not None:source["condition_id"] = condition
         result = {"report": latest(service, source)}
         comparison = latest_comparison(service, source)
         if comparison is not None:
@@ -391,10 +392,11 @@ def install_routes(app, service):
         return result
 
     @app.get(ROOT + "/iq-comparisons/latest")
-    def iq_comparison_latest(source_run: str, candidate: str, condition: str):
+    def iq_comparison_latest(source_run: str, candidate: str, condition: str | None = None):
         from .esfr_iq_service import latest_comparison
-        return {"comparison": latest_comparison(service, {"run_id": source_run,
-            "candidate_id": candidate, "condition_id": condition})}
+        source = {"run_id": source_run, "candidate_id": candidate}
+        if condition is not None:source["condition_id"] = condition
+        return {"comparison": latest_comparison(service, source)}
 
     @app.get(ROOT + "/iq-comparisons/{identity}/files/{relative:path}")
     def iq_comparison_file(identity: str, relative: str):

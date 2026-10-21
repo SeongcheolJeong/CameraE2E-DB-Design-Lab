@@ -1,0 +1,103 @@
+{
+  "schema": "db_design_lab_source_snapshot_updates_v1",
+  "base_commit": "060ad357d446c0dcb3428d3af0bb047338f7f944",
+  "base_manifest_sha256": "cc8f0da7beffc2f858eaf16cf5a3448cee03d5b2c99b840fca9460efdf8f3758",
+  "files": {
+    ".gitignore": {
+      "sha256": "bd0643a14f51310084596e7c198ec791f612deb7e940311333680cf7bb1e92e3",
+      "bytes": 244,
+      "source": "portable-example-integration-20261021"
+    },
+    "EXAMPLE_PACK_MANIFEST.json": {
+      "sha256": "13c964eb4645c3527cdc3b3a6978cafb9df4a4dfb142fe02a9df695a5cc2c24d",
+      "bytes": 1921918,
+      "source": "portable-example-integration-20261021"
+    },
+    "README.md": {
+      "sha256": "19a405813298555f4abdd6b3de8d92ae6f338f1784d133ca372d956da9e36cad",
+      "bytes": 5610,
+      "source": "portable-example-integration-20261021"
+    },
+    "docs/esfr-normal-hdr-ab.md": {
+      "sha256": "2c3f46e86f7ae6de3ae7c37c651c3a84bcb94fe03eb3fb7cc340a6edb3d5892f",
+      "bytes": 4389,
+      "source": "portable-example-integration-20261021"
+    },
+    "docs/esfr-portable-examples.md": {
+      "sha256": "08d226c356de215849e8829fbb917a1b11b290bce5f4b40c712e483426a63806",
+      "bytes": 5553,
+      "source": "portable-example-integration-20261021"
+    },
+    "src/camera_platform/api.py": {
+      "sha256": "cb5f245fd1c48e929b4660c3831deb203dc1654a3a6fce44870612d60b865253",
+      "bytes": 96507,
+      "source": "portable-example-integration-20261021"
+    },
+    "src/camera_platform/esfr_measured_workflow.py": {
+      "sha256": "6661b2b7a1ca59e560e31012f16a912e4e21b0168809af90524f6005efe1b8ba",
+      "bytes": 22312,
+      "source": "portable-example-integration-20261021"
+    },
+    "src/camera_platform/example_gallery.py": {
+      "sha256": "242a996c2651cc7a7ecae728193c1850b04c226475c4becd3339e97e19748b5e",
+      "bytes": 4998,
+      "source": "portable-example-integration-20261021"
+    },
+    "src/camera_platform/static/camera-validation-esfr.html": {
+      "sha256": "cbb95fbe808c9b98a13c7fb563877e178a3d7ef2e8e29c05b638b38fd19040e7",
+      "bytes": 13279,
+      "source": "portable-example-integration-20261021"
+    },
+    "src/camera_platform/static/db-design.html": {
+      "sha256": "d46a718b2ca68161c84191ad5aaf7b0c2e41a434fad626a4c00c5617f31df83f",
+      "bytes": 22065,
+      "source": "portable-example-integration-20261021"
+    },
+    "src/camera_platform/static/esfr-measured.html": {
+      "sha256": "747d21594dc2d8087012fd4957a1b24b9d570719b57e5f012938fb121861617d",
+      "bytes": 15017,
+      "source": "portable-example-integration-20261021"
+    },
+    "tests/test_portable_esfr_examples.py": {
+      "sha256": "5b4c3d716d69d4c828fa200a8fb0da659ad8ce04d1d132ce93e19fcf0b86a35e",
+      "bytes": 8374,
+      "source": "portable-example-integration-20261021"
+    },
+    "tools/build_esfr_example_pack.py": {
+      "sha256": "3207c0f4fc761fa3bcdd3b9e1c784685c05c0f786cddc6f7f55cf85ee1e7e372",
+      "bytes": 13460,
+      "source": "portable-example-integration-20261021"
+    },
+    "tools/esfr_demo_source.py": {
+      "sha256": "3fa0774891c81b0a4d39130bae0c756d60787f87b8cd83cbf4a5b91d7bfcc2ce",
+      "bytes": 5470,
+      "source": "portable-example-integration-20261021"
+    },
+    "tools/install_esfr_examples.py": {
+      "sha256": "8e827ed97a7f30272d0b0b234e916c6751daca696b1969b562d94cd2acbe7a12",
+      "bytes": 2873,
+      "source": "portable-example-integration-20261021"
+    },
+    "tools/run_esfr_hdr_ab_live.py": {
+      "sha256": "37b62932aa4032d5f1b25eaa2b836053c00f716ecac4ed63014d46077ee14e6c",
+      "bytes": 11462,
+      "source": "portable-example-integration-20261021"
+    },
+    "tools/serve_db_design_lab.py": {
+      "sha256": "9471fac12b8c23f9a69de16df45456c74aba63922b9ebf70808a48226d46bea9",
+      "bytes": 869,
+      "source": "portable-example-integration-20261021"
+    },
+    "tools/verify_esfr_iq_live.py": {
+      "sha256": "c5fbffd054adb434fe75c1459a103c7562f994167824ea6fdd18ec9b8219431a",
+      "bytes": 10314,
+      "source": "portable-example-integration-20261021"
+    },
+    "verification/esfr-examples.json": {
+      "sha256": "a62d48ace4969193812a98bc532a99506c0e5c9f5679913b892bf639bf5c12ba",
+      "bytes": 1701,
+      "source": "portable-example-integration-20261021"
+    }
+  },
+  "scope": "Historical read-only example pack, portable DB bootstrap and HTTP-only fresh E-SFR clients; numerical engines and thresholds unchanged"
+}

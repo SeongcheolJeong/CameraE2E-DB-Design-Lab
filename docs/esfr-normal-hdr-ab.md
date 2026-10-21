@@ -17,3 +17,7 @@ RAW는 같은 12bit full-scale 상대 선형 신호로 내보낸다. 일반 ISP�
 정확한 DB tuple의 최신 A/B는 `GET /api/v1/camera-validation/esfr/measured/iq-comparisons/latest?source_run=…&candidate=…&condition=…`와 기존 `iq-latest`의 선택적 `comparison`으로 조회한다. DB Design Lab 카드는 A/B HTML·ZIP을 연결한다. 원 DB 모델과 활성 color/core/unified 모델은 보존한다.
 
 재현 실행은 고정 릴리스의 `tools/run_esfr_hdr_ab_live.py --base-url http://127.0.0.1:8780 --output <new-folder>`로 수행한다. 기존 receipt를 재사용하며 결과를 덮어쓰지 않는다. 원본·두 workflow·취득 계약·보고서·ZIP manifest와 각 파일 SHA를 검증하고, 완료 근거는 항상 `source_kind: synthetic`, `physical_validation: not_established`다.
+
+## 새 설치에서 재현
+
+과거 DB tuple은 이 문서의 원본 실험 출처입니다. 현재 도구는 과거 ID를 기본값으로 사용하지 않습니다. [독립 예제 설치·재계산](esfr-portable-examples.md)의 `--create-db-source` 또는 현재 서버의 명시적 source를 사용하세요. 클라이언트의 로컬 SQLite 의존성도 제거했습니다.
